@@ -1,0 +1,9 @@
+.idea
+*.iml
+*.aux
+*.log
+*.pdf
+*.cls
+/*.tex
+example/*.tex
+example/example

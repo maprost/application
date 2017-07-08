@@ -1,0 +1,30 @@
+\documentclass[10pt]{article}
+\usepackage{tikz}
+\usepackage{xcolor}
+\usepackage[absolute,overlay,showboxes]{textpos}
+\usepackage[left=1.6cm,top=0.0cm,right=1cm,bottom=0.2cm,nohead,nofoot]{geometry}
+\usepackage{graphicx}
+
+\pagestyle{empty} % Disable headers and footers
+\setlength{\parindent}{0pt} % Disable paragraph indentation
+
+
+\definecolor{white}{RGB}{255,255,255}
+\definecolor{gray}{HTML}{4D4D4D}
+\definecolor{sidecolor}{HTML}{E7E7E7}
+\definecolor{mainblue}{HTML}{0E5484}
+\definecolor{maingray}{HTML}{B9B9B9}
+
+
+\begin{document}
+
+{{.Name}}
+
+Blob for {{.Title}}
+
+{{template "cv.tex" .}}
+
+
+
+
+\end{document}
