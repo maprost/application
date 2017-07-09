@@ -5,8 +5,8 @@ import (
 	"github.com/maprost/application/generator/genmodel"
 )
 
-func New() genmodel.Company {
-	return genmodel.Company{
+func New() genmodel.JobPosition {
+	return genmodel.JobPosition{
 		Skills: []genmodel.SkillID{profile.SkillHiding, profile.SkillSneaking},
 	}
 }

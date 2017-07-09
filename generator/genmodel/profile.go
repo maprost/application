@@ -5,5 +5,5 @@ type Profile struct {
 	Title string
 
 	CV      CV
-	Company Company
+	Company JobPosition
 }

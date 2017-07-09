@@ -2,8 +2,8 @@ package profile
 
 import (
 	"github.com/maprost/application/generator/genmodel"
-	"runtime"
 	"path"
+	"runtime"
 )
 
 const (
@@ -17,10 +17,10 @@ func New() genmodel.Profile {
 	_, file, _, _ := runtime.Caller(1)
 
 	return genmodel.Profile{
-		Name:  "Max Musertmann",
-		Title: "Santa Clause",
+		Name:  "Mad Max",
+		Title: "Bringer of Joy",
 		CV: genmodel.CV{
-			Pic: path.Dir(file) + "/images/cv",
+			Pic: path.Dir(file) + "/image/cv",
 			Skills: []genmodel.Skill{
 				{ID: SkillHiding, Name: "hiding", Rating: 3},
 				{ID: SkillSneaking, Name: "sneaking", Rating: 5},

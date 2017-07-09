@@ -9,39 +9,64 @@ import (
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/convert"
 	"github.com/maprost/application/generator/internal/shell"
+	"github.com/maprost/application/generator/internal/texmodel"
+)
+
+const (
+	binaryBase = "application"
+	binaryTex  = binaryBase + ".tex"
 )
 
 var root = rootPath()
 
 func Build(profile genmodel.Profile) (err error) {
-	err = convert.Convert(&profile)
+	indexData, err := prepare(&profile)
 	if err != nil {
 		return
 	}
 
 	// create templates
-	index, err := template.ParseFiles(root + "/internal/template/index.tex")
-	if err != nil {
-		return
-	}
-	addSubTex(index, "cv.tex")
-
-	// create tex file to compile
-	compilationFileBase := "application"
-	compilationFile := compilationFileBase + ".tex"
-	err = createCompilationFile(compilationFile, index, profile)
+	err = create(indexData)
 	if err != nil {
 		return
 	}
 
 	// compile file
-	_, err = shell.Stream("pdflatex", compilationFile)
+	err = compile()
 	if err != nil {
 		return
 	}
 
+	// remove .aux/.log/.tex file
+	cleanUp()
+	return
+}
+
+func prepare(profile *genmodel.Profile) (texmodel.Index, error) {
+	return convert.Convert(profile)
+}
+
+func create(indexData texmodel.Index) (err error) {
+	indexFile, err := template.ParseFiles(root + "/internal/template/index.tex")
+	if err != nil {
+		return
+	}
+	addSubTex(indexFile, "cv.tex")
+
+	// create tex file to compile
+
+	err = createCompilationFile(binaryTex, indexFile, indexData)
+	return
+}
+
+func compile() (err error) {
+	_, err = shell.Stream("pdflatex", binaryTex)
+	return
+}
+
+func cleanUp() (err error) {
 	// clean up
-	_, err = shell.Stream("rm", compilationFileBase+".aux", compilationFileBase+".log", compilationFile)
+	_, err = shell.Stream("rm", binaryBase+".aux", binaryBase+".log", binaryTex)
 	return
 }
 
@@ -50,7 +75,7 @@ func rootPath() string {
 	return filepath.Dir(curFile)
 }
 
-func createCompilationFile(path string, templ *template.Template, profile genmodel.Profile) (err error) {
+func createCompilationFile(path string, templ *template.Template, indexData texmodel.Index) (err error) {
 	file, err := os.Create(path)
 	if err != nil {
 		return
@@ -59,7 +84,7 @@ func createCompilationFile(path string, templ *template.Template, profile genmod
 	defer file.Close()
 	file.Chmod(0644)
 
-	err = templ.Execute(file, profile)
+	err = templ.Execute(file, indexData)
 	if err != nil {
 		return
 	}
@@ -67,12 +92,12 @@ func createCompilationFile(path string, templ *template.Template, profile genmod
 	return
 }
 
-func addSubTex(main *template.Template, file string) (err error) {
+func addSubTex(indexFile *template.Template, file string) (err error) {
 	subTex, err := template.ParseFiles(root + "/internal/template/" + file)
 	if err != nil {
 		return
 	}
 
-	main.AddParseTree(file, subTex.Tree)
+	indexFile.AddParseTree(file, subTex.Tree)
 	return
 }

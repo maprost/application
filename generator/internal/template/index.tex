@@ -1,9 +1,15 @@
 \documentclass[10pt]{article}
 \usepackage{tikz}
 \usepackage{xcolor}
-\usepackage[absolute,overlay,showboxes]{textpos}
+\usepackage[absolute,overlay]{textpos}
 \usepackage[left=1.6cm,top=0.0cm,right=1cm,bottom=0.2cm,nohead,nofoot]{geometry}
 \usepackage{graphicx}
+\usepackage{marvosym}
+\usepackage[
+	colorlinks=true,
+	urlcolor=blue,
+	linkcolor=green
+]{hyperref}
 
 \pagestyle{empty} % Disable headers and footers
 \setlength{\parindent}{0pt} % Disable paragraph indentation
@@ -16,13 +22,11 @@
 \definecolor{maingray}{HTML}{B9B9B9}
 
 
+
 \begin{document}
 
-{{.Name}}
 
-Blob for {{.Title}}
-
-{{template "cv.tex" .}}
+{{template "cv.tex" .CV}}
 
 
 

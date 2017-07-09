@@ -31,7 +31,7 @@ func TestConvert(t *testing.T) {
 				{ID: SkillGoingInTheBathroom, Name: "Going to the bathroom", Rating: 2},
 			},
 		},
-		Company: genmodel.Company{
+		Company: genmodel.JobPosition{
 			Skills: []genmodel.SkillID{SkillSleeping},
 		},
 	}
@@ -57,7 +57,7 @@ func TestConvert_toMuchSkillsInCompany_cutToFive(t *testing.T) {
 				{ID: SkillGoingInTheBathroom, Name: "Going to the bathroom", Rating: 2},
 			},
 		},
-		Company: genmodel.Company{
+		Company: genmodel.JobPosition{
 			Skills: []genmodel.SkillID{
 				SkillSleeping,
 				SkillDrinkingCoffee,
@@ -90,7 +90,7 @@ func TestConvert_lessThanFiveProfileSkills(t *testing.T) {
 				{ID: SkillDrinkingCoffee, Name: "Drinking Coffee", Rating: 3},
 			},
 		},
-		Company: genmodel.Company{
+		Company: genmodel.JobPosition{
 			Skills: []genmodel.SkillID{
 				SkillSleeping,
 			},
@@ -118,7 +118,7 @@ func TestConvert_noCompanySkillSetup_chooseFirstFiveProfileSkills(t *testing.T) 
 				{ID: SkillGoingInTheBathroom, Name: "Going to the bathroom", Rating: 2},
 			},
 		},
-		Company: genmodel.Company{},
+		Company: genmodel.JobPosition{},
 	}
 
 	err := convert.Convert(&profile)
@@ -141,7 +141,7 @@ func TestConvert_unknownCompanySkill_error(t *testing.T) {
 				{ID: SkillSleeping, Name: "Sleeping", Rating: 4},
 			},
 		},
-		Company: genmodel.Company{
+		Company: genmodel.JobPosition{
 			Skills: []genmodel.SkillID{
 				SkillSleeping,
 				SkillDrinkingCoffee,

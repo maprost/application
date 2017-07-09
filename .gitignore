@@ -4,6 +4,7 @@
 *.log
 *.pdf
 *.cls
-/*.tex
-example/*.tex
+*.out
+*.tex
+!generator/internal/template/*.tex
 example/example

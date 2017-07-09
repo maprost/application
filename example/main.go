@@ -25,7 +25,7 @@ func main() {
 		company = "santa"
 	}
 
-	log.Println("Name:", name, " Company:", company)
+	log.Println("Name:", name, " JobPosition:", company)
 
 	var profile genmodel.Profile
 	switch name {
