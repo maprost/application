@@ -43,7 +43,7 @@ func TestExample(t *testing.T) {
 					Name:   "Roaring",
 					Rating: 9,
 				}, {
-					Name:   "Gentleman",
+					Name:   "Sneaking",
 					Rating: 2,
 				}, {
 					Name:   "See invisible people with red hair",
@@ -54,6 +54,8 @@ func TestExample(t *testing.T) {
 				},
 			},
 			OtherSkills: "kill the blob, see the light, have a break, make a bloody marie",
+			Interest:    "Datamining",
+			SoftSkills:  "Problemsolver",
 			Language: []texmodel.Language{
 				{
 					Name:  "English",
@@ -72,6 +74,7 @@ func TestExample(t *testing.T) {
 					Level: "B1+",
 				},
 			},
+			Hobbies: "Skat, Bicycle",
 			Experience: []texmodel.Experience{
 				{
 					Company:     "Freelancer",
@@ -79,6 +82,20 @@ func TestExample(t *testing.T) {
 					Position:    "Peacemaker",
 					Description: "Looking for bad guys.",
 					Tech:        "MP5",
+				},
+				{
+					Company:     "Hack'n'Slay",
+					Time:        "1995 - 1999",
+					Position:    "Senior Tester",
+					Description: "Looking for bad guys.",
+					Tech:        "MP5",
+				},
+				{
+					Company:     "Freelancer",
+					Time:        "1994 - 1996",
+					Position:    "Chocolate taste definer",
+					Description: "Smell and task chocolate. Invented the task bitter sweet.",
+					Tech:        "X-Carb3.",
 				},
 			},
 		},

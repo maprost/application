@@ -31,10 +31,12 @@ type CV struct {
 	Location    string
 	Email       string
 	Phone       string
-
 	Websites    []Websites
 	Skills      []Skill
 	OtherSkills string
+	Interest    string
+	SoftSkills  string
 	Language    []Language
+	Hobbies     string
 	Experience  []Experience
 }

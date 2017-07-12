@@ -11,8 +11,10 @@
 % Command for printing the contact information icons
 \newcommand*\icon[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt, fill=maincolor,maincolor,text=white] (char) {#1};}}
 
-\newcommand{\category}[1]{%
-{\Large #1 \xrfill[0.5ex]{1.5pt}[maincolor]}
+\newcommand{\category}[1]{
+\vspace{5mm}
+
+{\Large\ffmfamily\bfseries #1 \xrfill[0.5ex]{1.5pt}[maincolor]}
 
 \medskip
 
@@ -57,11 +59,8 @@
         \href{{"{"}}{{.Url }}}{\includegraphics[width=5mm]{/{{.Icon}}}}{{end}}\\
 \end{tabular}
 
-\vspace{5mm}
-
-% tech skills
-
-\category{Skills}
+% IT skills
+\category{Prof.\,Skills}
 \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}}
 {{range .Skills}}
 		{{.Name}}
@@ -70,50 +69,60 @@
 			\draw[fill=maingray,maingray] (0,0) rectangle (1,0.4);
 			\draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.4);
 		\end{tikzpicture}
-		\\
+		\\[1ex]
     {{end}}
 \end{tabular}
 
-
 \medskip
 
-\begin{minipage}{\textwidth}
-    {{.OtherSkills}}
-\end{minipage}
-
-\vspace{5mm}
-
-% soft skills
-% Teamplayer
+{{.OtherSkills}}
 
 % interest
-% Clean Code
+\category{Interest}
+
+{{.Interest}}
+
+% soft skills
+\category{Soft\,Skills}
+
+{{.SoftSkills}}
 
 % language
-\category{Language}
+\category{Languages}
 \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}}
     {{range .Language}}
         {{.Name}} & {{.Level}} \\
     {{end}}
 \end{tabular}
 
-\vspace{1cm}
 
 % hobbies
+\category{Hobbies}
 
-%
+{{.Hobbies}}
+
+% Researcher, Configer, Architect, Maintainer, Tester
 
 \end{textblock}
-\begin{textblock}{15}(6.2, 0.2)
+\begin{textblock}{14.5}(6.5, 0.5)
 
 {{range .Experience}}
-    {{.Company}} {{.Time}}
+    {\Large\ffmfamily\bfseries {{.Position}}} \xrfill[0.0ex]{0.5pt}[maincolor]  {{.Time}}
 
-    {{.Position}}
+    \begin{minipage}{5mm}
+    ~
+    \end{minipage}
+    \begin{minipage}{142mm}
+        {{.Company}}
 
-    {{.Description}}
+        \smallskip
 
-    {{.Tech}}
+        {{.Description}}
+
+        \smallskip
+
+        {\textit {{.Tech}}}
+    \end{minipage} \\[2ex]
 {{end}}
 
 
