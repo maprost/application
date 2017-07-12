@@ -18,7 +18,7 @@ func TestExample(t *testing.T) {
 			Title:       "Good night bringer and tooth painter",
 			Nationality: "Canada",
 			Email:       "logan@xmen.com",
-			Location:    "X-Men Headquarter",
+			Location:    "X-Men Headquarter near the Everglades",
 			Phone:       "0123456789",
 			Websites: []texmodel.Websites{
 				{
@@ -37,31 +37,39 @@ func TestExample(t *testing.T) {
 			Skills: []texmodel.Skill{
 				{
 					Name:   "Cleaning",
-					Rating: 4,
+					Rating: 7,
 				},
 				{
 					Name:   "Roaring",
+					Rating: 9,
+				}, {
+					Name:   "Gentleman",
+					Rating: 2,
+				}, {
+					Name:   "See invisible people with red hair",
 					Rating: 5,
 				}, {
-					Name:   "..",
-					Rating: 3,
-				}, {
-					Name:   "See invisible people with red hair and blue eyes",
-					Rating: 4,
-				}, {
-					Name:   "..",
-					Rating: 2,
+					Name:   "Climbing",
+					Rating: 7,
 				},
 			},
 			OtherSkills: "kill the blob, see the light, have a break, make a bloody marie",
 			Language: []texmodel.Language{
 				{
-					Name:  "German",
+					Name:  "English",
 					Level: "Native",
 				},
 				{
-					Name:  "English",
-					Level: "B2",
+					Name:  "French",
+					Level: "C1",
+				},
+				{
+					Name:  "Portuguese",
+					Level: "A1",
+				},
+				{
+					Name:  "Hiligaynon/ Ilonggo ",
+					Level: "B1+",
 				},
 			},
 			Experience: []texmodel.Experience{
