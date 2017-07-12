@@ -9,8 +9,14 @@
 \pgfmathsetlength{\imagescale}{\imagewidth/600}
 
 % Command for printing the contact information icons
-\newcommand*\icon[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt, fill=mainblue,mainblue,text=white] (char) {#1};}}
+\newcommand*\icon[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt, fill=maincolor,maincolor,text=white] (char) {#1};}}
 
+\newcommand{\category}[1]{%
+{\Large #1 \xrfill[0.5ex]{1.5pt}[maincolor]}
+
+\medskip
+
+}
 
 % color background for side bar
 \begin{tikzpicture}[remember picture,overlay]
@@ -19,7 +25,7 @@
 
 %------------------------------------------------
 
-\begin{textblock}{5}(0.5, 0.2)
+\begin{textblock}{5.1}(0.5, 0.2)
 
 % profile picture
 \begin{center}
@@ -54,14 +60,15 @@
 \vspace{5mm}
 
 % tech skills
+
+\category{Skills}
 \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}}
-\hline \\[-2ex]
 {{range .Skills}}
 		{{.Name}}
 		&
 		\begin{tikzpicture}
 			\draw[fill=maingray,maingray] (0,0) rectangle (1,0.4);
-			\draw[fill=white,mainblue](0,0) rectangle ({{.Rating}}/10,0.4);
+			\draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.4);
 		\end{tikzpicture}
 		\\
     {{end}}
@@ -83,8 +90,8 @@
 % Clean Code
 
 % language
+\category{Language}
 \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}}
-\hline \\[-2ex]
     {{range .Language}}
         {{.Name}} & {{.Level}} \\
     {{end}}
