@@ -1,5 +1,5 @@
 # application
-application generator
+application generator (not live)
 
 <object data="application.pdf" type="application/pdf" width="700px" height="700px">
     <embed src="http://yoursite.com/the.pdf">
