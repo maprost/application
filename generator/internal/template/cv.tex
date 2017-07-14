@@ -14,7 +14,7 @@
 \newcommand{\category}[1]{
 \vspace{5mm}
 
-{\Large\ffmfamily\bfseries #1 \xrfill[0.5ex]{1.5pt}[maincolor]}
+{\headerfont #1 \xrfill[0.5ex]{1.5pt}[maincolor]}
 
 \medskip
 
@@ -101,13 +101,13 @@
 
 {{.Hobbies}}
 
-% Researcher, Configer, Architect, Maintainer, Tester
+% Researcher, Configer, SoftwareDesigner, Maintainer, Tester, Architect
 
 \end{textblock}
 \begin{textblock}{14.5}(6.5, 0.5)
 
 {{range .Experience}}
-    {\Large\ffmfamily\bfseries {{.Position}}} \xrfill[0.0ex]{0.5pt}[maincolor]  {{.Time}}
+    {\headerfont {{.Position}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
 
     \begin{minipage}{5mm}
     ~
@@ -117,11 +117,11 @@
 
         \smallskip
 
-        {{.Description}}
+       {\itshape {{.Description}}}
 
         \smallskip
 
-        {\textit {{.Tech}}}
+        {{.Tech}}
     \end{minipage} \\[2ex]
 {{end}}
 

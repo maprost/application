@@ -1,5 +1,4 @@
 \documentclass[11pt]{article}
-\usepackage{tikz}
 \usepackage{xcolor}
 \usepackage[absolute,overlay]{textpos}
 \usepackage[left=1.6cm,top=0.0cm,right=1cm,bottom=0.2cm,nohead,nofoot]{geometry}
@@ -13,9 +12,10 @@
 \usepackage[ngerman]{babel}
 \usepackage{xhfill}
 \usepackage{fetamont}
-\usepackage[default,osfigures,scale=0.95]{opensans}
+\usepackage[default,scale=0.95]{opensans}
 \usepackage[T1]{fontenc}
-
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
 
 \pagestyle{empty} % Disable headers and footers
 \setlength{\parindent}{0pt} % Disable paragraph indentation
@@ -26,6 +26,8 @@
 \definecolor{sidecolor}{HTML}{E7E7E7}
 \definecolor{maingray}{HTML}{B9B9B9}
 
+\newcommand{\headerfont}{\Large\ffmfamily\bfseries}
+
 % company custom color
 \definecolor{maincolor}{HTML}{800000}
 
@@ -33,7 +35,27 @@
 \begin{document}
 \normalfont
 
-{{template "cv.tex" .CV}}
+\begin{tikzpicture}
+\newdimen\R
+\R=4cm
+\node[draw=black, minimum size=\R,regular polygon,regular polygon sides=5] (a) {};
+\draw (a.center) -- (a.north)    node[above] {Property1};
+\draw (a.center) -- (a.corner 5) node[right] {Property2};
+\draw (a.center) -- (a.corner 4) node[right] {Property3};
+\draw (a.center) -- (a.corner 3) node[left]  {Property4};
+\draw (a.center) -- (a.corner 2) node[left]  {Property5};
+
+\draw [thin,black!20] circle (\R) ;
+\fill[red] circle (2pt);
+
+% Trial/error for this example
+%                              P1        P2           P3              P4             P5
+\draw[fill=cyan, opacity=0.8] (0,1.5) -- (0.9,0.3) -- (0.55, -0.8) -- (-0.6,-0.8) -- (-1.4,0.45) -- cycle;
+
+\end{tikzpicture}
+
+\newpage
+%{{template "cv.tex" .CV}}
 
 
 
