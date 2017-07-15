@@ -1,11 +1,11 @@
-package convert
+package twoside
 
 import (
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/internal/texmodel"
+	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 )
 
-func Convert(profile *genmodel.Profile) (texmodel.Index, error) {
+func convert(profile *genmodel.Profile) (texmodel.Index, error) {
 	var err error
 
 	// first prepare the skills

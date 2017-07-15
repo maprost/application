@@ -1,9 +1,11 @@
-package generator
+package twoside_test
 
 import (
+	"github.com/maprost/application/generator/internal/compiler"
 	"github.com/maprost/application/generator/internal/image"
+	"github.com/maprost/application/generator/internal/style/twoside"
+	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 	"github.com/maprost/application/generator/internal/test"
-	"github.com/maprost/application/generator/internal/texmodel"
 	"github.com/maprost/assertion"
 	"testing"
 )
@@ -34,7 +36,7 @@ func TestExample(t *testing.T) {
 					Url:  "https://www.xing.com",
 				},
 			},
-			Skills: []texmodel.Skill{
+			ProfSkills: []texmodel.Skill{
 				{
 					Name:   "Cleaning",
 					Rating: 7,
@@ -53,9 +55,9 @@ func TestExample(t *testing.T) {
 					Rating: 7,
 				},
 			},
-			OtherSkills: "kill the blob, see the light, have a break, make a bloody marie",
-			Interest:    "Datamining",
-			SoftSkills:  "Problemsolver",
+			OtherProfSkills: "kill the blob, see the light, have a break, make a bloody marie",
+			Interest:        "Datamining",
+			SoftSkills:      "Problemsolver",
 			Language: []texmodel.Language{
 				{
 					Name:  "English",
@@ -94,16 +96,25 @@ func TestExample(t *testing.T) {
 					Company:     "Freelancer",
 					Time:        "1994 - 1996",
 					Position:    "Chocolate taste definer",
-					Description: "Smell and task chocolate. Invented the task bitter sweet.",
+					Description: "Smell and task chocolate. Invented the taste bitter sweet.",
 					Tech:        "X-Carb3.",
+				},
+			},
+			Education: []texmodel.Education{
+				{
+					Institute:   "MIT",
+					Time:        "1899-1903",
+					Description: "Learn a lot and many more and finish my study with 1.0.",
 				},
 			},
 		},
 	}
 
-	err := create(indexData)
+	path, mainFile, subFiles := twoside.Files()
+
+	err := compiler.CreateTexFile(indexData, path, mainFile, subFiles...)
 	assert.Nil(err)
 
-	err = compile()
+	err = compiler.Compile()
 	assert.Nil(err)
 }

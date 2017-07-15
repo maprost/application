@@ -6,5 +6,5 @@
 *.cls
 *.out
 *.tex
-!generator/internal/template/*.tex
+!generator/internal/style/twoside/template/*.tex
 example/example

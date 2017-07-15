@@ -1,28 +1,13 @@
-package shell
+package compiler
 
 import (
 	"bufio"
-	"bytes"
 	"errors"
 	"log"
 	"os/exec"
 )
 
-func Command(cmdName string, cmdArgs ...string) (string, error) {
-	log.Println(append([]string{cmdName}, cmdArgs...))
-	cmd := exec.Command(cmdName, cmdArgs...)
-
-	var out bytes.Buffer
-	cmd.Stdout = &out
-
-	var stderr bytes.Buffer
-	cmd.Stderr = &stderr
-
-	err := cmd.Run()
-	return evalOutput(out.String(), stderr.String(), err)
-}
-
-func Stream(cmdName string, cmdArgs ...string) (string, error) {
+func stream(cmdName string, cmdArgs ...string) (string, error) {
 	log.Println(append([]string{cmdName}, cmdArgs...))
 	cmd := exec.Command(cmdName, cmdArgs...)
 
