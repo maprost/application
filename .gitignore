@@ -9,7 +9,6 @@ application.aux
 application.log
 application.pdf
 /*.cls
-/*.tex
 
 #binaries
 example/example

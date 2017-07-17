@@ -7,6 +7,20 @@ type Skill struct {
 	Rating int // Rating range [1,10]
 }
 
+type Experience struct {
+	JobPosition string
+	Company     string
+	Time        string
+	Description string
+	TechStack   string
+}
+
+type Education struct {
+	School      string
+	Time        string
+	Description string
+}
+
 type Profile struct {
 	FirstName       string
 	LastName        string
@@ -19,4 +33,6 @@ type Profile struct {
 	Interest        []string
 	Hobbies         []string
 	SignPath        string // path to the sign image
+	Experience      []Experience
+	Education       []Education
 }

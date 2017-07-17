@@ -1,0 +1,110 @@
+\documentclass[a4paper, 11pt]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+% \usepackage[a4paper, left=2.5cm,
+% 					 right=2.5cm,
+% 					 top=1cm,
+% 					 bottom=1cm]{geometry}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{tabularx} 
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{fp}
+\usepackage{anysize}
+\usepackage{marvosym}
+\usepackage{varwidth}
+\usepackage{pdfpages}
+% \usepackage{url}
+\usepackage[colorlinks=true,%
+			linkcolor=black,%
+			citecolor=black,%
+			urlcolor=blue,%
+			plainpages=false,%
+			pdfpagelabels,%
+			hypertexnames=false]{hyperref} 
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}
+\newcommand{\Cpp}{{C\settoheight{\dimen0}{C}\settowidth{\dimen1}{{\ensuremath{\scriptstyle++}}}%
+\parbox[b][\dimen0][c]{\dimen1}{\ensuremath{\scriptstyle++}}}}
+\newcommand{\Csharp}{C\settoheight{\dimen0}{C}\settowidth{\dimen1}{{\ensuremath{\#}}}%
+\parbox[b][\dimen0][c]{\dimen1}{\ensuremath{\#}}}
+
+% Configuraion: 
+\marginsize{25mm}{25mm}{15mm}{15mm}
+\def\rightSize{110mm}
+\def\leftSize{36mm}
+\definecolor{balken}{rgb}{.39,.58,.92} % 100(39) - 149(58) - 237(92) 
+\definecolor{vorname}{gray}{.75}
+\definecolor{nachname}{gray}{.5}
+\definecolor{titlepage}{gray}{.45}
+\definecolor{header}{gray}{.3}
+\newcommand{\SmallHeadline}[1]{\color{balken}\rule{\leftSize}{5pt}& \Large \textcolor{header}{#1}}
+
+% 24, 85,
+
+\newenvironment{letter}[5]{
+\fancyfoot{}
+\begin{minipage}{10mm}
+	\vspace{14mm}
+\end{minipage}
+
+\begin{flushleft}
+	\color{balken}\rule{80mm}{5pt}
+\end{flushleft}
+
+\begin{center}
+	\huge \bfseries \textcolor{titlepage}{Bewerbung}\\
+	\Large \bfseries \textcolor{titlepage}{#1}\\[5ex]
+	\includegraphics[width=58mm]{picture/front1}\\[2ex]
+	{\Large \bfseries \textcolor{titlepage}{name}}\\[5ex]
+	\large \bfseries \textcolor{titlepage}{\Letter\, Addresse}\\[1ex]
+	\large \bfseries \textcolor{titlepage}{\Email\, email}\\[1ex]
+	\large \bfseries \textcolor{titlepage}{\Mobilefone\, phone}
+\end{center}
+
+\begin{flushright}
+	\color{balken}\rule{80mm}{5pt}
+\end{flushright}
+
+\newpage
+Name\\Addresse\\[1ex]zip\\\Mobilefone\, phone\\[6ex]
+#2\\#3\\#4\\[1ex]#5\\[5ex]
+\begin{flushright}\today\end{flushright}
+}{
+\smallskip
+
+Ich freue mich, mit Ihnen in einem gemeinsamen Gespräch meine
+persönlichen und beruflichen Ziele zu erörtern. Sollten Sie Fragen haben, stehe ich Ihnen
+gern jederzeit unter der oben genannten Rufnummer zur Verfügung.
+\bigskip
+
+Mit freundlichen Grüßen\\[1ex]
+\includegraphics[width=5cm]{picture/Unterschrift}\\
+name\\[4ex]
+\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
+\enlargethispage{\baselineskip}
+Anlagen:\\
+\begin{tabular}{cl}
+&Lebenslauf\\
+&Diplomzeugnis\\
+&Notenbescheinigung
+\end{tabular}
+}
+
+
+\begin{document}
+\marginsize{25mm}{25mm}{20mm}{20mm}
+\setlength{\parindent}{0pt}
+\input{bewerbung/set1/skytron}
+\clearpage
+\input{anhang/lebenslauf}
+\newpage
+% \input{anhang/bestanden}
+\input{anhang/zeugnis}
+\input{anhang/notenuebersicht}
+
+\end{document}
