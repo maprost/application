@@ -1,5 +1,8 @@
 package texmodel
 
 type CoverLetter struct {
-	Title string // of the job
+	CompanyAddress string
+
+	Title string
+	Text  string
 }

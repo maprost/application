@@ -30,11 +30,10 @@ func CreateTexFile(data interface{}, path string, mainFile string, subFiles ...s
 func Compile() (err error) {
 	// compile
 	_, err = stream("pdflatex", binaryTex)
-	if err != nil {
-		return
-	}
+	return
+}
 
-	// clean up
+func CleanUp() (err error) {
 	_, err = stream("rm", binaryBase+".out", binaryBase+".aux", binaryBase+".log", binaryTex)
 	return
 }

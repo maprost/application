@@ -23,5 +23,10 @@ func Build(profile genmodel.Profile, style Style) (err error) {
 	}
 
 	err = compiler.Compile()
+	if err != nil {
+		return
+	}
+
+	err = compiler.CleanUp()
 	return
 }
