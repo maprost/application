@@ -1,10 +1,14 @@
+#IntelligJ
 .idea
 *.iml
-*.aux
-*.log
-*.pdf
+
+#latex output
+application.out
+application.tex
+application.aux
+application.log
+application.pdf
 *.cls
-*.out
-*.tex
-!generator/internal/style/twoside/template/*.tex
+
+#binaries
 example/example
