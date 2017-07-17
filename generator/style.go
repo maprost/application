@@ -12,7 +12,7 @@ const (
 	TwoSide = Style(iota)
 )
 
-func (s Style) Data(profile genmodel.Profile) (data interface{}, err error) {
+func (s Style) Data(profile genmodel.Profile) (_ interface{}, err error) {
 	switch s {
 	case TwoSide:
 		return twoside.Data(profile)
