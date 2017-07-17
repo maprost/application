@@ -1,0 +1,178 @@
+\newpage
+
+\setlength{\TPHorizModule}{1cm} % Left margin
+\setlength{\TPVertModule}{1cm} % Top margin
+
+\newlength\imagewidth
+\newlength\imagescale
+\pgfmathsetlength{\imagewidth}{5cm}
+\pgfmathsetlength{\imagescale}{\imagewidth/600}
+
+% Command for printing the contact information icons
+\newcommand{\icon}[1]{%
+    \tikz[baseline=(char.base)]{
+        \node[shape=circle,draw,inner sep=1pt, fill=maincolor,maincolor,text=white] (char) {#1};
+    }%
+}
+
+\newcommand{\category}[1]{
+\vspace{5mm}
+
+{\headerfont #1 \xrfill[0.5ex]{1.5pt}[maincolor]}
+
+\medskip
+
+}
+
+% color background for side bar
+\begin{tikzpicture}[remember picture,overlay]
+    \node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (0cm,0.5cm){};
+\end{tikzpicture}
+
+%------------------------------------------------
+
+\begin{textblock}{5.1}(0.5, 0.2)
+
+% profile picture
+\begin{center}
+    \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+        \clip (600/2, 567/2) circle (567/2);
+        \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{/{{.Pic}}}};
+    \end{tikzpicture}
+\end{center}
+
+% Name
+{\Huge {{.Name}}}
+
+\smallskip
+
+
+% Title
+{{.Title}}
+
+\medskip
+
+
+% contact info
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{@{}p{0.5cm} @{\hskip 0.2cm}p{43mm}@{}}
+    \icon{\Mundus}  & {{.Nationality}}  \\
+    \icon{\Letter}  & {{.Location}}  \\
+    \icon{\Telefon} & {{.Phone}}    \\
+    \icon{\Email}   & {{.Email}}    \\[1ex]
+                    &
+    {{range .Websites}}
+        \href{{"{"}}{{.Url }}}{\includegraphics[width=5mm]{/{{.Icon}}}}{{end}}\\
+\end{tabular}
+
+
+% professional skills
+\category{Prof.\,Skills}
+\begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
+{{range .ProfSkills}}
+		{{.Name}}
+		&
+		\begin{tikzpicture}
+			\draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
+			\draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.3);
+		\end{tikzpicture}
+		\\[1ex]
+    {{end}}
+\end{tabular}
+
+\medskip
+
+{{.OtherProfSkills}}
+
+
+% interest
+\category{Interest}
+
+{{.Interest}}
+
+
+% soft skills
+\category{Soft\,Skills}
+
+{{.SoftSkills}}
+
+
+% language
+\category{Languages}
+\begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+    {{range .Language}}
+        {{.Name}} & {{.Level}} \\
+    {{end}}
+\end{tabular}
+
+
+% hobbies
+\category{Hobbies}
+
+{{.Hobbies}}
+
+% Researcher, Configer, SoftwareDesigner, Tester, Databases
+
+\end{textblock}
+\begin{textblock}{14.5}(6.5, 0.5)
+% config length
+\newlength\indentLength
+\pgfmathsetlength{\indentLength}{5mm}
+\newlength\outsidePageLength
+\pgfmathsetlength{\outsidePageLength}{140mm}
+\newlength\insidePageLength
+\pgfmathsetlength{\insidePageLength}{135mm}
+
+\timeLineHeader{Experience}
+
+\begin{minipage}{\indentLength}
+~
+\end{minipage}
+\begin{minipage}{\outsidePageLength}
+    {{range .Experience}}
+        {\headerfont {{.Position}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+
+        \smallskip
+
+        \begin{minipage}{\indentLength}
+        ~
+        \end{minipage}
+        \begin{minipage}{\insidePageLength}
+            {{.Company}}
+
+            \smallskip
+
+           {\itshape {{.Description}}}
+
+            \smallskip
+
+            {{.Tech}}
+        \end{minipage} \\[2ex]
+    {{end}}
+\end{minipage}
+
+\bigskip
+
+\timeLineHeader{Education}
+
+
+\begin{minipage}{\indentLength}
+~
+\end{minipage}
+\begin{minipage}{\outsidePageLength}
+    {{range .Education}}
+        {\headerfont {{.Institute}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+
+        \smallskip
+
+        \begin{minipage}{\indentLength}
+        ~
+        \end{minipage}
+        \begin{minipage}{\insidePageLength}
+           {{.Description}}
+
+        \end{minipage} \\[2ex]
+    {{end}}
+\end{minipage}
+
+\end{textblock}

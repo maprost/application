@@ -8,7 +8,8 @@ application.tex
 application.aux
 application.log
 application.pdf
-*.cls
+/*.cls
+/*.tex
 
 #binaries
 example/example
