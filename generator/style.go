@@ -12,10 +12,10 @@ const (
 	TwoSide = Style(iota)
 )
 
-func (s Style) Data(profile genmodel.Profile) (_ interface{}, err error) {
+func (s Style) Data(application *genmodel.Application) (data interface{}, err error) {
 	switch s {
 	case TwoSide:
-		return twoside.Data(profile)
+		return twoside.Data(application)
 	}
 
 	err = errors.New("Style not found.")

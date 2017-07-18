@@ -10,14 +10,16 @@ type Skill struct {
 type Experience struct {
 	JobPosition string
 	Company     string
-	Time        string
+	StartTime   string
+	EndTime     string
 	Description string
 	TechStack   string
 }
 
 type Education struct {
 	School      string
-	Time        string
+	StartTime   string
+	EndTime     string
 	Description string
 }
 

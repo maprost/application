@@ -5,13 +5,13 @@ import (
 	"github.com/maprost/application/generator/internal/compiler"
 )
 
-func Build(profile genmodel.Profile, style Style) (err error) {
+func Build(application genmodel.Application, style Style) (err error) {
 	var data interface{}
 	var path string
 	var mainFile string
 	var subFiles []string
 
-	data, err = style.Data(profile)
+	data, err = style.Data(&application)
 	if err != nil {
 		return
 	}

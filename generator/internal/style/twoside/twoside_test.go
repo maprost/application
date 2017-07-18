@@ -1,13 +1,14 @@
 package twoside_test
 
 import (
+	"github.com/maprost/assertion"
+	"testing"
+
 	"github.com/maprost/application/generator/internal/compiler"
 	"github.com/maprost/application/generator/internal/image"
 	"github.com/maprost/application/generator/internal/style/twoside"
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 	"github.com/maprost/application/generator/internal/test"
-	"github.com/maprost/assertion"
-	"testing"
 )
 
 func TestExample(t *testing.T) {

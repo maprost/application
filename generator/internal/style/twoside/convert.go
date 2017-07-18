@@ -5,11 +5,67 @@ import (
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 )
 
-func convert(profile *genmodel.Profile) (texmodel.Index, error) {
+func convertFirstPageData(application *genmodel.Application) (texmodel.FirstPage, error) {
 	var err error
 
-	// first prepare the skills
-	err = setCVSkills(profile)
-
-	return texmodel.Index{}, err
+	return texmodel.FirstPage{}, err
 }
+
+func convertCoverLetterData(application *genmodel.Application) (texmodel.CoverLetter, error) {
+	var err error
+
+	return texmodel.CoverLetter{}, err
+}
+
+func convertCVData(application *genmodel.Application) (texmodel.CV, error) {
+	var err error
+
+	return texmodel.CV{}, err
+}
+
+func setCVSkills(prf *genmodel.Profile) (err error) {
+	//skillSize := len(prf.Company.ProfSkills)
+
+	//// no skills set in jobposition -> use first of cv config
+	//if skillSize == 0 {
+	//	skillSize = maxSkillSize(len(prf.CV.ProfSkills))
+	//
+	//	// use the first #skillSize from the CV list
+	//	prf.CV.ProfSkills = prf.CV.ProfSkills[:skillSize]
+	//	return
+	//}
+	//
+	//skillMap := createSkillMap(prf.CV.ProfSkills)
+	//skillSize = maxSkillSize(skillSize)
+	//skills := make([]genmodel.Skill, skillSize)
+	//for i, skillID := range prf.Company.ProfSkills {
+	//	if i == skillSize {
+	//		break
+	//	}
+	//
+	//	skill, ok := skillMap[skillID]
+	//	if !ok {
+	//		err = fmt.Errorf("SkillID %d is not known", skillID)
+	//		return
+	//	}
+	//	skills[i] = skill
+	//}
+	//
+	//prf.CV.ProfSkills = skills
+	return
+}
+
+//func maxSkillSize(size int) int {
+//	if size < maxSkills {
+//		return size
+//	}
+//	return maxSkills
+//}
+//
+//func createSkillMap(skills []genmodel.Skill) (result map[genmodel.SkillID]genmodel.Skill) {
+//	result = make(map[genmodel.SkillID]genmodel.Skill)
+//	for _, skill := range skills {
+//		result[skill.ID] = skill
+//	}
+//	return
+//}
