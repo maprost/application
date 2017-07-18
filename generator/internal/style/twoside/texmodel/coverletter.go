@@ -1,8 +1,11 @@
 package texmodel
 
 type CoverLetter struct {
-	CompanyAddress string
-
-	Title string
-	Text  string
+	Name          string
+	Street        string
+	Zip           string
+	CompanyName   string
+	CompanyStreet string
+	CompanyZip    string
+	Text          string
 }

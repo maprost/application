@@ -30,7 +30,7 @@ type Education struct {
 }
 
 type CV struct {
-	Pic             string // path
+	Image           string // path
 	Name            string
 	Title           string
 	Nationality     string

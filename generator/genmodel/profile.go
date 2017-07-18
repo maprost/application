@@ -26,9 +26,11 @@ type Education struct {
 type Profile struct {
 	FirstName       string
 	LastName        string
+	Image           string // path
 	Nationality     string
 	Birthday        string
 	Address         Address
+	Email           string
 	Website         []string          // url
 	TechnicalSkills map[SkillID]Skill // should contains all technical skills you have
 	SoftSkills      map[SkillID]Skill // should contains all soft skills you have

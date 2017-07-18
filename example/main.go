@@ -5,7 +5,6 @@ import (
 	"log"
 	"os"
 
-	"github.com/maprost/application/example/july"
 	"github.com/maprost/application/example/max"
 	"github.com/maprost/application/generator"
 	"github.com/maprost/application/generator/genmodel"
@@ -22,20 +21,18 @@ func main() {
 		company = flag.Arg(1)
 	} else {
 		name = "max"
-		company = "santa"
+		company = "bunny"
 	}
 
 	log.Println("Name:", name, " JobPosition:", company)
 
-	var profile genmodel.Profile
+	var application genmodel.Application
 	switch name {
 	case "max":
-		profile = max.Profile(company)
-	case "july":
-		profile = july.Profile(company)
+		application = max.Application(company)
 	}
 
-	err := generator.Build(profile)
+	err := generator.Build(application, generator.TwoSide)
 	if err != nil {
 		log.Println(err.Error())
 		os.Exit(1)

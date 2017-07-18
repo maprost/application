@@ -7,7 +7,7 @@ import (
 
 func New() genmodel.JobPosition {
 	return genmodel.JobPosition{
-		Title:  "Santa Clause",
-		Skills: []genmodel.SkillID{profile.SkillWrapping, profile.SkillSneaking, profile.SkillClimbing},
+		Title:           "Santa Clause",
+		TechnicalSkills: []genmodel.SkillID{profile.TechSkillWrapping, profile.TechSkillSneaking, profile.TechSkillClimbing},
 	}
 }

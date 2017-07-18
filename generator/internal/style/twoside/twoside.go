@@ -5,23 +5,22 @@ import (
 	"runtime"
 
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 )
 
 func Data(application *genmodel.Application) (data interface{}, err error) {
-	var index texmodel.Index
+	index, err := initIndex(application)
 
-	index.FirstPage, err = convertFirstPageData(application)
+	index.FirstPage, err = createFirstPageData(application)
 	if err != nil {
 		return
 	}
 
-	index.CoverLetter, err = convertCoverLetterData(application)
+	index.CoverLetter, err = createCoverLetterData(application)
 	if err != nil {
 		return
 	}
 
-	index.CV, err = convertCVData(application)
+	index.CV, err = createCVData(application)
 	if err != nil {
 		return
 	}

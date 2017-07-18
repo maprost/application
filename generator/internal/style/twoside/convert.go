@@ -5,22 +5,41 @@ import (
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 )
 
-func convertFirstPageData(application *genmodel.Application) (texmodel.FirstPage, error) {
-	var err error
-
-	return texmodel.FirstPage{}, err
+func initIndex(application *genmodel.Application) (texmodel.Index, error) {
+	return texmodel.Index{
+		MainColor: application.JobPosition.MainColor,
+	}, nil
 }
 
-func convertCoverLetterData(application *genmodel.Application) (texmodel.CoverLetter, error) {
-	var err error
-
-	return texmodel.CoverLetter{}, err
+func createFirstPageData(application *genmodel.Application) (texmodel.FirstPage, error) {
+	return texmodel.FirstPage{
+		Name:  application.Profile.FirstName + " " + application.Profile.LastName,
+		Title: application.JobPosition.Title,
+		Image: application.Profile.Image,
+	}, nil
 }
 
-func convertCVData(application *genmodel.Application) (texmodel.CV, error) {
+func createCoverLetterData(application *genmodel.Application) (texmodel.CoverLetter, error) {
+	return texmodel.CoverLetter{
+		Name:          application.Profile.FirstName + " " + application.Profile.LastName,
+		Street:        application.Profile.Address.Street,
+		Zip:           application.Profile.Address.Zip + " " + application.Profile.Address.City,
+		CompanyName:   application.JobPosition.Company,
+		CompanyStreet: application.JobPosition.Address.Street,
+		CompanyZip:    application.JobPosition.Address.Zip + " " + application.JobPosition.Address.City,
+		Text:          application.JobPosition.LetterText,
+	}, nil
+}
+
+func createCVData(application *genmodel.Application) (texmodel.CV, error) {
 	var err error
 
-	return texmodel.CV{}, err
+	return texmodel.CV{
+		Name:  application.Profile.FirstName + " " + application.Profile.LastName,
+		Title: application.JobPosition.Title,
+		Image: application.Profile.Image,
+		Email: application.Profile.Email,
+	}, err
 }
 
 func setCVSkills(prf *genmodel.Profile) (err error) {

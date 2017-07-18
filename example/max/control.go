@@ -7,15 +7,16 @@ import (
 	"github.com/maprost/application/generator/genmodel"
 )
 
-func Profile(company string) genmodel.Profile {
-	prf := profile.New()
+func Application(company string) genmodel.Application {
+	application := genmodel.Application{}
+	application.Profile = profile.New()
 
 	switch company {
 	case "santa":
-		prf.Company = santa.New()
+		application.JobPosition = santa.New()
 	case "bunny":
-		prf.Company = bunny.New()
+		application.JobPosition = bunny.New()
 	}
 
-	return prf
+	return application
 }
