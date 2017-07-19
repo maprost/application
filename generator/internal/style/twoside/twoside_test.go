@@ -24,7 +24,7 @@ func TestExample(t *testing.T) {
 			Email:       "logan@xmen.com",
 			Location:    "X-Men Headquarter near the Everglades",
 			Phone:       "0123456789",
-			Websites: []texmodel.Websites{
+			Websites: []texmodel.Website{
 				{
 					Icon: image.ImagePath() + "github",
 					Url:  "https://github.com",

@@ -27,7 +27,7 @@ func New() genmodel.Profile {
 		Birthday:    "1980, California",
 		Email:       "mad@max.com",
 		Nationality: "american",
-		Website:     []string{"https://www.linkedin.com"},
+		Websites:    []string{"https://www.linkedin.com", "www.myspace.com"},
 		Address: genmodel.Address{
 			Street:  "NewStr. 56",
 			Zip:     "12345",
@@ -45,6 +45,16 @@ func New() genmodel.Profile {
 		},
 		Interest: []string{"Survival training", "Water"},
 		Hobbies:  []string{"cars"},
+		Language: []genmodel.Language{
+			{
+				Name:  "English",
+				Level: "C2",
+			},
+			{
+				Name:  "French",
+				Level: "A2",
+			},
+		},
 		Experience: []genmodel.Experience{
 			{
 				Company:     "Lord Drug",

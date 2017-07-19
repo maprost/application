@@ -2,8 +2,10 @@ package twoside
 
 import (
 	"github.com/maprost/application/generator/genmodel"
+	"github.com/maprost/application/generator/internal/image"
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 	"github.com/maprost/application/generator/internal/util"
+	"strings"
 )
 
 func initIndex(application *genmodel.Application) (texmodel.Index, error) {
@@ -48,9 +50,16 @@ func createCVData(application *genmodel.Application) (data texmodel.CV, err erro
 		Title:           application.JobPosition.Title,
 		Image:           util.DefaultImage(application.Profile.Image),
 		Email:           application.Profile.Email,
+		Phone:           application.Profile.Phone,
+		Location:        application.Profile.Address.City + ", " + application.Profile.Address.Country,
+		Nationality:     application.Profile.Nationality,
+		Websites:        convertWebsites(application),
 		OtherProfSkills: otherProfSkills,
 		ProfSkills:      profSkills,
 		SoftSkills:      softSkills,
+		Hobbies:         strings.Join(application.Profile.Hobbies, " ,"),
+		Interest:        strings.Join(application.Profile.Interest, " ,"),
+		Language:        convertLanguage(application),
 	}
 	return
 }
@@ -92,17 +101,34 @@ func convertSoftSkills(application *genmodel.Application) (softSkills string, er
 	return
 }
 
-//func maxSkillSize(size int) int {
-//	if size < maxSkills {
-//		return size
-//	}
-//	return maxSkills
-//}
-//
-//func createSkillMap(skills []genmodel.Skill) (result map[genmodel.SkillID]genmodel.Skill) {
-//	result = make(map[genmodel.SkillID]genmodel.Skill)
-//	for _, skill := range skills {
-//		result[skill.ID] = skill
-//	}
-//	return
-//}
+func convertLanguage(application *genmodel.Application) (out []texmodel.Language) {
+	for _, lang := range application.Profile.Language {
+		out = append(out, texmodel.Language{
+			Name:  lang.Name,
+			Level: lang.Level,
+		})
+	}
+	return
+}
+
+func convertWebsites(application *genmodel.Application) (websites []texmodel.Website) {
+	for _, website := range application.Profile.Websites {
+		icon := image.ImagePath() + "website"
+
+		if strings.HasPrefix(website, "https://github.com") {
+			icon = image.ImagePath() + "github"
+
+		} else if strings.HasPrefix(website, "https://www.linkedin.com") {
+			icon = image.ImagePath() + "linkedIn"
+
+		} else if strings.HasPrefix(website, "https://www.xing.com") {
+			icon = image.ImagePath() + "xing"
+		}
+
+		websites = append(websites, texmodel.Website{
+			Icon: icon,
+			Url:  website,
+		})
+	}
+	return
+}

@@ -5,7 +5,7 @@ type Skill struct {
 	Rating int // Rating range [1,10]
 }
 
-type Websites struct {
+type Website struct {
 	Icon string // path
 	Url  string
 }
@@ -37,7 +37,7 @@ type CV struct {
 	Location        string
 	Email           string
 	Phone           string
-	Websites        []Websites
+	Websites        []Website
 	ProfSkills      []Skill
 	OtherProfSkills string
 	Interest        string
