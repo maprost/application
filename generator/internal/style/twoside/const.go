@@ -1,5 +1,5 @@
 package twoside
 
 const (
-	maxSkills = 5
+	maxProfessionalSkills = 5
 )

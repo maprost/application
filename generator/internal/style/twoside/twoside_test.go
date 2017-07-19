@@ -15,8 +15,9 @@ func TestExample(t *testing.T) {
 	assert := assertion.New(t)
 
 	indexData := texmodel.Index{
+		MainColor: "e3593b",
 		CV: texmodel.CV{
-			Pic:         test.ImagePath() + "logan",
+			Image:       test.ImagePath() + "logan",
 			Name:        "Logan van der Bommel",
 			Title:       "Good night bringer and tooth painter",
 			Nationality: "Canada",

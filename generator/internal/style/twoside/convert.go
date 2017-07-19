@@ -3,11 +3,12 @@ package twoside
 import (
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
+	"github.com/maprost/application/generator/internal/util"
 )
 
 func initIndex(application *genmodel.Application) (texmodel.Index, error) {
 	return texmodel.Index{
-		MainColor: application.JobPosition.MainColor,
+		MainColor: util.DefaultColor(application.JobPosition.MainColor),
 	}, nil
 }
 
@@ -15,7 +16,7 @@ func createFirstPageData(application *genmodel.Application) (texmodel.FirstPage,
 	return texmodel.FirstPage{
 		Name:  application.Profile.FirstName + " " + application.Profile.LastName,
 		Title: application.JobPosition.Title,
-		Image: application.Profile.Image,
+		Image: util.DefaultImage(application.Profile.Image),
 	}, nil
 }
 
@@ -31,46 +32,63 @@ func createCoverLetterData(application *genmodel.Application) (texmodel.CoverLet
 	}, nil
 }
 
-func createCVData(application *genmodel.Application) (texmodel.CV, error) {
-	var err error
+func createCVData(application *genmodel.Application) (data texmodel.CV, err error) {
+	profSkills, otherProfSkills, err := convertProfSkills(application)
+	if err != nil {
+		return
+	}
 
-	return texmodel.CV{
-		Name:  application.Profile.FirstName + " " + application.Profile.LastName,
-		Title: application.JobPosition.Title,
-		Image: application.Profile.Image,
-		Email: application.Profile.Email,
-	}, err
+	softSkills, err := convertSoftSkills(application)
+	if err != nil {
+		return
+	}
+
+	data = texmodel.CV{
+		Name:            application.Profile.FirstName + " " + application.Profile.LastName,
+		Title:           application.JobPosition.Title,
+		Image:           util.DefaultImage(application.Profile.Image),
+		Email:           application.Profile.Email,
+		OtherProfSkills: otherProfSkills,
+		ProfSkills:      profSkills,
+		SoftSkills:      softSkills,
+	}
+	return
 }
 
-func setCVSkills(prf *genmodel.Profile) (err error) {
-	//skillSize := len(prf.Company.ProfSkills)
+func convertProfSkills(application *genmodel.Application) (profSkills []texmodel.Skill, otherProfSkills string, err error) {
+	skills, err := util.CalculatProfessionalSkills(application)
+	if err != nil {
+		return
+	}
 
-	//// no skills set in jobposition -> use first of cv config
-	//if skillSize == 0 {
-	//	skillSize = maxSkillSize(len(prf.CV.ProfSkills))
-	//
-	//	// use the first #skillSize from the CV list
-	//	prf.CV.ProfSkills = prf.CV.ProfSkills[:skillSize]
-	//	return
-	//}
-	//
-	//skillMap := createSkillMap(prf.CV.ProfSkills)
-	//skillSize = maxSkillSize(skillSize)
-	//skills := make([]genmodel.Skill, skillSize)
-	//for i, skillID := range prf.Company.ProfSkills {
-	//	if i == skillSize {
-	//		break
-	//	}
-	//
-	//	skill, ok := skillMap[skillID]
-	//	if !ok {
-	//		err = fmt.Errorf("SkillID %d is not known", skillID)
-	//		return
-	//	}
-	//	skills[i] = skill
-	//}
-	//
-	//prf.CV.ProfSkills = skills
+	for i, skill := range skills {
+		if i < maxProfessionalSkills {
+			profSkills = append(profSkills, texmodel.Skill{
+				Name:   skill.Name,
+				Rating: skill.Rating,
+			})
+		} else {
+			if i >= maxProfessionalSkills {
+				otherProfSkills += " ,"
+			}
+			otherProfSkills += skill.Name
+		}
+	}
+	return
+}
+
+func convertSoftSkills(application *genmodel.Application) (softSkills string, err error) {
+	skills, err := util.CalculateSoftSkills(application)
+	if err != nil {
+		return
+	}
+
+	for i, skill := range skills {
+		if i > 0 {
+			softSkills += " ,"
+		}
+		softSkills += skill.Name
+	}
 	return
 }
 

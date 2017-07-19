@@ -14,8 +14,8 @@ func New() genmodel.JobPosition {
 			City:    "EggTown",
 			Country: "EggLand",
 		},
-		Title:           "Senior Egg Mover",
-		TechnicalSkills: []genmodel.SkillID{profile.TechSkillHiding, profile.TechSkillSneaking},
+		Title:              "Senior Egg Mover",
+		ProfessionalSkills: []genmodel.SkillID{profile.TechSkillHiding, profile.TechSkillSneaking},
 		LetterText: `
 		I love eggs as long as I live and my biggest dream is to hide them. So no one can find them and
 		I can eat them all after the party is over. I would love to apply for the position of a Senior

@@ -34,7 +34,7 @@ func New() genmodel.Profile {
 			City:    "LA",
 			Country: "USA",
 		},
-		TechnicalSkills: map[genmodel.SkillID]genmodel.Skill{
+		ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
 			TechSkillHiding:   {Name: "hiding", Rating: 3},
 			TechSkillSneaking: {Name: "sneaking", Rating: 5},
 			TechSkillWrapping: {Name: "wrapping", Rating: 3},
