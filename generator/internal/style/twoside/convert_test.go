@@ -30,7 +30,7 @@ func assertApplication(t *testing.T, application genmodel.Application, expected 
 		expected.MainColor = util.DefaultColorValue
 	}
 
-	if expected.FirstPage.Image == "" {
+	if !expected.ShortVersion && expected.FirstPage.Image == "" {
 		expected.FirstPage.Image = util.NoImagePath
 	}
 
