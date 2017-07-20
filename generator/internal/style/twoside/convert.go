@@ -77,14 +77,19 @@ func convertProfSkills(application *genmodel.Application) (profSkills []texmodel
 		return
 	}
 
+	maxSkills := maxProfessionalSkills
+	if maxProfessionalSkills+1 == len(skills) {
+		maxSkills = maxProfessionalSkills + 1
+	}
+
 	for i, skill := range skills {
-		if i < maxProfessionalSkills {
+		if i < maxSkills {
 			profSkills = append(profSkills, texmodel.Skill{
 				Name:   skill.Name,
 				Rating: skill.Rating,
 			})
 		} else {
-			if i >= maxProfessionalSkills {
+			if i >= maxSkills {
 				otherProfSkills += " ,"
 			}
 			otherProfSkills += skill.Name
