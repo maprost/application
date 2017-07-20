@@ -5,18 +5,34 @@ import (
 	"strings"
 )
 
+var (
+	WebsiteIconPath  = image.ImagePath() + "website"
+	XingIconPath     = image.ImagePath() + "xing"
+	GithubIconPath   = image.ImagePath() + "github"
+	LinkedinIconPath = image.ImagePath() + "linkedIn"
+)
+
 func WebsiteIcon(website string) (icon string) {
-	imageRootPath := image.ImagePath()
-	icon = imageRootPath + "website"
+	icon = WebsiteIconPath
+	website = strings.ToLower(website)
+
+	// repair urls
+	containsHttpPrefix := strings.HasPrefix(website, "http")
+	containsHttpsPrefix := strings.HasPrefix(website, "https")
+	if containsHttpPrefix && !containsHttpsPrefix {
+		website = "https" + website[4:]
+	} else if !containsHttpPrefix {
+		website = "https://" + website
+	}
 
 	if strings.HasPrefix(website, "https://github.com") {
-		icon = imageRootPath + "github"
+		icon = GithubIconPath
 
-	} else if strings.HasPrefix(website, "https://www.linkedin.com") {
-		icon = imageRootPath + "linkedIn"
+	} else if strings.HasPrefix(website, "https://www.linkedin.com") || strings.HasPrefix(website, "https://linkedin.com") {
+		icon = LinkedinIconPath
 
-	} else if strings.HasPrefix(website, "https://www.xing.com") {
-		icon = imageRootPath + "xing"
+	} else if strings.HasPrefix(website, "https://www.xing.com") || strings.HasPrefix(website, "https://xing.com") {
+		icon = XingIconPath
 	}
 
 	return

@@ -5,15 +5,23 @@ import (
 	"strings"
 )
 
+const (
+	DefaultColorValue = "e3593b"
+)
+
+var (
+	NoImagePath = image.ImagePath() + "noimage"
+)
+
 func DefaultColor(color string) string {
-	return defaultValue(color, "e3593b")
+	return DefaultValue(color, DefaultColorValue)
 }
 
 func DefaultImage(path string) string {
-	return defaultValue(path, image.ImagePath()+"noimage")
+	return DefaultValue(path, NoImagePath)
 }
 
-func defaultValue(value string, defaultValue string) string {
+func DefaultValue(value string, defaultValue string) string {
 	if strings.TrimSpace(value) == "" {
 		return defaultValue
 	}

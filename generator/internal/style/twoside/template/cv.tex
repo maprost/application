@@ -121,6 +121,15 @@
 \newlength\insidePageLength
 \pgfmathsetlength{\insidePageLength}{135mm}
 
+{{if not (eq .AboutMe "")}}
+\timeLineHeader{Profile}
+
+{{.AboutMe}}
+
+\bigskip
+
+{{end}}
+
 \timeLineHeader{Experience}
 
 \begin{minipage}{\indentLength}

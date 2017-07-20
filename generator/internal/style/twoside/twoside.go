@@ -7,20 +7,22 @@ import (
 	"github.com/maprost/application/generator/genmodel"
 )
 
-func Data(application *genmodel.Application) (data interface{}, err error) {
-	index, err := initIndex(application)
+func Data(application *genmodel.Application, shortVersion bool) (data interface{}, err error) {
+	index, err := initIndex(application, shortVersion)
 
-	index.FirstPage, err = createFirstPageData(application)
-	if err != nil {
-		return
+	if !shortVersion {
+		index.FirstPage, err = createFirstPageData(application)
+		if err != nil {
+			return
+		}
+
+		index.CoverLetter, err = createCoverLetterData(application)
+		if err != nil {
+			return
+		}
 	}
 
-	index.CoverLetter, err = createCoverLetterData(application)
-	if err != nil {
-		return
-	}
-
-	index.CV, err = createCVData(application)
+	index.CV, err = createCVData(application, shortVersion)
 	if err != nil {
 		return
 	}

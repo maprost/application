@@ -5,7 +5,7 @@ import (
 	"github.com/maprost/application/generator/genmodel"
 )
 
-func CalculatProfessionalSkills(application *genmodel.Application) ([]genmodel.Skill, error) {
+func CalculateProfessionalSkills(application *genmodel.Application) ([]genmodel.Skill, error) {
 	return calculateSkills(application.Profile.ProfessionalSkills, application.JobPosition.ProfessionalSkills)
 }
 

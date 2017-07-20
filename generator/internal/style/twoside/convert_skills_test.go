@@ -1,4 +1,4 @@
-package twoside
+package twoside_test
 
 import (
 	"github.com/maprost/application/generator/genmodel"

@@ -63,17 +63,16 @@
 %
 %\newpage
 
-{{template "firstpage.tex" .FirstPage}}
+{{if not .ShortVersion}}
+	{{template "firstpage.tex" .FirstPage}}
 
-\newpage
+	\newpage
 
-{{template "coverletter.tex" .CoverLetter}}
+	{{template "coverletter.tex" .CoverLetter}}
 
-\newpage
+	\newpage
+{{end}}
 
 {{template "cv.tex" .CV}}
-
-
-
 
 \end{document}

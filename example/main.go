@@ -32,7 +32,7 @@ func main() {
 		application = max.Application(company)
 	}
 
-	err := generator.Build(application, generator.TwoSide)
+	err := generator.Build(application, generator.TwoSide_short)
 	if err != nil {
 		log.Println(err.Error())
 		os.Exit(1)

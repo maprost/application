@@ -9,13 +9,16 @@ import (
 type Style int
 
 const (
-	TwoSide = Style(iota)
+	TwoSide_long = Style(iota)
+	TwoSide_short
 )
 
 func (s Style) Data(application *genmodel.Application) (data interface{}, err error) {
 	switch s {
-	case TwoSide:
-		return twoside.Data(application)
+	case TwoSide_long:
+		return twoside.Data(application, false)
+	case TwoSide_short:
+		return twoside.Data(application, true)
 	}
 
 	err = errors.New("Style not found.")
@@ -24,7 +27,7 @@ func (s Style) Data(application *genmodel.Application) (data interface{}, err er
 
 func (s Style) Files() (path string, mainFile string, subFiles []string) {
 	switch s {
-	case TwoSide:
+	case TwoSide_long, TwoSide_short:
 		return twoside.Files()
 	}
 	return

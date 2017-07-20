@@ -44,6 +44,7 @@ type CV struct {
 	SoftSkills      string
 	Language        []Language
 	Hobbies         string
+	AboutMe         string // only used in short version
 	Experience      []Experience
 	Education       []Education
 }

@@ -29,21 +29,22 @@ type Language struct {
 }
 
 type Profile struct {
-	FirstName          string
-	LastName           string
-	Image              string // path
-	Nationality        string
-	Birthday           string
-	Address            Address
-	Email              string
-	Phone              string
-	Websites           []string          // url
-	ProfessionalSkills map[SkillID]Skill // should contains all professional skills you have
-	SoftSkills         map[SkillID]Skill // should contains all soft skills you have
-	Interest           []string
-	Hobbies            []string
-	SignPath           string // path to the sign image
-	Experience         []Experience
-	Education          []Education
-	Language           []Language
+	FirstName             string
+	LastName              string
+	Image                 string // path
+	Nationality           string
+	Birthday              string
+	Address               Address
+	Email                 string
+	Phone                 string
+	Websites              []string          // url
+	ProfessionalSkills    map[SkillID]Skill // should contains all professional skills you have
+	SoftSkills            map[SkillID]Skill // should contains all soft skills you have
+	Interest              []string
+	Hobbies               []string
+	SignPath              string // path to the sign image
+	Experience            []Experience
+	Education             []Education
+	Language              []Language
+	GeneralMotivationText string // your general motivation text, this text can contains tex elements
 }

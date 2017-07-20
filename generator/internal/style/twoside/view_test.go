@@ -11,7 +11,7 @@ import (
 	"github.com/maprost/application/generator/internal/test"
 )
 
-func TestExample(t *testing.T) {
+func _TestViewManual(t *testing.T) {
 	assert := assertion.New(t)
 
 	indexData := texmodel.Index{
@@ -31,7 +31,7 @@ func TestExample(t *testing.T) {
 				},
 				{
 					Icon: image.ImagePath() + "linkedIn",
-					Url:  "https://www.linkedin.com",
+					Url:  "https://linkedin.com",
 				},
 				{
 					Icon: image.ImagePath() + "xing",
