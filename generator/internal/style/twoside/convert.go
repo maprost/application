@@ -2,7 +2,6 @@ package twoside
 
 import (
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/internal/image"
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 	"github.com/maprost/application/generator/internal/util"
 	"strings"
@@ -113,20 +112,8 @@ func convertLanguage(application *genmodel.Application) (out []texmodel.Language
 
 func convertWebsites(application *genmodel.Application) (websites []texmodel.Website) {
 	for _, website := range application.Profile.Websites {
-		icon := image.ImagePath() + "website"
-
-		if strings.HasPrefix(website, "https://github.com") {
-			icon = image.ImagePath() + "github"
-
-		} else if strings.HasPrefix(website, "https://www.linkedin.com") {
-			icon = image.ImagePath() + "linkedIn"
-
-		} else if strings.HasPrefix(website, "https://www.xing.com") {
-			icon = image.ImagePath() + "xing"
-		}
-
 		websites = append(websites, texmodel.Website{
-			Icon: icon,
+			Icon: util.WebsiteIcon(website),
 			Url:  website,
 		})
 	}
