@@ -89,8 +89,8 @@ func convertProfSkills(application *genmodel.Application) (profSkills []texmodel
 				Rating: skill.Rating,
 			})
 		} else {
-			if i >= maxSkills {
-				otherProfSkills += " ,"
+			if i > maxSkills {
+				otherProfSkills += ", "
 			}
 			otherProfSkills += skill.Name
 		}
@@ -106,7 +106,7 @@ func convertSoftSkills(application *genmodel.Application) (softSkills string, er
 
 	for i, skill := range skills {
 		if i > 0 {
-			softSkills += " ,"
+			softSkills += ", "
 		}
 		softSkills += skill.Name
 	}

@@ -12,6 +12,14 @@ const (
 	techSkill_Cpp
 	techSkill_Latex
 	techSkill_SoftwareDesign
+	techSkill_IntelliJ
+	techSkill_Ubuntu
+	techSkill_PostgresSQL
+	techSkill_Docker
+	techSkill_Git
+	techSkill_Docker
+	techSkill_Docker
+	techSkill_Docker
 )
 
 const (
@@ -25,36 +33,42 @@ func Profile() genmodel.Profile {
 		FirstName:   "maprost",
 		LastName:    "",
 		Image:       path.Dir(file) + "/images/cv",
-		Birthday:    "...",
-		Email:       "...",
+		Birthday:    "",
+		Email:       "N/A",
 		Nationality: "german",
+		Phone:       "N/A",
 		Websites:    []string{"https://github.com/maprost"},
 		Address: genmodel.Address{
-			Street:  "...",
-			Zip:     "...",
-			City:    "...",
+			Street:  "",
+			Zip:     "",
+			City:    "",
 			Country: "Germany",
 		},
 		ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
 			techSkill_Go:             {Name: "Go", Rating: 8},
-			techSkill_Java:           {Name: "Java", Rating: 8},
-			techSkill_SoftwareDesign: {Name: "Software Design", Rating: 8},
+			techSkill_Java:           {Name: "Java", Rating: 9},
+			techSkill_SoftwareDesign: {Name: "Software Design", Rating: 9},
 			techSkill_Cpp:            {Name: "C++", Rating: 5},
 			techSkill_Latex:          {Name: "\\LaTeX", Rating: 7},
+			techSkill_IntelliJ:       {Name: "IntelliJ", Rating: 6},
+			techSkill_Ubuntu:         {Name: "Ubuntu", Rating: 6},
+			techSkill_PostgresSQL:    {Name: "Postgres", Rating: 6},
+			techSkill_Docker:         {Name: "Docker", Rating: 5},
+			techSkill_Git:            {Name: "Git", Rating: 5},
 		},
 		SoftSkills: map[genmodel.SkillID]genmodel.Skill{
-			softSkillFriendly: {Name: "friendly", Rating: 2},
+			softSkillFriendly: {Name: "friendly", Rating: 9},
 		},
-		Interest: []string{"CleanCode", ""},
+		Interest: []string{"CleanCode", "TDD", "Design Pattern"},
 		Hobbies:  []string{"Boardgames"},
 		Language: []genmodel.Language{
 			{
-				Name:  "English",
-				Level: "B2",
-			},
-			{
 				Name:  "German",
 				Level: "Native",
+			},
+			{
+				Name:  "English",
+				Level: "B2",
 			},
 		},
 		Experience: []genmodel.Experience{

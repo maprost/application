@@ -3,6 +3,7 @@ package util
 import (
 	"fmt"
 	"github.com/maprost/application/generator/genmodel"
+	"sort"
 )
 
 func CalculateProfessionalSkills(application *genmodel.Application) ([]genmodel.Skill, error) {
@@ -31,9 +32,13 @@ func calculateSkills(skillMap map[genmodel.SkillID]genmodel.Skill, neededSkills 
 	return
 }
 
+// return the map values sorted by ranking
 func convertMapToList(skillMap map[genmodel.SkillID]genmodel.Skill) (result []genmodel.Skill) {
 	for _, skill := range skillMap {
 		result = append(result, skill)
 	}
+	sort.Slice(result, func(i, j int) bool {
+		return result[i].Rating > result[j].Rating
+	})
 	return
 }
