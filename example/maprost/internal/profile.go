@@ -17,9 +17,6 @@ const (
 	techSkill_PostgresSQL
 	techSkill_Docker
 	techSkill_Git
-	techSkill_Docker
-	techSkill_Docker
-	techSkill_Docker
 )
 
 const (
