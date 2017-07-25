@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/maprost/application/example/maprost"
 	"github.com/maprost/application/example/max"
 	"github.com/maprost/application/generator"
 	"github.com/maprost/application/generator/genmodel"
@@ -20,8 +21,8 @@ func main() {
 		name = flag.Arg(0)
 		company = flag.Arg(1)
 	} else {
-		name = "max"
-		company = "bunny"
+		name = "maprost"
+		company = "google"
 	}
 
 	log.Println("Name:", name, " JobPosition:", company)
@@ -30,6 +31,8 @@ func main() {
 	switch name {
 	case "max":
 		application = max.Application(company)
+	case "maprost":
+		application = maprost.Application(company)
 	}
 
 	err := generator.Build(application, generator.TwoSide_short)
