@@ -20,7 +20,7 @@ const (
 )
 
 const (
-	softSkillFriendly = genmodel.SkillID(iota)
+	softSkill_AnalyticalThinking = genmodel.SkillID(iota)
 )
 
 func Profile() genmodel.Profile {
@@ -54,10 +54,10 @@ func Profile() genmodel.Profile {
 			techSkill_Git:            {Name: "Git", Rating: 5},
 		},
 		SoftSkills: map[genmodel.SkillID]genmodel.Skill{
-			softSkillFriendly: {Name: "friendly", Rating: 9},
+			softSkill_AnalyticalThinking: {Name: "Analytical Thinking", Rating: 9},
 		},
-		Interest: []string{"CleanCode", "TDD", "Design Pattern"},
-		Hobbies:  []string{"Boardgames"},
+		Interest: []string{"CleanCode", "TDD", "Design Pattern", "Microservices", "Backend development"},
+		Hobbies:  []string{"Boardgames", "Travaling by bike"},
 		Language: []genmodel.Language{
 			{
 				Name:  "German",
@@ -68,6 +68,9 @@ func Profile() genmodel.Profile {
 				Level: "B2",
 			},
 		},
+		GeneralMotivationText: `
+
+		`,
 		Experience: []genmodel.Experience{
 			{
 				Company:     "Lord Drug",
