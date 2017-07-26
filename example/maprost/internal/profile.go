@@ -17,6 +17,8 @@ const (
 	techSkill_PostgresSQL
 	techSkill_Docker
 	techSkill_Git
+	techSkill_Python
+	techSkill_Bash
 )
 
 const (
@@ -52,6 +54,8 @@ func Profile() genmodel.Profile {
 			techSkill_PostgresSQL:    {Name: "Postgres", Rating: 6},
 			techSkill_Docker:         {Name: "Docker", Rating: 5},
 			techSkill_Git:            {Name: "Git", Rating: 5},
+			techSkill_Python:         {Name: "Python", Rating: 5},
+			techSkill_Bash:           {Name: "Bash", Rating: 5},
 		},
 		SoftSkills: map[genmodel.SkillID]genmodel.Skill{
 			softSkill_AnalyticalThinking: {Name: "Analytical Thinking", Rating: 9},
