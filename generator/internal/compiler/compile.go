@@ -34,7 +34,7 @@ func Compile() (err error) {
 }
 
 func CleanUp() (err error) {
-	_, err = stream("rm", binaryBase+".out", binaryBase+".aux", binaryBase+".log", binaryTex)
+	_, err = stream("rm", binaryBase+".aux", binaryBase+".log", binaryTex)
 	return
 }
 

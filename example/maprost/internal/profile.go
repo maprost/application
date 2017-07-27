@@ -19,6 +19,9 @@ const (
 	techSkill_Git
 	techSkill_Python
 	techSkill_Bash
+	techSkill_HTML5
+	techSkill_DBDesign
+	techSkill_Testing
 )
 
 const (
@@ -47,8 +50,10 @@ func Profile() genmodel.Profile {
 			techSkill_Go:             {Name: "Go", Rating: 8},
 			techSkill_Java:           {Name: "Java", Rating: 9},
 			techSkill_SoftwareDesign: {Name: "Software Design", Rating: 9},
-			techSkill_Cpp:            {Name: "C++", Rating: 5},
+			techSkill_DBDesign:       {Name: "Database Design", Rating: 8},
+			techSkill_Testing:        {Name: "Testing", Rating: 9},
 			techSkill_Latex:          {Name: "\\LaTeX", Rating: 7},
+			techSkill_Cpp:            {Name: "C++", Rating: 5},
 			techSkill_IntelliJ:       {Name: "IntelliJ", Rating: 6},
 			techSkill_Ubuntu:         {Name: "Ubuntu", Rating: 6},
 			techSkill_PostgresSQL:    {Name: "Postgres", Rating: 6},
@@ -56,6 +61,7 @@ func Profile() genmodel.Profile {
 			techSkill_Git:            {Name: "Git", Rating: 5},
 			techSkill_Python:         {Name: "Python", Rating: 5},
 			techSkill_Bash:           {Name: "Bash", Rating: 5},
+			techSkill_HTML5:          {Name: "HTML5 (HTML, JS, CSS)", Rating: 4},
 		},
 		SoftSkills: map[genmodel.SkillID]genmodel.Skill{
 			softSkill_AnalyticalThinking: {Name: "Analytical Thinking", Rating: 9},
