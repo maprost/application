@@ -67,7 +67,7 @@ func Profile() genmodel.Profile {
 			softSkill_AnalyticalThinking: {Name: "Analytical Thinking", Rating: 9},
 		},
 		Interest: []string{"CleanCode", "TDD", "Design Pattern", "Microservices", "Backend development"},
-		Hobbies:  []string{"Boardgames", "Travaling by bike"},
+		Hobbies:  []string{"Boardgames", "Traveling by bike"},
 		Language: []genmodel.Language{
 			{
 				Name:  "German",
