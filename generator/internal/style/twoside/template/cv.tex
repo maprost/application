@@ -145,7 +145,7 @@
         ~
         \end{minipage}
         \begin{minipage}{\insidePageLength}
-            {{.Company}}
+            {\scshape {{.Company}}}
 
             \smallskip
 
@@ -168,7 +168,7 @@
 \end{minipage}
 \begin{minipage}{\outsidePageLength}
     {{range .Education}}
-        {\headerfont {{.Institute}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+        {\headerfont {{.Graduation}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
 
         \smallskip
 
@@ -176,7 +176,11 @@
         ~
         \end{minipage}
         \begin{minipage}{\insidePageLength}
-           {{.Description}}
+            {\scshape {{.Institute}}}
+
+            \smallskip
+
+            {{.Focus}}
 
         \end{minipage} \\[2ex]
     {{end}}

@@ -24,9 +24,10 @@ type Experience struct {
 }
 
 type Education struct {
-	Institute   string
-	Time        string
-	Description string
+	Graduation string
+	Institute  string
+	Time       string
+	Focus      string
 }
 
 type CV struct {

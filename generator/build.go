@@ -3,6 +3,7 @@ package generator
 import (
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/compiler"
+	"github.com/maprost/application/generator/internal/util"
 )
 
 func Build(application genmodel.Application, style Style) (err error) {
@@ -10,6 +11,8 @@ func Build(application genmodel.Application, style Style) (err error) {
 	var path string
 	var mainFile string
 	var subFiles []string
+
+	generalConvert(&application)
 
 	data, err = style.Data(&application)
 	if err != nil {
@@ -27,6 +30,10 @@ func Build(application genmodel.Application, style Style) (err error) {
 		return
 	}
 
-	err = compiler.CleanUp()
+	//err = compiler.CleanUp()
 	return
+}
+
+func generalConvert(application *genmodel.Application) {
+	util.JoinExperience(application)
 }

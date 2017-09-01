@@ -14,7 +14,7 @@ const (
 	techSkill_SoftwareDesign
 	techSkill_IntelliJ
 	techSkill_Ubuntu
-	techSkill_PostgresSQL
+	techSkill_PostgreSQL
 	techSkill_Docker
 	techSkill_Git
 	techSkill_Python
@@ -56,17 +56,17 @@ func Profile() genmodel.Profile {
 			techSkill_Cpp:            {Name: "C++", Rating: 5},
 			techSkill_IntelliJ:       {Name: "IntelliJ", Rating: 6},
 			techSkill_Ubuntu:         {Name: "Ubuntu", Rating: 6},
-			techSkill_PostgresSQL:    {Name: "Postgres", Rating: 6},
+			techSkill_PostgreSQL:     {Name: "PostgreSQL", Rating: 6},
 			techSkill_Docker:         {Name: "Docker", Rating: 5},
 			techSkill_Git:            {Name: "Git", Rating: 5},
 			techSkill_Python:         {Name: "Python", Rating: 5},
 			techSkill_Bash:           {Name: "Bash", Rating: 5},
-			techSkill_HTML5:          {Name: "HTML5 (HTML, JS, CSS)", Rating: 4},
+			techSkill_HTML5:          {Name: "HTML5, JS, CSS", Rating: 4},
 		},
 		SoftSkills: map[genmodel.SkillID]genmodel.Skill{
 			softSkill_AnalyticalThinking: {Name: "Analytical Thinking", Rating: 9},
 		},
-		Interest: []string{"CleanCode", "TDD", "Design Pattern", "Microservices", "Backend development"},
+		Interest: []string{"CleanCode", "Design Pattern", "Microservices", "TDD", "Backend development, Big Data"},
 		Hobbies:  []string{"Boardgames", "Traveling by bike"},
 		Language: []genmodel.Language{
 			{
@@ -83,20 +83,47 @@ func Profile() genmodel.Profile {
 		`,
 		Experience: []genmodel.Experience{
 			{
-				Company:     "Lord Drug",
-				JobPosition: "Joker",
-				StartTime:   "Jun. 2014",
-				EndTime:     "Jul 2026",
-				Description: "Bring some fun to the people in my environment and let them laugh.",
-				TechStack:   "MP5, Knifes",
+				Company:     "Fitness Company",
+				JobPosition: "Java Backend Developer",
+				StartTime:   "Jul. 2014",
+				Description: "" +
+					"Part of the recruiting team since Oct. 2015.\n" +
+					"Product owner of a sub team from Jan. 2016 to Oct. 2016.",
+				TechStack: "Java, Guice, GWT, MySQL, Hibernate, RESTful, Json, Docker, Go, \\LaTeX, Ubuntu, Bash, " +
+					"Python, Git, Scrum/Kanban, JIRA",
+			},
+			{
+				Company:     "Solar Company",
+				JobPosition: "C++ Backend Developer",
+				StartTime:   "Mar. 2011",
+				EndTime:     "May 2014",
+				Description: "Create an XML ",
+				TechStack:   "C++, cmake, Boost, PostgreSQL, XML, Bash, Python, OpenSuse, Valgrind, SVN, Mantis",
+			},
+			{
+				Company:     "German University",
+				JobPosition: "Tutor",
+				StartTime:   "Oct. 2008",
+				EndTime:     "Sep. 2010",
+				Description: "Teach first and second semester students the basics of programming",
+				TechStack:   "Java, object orientation, algorithms, data structures",
 			},
 		},
 		Education: []genmodel.Education{
 			{
-				School:      "LA School of Nowhere",
-				StartTime:   "Aug 2000",
-				EndTime:     "Sep 2000",
-				Description: "Learn how to survive in a difficult area.",
+				Graduation: "Diplom Informatiker",
+				Institute:  "German University",
+				StartTime:  "Sep. 2005",
+				EndTime:    "Oct. 2010",
+				Focus:      "software engineering, compiler construction, database design",
+				FinalGrade: "1.0",
+			},
+			{
+				Graduation: "Fachinformatiker Systemintegration",
+				Institute:  "Telecommunication Company",
+				StartTime:  "Sep. 2002",
+				EndTime:    "Jan. 2005",
+				Focus:      "C++, website development (PHP/mssql), system configuration, router programming",
 			},
 		},
 	}

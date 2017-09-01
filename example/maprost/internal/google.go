@@ -15,12 +15,12 @@ func Google() genmodel.JobPosition {
 		},
 		Title:          "Software Defender",
 		MotivationText: ``,
-		MainColor:      "800000",
+		MainColor:      "4285F4",
 		FutureExperience: genmodel.Experience{
-			JobPosition: "Backend developer",
+			JobPosition: "Go Backend Developer",
 			TechStack:   "Go, Docker",
 			Company:     "Google",
-			StartTime:   "",
+			StartTime:   "Jan. 2018",
 			EndTime:     "",
 			Description: `
 

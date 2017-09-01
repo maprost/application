@@ -67,10 +67,10 @@ func New() genmodel.Profile {
 		},
 		Education: []genmodel.Education{
 			{
-				School:      "LA School of Nowhere",
-				StartTime:   "Aug 2000",
-				EndTime:     "Sep 2000",
-				Description: "Learn how to survive in a difficult area.",
+				Institute: "LA Institute of Nowhere",
+				StartTime: "Aug 2000",
+				EndTime:   "Sep 2000",
+				Focus:     "Learn how to survive in a difficult area.",
 			},
 		},
 	}

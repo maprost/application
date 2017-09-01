@@ -67,6 +67,8 @@ func createCVData(application *genmodel.Application, shortVersion bool) (data te
 		Interest:        strings.Join(application.Profile.Interest, ", "),
 		Language:        convertLanguage(application),
 		AboutMe:         aboutMe,
+		Experience:      convertExperience(application),
+		Education:       convertEducation(application),
 	}
 	return
 }
@@ -131,4 +133,47 @@ func convertWebsites(application *genmodel.Application) (websites []texmodel.Web
 		})
 	}
 	return
+}
+
+func convertExperience(application *genmodel.Application) (experience []texmodel.Experience) {
+	for i, exp := range application.Profile.Experience {
+
+		timeRange := convertTime(exp.StartTime, exp.EndTime)
+		if i == 0 && exp.FutureExperience {
+			timeRange = "possible at~~" + exp.StartTime
+		}
+
+		experience = append(experience, texmodel.Experience{
+			Position:    exp.JobPosition,
+			Description: util.ReplaceNewLine(exp.Description),
+			Company:     exp.Company,
+			Tech:        exp.TechStack,
+			Time:        timeRange,
+		})
+	}
+	return
+}
+
+func convertEducation(application *genmodel.Application) (education []texmodel.Education) {
+	for _, edu := range application.Profile.Education {
+		graduationWithGrade := edu.Graduation
+		if edu.FinalGrade != "" {
+			graduationWithGrade = graduationWithGrade + " (" + edu.FinalGrade + ")"
+		}
+
+		education = append(education, texmodel.Education{
+			Graduation: graduationWithGrade,
+			Institute:  edu.Institute,
+			Focus:      edu.Focus,
+			Time:       convertTime(edu.StartTime, edu.EndTime),
+		})
+	}
+	return
+}
+
+func convertTime(start string, end string) string {
+	if end == "" {
+		return "since~~" + start
+	}
+	return start + " - " + end
 }

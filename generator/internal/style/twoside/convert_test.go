@@ -134,9 +134,9 @@ func _TestData_contactData_blob(t *testing.T) {
 				},
 				Education: []texmodel.Education{
 					{
-						Institute:   "MIT",
-						Time:        "1899-1903",
-						Description: "Learn a lot and many more and finish my study with 1.0.",
+						Institute: "MIT",
+						Time:      "1899-1903",
+						Focus:     "Learn a lot and many more and finish my study with 1.0.",
 					},
 				},
 			},

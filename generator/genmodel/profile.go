@@ -8,19 +8,26 @@ type Skill struct {
 }
 
 type Experience struct {
-	JobPosition string
-	Company     string
-	StartTime   string
-	EndTime     string
-	Description string
-	TechStack   string
+	JobPosition      string
+	Company          string
+	StartTime        string
+	EndTime          string
+	Description      string
+	TechStack        string
+	FutureExperience bool
+}
+
+func (e Experience) Empty() bool {
+	return e.JobPosition == ""
 }
 
 type Education struct {
-	School      string
-	StartTime   string
-	EndTime     string
-	Description string
+	Graduation string
+	Institute  string
+	StartTime  string
+	EndTime    string
+	Focus      string
+	FinalGrade string
 }
 
 type Language struct {
