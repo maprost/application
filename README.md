@@ -2,8 +2,8 @@
 application generator (not live)
 
 <object data="application.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="http://yoursite.com/the.pdf">
-        This browser does not support PDFs. Please download the PDF to view it: <a href="http://yoursite.com/the.pdf">Download PDF</a>.</p>
+    <embed src="https://github.com/maprost/application/blob/master/example/maprost/maprost.pdf">
+        This browser does not support PDFs. Please download the PDF to view it: <a href="https://github.com/maprost/application/blob/master/example/maprost/maprost.pdf">Download PDF</a>.</p>
     </embed>
 </object>
 
