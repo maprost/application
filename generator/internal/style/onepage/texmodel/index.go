@@ -1,5 +1,7 @@
 package texmodel
 
+import "github.com/maprost/application/generator/lang"
+
 type Skill struct {
 	Name   string
 	Rating int // Rating range [1,10]
@@ -30,7 +32,8 @@ type Education struct {
 	Focus      string
 }
 
-type CV struct {
+type Index struct {
+	Label           lang.Language
 	Image           string // path
 	Name            string
 	Title           string
@@ -45,7 +48,9 @@ type CV struct {
 	SoftSkills      string
 	Language        []Language
 	Hobbies         string
-	AboutMe         string // only used in short version
+	AboutMe         string
 	Experience      []Experience
 	Education       []Education
+	MainColor       string
+	ShortVersion    bool
 }

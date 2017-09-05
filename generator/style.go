@@ -3,22 +3,20 @@ package generator
 import (
 	"errors"
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/internal/style/twoside"
+	"github.com/maprost/application/generator/internal/style/onepage"
+	"github.com/maprost/application/generator/lang"
 )
 
 type Style int
 
 const (
-	TwoSide_long = Style(iota)
-	TwoSide_short
+	OneSide = Style(iota)
 )
 
-func (s Style) Data(application *genmodel.Application) (data interface{}, err error) {
+func (s Style) Data(application *genmodel.Application, lang lang.Language) (data interface{}, err error) {
 	switch s {
-	case TwoSide_long:
-		return twoside.Data(application, false)
-	case TwoSide_short:
-		return twoside.Data(application, true)
+	case OneSide:
+		return onepage.Data(application, lang)
 	}
 
 	err = errors.New("Style not found.")
@@ -27,8 +25,8 @@ func (s Style) Data(application *genmodel.Application) (data interface{}, err er
 
 func (s Style) Files() (path string, mainFile string, subFiles []string) {
 	switch s {
-	case TwoSide_long, TwoSide_short:
-		return twoside.Files()
+	case OneSide:
+		return onepage.Files()
 	}
 	return
 }

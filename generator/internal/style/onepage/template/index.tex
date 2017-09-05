@@ -1,0 +1,237 @@
+\documentclass[11pt]{article}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+\usepackage[left=1.6cm,top=0.0cm,right=1cm,bottom=0.2cm,nohead,nofoot]{geometry}
+\usepackage{graphicx}
+\usepackage{marvosym}
+\usepackage[
+	colorlinks=true,
+	urlcolor=blue,
+	linkcolor=green
+]{hyperref}
+\usepackage[ngerman]{babel}
+\usepackage{xhfill}
+\usepackage{fetamont}
+\usepackage[default,scale=0.95]{opensans}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage{blindtext}
+\usepackage[utf8]{inputenc}
+
+\pagestyle{empty} % Disable headers and footers
+\setlength{\parindent}{0pt} % Disable paragraph indentation
+
+
+\definecolor{white}{RGB}{255,255,255}
+\definecolor{gray}{HTML}{4D4D4D}
+\definecolor{sidecolor}{HTML}{E7E7E7}
+\definecolor{maingray}{HTML}{B9B9B9}
+
+\newcommand{\headerfont}{\Large\ffmfamily\bfseries}
+
+\newcommand{\timeLineHeader}[1]{ {%
+    \LARGE\ffmfamily\bfseries\textcolor{maincolor}{#1}}
+
+    \bigskip
+
+}
+
+% company custom color
+\definecolor{maincolor}{HTML}{{"{"}}{{.MainColor}}}
+
+
+\begin{document}
+    \normalfont
+
+    \setlength{\TPHorizModule}{1cm} % Left margin
+    \setlength{\TPVertModule}{1cm} % Top margin
+
+    \newlength\imagewidth
+    \newlength\imagescale
+    \pgfmathsetlength{\imagewidth}{5cm}
+    \pgfmathsetlength{\imagescale}{\imagewidth/600}
+
+    % Command for printing the contact information icons
+    \newcommand{\icon}[1]{%
+        \tikz[baseline=(char.base)]{
+            \node[shape=circle,draw,inner sep=1pt, fill=maincolor,maincolor,text=white] (char) {#1};
+        }%
+    }
+
+    \newcommand{\category}[1]{
+    \vspace{5mm}
+
+    {\headerfont #1 \xrfill[0.5ex]{1.5pt}[maincolor]}
+
+    \medskip
+
+    }
+
+    % color background for side bar
+    \begin{tikzpicture}[remember picture,overlay]
+        \node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (0cm,0.5cm){};
+    \end{tikzpicture}
+
+    %------------------------------------------------
+
+    \begin{textblock}{5.1}(0.5, 0.2)
+
+    % profile picture
+    \begin{center}
+        \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+            \clip (600/2, 567/2) circle (567/2);
+            \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{{print "{" .Image "}"}}};
+        \end{tikzpicture}
+    \end{center}
+
+    % Name
+    {\Huge {{.Name}}}
+
+    \smallskip
+
+
+    % Title
+    {{.Title}}
+
+    \medskip
+
+
+    % contact info
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{@{}p{0.5cm} @{\hskip 0.2cm}p{43mm}@{}}
+        \icon{\Mundus}  & {{.Nationality}}  \\
+        \icon{\Letter}  & {{.Location}}  \\
+        \icon{\Telefon} & {{.Phone}}    \\
+        \icon{\Email}   & {{.Email}}    \\[1ex]
+                        &
+        {{range .Websites}}
+            \href{{print "{" .Url "}" }}{\includegraphics[width=5mm]{{print "{" .Icon "}"}}}{{end}}\\
+    \end{tabular}
+
+
+    % professional skills
+    \category{{print "{" $.Label.TechSkills "}"}}
+    \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
+    {{range .ProfSkills}}
+            {{.Name}}
+            &
+            \begin{tikzpicture}
+                \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
+                \draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.3);
+            \end{tikzpicture}
+            \\[1ex]
+        {{end}}
+    \end{tabular}
+
+    \medskip
+
+    {{.OtherProfSkills}}
+
+
+    % interest
+    \category{{print "{" $.Label.Interests "}"}}
+
+    {{.Interest}}
+
+
+    % soft skills
+    \category{{print "{" $.Label.SoftSkills "}"}}
+
+    {{.SoftSkills}}
+
+
+    % language
+    \category{{print "{" $.Label.Languages "}"}}
+    \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+        {{range .Language}}
+            {{.Name}} & {{.Level}} \\
+        {{end}}
+    \end{tabular}
+
+
+    % hobbies
+    \category{{print "{" $.Label.Hobbies "}"}}
+
+    {{.Hobbies}}
+
+    % Researcher, Configer, SoftwareDesigner, Tester, Databases
+
+    \end{textblock}
+    \begin{textblock}{14.5}(6.5, 0.5)
+    % config length
+    \newlength\indentLength
+    \pgfmathsetlength{\indentLength}{5mm}
+    \newlength\outsidePageLength
+    \pgfmathsetlength{\outsidePageLength}{140mm}
+    \newlength\insidePageLength
+    \pgfmathsetlength{\insidePageLength}{135mm}
+
+    {{if not (eq .AboutMe "")}}
+    \timeLineHeader{{print "{" $.Label.Profile "}"}}
+
+    {{.AboutMe}}
+
+    \bigskip
+
+    {{end}}
+
+    \timeLineHeader{{print "{" $.Label.Experience "}"}}
+
+    \begin{minipage}{\indentLength}
+    ~
+    \end{minipage}
+    \begin{minipage}{\outsidePageLength}
+        {{range .Experience}}
+            {\headerfont {{.Position}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+
+            \smallskip
+
+            \begin{minipage}{\indentLength}
+            ~
+            \end{minipage}
+            \begin{minipage}{\insidePageLength}
+                {\scshape {{.Company}}}
+
+                \smallskip
+
+               {\itshape {{.Description}}}
+
+                \smallskip
+
+                {{.Tech}}
+            \end{minipage} \\[2ex]
+        {{end}}
+    \end{minipage}
+
+    \bigskip
+
+    \timeLineHeader{{print "{" $.Label.Education "}"}}
+
+
+    \begin{minipage}{\indentLength}
+    ~
+    \end{minipage}
+    \begin{minipage}{\outsidePageLength}
+        {{range .Education}}
+            {\headerfont {{.Graduation}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+
+            \smallskip
+
+            \begin{minipage}{\indentLength}
+            ~
+            \end{minipage}
+            \begin{minipage}{\insidePageLength}
+                {\scshape {{.Institute}}}
+
+                \smallskip
+
+                {{.Focus}}
+
+            \end{minipage} \\[2ex]
+        {{end}}
+    \end{minipage}
+
+    \end{textblock}
+
+\end{document}

@@ -9,6 +9,7 @@ import (
 	"github.com/maprost/application/example/max"
 	"github.com/maprost/application/generator"
 	"github.com/maprost/application/generator/genmodel"
+	"github.com/maprost/application/generator/lang"
 )
 
 func main() {
@@ -35,7 +36,7 @@ func main() {
 		application = maprost.Application(company)
 	}
 
-	err := generator.Build(application, generator.TwoSide_short)
+	err := generator.Build(application, generator.OneSide, lang.German)
 	if err != nil {
 		log.Println(err.Error())
 		os.Exit(1)

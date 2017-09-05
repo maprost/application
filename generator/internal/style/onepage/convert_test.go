@@ -1,22 +1,44 @@
-package twoside_test
+package onepage_test
 
 import (
 	"github.com/maprost/assertion"
 	"testing"
 
-	"github.com/maprost/application/generator/internal/compiler"
+	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/image"
-	"github.com/maprost/application/generator/internal/style/twoside"
-	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
+	"github.com/maprost/application/generator/internal/style/onepage"
+	"github.com/maprost/application/generator/internal/style/onepage/texmodel"
 	"github.com/maprost/application/generator/internal/test"
+	"github.com/maprost/application/generator/internal/util"
+	"github.com/maprost/application/generator/lang"
 )
 
-func _TestViewManual(t *testing.T) {
+func TestData_emptyInput(t *testing.T) {
+	assertApplication(t, genmodel.Application{}, texmodel.Index{})
+}
+
+func assertApplication(t *testing.T, application genmodel.Application, expected texmodel.Index) {
 	assert := assertion.New(t)
 
-	indexData := texmodel.Index{
-		MainColor: "e3593b",
-		CV: texmodel.CV{
+	data, err := onepage.Data(&application, lang.English)
+	assert.Nil(err)
+
+	texmodelData, ok := data.(texmodel.Index)
+	assert.True(ok)
+
+	// modify (set default values) expected:
+	if expected.MainColor == "" {
+		expected.MainColor = util.DefaultColorValue
+	}
+
+	assert.Equal(texmodelData, expected)
+}
+
+func _TestData_contactData_blob(t *testing.T) {
+	assertApplication(t,
+		genmodel.Application{},
+		texmodel.Index{
+			MainColor:   "e3593b",
 			Image:       test.ImagePath() + "logan",
 			Name:        "Logan van der Bommel",
 			Title:       "Good night bringer and tooth painter",
@@ -109,14 +131,5 @@ func _TestViewManual(t *testing.T) {
 					Focus:     "Learn a lot and many more and finish my study with 1.0.",
 				},
 			},
-		},
-	}
-
-	path, mainFile, subFiles := twoside.Files()
-
-	err := compiler.CreateTexFile(indexData, path, mainFile, subFiles...)
-	assert.Nil(err)
-
-	err = compiler.Compile()
-	assert.Nil(err)
+		})
 }

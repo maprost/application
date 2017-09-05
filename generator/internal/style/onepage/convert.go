@@ -1,41 +1,15 @@
-package twoside
+package onepage
 
 import (
 	"strings"
 
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
+	"github.com/maprost/application/generator/internal/style/onepage/texmodel"
 	"github.com/maprost/application/generator/internal/util"
+	"github.com/maprost/application/generator/lang"
 )
 
-func initIndex(application *genmodel.Application, shortVersion bool) (texmodel.Index, error) {
-	return texmodel.Index{
-		MainColor:    util.DefaultColor(application.JobPosition.MainColor),
-		ShortVersion: shortVersion,
-	}, nil
-}
-
-func createFirstPageData(application *genmodel.Application) (texmodel.FirstPage, error) {
-	return texmodel.FirstPage{
-		Name:  util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),
-		Title: application.JobPosition.Title,
-		Image: util.DefaultImage(application.Profile.Image),
-	}, nil
-}
-
-func createCoverLetterData(application *genmodel.Application) (texmodel.CoverLetter, error) {
-	return texmodel.CoverLetter{
-		Name:          util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),
-		Street:        application.Profile.Address.Street,
-		Zip:           util.JoinStrings(application.Profile.Address.Zip, " ", application.Profile.Address.City),
-		CompanyName:   application.JobPosition.Company,
-		CompanyStreet: application.JobPosition.Address.Street,
-		CompanyZip:    util.JoinStrings(application.JobPosition.Address.Zip, " ", application.JobPosition.Address.City),
-		Text:          util.DefaultValue(application.JobPosition.MotivationText, application.Profile.GeneralMotivationText),
-	}, nil
-}
-
-func createCVData(application *genmodel.Application, shortVersion bool) (data texmodel.CV, err error) {
+func initData(application *genmodel.Application, lang lang.Language) (data texmodel.Index, err error) {
 	profSkills, otherProfSkills, err := convertProfSkills(application)
 	if err != nil {
 		return
@@ -46,12 +20,11 @@ func createCVData(application *genmodel.Application, shortVersion bool) (data te
 		return
 	}
 
-	aboutMe := ""
-	if shortVersion {
-		aboutMe = util.DefaultValue(application.JobPosition.MotivationText, application.Profile.GeneralMotivationText)
-	}
+	aboutMe := util.DefaultValue(application.JobPosition.MotivationText, application.Profile.GeneralMotivationText)
 
-	data = texmodel.CV{
+	data = texmodel.Index{
+		Label:           lang,
+		MainColor:       util.DefaultColor(application.JobPosition.MainColor),
 		Name:            util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),
 		Title:           application.JobPosition.Title,
 		Image:           util.DefaultImage(application.Profile.Image),
@@ -67,8 +40,8 @@ func createCVData(application *genmodel.Application, shortVersion bool) (data te
 		Interest:        strings.Join(application.Profile.Interest, ", "),
 		Language:        convertLanguage(application),
 		AboutMe:         aboutMe,
-		Experience:      convertExperience(application),
-		Education:       convertEducation(application),
+		Experience:      convertExperience(application, lang),
+		Education:       convertEducation(application, lang),
 	}
 	return
 }
@@ -116,10 +89,10 @@ func convertSoftSkills(application *genmodel.Application) (softSkills string, er
 }
 
 func convertLanguage(application *genmodel.Application) (out []texmodel.Language) {
-	for _, lang := range application.Profile.Language {
+	for _, language := range application.Profile.Language {
 		out = append(out, texmodel.Language{
-			Name:  lang.Name,
-			Level: lang.Level,
+			Name:  language.Name,
+			Level: language.Level,
 		})
 	}
 	return
@@ -135,12 +108,12 @@ func convertWebsites(application *genmodel.Application) (websites []texmodel.Web
 	return
 }
 
-func convertExperience(application *genmodel.Application) (experience []texmodel.Experience) {
+func convertExperience(application *genmodel.Application, lang lang.Language) (experience []texmodel.Experience) {
 	for i, exp := range application.Profile.Experience {
 
-		timeRange := convertTime(exp.StartTime, exp.EndTime)
+		timeRange := convertTime(exp.StartTime, exp.EndTime, lang)
 		if i == 0 && exp.FutureExperience {
-			timeRange = "possible at~~" + exp.StartTime
+			timeRange = lang.PossibleAt() + "~~" + exp.StartTime
 		}
 
 		experience = append(experience, texmodel.Experience{
@@ -154,7 +127,7 @@ func convertExperience(application *genmodel.Application) (experience []texmodel
 	return
 }
 
-func convertEducation(application *genmodel.Application) (education []texmodel.Education) {
+func convertEducation(application *genmodel.Application, lang lang.Language) (education []texmodel.Education) {
 	for _, edu := range application.Profile.Education {
 		graduationWithGrade := edu.Graduation
 		if edu.FinalGrade != "" {
@@ -165,15 +138,15 @@ func convertEducation(application *genmodel.Application) (education []texmodel.E
 			Graduation: graduationWithGrade,
 			Institute:  edu.Institute,
 			Focus:      edu.Focus,
-			Time:       convertTime(edu.StartTime, edu.EndTime),
+			Time:       convertTime(edu.StartTime, edu.EndTime, lang),
 		})
 	}
 	return
 }
 
-func convertTime(start string, end string) string {
+func convertTime(start string, end string, lang lang.Language) string {
 	if end == "" {
-		return "since~~" + start
+		return lang.Since() + "~~" + start
 	}
 	return start + " - " + end
 }
