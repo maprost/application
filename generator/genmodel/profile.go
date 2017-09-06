@@ -1,45 +1,47 @@
 package genmodel
 
+import "github.com/maprost/application/generator/lang"
+
 type SkillID int
 
 type Skill struct {
-	Name   string
+	Name   lang.TranslationMap
 	Rating int // Rating range [1,10]
 }
 
 type Experience struct {
-	JobPosition      string
+	JobPosition      lang.TranslationMap
 	Company          string
 	StartTime        string
 	EndTime          string
-	Description      string
-	TechStack        string
+	Description      lang.TranslationMap
+	TechStack        lang.TranslationMap
 	FutureExperience bool
 }
 
 func (e Experience) Empty() bool {
-	return e.JobPosition == ""
+	return len(e.JobPosition) == 0
 }
 
 type Education struct {
-	Graduation string
+	Graduation lang.TranslationMap
 	Institute  string
 	StartTime  string
 	EndTime    string
-	Focus      string
+	Focus      lang.TranslationMap
 	FinalGrade string
 }
 
 type Language struct {
-	Name  string
-	Level string
+	Name  lang.TranslationMap
+	Level lang.TranslationMap
 }
 
 type Profile struct {
 	FirstName             string
 	LastName              string
 	Image                 string // path
-	Nationality           string
+	Nationality           lang.TranslationMap
 	Birthday              string
 	Address               Address
 	Email                 string
@@ -47,8 +49,8 @@ type Profile struct {
 	Websites              []string          // url
 	ProfessionalSkills    map[SkillID]Skill // should contains all professional skills you have
 	SoftSkills            map[SkillID]Skill // should contains all soft skills you have
-	Interest              []string
-	Hobbies               []string
+	Interest              []lang.TranslationMap
+	Hobbies               []lang.TranslationMap
 	SignPath              string // path to the sign image
 	Experience            []Experience
 	Education             []Education
