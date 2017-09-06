@@ -44,11 +44,14 @@ func Profile() genmodel.Profile {
 		},
 		Phone:    "N/A",
 		Websites: []string{"https://github.com/maprost"},
-		Address: genmodel.Address{
-			Street:  "",
-			Zip:     "",
-			City:    "",
-			Country: "Germany",
+		Address: genmodel.ProfileAddress{
+			Street: "",
+			Zip:    "",
+			City:   lang.DefaultTranslation(""),
+			Country: lang.TranslationMap{
+				lang.English: "Germany",
+				lang.German:  "Deutschland",
+			},
 		},
 		ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
 			techSkill_Go:             {Name: lang.DefaultTranslation("Go"), Rating: 8},
@@ -92,9 +95,10 @@ func Profile() genmodel.Profile {
 				Level: lang.DefaultTranslation("B2"),
 			},
 		},
-		GeneralMotivationText: `
-
-		`,
+		GeneralMotivationText: lang.TranslationMap{
+			lang.English: "",
+			lang.German:  "",
+		},
 		Experience: []genmodel.Experience{
 			{
 				Company:     "Fitness Company",

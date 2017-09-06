@@ -2,13 +2,12 @@ package internal
 
 import (
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/lang"
 )
 
 func Google() genmodel.JobPosition {
 	return genmodel.JobPosition{
 		Company: "Google",
-		Address: genmodel.Address{
+		Address: genmodel.JobAddress{
 			Street:  "...",
 			Zip:     "...",
 			City:    "...",
@@ -17,13 +16,11 @@ func Google() genmodel.JobPosition {
 		Title:          "Software Defender",
 		MotivationText: ``,
 		MainColor:      "4285F4",
-		FutureExperience: genmodel.Experience{
-			JobPosition: lang.DefaultTranslation("Go Backend Developer"),
-			TechStack:   lang.DefaultTranslation("Go, Docker"),
-			Company:     "Google",
+		FutureExperience: genmodel.FutureExperience{
+			JobPosition: "Go Backend Developer",
+			TechStack:   "Go, Docker",
 			StartTime:   "Jan. 2018",
-			EndTime:     "",
-			Description: lang.DefaultTranslation(""),
+			Description: "",
 		},
 	}
 }

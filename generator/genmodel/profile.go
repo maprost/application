@@ -19,10 +19,6 @@ type Experience struct {
 	FutureExperience bool
 }
 
-func (e Experience) Empty() bool {
-	return len(e.JobPosition) == 0
-}
-
 type Education struct {
 	Graduation lang.TranslationMap
 	Institute  string
@@ -37,13 +33,20 @@ type Language struct {
 	Level lang.TranslationMap
 }
 
+type ProfileAddress struct {
+	Street  string
+	Zip     string
+	City    lang.TranslationMap
+	Country lang.TranslationMap
+}
+
 type Profile struct {
 	FirstName             string
 	LastName              string
 	Image                 string // path
 	Nationality           lang.TranslationMap
 	Birthday              string
-	Address               Address
+	Address               ProfileAddress
 	Email                 string
 	Phone                 string
 	Websites              []string          // url
@@ -55,5 +58,5 @@ type Profile struct {
 	Experience            []Experience
 	Education             []Education
 	Language              []Language
-	GeneralMotivationText string // your general motivation text, this text can contains tex elements
+	GeneralMotivationText lang.TranslationMap // your general motivation text, this text can contains tex elements
 }

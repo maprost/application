@@ -7,39 +7,39 @@ import (
 	"github.com/maprost/application/generator/lang"
 )
 
-func initData(application *genmodel.Application, language lang.Language) (data texmodel.Index, err error) {
-	profSkills, otherProfSkills, err := convertProfSkills(application, language)
+func initData(application *genmodel.Application, lang lang.Language) (data texmodel.Index, err error) {
+	profSkills, otherProfSkills, err := convertProfSkills(application, lang)
 	if err != nil {
 		return
 	}
 
-	softSkills, err := convertSoftSkills(application, language)
+	softSkills, err := convertSoftSkills(application, lang)
 	if err != nil {
 		return
 	}
 
-	aboutMe := util.DefaultValue(application.JobPosition.MotivationText, application.Profile.GeneralMotivationText)
+	aboutMe := util.DefaultValue(application.JobPosition.MotivationText, lang.String(application.Profile.GeneralMotivationText))
 
 	data = texmodel.Index{
-		Label:           language,
+		Label:           lang,
 		MainColor:       util.DefaultColor(application.JobPosition.MainColor),
 		Name:            util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),
 		Title:           application.JobPosition.Title,
 		Image:           util.DefaultImage(application.Profile.Image),
 		Email:           application.Profile.Email,
 		Phone:           application.Profile.Phone,
-		Location:        util.JoinStrings(application.Profile.Address.City, ", ", application.Profile.Address.Country),
-		Nationality:     application.Profile.Nationality.String(language),
+		Location:        util.JoinStrings(lang.String(application.Profile.Address.City), ", ", lang.String(application.Profile.Address.Country)),
+		Nationality:     lang.String(application.Profile.Nationality),
 		Websites:        convertWebsites(application),
 		OtherProfSkills: otherProfSkills,
 		ProfSkills:      profSkills,
 		SoftSkills:      softSkills,
-		Hobbies:         lang.JoinTranslationMap(application.Profile.Hobbies, language, ", "),
-		Interest:        lang.JoinTranslationMap(application.Profile.Interest, language, ", "),
-		Language:        convertLanguage(application, language),
+		Hobbies:         lang.Join(application.Profile.Hobbies, ", "),
+		Interest:        lang.Join(application.Profile.Interest, ", "),
+		Language:        convertLanguage(application, lang),
 		AboutMe:         aboutMe,
-		Experience:      convertExperience(application, language),
-		Education:       convertEducation(application, language),
+		Experience:      convertExperience(application, lang),
+		Education:       convertEducation(application, lang),
 	}
 	return
 }
@@ -58,14 +58,14 @@ func convertProfSkills(application *genmodel.Application, lang lang.Language) (p
 	for i, skill := range skills {
 		if i < maxSkills {
 			profSkills = append(profSkills, texmodel.Skill{
-				Name:   skill.Name.String(lang),
+				Name:   lang.String(skill.Name),
 				Rating: skill.Rating,
 			})
 		} else {
 			if i > maxSkills {
 				otherProfSkills += ", "
 			}
-			otherProfSkills += skill.Name.String(lang)
+			otherProfSkills += lang.String(skill.Name)
 		}
 	}
 	return
@@ -81,7 +81,7 @@ func convertSoftSkills(application *genmodel.Application, lang lang.Language) (s
 		if i > 0 {
 			softSkills += ", "
 		}
-		softSkills += skill.Name.String(lang)
+		softSkills += lang.String(skill.Name)
 	}
 	return
 }
@@ -89,8 +89,8 @@ func convertSoftSkills(application *genmodel.Application, lang lang.Language) (s
 func convertLanguage(application *genmodel.Application, lang lang.Language) (out []texmodel.Language) {
 	for _, language := range application.Profile.Language {
 		out = append(out, texmodel.Language{
-			Name:  language.Name.String(lang),
-			Level: language.Level.String(lang),
+			Name:  lang.String(language.Name),
+			Level: lang.String(language.Level),
 		})
 	}
 	return
@@ -115,10 +115,10 @@ func convertExperience(application *genmodel.Application, lang lang.Language) (e
 		}
 
 		experience = append(experience, texmodel.Experience{
-			Position:    exp.JobPosition.String(lang),
-			Description: util.ReplaceNewLine(exp.Description.String(lang)),
+			Position:    lang.String(exp.JobPosition),
+			Description: util.ReplaceNewLine(lang.String(exp.Description)),
 			Company:     exp.Company,
-			Tech:        exp.TechStack.String(lang),
+			Tech:        lang.String(exp.TechStack),
 			Time:        timeRange,
 		})
 	}
@@ -127,7 +127,7 @@ func convertExperience(application *genmodel.Application, lang lang.Language) (e
 
 func convertEducation(application *genmodel.Application, lang lang.Language) (education []texmodel.Education) {
 	for _, edu := range application.Profile.Education {
-		graduationWithGrade := edu.Graduation.String(lang)
+		graduationWithGrade := lang.String(edu.Graduation)
 		if edu.FinalGrade != "" {
 			graduationWithGrade = graduationWithGrade + " (" + edu.FinalGrade + ")"
 		}
@@ -135,7 +135,7 @@ func convertEducation(application *genmodel.Application, lang lang.Language) (ed
 		education = append(education, texmodel.Education{
 			Graduation: graduationWithGrade,
 			Institute:  edu.Institute,
-			Focus:      edu.Focus.String(lang),
+			Focus:      lang.String(edu.Focus),
 			Time:       convertTime(edu.StartTime, edu.EndTime, lang),
 		})
 	}
