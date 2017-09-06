@@ -40,6 +40,11 @@ type ProfileAddress struct {
 	Country lang.TranslationMap
 }
 
+type FunFacts struct {
+	EarlyBird_NightOwl int // [0 - 1 - 2]
+
+}
+
 type Profile struct {
 	FirstName             string
 	LastName              string
