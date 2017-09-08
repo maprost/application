@@ -1,4 +1,4 @@
-package internal
+package google
 
 import (
 	"github.com/maprost/application/generator/genmodel"

@@ -2,12 +2,13 @@ package maprost
 
 import (
 	"github.com/maprost/application/example/maprost/internal"
+	"github.com/maprost/application/example/maprost/internal/google"
 	"github.com/maprost/application/generator/genmodel"
 	"log"
 )
 
 var allCompanies = map[string]func() genmodel.JobPosition{
-	"google": internal.Google,
+	"google": google.Google,
 }
 
 func Application(company string) genmodel.Application {

@@ -36,7 +36,7 @@ func main() {
 		application = maprost.Application(company)
 	}
 
-	err := generator.Build(application, generator.OneSide, lang.English)
+	err := generator.Build(application, generator.OneSide, lang.German, "example/maprost/internal")
 	if err != nil {
 		log.Println(err.Error())
 		os.Exit(1)

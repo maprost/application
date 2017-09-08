@@ -1,16 +1,12 @@
 package compiler
 
 import (
+	"github.com/maprost/application/generator/internal/util"
 	"os"
 	"text/template"
 )
 
-const (
-	binaryBase = "application"
-	binaryTex  = binaryBase + ".tex"
-)
-
-func CreateTexFile(data interface{}, path string, mainFile string, subFiles ...string) (err error) {
+func CreateTexFile(outputPath string, file string, data interface{}, path string, mainFile string, subFiles ...string) (err error) {
 	indexFile, err := template.ParseFiles(path + mainFile)
 	if err != nil {
 		return
@@ -23,23 +19,33 @@ func CreateTexFile(data interface{}, path string, mainFile string, subFiles ...s
 	}
 
 	// create tex file to compile
-	err = createCompilationFile(binaryTex, indexFile, data)
+	err = createCompilationFile(outputPath, texFile("", file), indexFile, data)
 	return
 }
 
-func Compile() (err error) {
+func Compile(outputPath string, file string) (err error) {
 	// compile
-	_, err = stream("pdflatex", binaryTex)
+	_, err = stream("pdflatex", "-output-directory="+outputPath, texFile(outputPath, file))
 	return
 }
 
-func CleanUp() (err error) {
-	_, err = stream("rm", binaryBase+".aux", binaryBase+".log", binaryTex)
+func CleanUp(outputPath string, file string) (err error) {
+	_, err = stream("rm",
+		concat(outputPath, file, "aux"),
+		concat(outputPath, file, "log"),
+		concat(outputPath, file, "out"),
+		//texFile(outputPath, file),
+	)
 	return
 }
 
-func createCompilationFile(path string, templ *template.Template, data interface{}) (err error) {
-	file, err := os.Create(path)
+func createCompilationFile(path string, fileName string, templ *template.Template, data interface{}) (err error) {
+	err = os.MkdirAll(path, os.ModePerm)
+	if err != nil {
+		return
+	}
+
+	file, err := os.Create(path + "/" + fileName)
 	if err != nil {
 		return
 	}
@@ -63,4 +69,12 @@ func addSubTex(indexFile *template.Template, path string, subFile string) (err e
 
 	indexFile.AddParseTree(subFile, subTex.Tree)
 	return
+}
+
+func texFile(path string, file string) string {
+	return concat(path, file, "tex")
+}
+
+func concat(path string, file string, end string) string {
+	return util.JoinStrings(path, "/", file+"."+end)
 }

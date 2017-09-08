@@ -167,14 +167,11 @@
     \newlength\insidePageLength
     \pgfmathsetlength{\insidePageLength}{135mm}
 
-    {{if not (eq .AboutMe "")}}
     \timeLineHeader{{print "{" $.Label.Profile "}"}}
 
     {{.AboutMe}}
 
     \bigskip
-
-    {{end}}
 
     \timeLineHeader{{print "{" $.Label.Experience "}"}}
 
