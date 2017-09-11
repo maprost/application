@@ -128,13 +128,9 @@ func convertExperience(application *genmodel.Application, lang lang.Language) (e
 
 func convertEducation(application *genmodel.Application, lang lang.Language) (education []texmodel.Education) {
 	for _, edu := range application.Profile.Education {
-		graduationWithGrade := lang.String(edu.Graduation)
-		if edu.FinalGrade != "" {
-			graduationWithGrade = graduationWithGrade + " (" + edu.FinalGrade + ")"
-		}
-
 		education = append(education, texmodel.Education{
-			Graduation: graduationWithGrade,
+			Graduation: lang.String(edu.Graduation),
+			FinalGrade: lang.String(edu.FinalGrade),
 			Institute:  edu.Institute,
 			Focus:      lang.String(edu.Focus),
 			Time:       convertTime(edu.StartTime, edu.EndTime, lang),

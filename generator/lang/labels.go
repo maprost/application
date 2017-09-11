@@ -63,6 +63,15 @@ func (l Language) Education() string {
 	}
 }
 
+func (l Language) FinalGrade() string {
+	switch l {
+	case German:
+		return "Abschlussnote"
+	default:
+		return "Final grade"
+	}
+}
+
 func (l Language) Experience() string {
 	switch l {
 	case German:

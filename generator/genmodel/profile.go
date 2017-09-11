@@ -25,7 +25,7 @@ type Education struct {
 	StartTime  string
 	EndTime    string
 	Focus      lang.TranslationMap
-	FinalGrade string
+	FinalGrade lang.TranslationMap
 }
 
 type Language struct {

@@ -27,6 +27,7 @@ type Experience struct {
 
 type Education struct {
 	Graduation string
+	FinalGrade string
 	Institute  string
 	Time       string
 	Focus      string

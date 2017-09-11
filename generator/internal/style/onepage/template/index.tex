@@ -18,6 +18,7 @@
 \usetikzlibrary{shapes.geometric}
 \usepackage{blindtext}
 \usepackage[utf8]{inputenc}
+\usepackage{ifthen}
 
 \pagestyle{empty} % Disable headers and footers
 \setlength{\parindent}{0pt} % Disable paragraph indentation
@@ -27,6 +28,15 @@
 \definecolor{gray}{HTML}{4D4D4D}
 \definecolor{sidecolor}{HTML}{E7E7E7}
 \definecolor{maingray}{HTML}{B9B9B9}
+
+\newcommand{\checkPar}[2]{%
+    \ifthenelse{\equal{#1}{}}{}{%
+        {#2}
+
+        \smallskip
+
+    }
+}
 
 \newcommand{\headerfont}{\Large\ffmfamily\bfseries}
 
@@ -188,13 +198,9 @@
             ~
             \end{minipage}
             \begin{minipage}{\insidePageLength}
-                {\scshape {{.Company}}}
+                \checkPar{{print "{" .Company "}"}}{\scshape {{.Company}}}
 
-                \smallskip
-
-               {\itshape {{.Description}}}
-
-                \smallskip
+                \checkPar{{print "{" .Description "}"}}{\itshape {{.Description}}}
 
                 {{.Tech}}
             \end{minipage} \\[2ex]
@@ -219,9 +225,9 @@
             ~
             \end{minipage}
             \begin{minipage}{\insidePageLength}
-                {\scshape {{.Institute}}}
+                \checkPar{{print "{" .Institute "}"}}{\scshape {{.Institute}}}
 
-                \smallskip
+                \checkPar{{print "{" .FinalGrade "}"}}{\scshape {{$.Label.FinalGrade}}: {{.FinalGrade}}}
 
                 {{.Focus}}
 

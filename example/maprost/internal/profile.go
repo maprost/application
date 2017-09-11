@@ -137,7 +137,7 @@ func Profile() genmodel.Profile {
 				StartTime:  "Sep. 2005",
 				EndTime:    "Oct. 2010",
 				Focus:      lang.DefaultTranslation("software engineering, compiler construction, database design"),
-				FinalGrade: "1.0",
+				FinalGrade: lang.DefaultTranslation("1.0"),
 			},
 			{
 				Graduation: lang.DefaultTranslation("Fachinformatiker Systemintegration"),
