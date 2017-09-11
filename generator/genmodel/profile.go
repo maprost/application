@@ -48,6 +48,7 @@ type FunFacts struct {
 type Profile struct {
 	FirstName             string
 	LastName              string
+	Title                 string
 	Image                 string // path
 	Nationality           lang.TranslationMap
 	Birthday              string

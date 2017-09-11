@@ -4,12 +4,11 @@ import (
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/compiler"
 	"github.com/maprost/application/generator/internal/util"
-	"github.com/maprost/application/generator/lang"
 	"strings"
 	"unicode"
 )
 
-func Build(application genmodel.Application, style Style, lang lang.Language, outputPath string) (err error) {
+func Build(application genmodel.Application, outputPath string) (err error) {
 	var data interface{}
 	var path string
 	var mainFile string
@@ -17,11 +16,11 @@ func Build(application genmodel.Application, style Style, lang lang.Language, ou
 
 	generalConvert(&application)
 
-	data, err = style.Data(&application, lang)
+	data, err = application.JobPosition.Style.Data(&application)
 	if err != nil {
 		return
 	}
-	path, mainFile, subFiles = style.Files()
+	path, mainFile, subFiles = application.JobPosition.Style.Files()
 
 	outputPath, file := generateOutput(outputPath, &application)
 

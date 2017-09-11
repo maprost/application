@@ -7,7 +7,8 @@ import (
 	"github.com/maprost/application/generator/lang"
 )
 
-func initData(application *genmodel.Application, lang lang.Language) (data texmodel.Index, err error) {
+func initData(application *genmodel.Application) (data texmodel.Index, err error) {
+	lang := application.JobPosition.Lang
 	profSkills, otherProfSkills, err := convertProfSkills(application, lang)
 	if err != nil {
 		return
@@ -24,7 +25,7 @@ func initData(application *genmodel.Application, lang lang.Language) (data texmo
 		Label:           lang,
 		MainColor:       util.DefaultColor(application.JobPosition.MainColor),
 		Name:            util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),
-		Title:           application.JobPosition.Title,
+		Title:           util.DefaultValue(application.JobPosition.Title, application.Profile.Title),
 		Image:           util.DefaultImage(application.Profile.Image),
 		Email:           application.Profile.Email,
 		Phone:           application.Profile.Phone,

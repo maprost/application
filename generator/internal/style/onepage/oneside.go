@@ -5,11 +5,10 @@ import (
 	"runtime"
 
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/lang"
 )
 
-func Data(application *genmodel.Application, lang lang.Language) (data interface{}, err error) {
-	index, err := initData(application, lang)
+func Data(application *genmodel.Application) (data interface{}, err error) {
+	index, err := initData(application)
 	if err != nil {
 		return
 	}
