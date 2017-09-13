@@ -22,6 +22,7 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 	aboutMe := util.DefaultValue(application.JobPosition.MotivationText, lang.String(application.Profile.GeneralMotivationText))
 
 	data = texmodel.Index{
+		TechStackIcon:   util.TechStackIconPath,
 		Label:           lang,
 		MainColor:       util.DefaultColor(application.JobPosition.MainColor),
 		Name:            util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),

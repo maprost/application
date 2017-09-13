@@ -6,10 +6,11 @@ import (
 )
 
 var (
-	WebsiteIconPath  = image.ImagePath() + "website"
-	XingIconPath     = image.ImagePath() + "xing"
-	GithubIconPath   = image.ImagePath() + "github"
-	LinkedinIconPath = image.ImagePath() + "linkedIn"
+	WebsiteIconPath   = image.ImagePath() + "website"
+	XingIconPath      = image.ImagePath() + "xing"
+	GithubIconPath    = image.ImagePath() + "github"
+	LinkedinIconPath  = image.ImagePath() + "linkedIn"
+	TechStackIconPath = image.ImagePath() + "techstack"
 )
 
 func WebsiteIcon(website string) (icon string) {

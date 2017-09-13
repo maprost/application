@@ -34,6 +34,7 @@ type Education struct {
 }
 
 type Index struct {
+	TechStackIcon   string
 	Label           lang.Language
 	Image           string // path
 	Name            string
