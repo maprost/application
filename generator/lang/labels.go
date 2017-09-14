@@ -98,3 +98,30 @@ func (l Language) PossibleAt() string {
 		return "possible at"
 	}
 }
+
+func (l Language) SomeProjects() string {
+	switch l {
+	case German:
+		return "ausgewählte Projekte"
+	default:
+		return "some projects"
+	}
+}
+
+func (l Language) SomeRoles() string {
+	switch l {
+	case German:
+		return "ausgwählte Rolen"
+	default:
+		return "some roles"
+	}
+}
+
+func (l Language) UsedTechs() string {
+	switch l {
+	case German:
+		return "genutzte Technologien"
+	default:
+		return "used technologies"
+	}
+}

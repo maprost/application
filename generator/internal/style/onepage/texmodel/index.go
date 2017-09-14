@@ -22,6 +22,8 @@ type Experience struct {
 	Position    string
 	Time        string
 	Description string
+	Project     string // please add here your pet projects
+	Role        string // please add here more roles you did
 	Tech        string
 }
 
@@ -33,8 +35,14 @@ type Education struct {
 	Focus      string
 }
 
+type Icon struct {
+	Project   string
+	Role      string
+	TechStack string
+}
+
 type Index struct {
-	TechStackIcon   string
+	Icon            Icon
 	Label           lang.Language
 	Image           string // path
 	Name            string

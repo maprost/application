@@ -15,6 +15,8 @@ type Experience struct {
 	StartTime        string
 	EndTime          string
 	Description      lang.TranslationMap
+	Project          lang.TranslationMap
+	Role             lang.TranslationMap
 	TechStack        lang.TranslationMap
 	FutureExperience bool
 }

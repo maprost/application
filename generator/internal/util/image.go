@@ -11,6 +11,8 @@ var (
 	GithubIconPath    = image.ImagePath() + "github"
 	LinkedinIconPath  = image.ImagePath() + "linkedIn"
 	TechStackIconPath = image.ImagePath() + "techstack"
+	ProjectIconPath   = image.ImagePath() + "project"
+	RoleIconPath      = image.ImagePath() + "role"
 )
 
 func WebsiteIcon(website string) (icon string) {

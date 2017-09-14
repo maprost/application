@@ -22,7 +22,11 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 	aboutMe := util.DefaultValue(application.JobPosition.MotivationText, lang.String(application.Profile.GeneralMotivationText))
 
 	data = texmodel.Index{
-		TechStackIcon:   util.TechStackIconPath,
+		Icon: texmodel.Icon{
+			Project:   util.ProjectIconPath,
+			Role:      util.RoleIconPath,
+			TechStack: util.TechStackIconPath,
+		},
 		Label:           lang,
 		MainColor:       util.DefaultColor(application.JobPosition.MainColor),
 		Name:            util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),
@@ -118,7 +122,9 @@ func convertExperience(application *genmodel.Application, lang lang.Language) (e
 
 		experience = append(experience, texmodel.Experience{
 			Position:    lang.String(exp.JobPosition),
-			Description: util.ReplaceNewLine(lang.String(exp.Description)),
+			Description: lang.String(exp.Description),
+			Project:     lang.String(exp.Project),
+			Role:        lang.String(exp.Role),
 			Company:     exp.Company,
 			Tech:        lang.String(exp.TechStack),
 			Time:        timeRange,
