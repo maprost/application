@@ -48,7 +48,7 @@ func (l Language) Hobbies() string {
 func (l Language) Profile() string {
 	switch l {
 	case German:
-		return "Profile"
+		return "Profil"
 	default:
 		return "Profile"
 	}
@@ -111,7 +111,7 @@ func (l Language) SomeProjects() string {
 func (l Language) SomeRoles() string {
 	switch l {
 	case German:
-		return "ausgwählte Rolen"
+		return "ausgwählte Rollen"
 	default:
 		return "some roles"
 	}

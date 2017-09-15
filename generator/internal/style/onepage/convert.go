@@ -29,7 +29,7 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 		},
 		Label:           lang,
 		MainColor:       util.DefaultColor(application.JobPosition.MainColor),
-		Name:            util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),
+		Name:            util.JoinStrings(application.Profile.FirstName, "\n\n\\smallskip\n\n", application.Profile.LastName),
 		Title:           util.DefaultValue(application.JobPosition.Title, application.Profile.Title),
 		Image:           util.DefaultImage(application.Profile.Image),
 		Email:           application.Profile.Email,
