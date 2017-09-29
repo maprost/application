@@ -110,6 +110,7 @@ func Profile() genmodel.Profile {
 					lang.German: ""},
 				TechStack: lang.DefaultTranslation("Java, Guice, GWT, MySQL, Hibernate, RESTful, Json, Docker, Go, \\LaTeX, Ubuntu, Bash, " +
 					"Python, Git, Scrum/Kanban, JIRA"),
+				DocumentLinks: []string{"http://google.de"},
 			},
 			{
 				Company:     "Solar Company",

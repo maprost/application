@@ -19,15 +19,17 @@ type Experience struct {
 	Role             lang.TranslationMap
 	TechStack        lang.TranslationMap
 	FutureExperience bool
+	DocumentLinks    []string
 }
 
 type Education struct {
-	Graduation lang.TranslationMap
-	Institute  string
-	StartTime  string
-	EndTime    string
-	Focus      lang.TranslationMap
-	FinalGrade lang.TranslationMap
+	Graduation    lang.TranslationMap
+	Institute     string
+	StartTime     string
+	EndTime       string
+	Focus         lang.TranslationMap
+	FinalGrade    lang.TranslationMap
+	DocumentLinks []string
 }
 
 type Language struct {
@@ -67,4 +69,5 @@ type Profile struct {
 	Education             []Education
 	Language              []Language
 	GeneralMotivationText lang.TranslationMap // your general motivation text, this text can contains tex elements
+	Attachment            []string
 }

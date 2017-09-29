@@ -38,4 +38,5 @@ type JobPosition struct {
 	ProfessionalSkills []SkillID        // if nothing is selected, it will use everything from profile
 	SoftSkills         []SkillID        // if nothing is selected, it will use everything from profile
 	FutureExperience   FutureExperience // if set, this experience will be the top of your experience
+	Attachment         []string
 }

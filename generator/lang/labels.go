@@ -111,7 +111,7 @@ func (l Language) SomeProjects() string {
 func (l Language) SomeRoles() string {
 	switch l {
 	case German:
-		return "ausgwählte Rollen"
+		return "ausgewählte Rollen"
 	default:
 		return "some roles"
 	}

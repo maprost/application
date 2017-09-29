@@ -13,6 +13,7 @@ var (
 	TechStackIconPath = image.ImagePath() + "techstack"
 	ProjectIconPath   = image.ImagePath() + "project"
 	RoleIconPath      = image.ImagePath() + "role"
+	DocumentIconPath  = image.ImagePath() + "document"
 )
 
 func WebsiteIcon(website string) (icon string) {

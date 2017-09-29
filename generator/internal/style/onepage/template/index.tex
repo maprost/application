@@ -60,6 +60,7 @@
 \newcommand{\projectIcon}{\includegraphics[width=4mm]{{print "{" $.Icon.Project "}"}} }
 \newcommand{\roleIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
 \newcommand{\techStackIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.TechStack "}"}} }
+\newcommand{\documentIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Document "}"}} }
 
 % Command for printing the contact information icons
 \newcommand{\icon}[1]{%
@@ -97,6 +98,7 @@
     %------------------------------------------------
 
     \begin{textblock}{5.1}(0.5, 0.2)
+    \raggedright
 
     % profile picture
     \begin{center}
@@ -176,10 +178,8 @@
 
     {{.Hobbies}}
 
-    % Researcher, Configer, SoftwareDesigner, Tester, Databases
-
-    \end{textblock}
-    \begin{textblock}{14.5}(6.5, 0.5)
+\end{textblock}
+\begin{textblock}{14.5}(6.5, 0.5)
     % config length
     \newlength\indentLength
     \pgfmathsetlength{\indentLength}{5mm}
@@ -209,7 +209,11 @@
             ~
             \end{minipage}
             \begin{minipage}{\insidePageLength}
-                \checkPar{{print "{" .Company "}"}}{\scshape {{.Company}}}
+                \checkPar{{print "{" .Company "}"}}{\scshape {{.Company}} ~ %
+                {{range .DocumentLinks}}%
+                    \href{{print "{" . "}" }}{\documentIcon}%
+                {{end}}%
+                }
 
                 \checkPar{{print "{" .Description "}"}}{{print "{" .Description "}"}}
 
@@ -239,9 +243,13 @@
             ~
             \end{minipage}
             \begin{minipage}{\insidePageLength}
-                \checkPar{{print "{" .Institute "}"}}{\scshape {{.Institute}}}
+                \checkPar{{print "{" .Institute "}"}}{\scshape {{.Institute}} ~ %
+                    {{range .DocumentLinks}}%
+                        \href{{print "{" . "}" }}{\documentIcon}%
+                    {{end}}%
+                }
 
-                {{.Focus}}
+                \checkPar{{print "{" .Focus "}"}}{{print "{" .Focus "}"}}
 
                 \checkPar{{print "{" .FinalGrade "}"}}{ {{$.Label.FinalGrade}}: {{.FinalGrade}}}
 
@@ -249,6 +257,14 @@
         {{end}}
     \end{minipage}
 
-    \end{textblock}
+\end{textblock}
+
+{{range .Attachment}}
+    \newpage
+    
+
+{{end}}
+
+
 
 \end{document}

@@ -26,10 +26,11 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 			Project:   util.ProjectIconPath,
 			Role:      util.RoleIconPath,
 			TechStack: util.TechStackIconPath,
+			Document:  util.DocumentIconPath,
 		},
 		Label:           lang,
 		MainColor:       util.DefaultColor(application.JobPosition.MainColor),
-		Name:            util.JoinStrings(application.Profile.FirstName, "\n\n\\smallskip\n\n", application.Profile.LastName),
+		Name:            util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),
 		Title:           util.DefaultValue(application.JobPosition.Title, application.Profile.Title),
 		Image:           util.DefaultImage(application.Profile.Image),
 		Email:           application.Profile.Email,
@@ -46,6 +47,7 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 		AboutMe:         aboutMe,
 		Experience:      convertExperience(application, lang),
 		Education:       convertEducation(application, lang),
+		Attachment:      util.DefaultStringArray(application.JobPosition.Attachment, application.Profile.Attachment),
 	}
 	return
 }
@@ -121,13 +123,14 @@ func convertExperience(application *genmodel.Application, lang lang.Language) (e
 		}
 
 		experience = append(experience, texmodel.Experience{
-			Position:    lang.String(exp.JobPosition),
-			Description: lang.String(exp.Description),
-			Project:     lang.String(exp.Project),
-			Role:        lang.String(exp.Role),
-			Company:     exp.Company,
-			Tech:        lang.String(exp.TechStack),
-			Time:        timeRange,
+			Position:      lang.String(exp.JobPosition),
+			Description:   lang.String(exp.Description),
+			Project:       lang.String(exp.Project),
+			Role:          lang.String(exp.Role),
+			Company:       exp.Company,
+			Tech:          lang.String(exp.TechStack),
+			Time:          timeRange,
+			DocumentLinks: exp.DocumentLinks,
 		})
 	}
 	return
@@ -136,11 +139,12 @@ func convertExperience(application *genmodel.Application, lang lang.Language) (e
 func convertEducation(application *genmodel.Application, lang lang.Language) (education []texmodel.Education) {
 	for _, edu := range application.Profile.Education {
 		education = append(education, texmodel.Education{
-			Graduation: lang.String(edu.Graduation),
-			FinalGrade: lang.String(edu.FinalGrade),
-			Institute:  edu.Institute,
-			Focus:      lang.String(edu.Focus),
-			Time:       convertTime(edu.StartTime, edu.EndTime, lang),
+			Graduation:    lang.String(edu.Graduation),
+			FinalGrade:    lang.String(edu.FinalGrade),
+			Institute:     edu.Institute,
+			Focus:         lang.String(edu.Focus),
+			Time:          convertTime(edu.StartTime, edu.EndTime, lang),
+			DocumentLinks: edu.DocumentLinks,
 		})
 	}
 	return
