@@ -1,11 +1,12 @@
 package generator
 
 import (
+	"strings"
+	"unicode"
+
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/compiler"
 	"github.com/maprost/application/generator/internal/util"
-	"strings"
-	"unicode"
 )
 
 func Build(application genmodel.Application, outputPath string) (err error) {
