@@ -68,5 +68,7 @@ type Index struct {
 	SideColor       string
 	ShortVersion    bool
 	Attachment      []string
-	HasFocus        bool
+	HasProject      bool
+	HasRole         bool
+	HasTechStack    bool
 }

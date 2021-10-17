@@ -49,7 +49,9 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 		Experience:      convertExperience(application, lang),
 		Education:       convertEducation(application, lang),
 		Attachment:      util.DefaultStringArray(application.JobPosition.Attachment, application.Profile.Attachment),
-		HasFocus:        false,
+		HasProject:      hasProjects(application),
+		HasRole:         hasRole(application),
+		HasTechStack:    hasTechStack(application),
 	}
 	return
 }
@@ -159,9 +161,29 @@ func convertTime(start string, end string, lang lang.Language) string {
 	return start + " - " + end
 }
 
-//func hasFocus(start string, end string, lang lang.Language) bool {
-//	if end == "" {
-//		return lang.Since() + "~~" + start
-//	}
-//	return start + " - " + end
-//}
+func hasProjects(application *genmodel.Application) bool {
+	for _, e := range application.Profile.Experience {
+		if len(e.Project) > 0 {
+			return true
+		}
+	}
+	return false
+}
+
+func hasRole(application *genmodel.Application) bool {
+	for _, e := range application.Profile.Experience {
+		if len(e.Role) > 0 {
+			return true
+		}
+	}
+	return false
+}
+
+func hasTechStack(application *genmodel.Application) bool {
+	for _, e := range application.Profile.Experience {
+		if len(e.TechStack) > 0 {
+			return true
+		}
+	}
+	return false
+}

@@ -73,9 +73,9 @@
 \renewcommand{\headrulewidth}{0pt}
 \cfoot{}
 \rfoot{%
-    \projectIcon{} {{$.Label.SomeProjects}} ~~~~
-    \roleIcon{} {{$.Label.SomeRoles}} ~~~~
-    \techStackIcon{} {{$.Label.UsedTechs}}
+    {{if $.HasProject}} \projectIcon{} {{$.Label.SomeProjects}} ~~~~ {{else}} % {{end}}
+    {{if $.HasRole}}\roleIcon{} {{$.Label.SomeRoles}} ~~~~ {{else}} % {{end}}
+    {{if $.HasTechStack}}\techStackIcon{} {{$.Label.UsedTechs}} {{else}} % {{end}}
 }
 
 \begin{document}
