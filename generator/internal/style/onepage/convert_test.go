@@ -31,6 +31,11 @@ func assertApplication(t *testing.T, application genmodel.Application, expected 
 		expected.MainColor = util.DefaultColorValue
 	}
 
+	// modify (set default values) expected:
+	if expected.SideColor == "" {
+		expected.SideColor = util.DefaultSideColorValue
+	}
+
 	assert.Equal(texmodelData, expected)
 }
 

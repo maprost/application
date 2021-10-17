@@ -30,6 +30,7 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 		},
 		Label:           lang,
 		MainColor:       util.DefaultColor(application.JobPosition.MainColor),
+		SideColor:       util.DefaultColor(application.JobPosition.SideColor),
 		Name:            util.JoinStrings(application.Profile.FirstName, " ", application.Profile.LastName),
 		Title:           util.DefaultValue(application.JobPosition.Title, application.Profile.Title),
 		Image:           util.DefaultImage(application.Profile.Image),
@@ -48,6 +49,7 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 		Experience:      convertExperience(application, lang),
 		Education:       convertEducation(application, lang),
 		Attachment:      util.DefaultStringArray(application.JobPosition.Attachment, application.Profile.Attachment),
+		HasFocus:        false,
 	}
 	return
 }
@@ -156,3 +158,10 @@ func convertTime(start string, end string, lang lang.Language) string {
 	}
 	return start + " - " + end
 }
+
+//func hasFocus(start string, end string, lang lang.Language) bool {
+//	if end == "" {
+//		return lang.Since() + "~~" + start
+//	}
+//	return start + " - " + end
+//}

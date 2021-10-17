@@ -52,7 +52,7 @@
 
 % company custom color
 \definecolor{maincolor}{HTML}{{"{"}}{{.MainColor}}}
-\definecolor{sidecolor}{HTML}{E7E7E7}
+\definecolor{sidecolor}{HTML}{{"{"}}{{.SideColor}}}
 \definecolor{maingray}{HTML}{B9B9B9}
 
 % icons
@@ -187,7 +187,7 @@
     \newlength\insidePageLength
     \pgfmathsetlength{\insidePageLength}{135mm}
 
-    {{if .AboutMe != ""}}
+    {{if (ne .AboutMe "") }}
     \timeLineHeader{{print "{" $.Label.Profile "}"}}
 
     {{.AboutMe}}

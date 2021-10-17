@@ -65,6 +65,8 @@ type Index struct {
 	Experience      []Experience
 	Education       []Education
 	MainColor       string
+	SideColor       string
 	ShortVersion    bool
 	Attachment      []string
+	HasFocus        bool
 }

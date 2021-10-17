@@ -29,6 +29,7 @@ type Style interface {
 
 type JobPosition struct {
 	MainColor          string // please use the HTML color signature: 800000, if the field is empty: standard color will used
+	SideColor          string
 	Style              Style
 	Lang               lang.Language
 	Company            string

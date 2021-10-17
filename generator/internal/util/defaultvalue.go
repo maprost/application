@@ -1,12 +1,14 @@
 package util
 
 import (
-	"github.com/maprost/application/generator/internal/image"
 	"strings"
+
+	"github.com/maprost/application/generator/internal/image"
 )
 
 const (
-	DefaultColorValue = "e3593b"
+	DefaultColorValue     = "e3593b"
+	DefaultSideColorValue = "e7e7e7"
 )
 
 var (
