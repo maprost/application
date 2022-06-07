@@ -196,8 +196,11 @@
     \bigskip
 
     {{ if .Experience }}
-        \timeLineHeader{{print "{" $.Label.Experience "}"}}
-
+        {{ if .CustomExperienceLabel }}
+            \timeLineHeader{{print "{" .CustomExperienceLabel "}"}}
+        {{ else }}
+            \timeLineHeader{{print "{" $.Label.Experience "}"}}
+        {{ end }}
         \begin{minipage}{\indentLength}
         ~
         \end{minipage}
