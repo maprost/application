@@ -45,30 +45,31 @@ type Icon struct {
 }
 
 type Index struct {
-	Icon            Icon
-	Label           lang.Language
-	Image           string // path
-	Name            string
-	Title           string
-	Nationality     string
-	Location        string
-	Email           string
-	Phone           string
-	Websites        []Website
-	ProfSkills      []Skill
-	OtherProfSkills string
-	Interest        string
-	SoftSkills      string
-	Language        []Language
-	Hobbies         string
-	AboutMe         string
-	Experience      []Experience
-	Education       []Education
-	MainColor       string
-	SideColor       string
-	ShortVersion    bool
-	Attachment      []string
-	HasProject      bool
-	HasRole         bool
-	HasTechStack    bool
+	Icon                  Icon
+	Label                 lang.Language
+	Image                 string // path
+	Name                  string
+	Title                 string
+	Nationality           string
+	Location              string
+	Email                 string
+	Phone                 string
+	Websites              []Website
+	ProfSkills            []Skill
+	OtherProfSkills       string
+	Interest              string
+	SoftSkills            string
+	Language              []Language
+	Hobbies               string
+	AboutMe               string
+	CustomExperienceLabel string
+	Experience            []Experience
+	Education             []Education
+	MainColor             string
+	SideColor             string
+	ShortVersion          bool
+	Attachment            []string
+	HasProject            bool
+	HasRole               bool
+	HasTechStack          bool
 }

@@ -66,7 +66,7 @@ type Profile struct {
 	Hobbies               []lang.TranslationMap
 	SignPath              string // path to the sign image
 	Experience            []Experience
-	CustomExperienceLabel string
+	CustomExperienceLabel lang.TranslationMap
 	Education             []Education
 	Language              []Language
 	GeneralMotivationText lang.TranslationMap // your general motivation text, this text can contains tex elements
