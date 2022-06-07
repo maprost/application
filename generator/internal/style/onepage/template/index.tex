@@ -195,11 +195,14 @@
 
     \bigskip
 
-    \timeLineHeader{{print "{" $.Label.Experience "}"}}
+    {{ if .Experience }}
+        \timeLineHeader{{print "{" $.Label.Experience "}"}}
 
-    \begin{minipage}{\indentLength}
-    ~
-    \end{minipage}
+        \begin{minipage}{\indentLength}
+        ~
+        \end{minipage}
+    {{ end }}
+
     \begin{minipage}{\outsidePageLength}
         {{range .Experience}}
             {\headerfont {{.Position}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
@@ -228,12 +231,14 @@
         {{end}}
     \end{minipage}
 
-    \timeLineHeader{{print "{" $.Label.Education "}"}}
+    {{ if .Education }}
+        \timeLineHeader{{print "{" $.Label.Education "}"}}
 
+        \begin{minipage}{\indentLength}
+        ~
+        \end{minipage}
+    {{ end }}
 
-    \begin{minipage}{\indentLength}
-    ~
-    \end{minipage}
     \begin{minipage}{\outsidePageLength}
         {{range .Education}}
             {\headerfont {{.Graduation}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
