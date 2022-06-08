@@ -56,11 +56,11 @@ func Profile() genmodel.Profile {
 		},
 		LeftSideAction: []genmodel.LeftSideAction{
 			genmodel.Hobbies,
-			genmodel.SoftSkills,
-			genmodel.SoftSkills,
+			//genmodel.SoftSkills,
+			//genmodel.SoftSkills,
 			genmodel.Interests,
-			genmodel.TechSkill,
-			genmodel.Languages,
+			//genmodel.TechSkill,
+			//genmodel.Languages,
 		},
 		ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
 			techSkill_Go:             {Name: lang.DefaultTranslation("Go"), Rating: 8},
@@ -90,6 +90,7 @@ func Profile() genmodel.Profile {
 			lang.DefaultTranslation("Design Pattern"),
 			lang.DefaultTranslation("Microservices"),
 			lang.DefaultTranslation(`
+
 \medskip
 
 Blob`),
