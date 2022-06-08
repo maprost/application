@@ -55,16 +55,22 @@ type Index struct {
 	Email                 string
 	Phone                 string
 	Websites              []Website
+	CustomProfSkillLabel  string
 	ProfSkills            []Skill
 	OtherProfSkills       string
+	CustomInterestLabel   string
 	Interest              string
+	CustomSoftSkillLabel  string
 	SoftSkills            string
+	CustomLanguageLabel   string
 	Language              []Language
+	CustomHobbiesLabel    string
 	Hobbies               string
 	CustomAboutMeLabel    string
 	AboutMe               string
 	CustomExperienceLabel string
 	Experience            []Experience
+	CustomEducationLabel  string
 	Education             []Education
 	MainColor             string
 	SideColor             string
@@ -73,4 +79,5 @@ type Index struct {
 	HasProject            bool
 	HasRole               bool
 	HasTechStack          bool
+	LeftSideAction        []int
 }

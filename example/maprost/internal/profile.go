@@ -1,10 +1,11 @@
 package internal
 
 import (
-	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/lang"
 	"path"
 	"runtime"
+
+	"github.com/maprost/application/generator/genmodel"
+	"github.com/maprost/application/generator/lang"
 )
 
 const (
@@ -53,6 +54,14 @@ func Profile() genmodel.Profile {
 				lang.German:  "Deutschland",
 			},
 		},
+		LeftSideAction: []genmodel.LeftSideAction{
+			genmodel.Hobbies,
+			genmodel.SoftSkills,
+			genmodel.SoftSkills,
+			genmodel.Interests,
+			genmodel.TechSkill,
+			genmodel.Languages,
+		},
 		ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
 			techSkill_Go:             {Name: lang.DefaultTranslation("Go"), Rating: 8},
 			techSkill_Java:           {Name: lang.DefaultTranslation("Java"), Rating: 9},
@@ -73,18 +82,26 @@ func Profile() genmodel.Profile {
 		SoftSkills: map[genmodel.SkillID]genmodel.Skill{
 			softSkill_AnalyticalThinking: {Name: lang.TranslationMap{lang.English: "Analytical Thinking", lang.German: "Analytisches Denken"}, Rating: 9},
 		},
+		CustomInterestLabel: map[lang.Language]string{
+			lang.German: "Interessen und Freizeit",
+		},
 		Interest: []lang.TranslationMap{
 			lang.DefaultTranslation("CleanCode"),
 			lang.DefaultTranslation("Design Pattern"),
 			lang.DefaultTranslation("Microservices"),
+			lang.DefaultTranslation(`
+\medskip
+
+Blob`),
 			lang.DefaultTranslation("TDD"),
 			lang.DefaultTranslation("Backend development"),
-			lang.DefaultTranslation("Big Data")},
-		Hobbies: []lang.TranslationMap{
-			{lang.English: "Boardgames", lang.German: "Brettspiele"},
-			{lang.English: "Traveling by bike", lang.German: "Fahrradtouren"},
-			{lang.English: "aikido", lang.German: "Aikido"},
+			lang.DefaultTranslation("Big Data"),
 		},
+		//Hobbies: []lang.TranslationMap{
+		//	{lang.English: "Boardgames", lang.German: "Brettspiele"},
+		//	{lang.English: "Traveling by bike", lang.German: "Fahrradtouren"},
+		//	{lang.English: "aikido", lang.German: "Aikido"},
+		//},
 		Language: []genmodel.Language{
 			{
 				Name:  lang.TranslationMap{lang.English: "German", lang.German: "Deutsch"},

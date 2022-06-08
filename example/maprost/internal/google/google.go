@@ -10,7 +10,7 @@ func Google() genmodel.JobPosition {
 	return genmodel.JobPosition{
 		MainColor: "4285F4",
 		Style:     style.OneSide,
-		Lang:      lang.English,
+		Lang:      lang.German,
 		Company:   "Google",
 		Address: genmodel.JobAddress{
 			Street:  "...",

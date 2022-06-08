@@ -68,6 +68,89 @@
     }%
 }
 
+\newcommand{\leftSideAction}[1]{%
+    \ifthenelse{\equal{#1}{1}}%
+    {% Professional Skill
+        {{ if .ProfSkills }}
+            {{ if .CustomProfSkillLabel }}
+                \category{{print "{" .CustomProfSkillLabel "}"}}
+            {{ else }}
+                \category{{print "{" $.Label.TechSkills "}"}}
+            {{ end }}
+            \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
+                {{range .ProfSkills}}
+                    {{.Name}}
+                    &
+                    \begin{tikzpicture}
+                        \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
+                        \draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.3);
+                    \end{tikzpicture}
+                    \\[1ex]
+                {{end}}
+            \end{tabular}
+
+            \medskip
+
+            {{.OtherProfSkills}}
+        {{ end }}
+    }{}%
+    %
+    \ifthenelse{\equal{#1}{2}}%
+    {% interest
+        {{ if .Interest }}
+            {{ if .CustomInterestLabel }}
+                \category{{print "{" .CustomInterestLabel "}"}}
+            {{ else }}
+                \category{{print "{" $.Label.Interests "}"}}
+            {{ end }}
+
+            {{.Interest}}
+        {{ end }}
+    }{}%
+    %
+    \ifthenelse{\equal{#1}{3}}%
+    {% softSkills
+        {{ if .SoftSkills }}
+            {{ if .CustomSoftSkillLabel }}
+                \category{{print "{" .CustomSoftSkillLabel "}"}}
+            {{ else }}
+                \category{{print "{" $.Label.SoftSkills "}"}}
+            {{ end }}
+
+            {{.SoftSkills}}
+        {{end}}
+    }{}%
+    %
+    \ifthenelse{\equal{#1}{4}}%
+    {% language
+        {{ if .Language }}
+            {{ if .CustomLanguageLabel }}
+                \category{{print "{" .CustomLanguageLabel "}"}}
+            {{ else }}
+                \category{{print "{" $.Label.Languages "}"}}
+            {{ end }}
+            \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+                {{range .Language}}
+                {{.Name}} & {{.Level}} \\
+                {{end}}
+            \end{tabular}
+        {{ end }}
+    }{}%
+    %
+    \ifthenelse{\equal{#1}{5}}%
+    {% hobbies
+        {{ if .Hobbies }}
+            {{ if .CustomHobbiesLabel }}
+                \category{{print "{" .CustomHobbiesLabel "}"}}
+            {{ else }}
+                \category{{print "{" $.Label.Hobbies "}"}}
+            {{ end }}
+
+            {{.Hobbies}}
+        {{end}}
+    }{}%
+}
+
 % header/footer:
 \pagestyle{fancy} % Disable headers
 \renewcommand{\headrulewidth}{0pt}
@@ -132,50 +215,89 @@
     \end{tabular}
 
 
-    % professional skills
-    \category{{print "{" $.Label.TechSkills "}"}}
-    \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
-    {{range .ProfSkills}}
-            {{.Name}}
-            &
-            \begin{tikzpicture}
-                \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
-                \draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.3);
-            \end{tikzpicture}
-            \\[1ex]
-        {{end}}
-    \end{tabular}
+    {{range .LeftSideAction}}
+        \leftSideAction{{print "{" . "}"}}
+    {{end}}
 
-    \medskip
+%    \leftSideAction{2}
+%    \leftSideAction{3}
+%    \leftSideAction{4}
+%    \leftSideAction{5}
+%    \leftSideAction{1}
 
-    {{.OtherProfSkills}}
-
-
-    % interest
-    \category{{print "{" $.Label.Interests "}"}}
-
-    {{.Interest}}
-
-
-    % soft skills
-    \category{{print "{" $.Label.SoftSkills "}"}}
-
-    {{.SoftSkills}}
-
-
-    % language
-    \category{{print "{" $.Label.Languages "}"}}
-    \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
-        {{range .Language}}
-            {{.Name}} & {{.Level}} \\
-        {{end}}
-    \end{tabular}
-
-
-    % hobbies
-    \category{{print "{" $.Label.Hobbies "}"}}
-
-    {{.Hobbies}}
+%    % professional skills
+%    {{ if .ProfSkills }}
+%        {{ if .CustomProfSkillLabel }}
+%            \category{{print "{" .CustomProfSkillLabel "}"}}
+%        {{ else }}
+%            \category{{print "{" $.Label.TechSkills "}"}}
+%        {{ end }}
+%        \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
+%        {{range .ProfSkills}}
+%                {{.Name}}
+%                &
+%                \begin{tikzpicture}
+%                    \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
+%                    \draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.3);
+%                \end{tikzpicture}
+%                \\[1ex]
+%            {{end}}
+%        \end{tabular}
+%
+%        \medskip
+%
+%        {{.OtherProfSkills}}
+%    {{ end }}
+%
+%    % interest
+%    {{ if .Interest }}
+%        {{ if .CustomInterestLabel }}
+%            \category{{print "{" .CustomInterestLabel "}"}}
+%        {{ else }}
+%            \category{{print "{" $.Label.Interests "}"}}
+%        {{ end }}
+%
+%        {{.Interest}}
+%    {{ end }}
+%
+%
+%    % soft skills
+%    {{ if .SoftSkills }}
+%        {{ if .CustomSoftSkillLabel }}
+%            \category{{print "{" .CustomSoftSkillLabel "}"}}
+%        {{ else }}
+%            \category{{print "{" $.Label.SoftSkills "}"}}
+%        {{ end }}
+%
+%        {{.SoftSkills}}
+%    {{end}}
+%
+%
+%    % language
+%    {{ if .Language }}
+%        {{ if .CustomLanguageLabel }}
+%            \category{{print "{" .CustomLanguageLabel "}"}}
+%        {{ else }}
+%            \category{{print "{" $.Label.Languages "}"}}
+%        {{ end }}
+%        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+%            {{range .Language}}
+%                {{.Name}} & {{.Level}} \\
+%            {{end}}
+%        \end{tabular}
+%    {{ end }}
+%
+%
+%    % hobbies
+%    {{ if .Hobbies }}
+%        {{ if .CustomHobbiesLabel }}
+%            \category{{print "{" .CustomHobbiesLabel "}"}}
+%        {{ else }}
+%            \category{{print "{" $.Label.Hobbies "}"}}
+%        {{ end }}
+%
+%        {{.Hobbies}}
+%    {{end}}
 
 \end{textblock}
 \begin{textblock}{14.5}(6.5, 0.5)
@@ -239,7 +361,11 @@
     \end{minipage}
 
     {{ if .Education }}
-        \timeLineHeader{{print "{" $.Label.Education "}"}}
+        {{ if .CustomEducationLabel }}
+            \timeLineHeader{{print "{" .CustomEducationLabel "}"}}
+        {{ else }}
+            \timeLineHeader{{print "{" $.Label.Education "}"}}
+        {{ end }}
     {{ end }}
 
     \begin{minipage}{\indentLength}

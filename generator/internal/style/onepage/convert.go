@@ -40,20 +40,27 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 		Nationality:           lang.String(application.Profile.Nationality),
 		Websites:              convertWebsites(application),
 		OtherProfSkills:       otherProfSkills,
+		CustomProfSkillLabel:  lang.String(application.Profile.CustomProfessionalSkillLabel),
 		ProfSkills:            profSkills,
+		CustomSoftSkillLabel:  lang.String(application.Profile.CustomSoftSkillLabel),
 		SoftSkills:            softSkills,
+		CustomHobbiesLabel:    lang.String(application.Profile.CustomHobbiesLabel),
 		Hobbies:               lang.Join(application.Profile.Hobbies, ", "),
+		CustomInterestLabel:   lang.String(application.Profile.CustomInterestLabel),
 		Interest:              lang.Join(application.Profile.Interest, ", "),
+		CustomLanguageLabel:   lang.String(application.Profile.CustomLanguageLabel),
 		Language:              convertLanguage(application, lang),
 		CustomAboutMeLabel:    lang.String(application.Profile.CustomMotivationTextLabel),
 		AboutMe:               aboutMe,
 		CustomExperienceLabel: lang.String(application.Profile.CustomExperienceLabel),
 		Experience:            convertExperience(application, lang),
+		CustomEducationLabel:  lang.String(application.Profile.CustomEducationLabel),
 		Education:             convertEducation(application, lang),
 		Attachment:            util.DefaultStringArray(application.JobPosition.Attachment, application.Profile.Attachment),
 		HasProject:            hasProjects(application),
 		HasRole:               hasRole(application),
 		HasTechStack:          hasTechStack(application),
+		LeftSideAction:        convertLeftSideActions(application),
 	}
 	return
 }
@@ -188,4 +195,24 @@ func hasTechStack(application *genmodel.Application) bool {
 		}
 	}
 	return false
+}
+
+func convertLeftSideActions(application *genmodel.Application) []int {
+	list := application.Profile.LeftSideAction
+	if len(list) == 0 {
+		return []int{
+			int(genmodel.TechSkill),
+			int(genmodel.Interests),
+			int(genmodel.SoftSkills),
+			int(genmodel.Languages),
+			int(genmodel.Hobbies),
+		}
+	}
+
+	res := make([]int, 0, len(list))
+	for _, lsa := range list {
+		res = append(res, int(lsa))
+	}
+
+	return res
 }

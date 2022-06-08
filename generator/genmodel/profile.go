@@ -9,6 +9,16 @@ type Skill struct {
 	Rating int // Rating range [1,10]
 }
 
+type LeftSideAction int
+
+const (
+	TechSkill  = LeftSideAction(1)
+	Interests  = LeftSideAction(2)
+	SoftSkills = LeftSideAction(3)
+	Languages  = LeftSideAction(4)
+	Hobbies    = LeftSideAction(5)
+)
+
 type Experience struct {
 	JobPosition      lang.TranslationMap
 	Company          string
@@ -50,26 +60,33 @@ type FunFacts struct {
 }
 
 type Profile struct {
-	FirstName                 string
-	LastName                  string
-	Title                     string
-	Image                     string // path
-	Nationality               lang.TranslationMap
-	Birthday                  string
-	Address                   ProfileAddress
-	Email                     string
-	Phone                     string
-	Websites                  []string          // url
-	ProfessionalSkills        map[SkillID]Skill // should contains all professional skills you have
-	SoftSkills                map[SkillID]Skill // should contains all soft skills you have
-	Interest                  []lang.TranslationMap
-	Hobbies                   []lang.TranslationMap
-	SignPath                  string // path to the sign image
-	Experience                []Experience
-	CustomExperienceLabel     lang.TranslationMap
-	Education                 []Education
-	Language                  []Language
-	CustomMotivationTextLabel lang.TranslationMap
-	GeneralMotivationText     lang.TranslationMap // your general motivation text, this text can contains tex elements
-	Attachment                []string
+	FirstName                    string
+	LastName                     string
+	Title                        string
+	Image                        string // path
+	Nationality                  lang.TranslationMap
+	Birthday                     string
+	Address                      ProfileAddress
+	Email                        string
+	Phone                        string
+	Websites                     []string // url
+	CustomProfessionalSkillLabel lang.TranslationMap
+	ProfessionalSkills           map[SkillID]Skill // should contains all professional skills you have
+	CustomSoftSkillLabel         lang.TranslationMap
+	SoftSkills                   map[SkillID]Skill // should contains all soft skills you have
+	CustomInterestLabel          lang.TranslationMap
+	Interest                     []lang.TranslationMap
+	CustomHobbiesLabel           lang.TranslationMap
+	Hobbies                      []lang.TranslationMap
+	SignPath                     string // path to the sign image
+	CustomExperienceLabel        lang.TranslationMap
+	Experience                   []Experience
+	CustomEducationLabel         lang.TranslationMap
+	Education                    []Education
+	CustomLanguageLabel          lang.TranslationMap
+	Language                     []Language
+	CustomMotivationTextLabel    lang.TranslationMap
+	GeneralMotivationText        lang.TranslationMap // your general motivation text, this text can contains tex elements
+	Attachment                   []string
+	LeftSideAction               []LeftSideAction
 }
