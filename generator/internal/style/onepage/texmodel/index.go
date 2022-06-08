@@ -61,6 +61,7 @@ type Index struct {
 	SoftSkills            string
 	Language              []Language
 	Hobbies               string
+	CustomAboutMeLabel    string
 	AboutMe               string
 	CustomExperienceLabel string
 	Experience            []Experience

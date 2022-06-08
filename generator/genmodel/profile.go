@@ -50,25 +50,26 @@ type FunFacts struct {
 }
 
 type Profile struct {
-	FirstName             string
-	LastName              string
-	Title                 string
-	Image                 string // path
-	Nationality           lang.TranslationMap
-	Birthday              string
-	Address               ProfileAddress
-	Email                 string
-	Phone                 string
-	Websites              []string          // url
-	ProfessionalSkills    map[SkillID]Skill // should contains all professional skills you have
-	SoftSkills            map[SkillID]Skill // should contains all soft skills you have
-	Interest              []lang.TranslationMap
-	Hobbies               []lang.TranslationMap
-	SignPath              string // path to the sign image
-	Experience            []Experience
-	CustomExperienceLabel lang.TranslationMap
-	Education             []Education
-	Language              []Language
-	GeneralMotivationText lang.TranslationMap // your general motivation text, this text can contains tex elements
-	Attachment            []string
+	FirstName                 string
+	LastName                  string
+	Title                     string
+	Image                     string // path
+	Nationality               lang.TranslationMap
+	Birthday                  string
+	Address                   ProfileAddress
+	Email                     string
+	Phone                     string
+	Websites                  []string          // url
+	ProfessionalSkills        map[SkillID]Skill // should contains all professional skills you have
+	SoftSkills                map[SkillID]Skill // should contains all soft skills you have
+	Interest                  []lang.TranslationMap
+	Hobbies                   []lang.TranslationMap
+	SignPath                  string // path to the sign image
+	Experience                []Experience
+	CustomExperienceLabel     lang.TranslationMap
+	Education                 []Education
+	Language                  []Language
+	CustomMotivationTextLabel lang.TranslationMap
+	GeneralMotivationText     lang.TranslationMap // your general motivation text, this text can contains tex elements
+	Attachment                []string
 }

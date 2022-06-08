@@ -45,6 +45,7 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 		Hobbies:               lang.Join(application.Profile.Hobbies, ", "),
 		Interest:              lang.Join(application.Profile.Interest, ", "),
 		Language:              convertLanguage(application, lang),
+		CustomAboutMeLabel:    lang.String(application.Profile.CustomMotivationTextLabel),
 		AboutMe:               aboutMe,
 		CustomExperienceLabel: lang.String(application.Profile.CustomExperienceLabel),
 		Experience:            convertExperience(application, lang),
