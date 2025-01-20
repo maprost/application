@@ -1,0 +1,387 @@
+\documentclass[11pt]{article}
+\usepackage{xcolor}
+\usepackage[absolute,overlay]{textpos}
+\usepackage[left=1.6cm,top=0.0cm,right=1cm,bottom=0.65cm,nohead,nofoot]{geometry}
+\usepackage{graphicx}
+\usepackage{marvosym}
+\usepackage[
+	colorlinks=true,
+	urlcolor=blue,
+	linkcolor=blue,
+]{hyperref}
+\usepackage[ngerman]{babel}
+\usepackage{xhfill}
+\usepackage{fetamont}
+\usepackage[default,scale=0.95]{opensans}
+\usepackage[T1]{fontenc}
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric}
+\usepackage[utf8]{inputenc}
+\usepackage{ifthen}
+\usepackage{fancyhdr}
+
+
+\setlength{\parindent}{0pt} % Disable paragraph indentation
+
+\newcommand{\checkPar}[2]{%
+    \ifthenelse{\equal{#1}{}}{}{%
+        {#2}%
+
+        \smallskip
+
+    }%
+}
+
+\newcommand{\headerfont}{\Large\ffmfamily\bfseries}
+
+\newcommand{\timeLineHeader}[1]{ {%
+    \LARGE\ffmfamily\bfseries\textcolor{maincolor}{#1}}
+
+    \bigskip
+
+}
+
+\newcommand{\category}[1]{
+    \vspace{5mm}
+
+    {\headerfont #1 \xrfill[0.5ex]{1.5pt}[maincolor]}
+
+    \medskip
+
+}
+
+% company custom color
+\definecolor{maincolor}{HTML}{{"{"}}{{.MainColor}}}
+\definecolor{sidecolor}{HTML}{{"{"}}{{.SideColor}}}
+\definecolor{maingray}{HTML}{B9B9B9}
+
+% icons
+\newcommand{\projectIcon}{\includegraphics[width=4mm]{{print "{" $.Icon.Project "}"}} }
+\newcommand{\roleIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
+\newcommand{\techStackIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.TechStack "}"}} }
+\newcommand{\documentIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Document "}"}} }
+
+% Command for printing the contact information icons
+\newcommand{\icon}[1]{%
+    \tikz[baseline=(char.base)]{
+        \node[shape=circle,draw,inner sep=1pt, fill=maincolor,maincolor,text=white] (char) {#1};
+    }%
+}
+
+\newcommand{\backgroundColorForSideBar}{%
+    % color background for side bar
+    \begin{tikzpicture}[remember picture,overlay]
+        \node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (0cm,0.5cm){};
+    \end{tikzpicture}
+}
+
+\newcommand{\sideOneleftSideAction}{%
+    {{range .SideOneLeftSideAction}}
+        {{ if .Ratings }}
+            \category{{print "{" .Label "}"}}
+            \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
+                {{range .Ratings}}
+                    {{.Name}}
+                    &
+                    \begin{tikzpicture}
+                        \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
+                        \draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.3);
+                    \end{tikzpicture}
+                    \\[1ex]
+                {{end}}
+            \end{tabular}
+            \medskip
+
+            {{.OtherRatings}}
+        {{ end }}
+        {{ if .Languages }}
+            \category{{print "{" .Label "}"}}
+            \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+                {{range .Languages}}
+                    {{.Name}} & {{.Level}} \\
+                {{end}}
+            \end{tabular}
+        {{ end }}
+        {{ if .List }}
+            \category{{print "{" .Label "}"}}
+            {{.List}}
+        {{ end }}
+    {{end}}
+}
+
+\newcommand{\sideTwoleftSideAction}{%
+    {{range .SideTwoLeftSideAction}}
+        {{ if .Ratings }}
+            \category{{print "{" .Label "}"}}
+            \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
+                {{range .Ratings}}
+                    {{.Name}}
+                    &
+                    \begin{tikzpicture}
+                        \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
+                        \draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.3);
+                    \end{tikzpicture}
+                    \\[1ex]
+                {{end}}
+            \end{tabular}
+            \medskip
+
+            {{.OtherRatings}}
+        {{ end }}
+        {{ if .Languages }}
+            \category{{print "{" .Label "}"}}
+            \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+                {{range .Languages}}
+                    {{.Name}} & {{.Level}} \\
+                {{end}}
+            \end{tabular}
+        {{ end }}
+        {{ if .List }}
+            \category{{print "{" .Label "}"}}
+            {{.List}}
+        {{ end }}
+    {{end}}
+}
+
+% header/footer:
+\pagestyle{fancy} % Disable headers
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{}
+\rfoot{%
+    {{if $.HasProject}} \projectIcon{} {{$.Label.SomeProjects}} ~~~~ {{else}} % {{end}}
+    {{if $.HasRole}}\roleIcon{} {{$.Label.SomeRoles}} ~~~~ {{else}} % {{end}}
+    {{if $.HasTechStack}}\techStackIcon{} {{$.Label.UsedTechs}} {{else}} % {{end}}
+}
+
+\begin{document}
+    \normalfont
+
+    \setlength{\TPHorizModule}{1cm} % Left margin
+    \setlength{\TPVertModule}{1cm} % Top margin
+
+    \newlength\imagewidth
+    \newlength\imagescale
+    \pgfmathsetlength{\imagewidth}{5cm}
+    \pgfmathsetlength{\imagescale}{\imagewidth/600}
+    \newlength\indentLength
+    \newlength\outsidePageLength
+    \newlength\insidePageLength
+
+    %------------------------------------------------
+    %---- first page
+    %------------------------------------------------
+    \backgroundColorForSideBar
+    \begin{textblock}{5.1}(0.5, 0.2)
+        \raggedright
+
+        % profile picture
+        \begin{center}
+            \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+                \clip (600/2, 567/2) circle (567/2);
+                \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{{print "{" .Image "}"}}};
+            \end{tikzpicture}
+        \end{center}
+
+        % Name
+        {\Huge {{.Name}}}
+
+        \smallskip
+
+
+        % Title
+        {{.Title}}
+
+        \medskip
+
+
+        % contact info
+        \renewcommand{\arraystretch}{1.2}
+        \begin{tabular}{@{}p{0.5cm} @{\hskip 0.2cm}p{43mm}@{}}
+            \icon{\Mundus}  & {{.Nationality}}  \\
+            \icon{\Letter}  & {{.Location}}  \\
+            \icon{\Telefon} & {{.Phone}}    \\
+            \icon{\Email}   & {{.Email}}    \\[1ex]
+                            &
+            {{range .Websites}}
+                \href{{print "{" .Url "}" }}{\includegraphics[width=5mm]{{print "{" .Icon "}"}}}{{end}}\\
+        \end{tabular}
+
+        \sideOneleftSideAction
+
+    \end{textblock}
+    \begin{textblock}{14.5}(6.5, 0.5)
+         % config length
+        \pgfmathsetlength{\indentLength}{5mm}
+        \pgfmathsetlength{\outsidePageLength}{140mm}
+        \pgfmathsetlength{\insidePageLength}{135mm}
+
+        {{if (ne .AboutMe "") }}
+            \timeLineHeader{{print "{" .AboutMeLabel "}"}}
+            {{.AboutMe}}
+        {{end}}
+
+        \bigskip
+
+
+        {{if .SideOneExperience}}
+            \timeLineHeader{{print "{" .SideOneExperienceLabel "}"}}
+
+            \begin{minipage}{\indentLength}
+                ~
+            \end{minipage}
+            \begin{minipage}{\outsidePageLength}
+                {{range .SideOneExperience}}
+                    {\headerfont {{.Position}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+
+                    \smallskip
+
+                    \begin{minipage}{\indentLength}
+                        ~
+                    \end{minipage}
+                    \begin{minipage}{\insidePageLength}
+                        \checkPar{{print "{" .Company "}"}}{\scshape {{.Company}} ~ %
+                            {{range .DocumentLinks}}%
+                                \href{{print "{" . "}" }}{\documentIcon}%
+                            {{end}}%
+                        }
+
+                        \checkPar{{print "{" .Description "}"}}{{print "{" .Description "}"}}
+
+                        \checkPar{{print "{" .Project "}"}}{\projectIcon~ {{.Project }}}
+
+                        \checkPar{{print "{" .Role "}"}}{\roleIcon~ {{.Role }}}
+
+                        \checkPar{{print "{" .Tech "}"}}{\techStackIcon~ {{.Tech }}}
+
+                    \end{minipage} \\[1ex]
+                {{end}}
+            \end{minipage}
+        {{end}}
+
+        {{ if .SideOneEducation }}
+            \timeLineHeader{{print "{" .SideOneEducationLabel "}"}}
+
+            \begin{minipage}{\indentLength}
+            ~
+            \end{minipage}
+            \begin{minipage}{\outsidePageLength}
+                {{range .SideOneEducation}}
+                    {\headerfont {{.Graduation}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+
+                    \smallskip
+
+                    \begin{minipage}{\indentLength}
+                    ~
+                    \end{minipage}
+                    \begin{minipage}{\insidePageLength}
+                        \checkPar{{print "{" .Institute "}"}}{\scshape {{.Institute}} ~ %
+                            {{range .DocumentLinks}}%
+                                \href{{print "{" . "}" }}{\documentIcon}%
+                            {{end}}%
+                        }
+
+                        \checkPar{{print "{" .Focus "}"}}{{print "{" .Focus "}"}}
+
+                        \checkPar{{print "{" .FinalGrade "}"}}{ {{$.Label.FinalGrade}}: {{.FinalGrade}}}
+
+                    \end{minipage} \\[1ex]
+                {{end}}
+            \end{minipage}
+        {{end}}
+    \end{textblock}
+
+    %------------------------------------------------
+    %---- second page
+    %------------------------------------------------
+    {{ if .HasSideTwo }}
+        \newpage
+        \backgroundColorForSideBar
+        \begin{textblock}{5.1}(0.5, 0.2)
+            \medskip
+            \sideTwoleftSideAction
+
+        \end{textblock}
+        \begin{textblock}{14.5}(6.5, 0.5)
+            % config length
+            \pgfmathsetlength{\indentLength}{5mm}
+            \pgfmathsetlength{\outsidePageLength}{140mm}
+            \pgfmathsetlength{\insidePageLength}{135mm}
+
+            {{if .SideTwoExperience}}
+                \timeLineHeader{{print "{" .SideTwoExperienceLabel "}"}}
+
+                \begin{minipage}{\indentLength}
+                ~
+                \end{minipage}
+                \begin{minipage}{\outsidePageLength}
+                    {{range .SideTwoExperience}}
+                        {\headerfont {{.Position}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+
+                        \smallskip
+
+                        \begin{minipage}{\indentLength}
+                        ~
+                        \end{minipage}
+                        \begin{minipage}{\insidePageLength}
+                            \checkPar{{print "{" .Company "}"}}{\scshape {{.Company}} ~ %
+                                {{range .DocumentLinks}}%
+                                    \href{{print "{" . "}" }}{\documentIcon}%
+                                {{end}}%
+                            }
+
+                            \checkPar{{print "{" .Description "}"}}{{print "{" .Description "}"}}
+
+                            \checkPar{{print "{" .Project "}"}}{\projectIcon~ {{.Project }}}
+
+                            \checkPar{{print "{" .Role "}"}}{\roleIcon~ {{.Role }}}
+
+                            \checkPar{{print "{" .Tech "}"}}{\techStackIcon~ {{.Tech }}}
+
+                        \end{minipage} \\[1ex]
+                    {{end}}
+                \end{minipage}
+            {{end}}
+
+            {{ if .SideTwoEducation }}
+                \timeLineHeader{{print "{" .SideTwoEducationLabel "}"}}
+
+                \begin{minipage}{\indentLength}
+                ~
+                \end{minipage}
+                \begin{minipage}{\outsidePageLength}
+                    {{range .SideTwoEducation}}
+                        {\headerfont {{.Graduation}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+
+                        \smallskip
+
+                        \begin{minipage}{\indentLength}
+                        ~
+                        \end{minipage}
+                        \begin{minipage}{\insidePageLength}
+                            \checkPar{{print "{" .Institute "}"}}{\scshape {{.Institute}} ~ %
+                                {{range .DocumentLinks}}%
+                                    \href{{print "{" . "}" }}{\documentIcon}%
+                                {{end}}%
+                            }
+
+                            \checkPar{{print "{" .Focus "}"}}{{print "{" .Focus "}"}}
+
+                            \checkPar{{print "{" .FinalGrade "}"}}{ {{$.Label.FinalGrade}}: {{.FinalGrade}}}
+
+                        \end{minipage} \\[1ex]
+                    {{end}}
+                \end{minipage}
+            {{end}}
+
+        \end{textblock}
+    {{end}}
+    %------------------------------------------------
+    %---- attachments
+    %------------------------------------------------
+
+    {{range .Attachment}}
+        \newpage
+
+    {{end}}
+
+\end{document}

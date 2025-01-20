@@ -1,11 +1,11 @@
-package onepage_test
+package oneside_test
 
 import (
 	"github.com/maprost/application/generator/genmodel"
 )
 
 const (
-	SkillSleeping = genmodel.SkillID(iota)
+	SkillSleeping = genmodel.ID(iota)
 	SkillDrinkingCoffee
 	SkillWatchingYoutube
 	SkillChat
@@ -28,7 +28,7 @@ const (
 //			},
 //		},
 //		Company: genmodel.JobPosition{
-//			Skills: []genmodel.SkillID{SkillSleeping},
+//			Skills: []genmodel.ID{SkillSleeping},
 //		},
 //	}
 //
@@ -54,7 +54,7 @@ const (
 //			},
 //		},
 //		Company: genmodel.JobPosition{
-//			Skills: []genmodel.SkillID{
+//			Skills: []genmodel.ID{
 //				SkillSleeping,
 //				SkillDrinkingCoffee,
 //				SkillWatchingYoutube,
@@ -87,7 +87,7 @@ const (
 //			},
 //		},
 //		Company: genmodel.JobPosition{
-//			Skills: []genmodel.SkillID{
+//			Skills: []genmodel.ID{
 //				SkillSleeping,
 //			},
 //		},
@@ -138,7 +138,7 @@ const (
 //			},
 //		},
 //		Company: genmodel.JobPosition{
-//			Skills: []genmodel.SkillID{
+//			Skills: []genmodel.ID{
 //				SkillSleeping,
 //				SkillDrinkingCoffee,
 //			},

@@ -1,12 +1,12 @@
-package onepage_test
+package oneside_test
 
 import (
-	"github.com/maprost/assertion"
 	"testing"
+
+	"github.com/maprost/assertion"
 
 	"github.com/maprost/application/generator/internal/compiler"
 	"github.com/maprost/application/generator/internal/image"
-	"github.com/maprost/application/generator/internal/style/onepage"
 	"github.com/maprost/application/generator/internal/style/onepage/texmodel"
 	"github.com/maprost/application/generator/internal/test"
 )
@@ -110,7 +110,7 @@ func _TestViewManual(t *testing.T) {
 		},
 	}
 
-	path, mainFile, subFiles := onepage.Files()
+	path, mainFile, subFiles := oneside.Files()
 
 	err := compiler.CreateTexFile(indexData, path, mainFile, subFiles...)
 	assert.Nil(err)

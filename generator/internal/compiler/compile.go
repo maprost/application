@@ -1,9 +1,10 @@
 package compiler
 
 import (
-	"github.com/maprost/application/generator/internal/util"
 	"os"
 	"text/template"
+
+	"github.com/maprost/application/generator/internal/util"
 )
 
 func CreateTexFile(outputPath string, file string, data interface{}, path string, mainFile string, subFiles ...string) (err error) {

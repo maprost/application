@@ -1,8 +1,8 @@
-package onepage
+package oneside
 
 import (
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/internal/style/onepage/texmodel"
+	"github.com/maprost/application/generator/internal/style/oneside/texmodel"
 	"github.com/maprost/application/generator/internal/util"
 	"github.com/maprost/application/generator/lang"
 )
@@ -198,7 +198,7 @@ func hasTechStack(application *genmodel.Application) bool {
 }
 
 func convertLeftSideActions(application *genmodel.Application) []int {
-	list := application.Profile.LeftSideAction
+	list := application.Profile.LeftSideActionType
 	if len(list) == 0 {
 		return []int{
 			int(genmodel.TechSkill),

@@ -1,4 +1,4 @@
-package onepage
+package twoside
 
 import (
 	"path/filepath"

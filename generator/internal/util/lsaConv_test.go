@@ -1,24 +1,25 @@
 package util_test
 
 import (
+	"testing"
+
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/util"
 	"github.com/maprost/assertion"
-	"testing"
 )
 
 const (
-	skillOneID = genmodel.SkillID(iota)
+	skillOneID = genmodel.ID(iota)
 	skillTwoID
 	skillThreeID
 	skillFourID
 )
 
 var (
-	skillOne   = genmodel.Skill{Name: "one", Rating: 1}
-	skillTwo   = genmodel.Skill{Name: "two", Rating: 2}
-	skillThree = genmodel.Skill{Name: "three", Rating: 3}
-	skillFour  = genmodel.Skill{Name: "four", Rating: 4}
+	skillOne   = genmodel.LeftSideAction{Name: "one", Rating: 1}
+	skillTwo   = genmodel.LeftSideAction{Name: "two", Rating: 2}
+	skillThree = genmodel.LeftSideAction{Name: "three", Rating: 3}
+	skillFour  = genmodel.LeftSideAction{Name: "four", Rating: 4}
 )
 
 func TestCalculateProfessionalSkills_emptyInput(t *testing.T) {
@@ -39,7 +40,7 @@ func TestCalculateProfessionalSkills_normalInput(t *testing.T) {
 
 	application := genmodel.Application{
 		Profile: genmodel.Profile{
-			ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
+			ProfessionalSkills: map[genmodel.ID]genmodel.LeftSideAction{
 				skillOneID:   skillOne,
 				skillTwoID:   skillTwo,
 				skillThreeID: skillThree,
@@ -47,13 +48,13 @@ func TestCalculateProfessionalSkills_normalInput(t *testing.T) {
 			},
 		},
 		JobPosition: genmodel.JobPosition{
-			ProfessionalSkills: []genmodel.SkillID{skillOneID, skillTwoID, skillThreeID, skillFourID},
+			ProfessionalSkills: []genmodel.ID{skillOneID, skillTwoID, skillThreeID, skillFourID},
 		},
 	}
 
 	skills, err := util.CalculateProfessionalSkills(&application)
 	assert.Nil(err)
-	assert.Equal(skills, []genmodel.Skill{
+	assert.Equal(skills, []genmodel.LeftSideAction{
 		skillOne, skillTwo, skillThree, skillFour,
 	})
 }
@@ -63,7 +64,7 @@ func TestCalculateProfessionalSkills_normalInput_noFilter(t *testing.T) {
 
 	application := genmodel.Application{
 		Profile: genmodel.Profile{
-			ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
+			ProfessionalSkills: map[genmodel.ID]genmodel.LeftSideAction{
 				skillOneID:   skillOne,
 				skillTwoID:   skillTwo,
 				skillThreeID: skillThree,
@@ -77,7 +78,7 @@ func TestCalculateProfessionalSkills_normalInput_noFilter(t *testing.T) {
 	assert.Nil(err)
 
 	// ordering is up to the map
-	assert.Similar(skills, []genmodel.Skill{
+	assert.Similar(skills, []genmodel.LeftSideAction{
 		skillOne, skillTwo, skillThree, skillFour,
 	})
 }
@@ -87,7 +88,7 @@ func TestCalculateProfessionalSkills_normalInput_someFilter(t *testing.T) {
 
 	application := genmodel.Application{
 		Profile: genmodel.Profile{
-			ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
+			ProfessionalSkills: map[genmodel.ID]genmodel.LeftSideAction{
 				skillOneID:   skillOne,
 				skillTwoID:   skillTwo,
 				skillThreeID: skillThree,
@@ -95,13 +96,13 @@ func TestCalculateProfessionalSkills_normalInput_someFilter(t *testing.T) {
 			},
 		},
 		JobPosition: genmodel.JobPosition{
-			ProfessionalSkills: []genmodel.SkillID{skillTwoID, skillThreeID},
+			ProfessionalSkills: []genmodel.ID{skillTwoID, skillThreeID},
 		},
 	}
 
 	skills, err := util.CalculateProfessionalSkills(&application)
 	assert.Nil(err)
-	assert.Equal(skills, []genmodel.Skill{
+	assert.Equal(skills, []genmodel.LeftSideAction{
 		skillTwo, skillThree,
 	})
 }
@@ -111,14 +112,14 @@ func TestCalculateProfessionalSkills_normalInput_wrongFilter(t *testing.T) {
 
 	application := genmodel.Application{
 		Profile: genmodel.Profile{
-			ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
+			ProfessionalSkills: map[genmodel.ID]genmodel.LeftSideAction{
 				skillOneID:   skillOne,
 				skillTwoID:   skillTwo,
 				skillThreeID: skillThree,
 			},
 		},
 		JobPosition: genmodel.JobPosition{
-			ProfessionalSkills: []genmodel.SkillID{skillOneID, skillFourID},
+			ProfessionalSkills: []genmodel.ID{skillOneID, skillFourID},
 		},
 	}
 
@@ -144,7 +145,7 @@ func TestCalculateSoftSkills_normalInput(t *testing.T) {
 
 	application := genmodel.Application{
 		Profile: genmodel.Profile{
-			SoftSkills: map[genmodel.SkillID]genmodel.Skill{
+			SoftSkills: map[genmodel.ID]genmodel.LeftSideAction{
 				skillOneID:   skillOne,
 				skillTwoID:   skillTwo,
 				skillThreeID: skillThree,
@@ -152,13 +153,13 @@ func TestCalculateSoftSkills_normalInput(t *testing.T) {
 			},
 		},
 		JobPosition: genmodel.JobPosition{
-			SoftSkills: []genmodel.SkillID{skillOneID, skillTwoID, skillThreeID, skillFourID},
+			SoftSkills: []genmodel.ID{skillOneID, skillTwoID, skillThreeID, skillFourID},
 		},
 	}
 
 	skills, err := util.CalculateSoftSkills(&application)
 	assert.Nil(err)
-	assert.Equal(skills, []genmodel.Skill{
+	assert.Equal(skills, []genmodel.LeftSideAction{
 		skillOne, skillTwo, skillThree, skillFour,
 	})
 }
@@ -168,7 +169,7 @@ func TestCalculateSoftSkills_normalInput_noFilter(t *testing.T) {
 
 	application := genmodel.Application{
 		Profile: genmodel.Profile{
-			SoftSkills: map[genmodel.SkillID]genmodel.Skill{
+			SoftSkills: map[genmodel.ID]genmodel.LeftSideAction{
 				skillOneID:   skillOne,
 				skillTwoID:   skillTwo,
 				skillThreeID: skillThree,
@@ -182,7 +183,7 @@ func TestCalculateSoftSkills_normalInput_noFilter(t *testing.T) {
 	assert.Nil(err)
 
 	// ordering is up to the map
-	assert.Similar(skills, []genmodel.Skill{
+	assert.Similar(skills, []genmodel.LeftSideAction{
 		skillOne, skillTwo, skillThree, skillFour,
 	})
 }
@@ -192,7 +193,7 @@ func TestCalculateSoftSkills_normalInput_someFilter(t *testing.T) {
 
 	application := genmodel.Application{
 		Profile: genmodel.Profile{
-			SoftSkills: map[genmodel.SkillID]genmodel.Skill{
+			SoftSkills: map[genmodel.ID]genmodel.LeftSideAction{
 				skillOneID:   skillOne,
 				skillTwoID:   skillTwo,
 				skillThreeID: skillThree,
@@ -200,13 +201,13 @@ func TestCalculateSoftSkills_normalInput_someFilter(t *testing.T) {
 			},
 		},
 		JobPosition: genmodel.JobPosition{
-			SoftSkills: []genmodel.SkillID{skillTwoID, skillThreeID},
+			SoftSkills: []genmodel.ID{skillTwoID, skillThreeID},
 		},
 	}
 
 	skills, err := util.CalculateSoftSkills(&application)
 	assert.Nil(err)
-	assert.Equal(skills, []genmodel.Skill{
+	assert.Equal(skills, []genmodel.LeftSideAction{
 		skillTwo, skillThree,
 	})
 }
@@ -216,14 +217,14 @@ func TestCalculateSoftSkills_normalInput_wrongFilter(t *testing.T) {
 
 	application := genmodel.Application{
 		Profile: genmodel.Profile{
-			SoftSkills: map[genmodel.SkillID]genmodel.Skill{
+			SoftSkills: map[genmodel.ID]genmodel.LeftSideAction{
 				skillOneID:   skillOne,
 				skillTwoID:   skillTwo,
 				skillThreeID: skillThree,
 			},
 		},
 		JobPosition: genmodel.JobPosition{
-			SoftSkills: []genmodel.SkillID{skillOneID, skillFourID},
+			SoftSkills: []genmodel.ID{skillOneID, skillFourID},
 		},
 	}
 

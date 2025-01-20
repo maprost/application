@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	techSkill_Go = genmodel.SkillID(iota)
+	techSkill_Go = genmodel.ID(iota)
 	techSkill_Java
 	techSkill_Cpp
 	techSkill_Latex
@@ -27,7 +27,7 @@ const (
 )
 
 const (
-	softSkill_AnalyticalThinking = genmodel.SkillID(iota)
+	softSkill_AnalyticalThinking = genmodel.ID(iota)
 )
 
 func Profile() genmodel.Profile {
@@ -54,49 +54,48 @@ func Profile() genmodel.Profile {
 				lang.German:  "Deutschland",
 			},
 		},
-		LeftSideAction: []genmodel.LeftSideAction{
+		LeftSideActionType: []genmodel.LeftSideActionType{
+			genmodel.Languages,
 			genmodel.Hobbies,
-			//genmodel.SoftSkills,
-			//genmodel.SoftSkills,
+			genmodel.SoftSkills,
 			genmodel.Interests,
-			//genmodel.TechSkill,
-			//genmodel.Languages,
+			genmodel.TechSkill,
 		},
-		ProfessionalSkills: map[genmodel.SkillID]genmodel.Skill{
-			techSkill_Go:             {Name: lang.DefaultTranslation("Go"), Rating: 8},
-			techSkill_Java:           {Name: lang.DefaultTranslation("Java"), Rating: 9},
-			techSkill_SoftwareDesign: {Name: lang.DefaultTranslation("Software Design"), Rating: 9},
-			techSkill_DBDesign:       {Name: lang.DefaultTranslation("Database Design"), Rating: 8},
-			techSkill_Testing:        {Name: lang.DefaultTranslation("Testing"), Rating: 9},
-			techSkill_Latex:          {Name: lang.DefaultTranslation("\\LaTeX"), Rating: 7},
-			techSkill_Cpp:            {Name: lang.DefaultTranslation("C++"), Rating: 5},
-			techSkill_IntelliJ:       {Name: lang.DefaultTranslation("IntelliJ"), Rating: 6},
-			techSkill_Ubuntu:         {Name: lang.DefaultTranslation("Ubuntu"), Rating: 6},
-			techSkill_PostgreSQL:     {Name: lang.DefaultTranslation("PostgreSQL"), Rating: 6},
-			techSkill_Docker:         {Name: lang.DefaultTranslation("Docker"), Rating: 5},
-			techSkill_Git:            {Name: lang.DefaultTranslation("Git"), Rating: 5},
-			techSkill_Python:         {Name: lang.DefaultTranslation("Python"), Rating: 5},
-			techSkill_Bash:           {Name: lang.DefaultTranslation("Bash"), Rating: 5},
-			techSkill_HTML5:          {Name: lang.DefaultTranslation("HTML5, JS, CSS"), Rating: 4},
+		ProfessionalSkills: []genmodel.LeftSideAction{
+			{Name: lang.DefaultTranslation("Go"), Rating: 8},
+			{Id: techSkill_Java, Name: lang.DefaultTranslation("Java"), Rating: 9},
+			{Id: techSkill_SoftwareDesign, Name: lang.DefaultTranslation("Software Design"), Rating: 9},
+			{Id: techSkill_DBDesign, Name: lang.DefaultTranslation("Database Design"), Rating: 8},
+			{Id: techSkill_Testing, Name: lang.DefaultTranslation("Testing"), Rating: 9},
+			{Id: techSkill_Latex, Name: lang.DefaultTranslation("\\LaTeX"), Rating: 7},
+			{Id: techSkill_Cpp, Name: lang.DefaultTranslation("C++"), Rating: 5},
+			{Id: techSkill_IntelliJ, Name: lang.DefaultTranslation("IntelliJ"), Rating: 6},
+			{Id: techSkill_Ubuntu, Name: lang.DefaultTranslation("Ubuntu"), Rating: 6},
+			{Id: techSkill_PostgreSQL, Name: lang.DefaultTranslation("PostgreSQL"), Rating: 6},
+			{Id: techSkill_Docker, Name: lang.DefaultTranslation("Docker"), Rating: 5},
+			{Id: techSkill_Git, Name: lang.DefaultTranslation("Git"), Rating: 5},
+			{Id: techSkill_Python, Name: lang.DefaultTranslation("Python"), Rating: 5},
+			{Id: techSkill_Bash, Name: lang.DefaultTranslation("Bash"), Rating: 5},
+			{Id: techSkill_HTML5, Name: lang.DefaultTranslation("HTML5, JS, CSS"), Rating: 4},
 		},
-		SoftSkills: map[genmodel.SkillID]genmodel.Skill{
-			softSkill_AnalyticalThinking: {Name: lang.TranslationMap{lang.English: "Analytical Thinking", lang.German: "Analytisches Denken"}, Rating: 9},
+		SoftSkills: []genmodel.LeftSideAction{
+			{Id: softSkill_AnalyticalThinking, Name: lang.TranslationMap{lang.English: "Analytical Thinking", lang.German: "Analytisches Denken"}, Rating: 9},
 		},
 		CustomInterestLabel: map[lang.Language]string{
 			lang.German: "Interessen und Freizeit",
 		},
-		Interest: []lang.TranslationMap{
-			lang.DefaultTranslation("CleanCode"),
-			lang.DefaultTranslation("Design Pattern"),
-			lang.DefaultTranslation("Microservices"),
-			lang.DefaultTranslation(`
+		Interest: []genmodel.LeftSideAction{
+			{Name: lang.DefaultTranslation("CleanCode")},
+			{Name: lang.DefaultTranslation("Design Pattern")},
+			{Name: lang.DefaultTranslation("Microservices")},
+			{Name: lang.DefaultTranslation(`
 
 \medskip
 
-Blob`),
-			lang.DefaultTranslation("TDD"),
-			lang.DefaultTranslation("Backend development"),
-			lang.DefaultTranslation("Big Data"),
+Blob`)},
+			{Name: lang.DefaultTranslation("TDD")},
+			{Name: lang.DefaultTranslation("Backend development")},
+			{Name: lang.DefaultTranslation("Big Data")},
 		},
 		//Hobbies: []lang.TranslationMap{
 		//	{lang.English: "Boardgames", lang.German: "Brettspiele"},
@@ -114,8 +113,8 @@ Blob`),
 			},
 		},
 		GeneralMotivationText: lang.TranslationMap{
-			lang.English: "",
-			lang.German:  "",
+			lang.English: "I will.",
+			lang.German:  "Ich will.",
 		},
 		Experience: []genmodel.Experience{
 			{
@@ -125,7 +124,7 @@ Blob`),
 				Description: lang.TranslationMap{lang.English: "" +
 					"Part of the recruiting team since Oct. 2015.\n" +
 					"Product owner of a sub team from Jan. 2016 to Oct. 2016.",
-					lang.German: ""},
+					lang.German: "Recruiter, ProductOwner"},
 				TechStack: lang.DefaultTranslation("Java, Guice, GWT, MySQL, Hibernate, RESTful, Json, Docker, Go, \\LaTeX, Ubuntu, Bash, " +
 					"Python, Git, Scrum/Kanban, JIRA"),
 				DocumentLinks: []string{"http://google.de"},

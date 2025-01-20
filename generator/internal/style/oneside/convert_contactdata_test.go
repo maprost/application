@@ -1,4 +1,4 @@
-package onepage_test
+package oneside_test
 
 import (
 	"testing"

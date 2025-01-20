@@ -1,12 +1,12 @@
-package onepage_test
+package oneside_test
 
 import (
-	"github.com/maprost/assertion"
 	"testing"
+
+	"github.com/maprost/assertion"
 
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/image"
-	"github.com/maprost/application/generator/internal/style/onepage"
 	"github.com/maprost/application/generator/internal/style/onepage/texmodel"
 	"github.com/maprost/application/generator/internal/test"
 	"github.com/maprost/application/generator/internal/util"
@@ -20,7 +20,7 @@ func TestData_emptyInput(t *testing.T) {
 func assertApplication(t *testing.T, application genmodel.Application, expected texmodel.Index) {
 	assert := assertion.New(t)
 
-	data, err := onepage.Data(&application, lang.English)
+	data, err := oneside.Data(&application, lang.English)
 	assert.Nil(err)
 
 	texmodelData, ok := data.(texmodel.Index)

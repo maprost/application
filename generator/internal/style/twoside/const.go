@@ -1,4 +1,4 @@
-package onepage
+package twoside
 
 const (
 	maxProfessionalSkills = 5

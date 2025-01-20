@@ -2,20 +2,37 @@ package style
 
 import (
 	"errors"
+
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/internal/style/onepage"
+	"github.com/maprost/application/generator/internal/style/twoside"
 )
 
 type Style int
 
 const (
 	OneSide = Style(iota)
+	TwoSide
 )
 
 func (s Style) Data(application *genmodel.Application) (data interface{}, err error) {
 	switch s {
 	case OneSide:
-		return onepage.Data(application)
+		// convert oneSide into twoSide
+		oneSideStyle := application.JobPosition.OneSideStyle
+		application.JobPosition.TwoSideStyle = genmodel.TwoSideStyle{
+			Skills:                     oneSideStyle.Skills,
+			SideOneLeftSideActionTypes: oneSideStyle.LeftSideActions,
+			SideTwoLeftSideActionTypes: nil,
+			Experience:                 oneSideStyle.Experience,
+			SideOneExperienceSize:      len(application.Profile.Experience),
+			Education:                  oneSideStyle.Education,
+			SideOneEducationSize:       len(application.Profile.Education),
+		}
+		application.JobPosition.Style = TwoSide
+		return twoside.Data(application)
+
+	case TwoSide:
+		return twoside.Data(application)
 	}
 
 	err = errors.New("Style not found.")
@@ -25,7 +42,9 @@ func (s Style) Data(application *genmodel.Application) (data interface{}, err er
 func (s Style) Files() (path string, mainFile string, subFiles []string) {
 	switch s {
 	case OneSide:
-		return onepage.Files()
+		return twoside.Files()
+	case TwoSide:
+		return twoside.Files()
 	}
 	return
 }

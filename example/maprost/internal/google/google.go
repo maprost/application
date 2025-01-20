@@ -9,9 +9,16 @@ import (
 func Google() genmodel.JobPosition {
 	return genmodel.JobPosition{
 		MainColor: "4285F4",
-		Style:     style.OneSide,
-		Lang:      lang.German,
-		Company:   "Google",
+		Style:     style.TwoSide,
+		TwoSideStyle: genmodel.TwoSideStyle{
+			SideTwoLeftSideActionTypes: []genmodel.LeftSideActionType{
+				genmodel.SoftSkills,
+			},
+			//SideOneExperienceSize: 2,
+			SideOneEducationSize: 1,
+		},
+		Lang:    lang.German,
+		Company: "Google",
 		Address: genmodel.JobAddress{
 			Street:  "...",
 			Zip:     "...",
