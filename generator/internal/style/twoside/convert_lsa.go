@@ -85,15 +85,15 @@ func addLsa(data *texmodel.Index, app *genmodel.Application, lang lang.Language)
 	data.SideTwoLeftSideAction = conv(sideTwoLsa)
 }
 
-func convertProfSkills(application *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+func convertProfSkills(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
 	var res texmodel.LeftSideAction
 	res.Type = 1
-	res.Label = application.Profile.CustomProfessionalSkillLabel[lang]
+	res.Label = app.Profile.CustomProfessionalSkillLabel[lang]
 	if res.Label == "" {
 		res.Label = lang.TechSkills()
 	}
 
-	skills, action, err := util.CalculateProfessionalSkills(application, application.JobPosition.TwoSideStyle.Skills)
+	skills, action, err := util.CalculateProfessionalSkills(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	if err != nil {
 		return res, action, false, err
 	}
@@ -120,24 +120,24 @@ func convertProfSkills(application *genmodel.Application, lang lang.Language) (t
 }
 
 func convertSoftSkills(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
-	skills, action, err := util.CalculateSoftSkills(app, app.JobPosition.TwoSideStyle.Skills)
+	list, action, err := util.CalculateSoftSkills(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	customLabel := app.Profile.CustomSoftSkillLabel[lang]
 	defaultLabel := lang.SoftSkills()
-	return convertListSkill(skills, action, customLabel, defaultLabel, err, lang)
+	return convertListSkill(list, action, customLabel, defaultLabel, err, lang)
 }
 
 func convertInterests(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
-	skills, action, err := util.CalculateInterest(app, app.JobPosition.TwoSideStyle.Skills)
+	list, action, err := util.CalculateInterest(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	customLabel := app.Profile.CustomInterestLabel[lang]
 	defaultLabel := lang.Interests()
-	return convertListSkill(skills, action, customLabel, defaultLabel, err, lang)
+	return convertListSkill(list, action, customLabel, defaultLabel, err, lang)
 }
 
 func convertHobbies(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
-	skills, action, err := util.CalculateHobbies(app, app.JobPosition.TwoSideStyle.Skills)
+	list, action, err := util.CalculateHobbies(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	customLabel := app.Profile.CustomHobbiesLabel[lang]
 	defaultLabel := lang.Hobbies()
-	return convertListSkill(skills, action, customLabel, defaultLabel, err, lang)
+	return convertListSkill(list, action, customLabel, defaultLabel, err, lang)
 }
 
 func convertListSkill(skills []genmodel.LeftSideAction, action genmodel.LeftSideActionType, customLabel string, defaultLabel string, err error, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
@@ -162,12 +162,12 @@ func convertListSkill(skills []genmodel.LeftSideAction, action genmodel.LeftSide
 	return res, action, len(skills) > 0, nil
 }
 
-func convertLanguage(application *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
-	langs, action, err := util.CalculateLanguage(application, application.JobPosition.TwoSideStyle.Skills)
+func convertLanguage(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+	langs, action, err := util.CalculateLanguage(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 
 	var res texmodel.LeftSideAction
 	res.Type = 3
-	res.Label = application.Profile.CustomLanguageLabel[lang]
+	res.Label = app.Profile.CustomLanguageLabel[lang]
 	if res.Label == "" {
 		res.Label = lang.Languages()
 	}

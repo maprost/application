@@ -14,6 +14,7 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 		// config
 		MainColor: util.DefaultColor(app.JobPosition.MainColor),
 		SideColor: util.DefaultColor(app.JobPosition.SideColor),
+		Label:     lang,
 		Icon: texmodel.Icon{
 			Project:   util.ProjectIconPath,
 			Role:      util.RoleIconPath,
@@ -128,4 +129,13 @@ func customDefaultString(customMap lang.TranslationMap, lang lang.Language, def 
 		custom = def
 	}
 	return custom
+}
+
+func findId(checkId genmodel.ID, ids []genmodel.ID) bool {
+	for _, id := range ids {
+		if checkId == id {
+			return true
+		}
+	}
+	return false
 }

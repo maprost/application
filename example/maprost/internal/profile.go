@@ -9,7 +9,7 @@ import (
 )
 
 const (
-	techSkill_Go = genmodel.ID(iota)
+	TechSkill_Go = genmodel.ID(iota) + 1
 	techSkill_Java
 	techSkill_Cpp
 	techSkill_Latex
@@ -27,7 +27,23 @@ const (
 )
 
 const (
-	softSkill_AnalyticalThinking = genmodel.ID(iota)
+	softSkill_AnalyticalThinking = genmodel.ID(iota) + 1
+)
+
+const (
+	Exp_fitness = genmodel.ID(iota) + 1
+	Exp_solar
+	Exp_tutor
+)
+
+const (
+	Edu_Uni = genmodel.ID(iota) + 1
+	Edu_Comp
+)
+
+const (
+	Lang_De = genmodel.ID(iota) + 1
+	Lang_En
 )
 
 func Profile() genmodel.Profile {
@@ -62,7 +78,7 @@ func Profile() genmodel.Profile {
 			genmodel.TechSkill,
 		},
 		ProfessionalSkills: []genmodel.LeftSideAction{
-			{Name: lang.DefaultTranslation("Go"), Rating: 8},
+			{Id: TechSkill_Go, Name: lang.DefaultTranslation("Go"), Rating: 8},
 			{Id: techSkill_Java, Name: lang.DefaultTranslation("Java"), Rating: 9},
 			{Id: techSkill_SoftwareDesign, Name: lang.DefaultTranslation("Software Design"), Rating: 9},
 			{Id: techSkill_DBDesign, Name: lang.DefaultTranslation("Database Design"), Rating: 8},
@@ -104,10 +120,12 @@ Blob`)},
 		//},
 		Language: []genmodel.Language{
 			{
+				Id:    Lang_De,
 				Name:  lang.TranslationMap{lang.English: "German", lang.German: "Deutsch"},
 				Level: lang.TranslationMap{lang.English: "Native", lang.German: "Muttersprache"},
 			},
 			{
+				Id:    Lang_En,
 				Name:  lang.TranslationMap{lang.English: "English", lang.German: "Englisch"},
 				Level: lang.DefaultTranslation("B2"),
 			},
@@ -118,6 +136,7 @@ Blob`)},
 		},
 		Experience: []genmodel.Experience{
 			{
+				Id:          Exp_fitness,
 				Company:     "Fitness Company",
 				JobPosition: lang.DefaultTranslation("Java Backend Developer"),
 				StartTime:   "Jul. 2014",
@@ -130,6 +149,7 @@ Blob`)},
 				DocumentLinks: []string{"http://google.de"},
 			},
 			{
+				Id:          Exp_solar,
 				Company:     "Solar Company",
 				JobPosition: lang.DefaultTranslation("C++ Backend Developer"),
 				StartTime:   "Mar. 2011",
@@ -139,6 +159,7 @@ Blob`)},
 				TechStack: lang.DefaultTranslation("C++, cmake, Boost, PostgreSQL, XML, Bash, Python, OpenSuse, Valgrind, SVN, Mantis"),
 			},
 			{
+				Id:          Exp_tutor,
 				Company:     "German University",
 				JobPosition: lang.DefaultTranslation("Tutor"),
 				StartTime:   "Oct. 2008",
@@ -150,6 +171,7 @@ Blob`)},
 		},
 		Education: []genmodel.Education{
 			{
+				Id:         Edu_Uni,
 				Graduation: lang.DefaultTranslation("Diplom Informatiker"),
 				Institute:  "German University",
 				StartTime:  "Sep. 2005",
@@ -158,6 +180,7 @@ Blob`)},
 				FinalGrade: lang.DefaultTranslation("1.0"),
 			},
 			{
+				Id:         Edu_Comp,
 				Graduation: lang.DefaultTranslation("Fachinformatiker Systemintegration"),
 				Institute:  "Telecommunication Company",
 				StartTime:  "Sep. 2002",

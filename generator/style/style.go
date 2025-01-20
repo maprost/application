@@ -21,11 +21,14 @@ func (s Style) Data(application *genmodel.Application) (data interface{}, err er
 		oneSideStyle := application.JobPosition.OneSideStyle
 		application.JobPosition.TwoSideStyle = genmodel.TwoSideStyle{
 			Skills:                     oneSideStyle.Skills,
+			RemoveSkills:               oneSideStyle.RemoveSkills,
 			SideOneLeftSideActionTypes: oneSideStyle.LeftSideActions,
 			SideTwoLeftSideActionTypes: nil,
 			Experience:                 oneSideStyle.Experience,
+			RemoveExperience:           oneSideStyle.RemoveExperience,
 			SideOneExperienceSize:      len(application.Profile.Experience),
 			Education:                  oneSideStyle.Education,
+			RemoveEducation:            oneSideStyle.RemoveEducation,
 			SideOneEducationSize:       len(application.Profile.Education),
 		}
 		application.JobPosition.Style = TwoSide

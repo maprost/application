@@ -7,46 +7,70 @@ import (
 	"github.com/maprost/application/generator/genmodel"
 )
 
-func CalculateProfessionalSkills(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
-	return CalculateLsa(app.Profile.ProfessionalSkills, needed, genmodel.TechSkill)
+func CalculateProfessionalSkills(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID, remove map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
+	return CalculateLsa(app.Profile.ProfessionalSkills, needed, remove, genmodel.TechSkill)
 }
 
-func CalculateSoftSkills(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
-	return CalculateLsa(app.Profile.SoftSkills, needed, genmodel.SoftSkills)
+func CalculateSoftSkills(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID, remove map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
+	return CalculateLsa(app.Profile.SoftSkills, needed, remove, genmodel.SoftSkills)
 }
 
-func CalculateInterest(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
-	return CalculateLsa(app.Profile.Interest, needed, genmodel.Interests)
+func CalculateInterest(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID, remove map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
+	return CalculateLsa(app.Profile.Interest, needed, remove, genmodel.Interests)
 }
 
-func CalculateHobbies(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
-	return CalculateLsa(app.Profile.Hobbies, needed, genmodel.Hobbies)
+func CalculateHobbies(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID, remove map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
+	return CalculateLsa(app.Profile.Hobbies, needed, remove, genmodel.Hobbies)
 }
 
-func CalculateLsa(lsaList []genmodel.LeftSideAction, needed map[genmodel.LeftSideActionType][]genmodel.ID, action genmodel.LeftSideActionType) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
+func CalculateLsa(lsaList []genmodel.LeftSideAction, needed map[genmodel.LeftSideActionType][]genmodel.ID, remove map[genmodel.LeftSideActionType][]genmodel.ID, action genmodel.LeftSideActionType) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
 	var result []genmodel.LeftSideAction
 	neededLsa := needed[action]
-	if len(neededLsa) == 0 {
+	removeLsa := remove[action]
+	if len(neededLsa) == 0 && len(removeLsa) == 0 {
 		result = sortLsa(lsaList)
 		return result, action, nil
 	}
 
-	// collect all needed skills out of the map
-	for _, lsaId := range neededLsa {
-		var lsa genmodel.LeftSideAction
-		found := false
-		for _, s := range lsaList {
-			if s.Id == lsaId {
-				lsa = s
-				found = true
+	if len(neededLsa) > 0 {
+		// collect all needed skills out of the map
+		for _, lsaId := range neededLsa {
+			var lsa genmodel.LeftSideAction
+			found := false
+			for _, s := range lsaList {
+				if s.Id == lsaId {
+					lsa = s
+					found = true
+				}
+			}
+			if !found {
+				err := fmt.Errorf("can't find lsa Id '%v' in the map'%v'", lsaId, lsaList)
+				return nil, action, err
+			}
+			result = append(result, lsa)
+		}
+	} else {
+		result = sortLsa(lsaList)
+	}
+
+	if len(removeLsa) > 0 {
+		var newResult []genmodel.LeftSideAction
+		for _, lsa := range result {
+			canBeInsert := true
+			for _, r := range removeLsa {
+				if lsa.Id == r {
+					canBeInsert = false
+					break
+				}
+			}
+
+			if canBeInsert {
+				newResult = append(newResult, lsa)
 			}
 		}
-		if !found {
-			err := fmt.Errorf("can't find lsa Id '%v' in the map'%v'", lsaId, lsaList)
-			return nil, action, err
-		}
-		result = append(result, lsa)
+		result = newResult
 	}
+
 	return result, action, nil
 }
 
@@ -58,29 +82,54 @@ func sortLsa(skills []genmodel.LeftSideAction) []genmodel.LeftSideAction {
 	return skills
 }
 
-func CalculateLanguage(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.Language, genmodel.LeftSideActionType, error) {
+func CalculateLanguage(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID, remove map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.Language, genmodel.LeftSideActionType, error) {
+	var result []genmodel.Language
 	action := genmodel.Languages
 	neededLanguages := needed[action]
-	if len(neededLanguages) == 0 {
+	removeLanguages := remove[action]
+	if len(neededLanguages) == 0 && len(removeLanguages) == 0 {
 		return app.Profile.Language, action, nil
 	}
 
-	// collect all needed skills out of the map
-	var result []genmodel.Language
-	for _, langId := range neededLanguages {
-		var lang genmodel.Language
-		found := false
-		for _, l := range app.Profile.Language {
-			if l.Id == langId {
-				lang = l
-				found = true
+	if len(neededLanguages) > 0 {
+		// collect all needed skills out of the map
+
+		for _, langId := range neededLanguages {
+			var lang genmodel.Language
+			found := false
+			for _, l := range app.Profile.Language {
+				if l.Id == langId {
+					lang = l
+					found = true
+				}
+			}
+			if !found {
+				err := fmt.Errorf("can't find lang Id '%v' in the list'%v'", langId, app.Profile.Language)
+				return nil, action, err
+			}
+			result = append(result, lang)
+		}
+	} else {
+		result = app.Profile.Language
+	}
+
+	if len(removeLanguages) > 0 {
+		var newResult []genmodel.Language
+		for _, lsa := range result {
+			canBeInsert := true
+			for _, r := range removeLanguages {
+				if lsa.Id == r {
+					canBeInsert = false
+					break
+				}
+			}
+
+			if canBeInsert {
+				newResult = append(newResult, lsa)
 			}
 		}
-		if !found {
-			err := fmt.Errorf("can't find lang Id '%v' in the list'%v'", langId, app.Profile.Language)
-			return nil, action, err
-		}
-		result = append(result, lang)
+		result = newResult
 	}
+
 	return result, action, nil
 }

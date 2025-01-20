@@ -13,16 +13,12 @@ func addExperiences(data *texmodel.Index, app *genmodel.Application, lang lang.L
 	var sideTwoExp []texmodel.Experience
 	for i, exp := range app.Profile.Experience {
 		if len(style.Experience) > 0 {
-			found := false
-			for _, eId := range style.Experience {
-				if exp.Id == eId {
-					found = true
-					break
-				}
-			}
-			if !found {
+			if !findId(exp.Id, style.Experience) {
 				continue
 			}
+		}
+		if findId(exp.Id, style.RemoveExperience) {
+			continue
 		}
 
 		timeRange := convertTime(exp.StartTime, exp.EndTime, lang)
@@ -79,16 +75,12 @@ func addEducation(data *texmodel.Index, app *genmodel.Application, lang lang.Lan
 
 	for _, edu := range app.Profile.Education {
 		if len(style.Education) > 0 {
-			found := false
-			for _, eId := range style.Education {
-				if edu.Id == eId {
-					found = true
-					break
-				}
-			}
-			if !found {
+			if !findId(edu.Id, style.Education) {
 				continue
 			}
+		}
+		if findId(edu.Id, style.RemoveEducation) {
+			continue
 		}
 
 		expRes := texmodel.Education{
