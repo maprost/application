@@ -26,6 +26,7 @@ func Google() genmodel.JobPosition {
 			//RemoveExperience: []genmodel.ID{internal.Exp_tutor},
 			//SideOneExperienceSize: 2,
 			SideOneEducationSize: 1,
+			ShowExperienceParts:  1,
 		},
 		Lang:    lang.German,
 		Company: "Google",

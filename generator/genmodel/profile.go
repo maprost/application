@@ -50,32 +50,32 @@ type ExperiencePart int
 
 const (
 	ExperiencePart_description = ExperiencePart(iota) + 1
-	ExperiencePart_description2
 	ExperiencePart_jobPosition
-	ExperiencePart_jobPosition2
 	ExperiencePart_project
-	ExperiencePart_project2
 	ExperiencePart_role
-	ExperiencePart_role2
 	ExperiencePart_techStack
-	ExperiencePart_techStack2
 )
 
 type Experience struct {
 	Id               ID
 	JobPosition      lang.TranslationMap
 	JobPosition2     lang.TranslationMap
+	JobPosition3     lang.TranslationMap
 	Company          string
 	StartTime        string
 	EndTime          string
 	Description      lang.TranslationMap
 	Description2     lang.TranslationMap
+	Description3     lang.TranslationMap
 	Project          lang.TranslationMap
 	Project2         lang.TranslationMap
+	Project3         lang.TranslationMap
 	Role             lang.TranslationMap
 	Role2            lang.TranslationMap
+	Role3            lang.TranslationMap
 	TechStack        lang.TranslationMap
 	TechStack2       lang.TranslationMap
+	TechStack3       lang.TranslationMap
 	FutureExperience bool
 	DocumentLinks    []string
 }

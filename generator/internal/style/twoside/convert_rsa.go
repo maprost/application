@@ -9,9 +9,20 @@ import (
 func addExperiences(data *texmodel.Index, app *genmodel.Application, local lang.Language) {
 	style := app.JobPosition.TwoSideStyle
 
-	//convTransLang := func(tm ...lang.TranslationMap) {
-	//
-	//}
+	convTransLang := func(typ genmodel.ExperiencePart, tm ...lang.TranslationMap) string {
+		for _, r := range style.RemoveExperiencePart {
+			if r == typ {
+				return ""
+			}
+		}
+		var idx int
+		if i, ok := style.ShowExperiencePart[typ]; ok {
+			idx = i - 1
+		} else {
+			idx = style.ShowExperienceParts - 1
+		}
+		return local.String(tm[idx])
+	}
 
 	var sideOneExp []texmodel.Experience
 	var sideTwoExp []texmodel.Experience
@@ -31,12 +42,12 @@ func addExperiences(data *texmodel.Index, app *genmodel.Application, local lang.
 		}
 
 		expRes := texmodel.Experience{
-			Position:      local.String(exp.JobPosition),
-			Description:   local.String(exp.Description),
-			Project:       local.String(exp.Project),
-			Role:          local.String(exp.Role),
+			Position:      convTransLang(genmodel.ExperiencePart_jobPosition, exp.JobPosition, exp.JobPosition2, exp.JobPosition3),
+			Description:   convTransLang(genmodel.ExperiencePart_description, exp.Description, exp.Description2, exp.Description3),
+			Project:       convTransLang(genmodel.ExperiencePart_project, exp.Project, exp.Project2, exp.Project3),
+			Role:          convTransLang(genmodel.ExperiencePart_role, exp.Role, exp.Role2, exp.Role3),
 			Company:       exp.Company,
-			Tech:          local.String(exp.TechStack),
+			Tech:          convTransLang(genmodel.ExperiencePart_techStack, exp.TechStack, exp.TechStack2, exp.TechStack3),
 			Time:          timeRange,
 			DocumentLinks: exp.DocumentLinks,
 		}

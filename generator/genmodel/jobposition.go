@@ -32,14 +32,16 @@ type Style interface {
 }
 
 type OneSideStyle struct {
-	Skills              map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
-	RemoveSkills        map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
-	LeftSideActionTypes LeftSideActionTypes
-	Experience          []ID
-	RemoveExperience    []ID
-	ShowExperienceParts []ExperiencePart
-	Education           []ID
-	RemoveEducation     []ID
+	Skills               map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
+	RemoveSkills         map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
+	LeftSideActionTypes  LeftSideActionTypes
+	Experience           []ID
+	RemoveExperience     []ID
+	ShowExperienceParts  int                    // if 0, it's default 1
+	ShowExperiencePart   map[ExperiencePart]int // [1,2,3], if not in, it's default 1
+	RemoveExperiencePart []ExperiencePart
+	Education            []ID
+	RemoveEducation      []ID
 }
 
 type TwoSideStyle struct {
@@ -49,7 +51,9 @@ type TwoSideStyle struct {
 	SideTwoLeftSideActionTypes LeftSideActionTypes
 	Experience                 []ID
 	RemoveExperience           []ID
-	ShowExperienceParts        []ExperiencePart
+	ShowExperienceParts        int                    // if 0, it's default 1
+	ShowExperiencePart         map[ExperiencePart]int // [1,2,3], if not in, it's default 1
+	RemoveExperiencePart       []ExperiencePart
 	SideOneExperienceSize      int // rest is on side two
 	Education                  []ID
 	RemoveEducation            []ID
