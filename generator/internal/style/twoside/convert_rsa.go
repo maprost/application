@@ -21,7 +21,12 @@ func addExperiences(data *texmodel.Index, app *genmodel.Application, local lang.
 		} else {
 			idx = style.ShowExperienceParts - 1
 		}
-		return local.String(tm[idx])
+
+		t := tm[idx]
+		if len(t) == 0 {
+			return ""
+		}
+		return local.String(t)
 	}
 
 	var sideOneExp []texmodel.Experience
