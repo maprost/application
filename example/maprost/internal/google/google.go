@@ -27,6 +27,7 @@ func Google() genmodel.JobPosition {
 			//SideOneExperienceSize: 2,
 			SideOneEducationSize: 1,
 			ShowExperienceParts:  1,
+			RemoveExperiencePart: []genmodel.ExperiencePart{genmodel.ExperiencePart_techStack},
 		},
 		Lang:    lang.German,
 		Company: "Google",
