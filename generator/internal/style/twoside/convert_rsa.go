@@ -18,8 +18,10 @@ func addExperiences(data *texmodel.Index, app *genmodel.Application, local lang.
 		var idx int
 		if i, ok := style.ShowExperiencePart[typ]; ok {
 			idx = i - 1
-		} else {
+		} else if style.ShowExperienceParts > 0 {
 			idx = style.ShowExperienceParts - 1
+		} else {
+			idx = 0
 		}
 
 		t := tm[idx]
