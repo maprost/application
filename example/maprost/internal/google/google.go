@@ -43,5 +43,7 @@ func Google() genmodel.JobPosition {
 			StartTime:   "Jan. 2018",
 			Description: "",
 		},
+		OutputPath: genmodel.OutputPath(),
+		FileName:   "",
 	}
 }

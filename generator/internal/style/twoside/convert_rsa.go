@@ -6,8 +6,12 @@ import (
 	"github.com/maprost/application/generator/lang"
 )
 
-func addExperiences(data *texmodel.Index, app *genmodel.Application, lang lang.Language) {
+func addExperiences(data *texmodel.Index, app *genmodel.Application, local lang.Language) {
 	style := app.JobPosition.TwoSideStyle
+
+	//convTransLang := func(tm ...lang.TranslationMap) {
+	//
+	//}
 
 	var sideOneExp []texmodel.Experience
 	var sideTwoExp []texmodel.Experience
@@ -21,18 +25,18 @@ func addExperiences(data *texmodel.Index, app *genmodel.Application, lang lang.L
 			continue
 		}
 
-		timeRange := convertTime(exp.StartTime, exp.EndTime, lang)
+		timeRange := convertTime(exp.StartTime, exp.EndTime, local)
 		if i == 0 && exp.FutureExperience {
-			timeRange = lang.PossibleAt() + "~~" + exp.StartTime
+			timeRange = local.PossibleAt() + "~~" + exp.StartTime
 		}
 
 		expRes := texmodel.Experience{
-			Position:      lang.String(exp.JobPosition),
-			Description:   lang.String(exp.Description),
-			Project:       lang.String(exp.Project),
-			Role:          lang.String(exp.Role),
+			Position:      local.String(exp.JobPosition),
+			Description:   local.String(exp.Description),
+			Project:       local.String(exp.Project),
+			Role:          local.String(exp.Role),
 			Company:       exp.Company,
-			Tech:          lang.String(exp.TechStack),
+			Tech:          local.String(exp.TechStack),
 			Time:          timeRange,
 			DocumentLinks: exp.DocumentLinks,
 		}
@@ -51,7 +55,7 @@ func addExperiences(data *texmodel.Index, app *genmodel.Application, lang lang.L
 	data.SideOneExperience = sideOneExp
 	data.SideTwoExperience = sideTwoExp
 
-	label := customDefaultString(app.Profile.CustomExperienceLabel, lang, lang.Experience())
+	label := customDefaultString(app.Profile.CustomExperienceLabel, local, local.Experience())
 	if len(sideOneExp) > 0 {
 		data.SideOneExperienceLabel = label
 	} else if len(sideTwoExp) > 0 {

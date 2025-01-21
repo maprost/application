@@ -1,6 +1,7 @@
 package compiler
 
 import (
+	"fmt"
 	"os"
 	"text/template"
 
@@ -8,7 +9,14 @@ import (
 )
 
 func CreateTexFile(outputPath string, file string, data interface{}, path string, mainFile string, subFiles ...string) (err error) {
-	indexFile, err := template.ParseFiles(path + mainFile)
+	indexPath := path + mainFile
+	c, err := os.ReadFile(indexPath)
+	if err != nil {
+		return err
+	}
+	fmt.Println(string(c))
+
+	indexFile, err := template.ParseFiles(indexPath)
 	if err != nil {
 		return
 	}

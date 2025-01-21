@@ -22,10 +22,11 @@ func (s Style) Data(application *genmodel.Application) (data interface{}, err er
 		application.JobPosition.TwoSideStyle = genmodel.TwoSideStyle{
 			Skills:                     oneSideStyle.Skills,
 			RemoveSkills:               oneSideStyle.RemoveSkills,
-			SideOneLeftSideActionTypes: oneSideStyle.LeftSideActions,
+			SideOneLeftSideActionTypes: oneSideStyle.LeftSideActionTypes,
 			SideTwoLeftSideActionTypes: nil,
 			Experience:                 oneSideStyle.Experience,
 			RemoveExperience:           oneSideStyle.RemoveExperience,
+			ShowExperienceParts:        oneSideStyle.ShowExperienceParts,
 			SideOneExperienceSize:      len(application.Profile.Experience),
 			Education:                  oneSideStyle.Education,
 			RemoveEducation:            oneSideStyle.RemoveEducation,

@@ -1,6 +1,10 @@
 package genmodel
 
 import (
+	"path"
+	"runtime"
+	"strings"
+
 	"github.com/maprost/application/generator/lang"
 )
 
@@ -28,13 +32,14 @@ type Style interface {
 }
 
 type OneSideStyle struct {
-	Skills           map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
-	RemoveSkills     map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
-	LeftSideActions  LeftSideActionTypes
-	Experience       []ID
-	RemoveExperience []ID
-	Education        []ID
-	RemoveEducation  []ID
+	Skills              map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
+	RemoveSkills        map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
+	LeftSideActionTypes LeftSideActionTypes
+	Experience          []ID
+	RemoveExperience    []ID
+	ShowExperienceParts []ExperiencePart
+	Education           []ID
+	RemoveEducation     []ID
 }
 
 type TwoSideStyle struct {
@@ -44,19 +49,22 @@ type TwoSideStyle struct {
 	SideTwoLeftSideActionTypes LeftSideActionTypes
 	Experience                 []ID
 	RemoveExperience           []ID
+	ShowExperienceParts        []ExperiencePart
 	SideOneExperienceSize      int // rest is on side two
 	Education                  []ID
 	RemoveEducation            []ID
-	SideOneEducationSize       int // if SideOneExperienceSize is set,
+	SideOneEducationSize       int // if SideOneExperienceSize is set, SideOneEducationSize is 0
 }
 
 type JobPosition struct {
-	MainColor string // please use the HTML color signature: 800000, if the field is empty: standard color will used
-	SideColor string
-	Lang      lang.Language
-	Company   string
-	Address   JobAddress
-	Title     string // of the job
+	MainColor  string // please use the HTML color signature: 800000, if the field is empty: standard color will used
+	SideColor  string
+	Lang       lang.Language
+	Company    string
+	Address    JobAddress
+	Title      string // of the job
+	FileName   string // default is 'application'
+	OutputPath string // will overwrite build(outputPath)
 
 	// customize your profile
 	MotivationText   string           //  your job specific motivation text, this text can contains tex elements
@@ -67,4 +75,13 @@ type JobPosition struct {
 	Style        Style
 	OneSideStyle OneSideStyle
 	TwoSideStyle TwoSideStyle
+}
+
+func OutputPath() string {
+	_, file, _, _ := runtime.Caller(1)
+	p := path.Dir(file)
+	if !strings.HasSuffix(p, "/") {
+		p += "/"
+	}
+	return p
 }

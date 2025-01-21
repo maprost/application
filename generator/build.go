@@ -1,9 +1,6 @@
 package generator
 
 import (
-	"strings"
-	"unicode"
-
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/compiler"
 	"github.com/maprost/application/generator/internal/util"
@@ -33,19 +30,17 @@ func generalConvert(application *genmodel.Application) {
 }
 
 func generateOutput(outputPath string, application *genmodel.Application) (path string, file string) {
-	// extract first word of company
-
-	company := strings.TrimSpace(application.JobPosition.Company)
-	index := 0
-	for i, r := range application.JobPosition.Company {
-		if unicode.IsLetter(r) || unicode.IsDigit(r) {
-			index = i
-		} else {
-			break
-		}
+	path = application.JobPosition.OutputPath
+	if path == "" {
+		path = outputPath
 	}
 
-	return outputPath + "/" + strings.ToLower(company[:index+1]), "application"
+	file = application.JobPosition.FileName
+	if file == "" {
+		file = "application"
+	}
+
+	return path, file
 }
 
 func build(application genmodel.Application, outputPath string, file string) (err error) {
