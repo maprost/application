@@ -121,7 +121,7 @@ func addEducation(data *texmodel.Index, app *genmodel.Application, lang lang.Lan
 				sideTwoEdu = append(sideTwoEdu, expRes)
 			}
 		} else {
-			appendSideOne(expRes)
+			sideTwoEdu = append(sideTwoEdu, expRes)
 		}
 	}
 

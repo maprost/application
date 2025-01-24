@@ -22,10 +22,10 @@ func Google() genmodel.JobPosition {
 			//Education: []genmodel.ID{
 			//	internal.Edu_Comp,
 			//},
-			RemoveEducation: []genmodel.ID{internal.Edu_Uni},
+			//RemoveEducation: []genmodel.ID{internal.Edu_Uni},
 			//RemoveExperience: []genmodel.ID{internal.Exp_tutor},
 			//SideOneExperienceSize: 2,
-			SideOneEducationSize: 1,
+			//SideOneEducationSize: 1,
 			ShowExperienceParts:  1,
 			RemoveExperiencePart: []genmodel.ExperiencePart{genmodel.ExperiencePart_techStack},
 		},
