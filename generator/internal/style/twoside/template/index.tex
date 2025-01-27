@@ -19,6 +19,8 @@
 \usepackage{framed}
 \usepackage{mdframed}
 \usepackage{enumitem}
+%\usepackage{wsuipa}
+\usepackage{setspace}
 
 \usepackage[
     left = \Large \flqq{},%
@@ -104,6 +106,12 @@
 
 \newcommand{\linerole}[1]{\checkPar{#1}{\roleIcon~ #1}}
 
+%\newcommand{\linequit}[1]{\checkPar{#1}{\smallskip \begin{spacing}{0.5} \color{black} \Large¬\footnotesize~\textit{#1}\normalsize \end{spacing}}}
+\newcommand{\linequit}[1]{\checkPar{#1}{\smallskip \begin{spacing}{0.5} \color{black} \Large¬\footnotesize~#1\normalsize \end{spacing}}}
+%\newcommand{\linequit}[1]{\checkPar{#1}{\smallskip \begin{spacing}{0.5} \color{black} \Large¬\normalsize~#1\normalsize \end{spacing}}}
+%\newcommand{\linequit}[1]{\checkPar{#1}{\smallskip \begin{spacing}{0.5} \color{darkgray} \Large¬\footnotesize~#1\normalsize \end{spacing}}}
+%\newcommand{\linequit}[1]{\checkPar{#1}{\color{gray} ¬\small~ \textit{#1}\normalsize}}
+
 \newcommand{\linetech}[1]{\checkPar{#1}{\techStackIcon~ #1}
 }
 
@@ -135,6 +143,7 @@
                 \lineproject{{print "{" .Project "}"}}
                 \linerole{{print "{" .Role "}"}}
                 \linetech{{print "{" .Tech "}"}}
+                \linequit{{print "{" .QuitReason "}"}}
             \end{minipage} \\[1ex]
         {{end}}
         \else
@@ -149,6 +158,7 @@
                 \lineproject{{print "{" .Project "}"}}
                 \linerole{{print "{" .Role "}"}}
                 \linetech{{print "{" .Tech "}"}}
+                \linequit{{print "{" .QuitReason "}"}}
             \end{minipage} \\[1ex]
         {{end}}
         \fi
@@ -178,6 +188,7 @@
                 \linefocus{{print "{" .Institute "}"}}
                 \linefocus{{print "{" .Focus "}"}}
                 \linefinalgrade{{print "{" .FinalGrade "}"}}
+                \linequit{{print "{" .QuitReason "}"}}
             \end{minipage} \\[1ex]
         {{end}}
         \else
@@ -190,6 +201,7 @@
                 \linefocus{{print "{" .Institute "}"}}
                 \linefocus{{print "{" .Focus "}"}}
                 \linefinalgrade{{print "{" .FinalGrade "}"}}
+                \linequit{{print "{" .QuitReason "}"}}
             \end{minipage} \\[1ex]
         {{end}}
         \fi
@@ -284,6 +296,7 @@
 % icons
 \newcommand{\projectIcon}{\includegraphics[width=4mm]{{print "{" $.Icon.Project "}"}} }
 \newcommand{\roleIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
+\newcommand{\quitIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
 \newcommand{\techStackIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.TechStack "}"}} }
 \newcommand{\documentIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Document "}"}}}
 

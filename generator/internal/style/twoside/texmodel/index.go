@@ -55,6 +55,7 @@ type Experience struct {
 	Company       string
 	Position      string
 	Time          string
+	QuitReason    string
 	Description   string
 	Project       string // please add here your pet projects
 	Role          string // please add here more roles you did
@@ -67,6 +68,7 @@ type Education struct {
 	FinalGrade    string
 	Institute     string
 	Time          string
+	QuitReason    string
 	Focus         string
 	DocumentLinks []string
 }

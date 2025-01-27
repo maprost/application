@@ -57,6 +57,7 @@ func addExperiences(data *texmodel.Index, app *genmodel.Application, local lang.
 			Company:       exp.Company,
 			Tech:          convTransLang(genmodel.ExperiencePart_techStack, exp.TechStack, exp.TechStack2, exp.TechStack3),
 			Time:          timeRange,
+			QuitReason:    local.String(exp.QuitReason),
 			DocumentLinks: exp.DocumentLinks,
 		}
 
@@ -109,6 +110,7 @@ func addEducation(data *texmodel.Index, app *genmodel.Application, lang lang.Lan
 		expRes := texmodel.Education{
 			Graduation:    lang.String(edu.Graduation),
 			FinalGrade:    lang.String(edu.FinalGrade),
+			QuitReason:    lang.String(edu.QuitReason),
 			Institute:     edu.Institute,
 			Focus:         lang.String(edu.Focus),
 			Time:          convertTime(edu.StartTime, edu.EndTime, lang),

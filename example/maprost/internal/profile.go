@@ -233,6 +233,7 @@ func Profile() genmodel.Profile {
 				Focus:         lang.DefaultTranslation("software engineering, compiler construction, database design"),
 				FinalGrade:    lang.DefaultTranslation("1.0"),
 				DocumentLinks: []string{"http://google.de"},
+				QuitReason:    lang.DefaultTranslation("für den Ausbau der Selbstständigkeit auf eigenen Wunsch beendet"),
 			},
 			{
 				Id:            Edu_Comp,
@@ -242,6 +243,7 @@ func Profile() genmodel.Profile {
 				EndTime:       "Jan. 2005",
 				Focus:         lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
 				DocumentLinks: []string{"http://google.de", "http://ecosia.de"},
+				QuitReason:    lang.DefaultTranslation("für den Ausbau der Selbstständigkeit auf eigenen Wunsch beendet für den Ausbau der Selbstständigkeit auf eigenen Wunsch beendet"),
 			},
 		},
 		Publication: []genmodel.Publication{

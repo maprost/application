@@ -72,6 +72,7 @@ type Experience struct {
 	Company          string
 	StartTime        string
 	EndTime          string
+	QuitReason       lang.TranslationMap
 	Description      lang.TranslationMap
 	Description2     lang.TranslationMap
 	Description3     lang.TranslationMap
@@ -94,6 +95,7 @@ type Education struct {
 	Institute     string
 	StartTime     string
 	EndTime       string
+	QuitReason    lang.TranslationMap
 	Focus         lang.TranslationMap
 	FinalGrade    lang.TranslationMap
 	DocumentLinks []string

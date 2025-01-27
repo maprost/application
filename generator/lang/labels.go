@@ -126,6 +126,15 @@ func (l Language) FinalGrade() string {
 	}
 }
 
+func (l Language) QuitReason() string {
+	switch l {
+	case German:
+		return ""
+	default:
+		return ""
+	}
+}
+
 func (l Language) Experience() string {
 	switch l {
 	case German:
