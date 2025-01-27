@@ -42,6 +42,27 @@ const (
 )
 
 const (
+	Pub_Calliope = genmodel.ID(iota) + 1
+	Pub_Machine
+)
+
+const (
+	Awa_Fami = genmodel.ID(iota) + 1
+	Awa_Mio
+)
+
+const (
+	Time_1632 = genmodel.ID(iota) + 1
+	Time_2432
+)
+
+const (
+	Money_36for24 = genmodel.ID(iota) + 1
+	Money_48for32
+	Money_60for40
+)
+
+const (
 	Lang_De = genmodel.ID(iota) + 1
 	Lang_En
 )
@@ -59,6 +80,22 @@ func Profile() genmodel.Profile {
 			lang.English: "german",
 			lang.German:  "deutsch",
 		},
+		GeneralMyMotivationText: lang.TranslationMap{
+			lang.English: "GeneralMyMotivationText",
+			lang.German:  "GeneralMyMotivationText",
+		},
+		CustomMainQuestionTextLabel: lang.TranslationMap{
+			lang.English: "xxx",
+			lang.German:  "xxx",
+		},
+		GeneralMainQuestionText: lang.TranslationMap{
+			lang.English: "GeneralMainQuestionText",
+			lang.German:  "GeneralMainQuestionText",
+		},
+		//CustomMyMotivationTextLabel: lang.TranslationMap{
+		//	lang.English: "CustomMyMotivationTextLabel",
+		//	lang.German:  "CustomMyMotivationTextLabel",
+		//},
 		Phone:    "N/A",
 		Websites: []string{"https://github.com/maprost"},
 		Address: genmodel.ProfileAddress{
@@ -76,7 +113,20 @@ func Profile() genmodel.Profile {
 			genmodel.SoftSkills,
 			genmodel.Interests,
 			genmodel.TechSkill,
+			genmodel.TimeAmount,
+			genmodel.MoneyAmount,
 		},
+		TimeAmount: []genmodel.LeftSideAction{
+			{Id: Time_1632, Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 16, Max: 32},
+			{Id: Time_2432, Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 24, Max: 32},
+			//{Name: lang.TranslationMap{lang.English: "negotiable wish 2", lang.German: "vehandelbarer Wunsch 2"}, Min: 6, Max: 32},
+		},
+		MoneyAmount: []genmodel.LeftSideAction{
+			{Id: Money_36for24, Name: lang.TranslationMap{lang.English: "for 24h", lang.German: "für 24h"}, SingleLabel: lang.TranslationMap{lang.English: "36-42T€", lang.German: "36-42T€"}, Min: 36, Max: 42},
+			{Id: Money_48for32, Name: lang.TranslationMap{lang.English: "for 32h", lang.German: "für 32h"}, SingleLabel: lang.TranslationMap{lang.English: "48-56T€", lang.German: "48-56T€"}, Min: 48, Max: 56},
+			{Id: Money_60for40, Name: lang.TranslationMap{lang.English: "for fulltime", lang.German: "für Vollzeit"}, SingleLabel: lang.TranslationMap{lang.English: "60-70T€", lang.German: "60-70T€"}, Min: 60, Max: 70},
+		},
+
 		ProfessionalSkills: []genmodel.LeftSideAction{
 			{Id: TechSkill_Go, Name: lang.DefaultTranslation("Go"), Rating: 8},
 			{Id: techSkill_Java, Name: lang.DefaultTranslation("Java"), Rating: 9},
@@ -104,11 +154,12 @@ func Profile() genmodel.Profile {
 			{Name: lang.DefaultTranslation("CleanCode")},
 			{Name: lang.DefaultTranslation("Design Pattern")},
 			{Name: lang.DefaultTranslation("Microservices")},
-			{Name: lang.DefaultTranslation(`
-
-\medskip
-
-Blob`)},
+			{Name: lang.DefaultTranslation("Blob")},
+			//			{Name: lang.DefaultTranslation(`
+			//
+			//\medskip
+			//
+			//Blob`)},
 			{Name: lang.DefaultTranslation("TDD")},
 			{Name: lang.DefaultTranslation("Backend development")},
 			{Name: lang.DefaultTranslation("Big Data")},
@@ -130,7 +181,7 @@ Blob`)},
 				Level: lang.DefaultTranslation("B2"),
 			},
 		},
-		GeneralMotivationText: lang.TranslationMap{
+		GeneralAboutMeText: lang.TranslationMap{
 			lang.English: "I will.",
 			lang.German:  "Ich will.",
 		},
@@ -147,10 +198,12 @@ Blob`)},
 				TechStack: lang.DefaultTranslation("Java, Guice, GWT, MySQL, Hibernate, RESTful, Json, Docker, Go, \\LaTeX, Ubuntu, Bash, " +
 					"Python, Git, Scrum/Kanban, JIRA"),
 				DocumentLinks: []string{"http://google.de"},
+				Project: lang.TranslationMap{lang.English: "Project 1",
+					lang.German: "Projekt 1"},
 			},
 			{
 				Id:          Exp_solar,
-				Company:     "Solar Company",
+				Company:     "Solar Company 123",
 				JobPosition: lang.DefaultTranslation("C++ Backend Developer"),
 				StartTime:   "Mar. 2011",
 				EndTime:     "May 2014",
@@ -172,22 +225,64 @@ Blob`)},
 		},
 		Education: []genmodel.Education{
 			{
-				Id:         Edu_Uni,
-				Graduation: lang.DefaultTranslation("Diplom Informatiker"),
-				Institute:  "German University",
-				StartTime:  "Sep. 2005",
-				EndTime:    "Oct. 2010",
-				Focus:      lang.DefaultTranslation("software engineering, compiler construction, database design"),
-				FinalGrade: lang.DefaultTranslation("1.0"),
+				Id:            Edu_Uni,
+				Graduation:    lang.DefaultTranslation("Diplom Informatiker"),
+				Institute:     "German University",
+				StartTime:     "Sep. 2005",
+				EndTime:       "Oct. 2010",
+				Focus:         lang.DefaultTranslation("software engineering, compiler construction, database design"),
+				FinalGrade:    lang.DefaultTranslation("1.0"),
+				DocumentLinks: []string{"http://google.de"},
 			},
 			{
-				Id:         Edu_Comp,
-				Graduation: lang.DefaultTranslation("Fachinformatiker Systemintegration"),
-				Institute:  "Telecommunication Company",
-				StartTime:  "Sep. 2002",
-				EndTime:    "Jan. 2005",
-				Focus:      lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
+				Id:            Edu_Comp,
+				Graduation:    lang.DefaultTranslation("Fachinformatiker Systemintegration"),
+				Institute:     "Telecommunication Company",
+				StartTime:     "Sep. 2002",
+				EndTime:       "Jan. 2005",
+				Focus:         lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
+				DocumentLinks: []string{"http://google.de", "http://ecosia.de"},
 			},
+		},
+		Publication: []genmodel.Publication{
+			{
+				Id:            Pub_Calliope,
+				Title:         lang.DefaultTranslation("Das Calliope Buch"),
+				Publisher:     lang.DefaultTranslation("XXX"),
+				StartTime:     "Sep. 2005",
+				EndTime:       "Oct. 2010",
+				Focus:         lang.DefaultTranslation("XXX"),
+				DocumentLinks: []string{"http://google.de"},
+			},
+			//{
+			//	Id:            Pub_Machine,
+			//	Graduation:    lang.DefaultTranslation("Fachinformatiker Systemintegration"),
+			//	Institute:     "Telecommunication Company",
+			//	StartTime:     "Sep. 2002",
+			//	EndTime:       "Jan. 2005",
+			//	Focus:         lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
+			//	DocumentLinks: []string{"http://google.de", "http://ecosia.de"},
+			//},
+		},
+		Award: []genmodel.Award{
+			{
+				Id:            Awa_Fami,
+				Title:         lang.DefaultTranslation("Beste XY"),
+				Institute:     lang.DefaultTranslation("XXX"),
+				StartTime:     "Sep. 2005",
+				EndTime:       "Oct. 2010",
+				Focus:         lang.DefaultTranslation("XXX"),
+				DocumentLinks: []string{"http://google.de"},
+			},
+			//{
+			//	Id:            Pub_Machine,
+			//	Graduation:    lang.DefaultTranslation("Fachinformatiker Systemintegration"),
+			//	Institute:     "Telecommunication Company",
+			//	StartTime:     "Sep. 2002",
+			//	EndTime:       "Jan. 2005",
+			//	Focus:         lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
+			//	DocumentLinks: []string{"http://google.de", "http://ecosia.de"},
+			//},
 		},
 	}
 }

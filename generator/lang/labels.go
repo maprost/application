@@ -45,6 +45,24 @@ func (l Language) Hobbies() string {
 	}
 }
 
+func (l Language) TimeAmount() string {
+	switch l {
+	case German:
+		return "Zeitpräferenz"
+	default:
+		return "Time preference"
+	}
+}
+
+func (l Language) MoneyAmount() string {
+	switch l {
+	case German:
+		return "Gehaltswunsch"
+	default:
+		return "Desired Salary"
+	}
+}
+
 func (l Language) Profile() string {
 	switch l {
 	case German:
@@ -54,12 +72,48 @@ func (l Language) Profile() string {
 	}
 }
 
+func (l Language) Motivation() string {
+	switch l {
+	case German:
+		return "Motivation"
+	default:
+		return "Motivation"
+	}
+}
+
+func (l Language) MainQuestion() string {
+	switch l {
+	case German:
+		return "Aber warum..."
+	default:
+		return "But why..."
+	}
+}
+
 func (l Language) Education() string {
 	switch l {
 	case German:
 		return "Bildung"
 	default:
 		return "Education"
+	}
+}
+
+func (l Language) Publication() string {
+	switch l {
+	case German:
+		return "Veröffentlichungen"
+	default:
+		return "Publications"
+	}
+}
+
+func (l Language) Award() string {
+	switch l {
+	case German:
+		return "Auszeichnungen"
+	default:
+		return "Awards"
 	}
 }
 
@@ -123,5 +177,14 @@ func (l Language) UsedTechs() string {
 		return "genutzte Technologien"
 	default:
 		return "used technologies"
+	}
+}
+
+func (l Language) DocumentLinks() string {
+	switch l {
+	case German:
+		return "Dokumente, Zeugnisse"
+	default:
+		return "Documents, certificates"
 	}
 }

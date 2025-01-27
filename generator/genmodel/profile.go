@@ -5,9 +5,13 @@ import "github.com/maprost/application/generator/lang"
 type ID int
 
 type LeftSideAction struct {
-	Id     ID
-	Name   lang.TranslationMap
-	Rating int // Rating range [1,10]
+	Id          ID
+	Name        lang.TranslationMap
+	SingleLabel lang.TranslationMap
+	Rating      int     // Rating range [1,10]
+	Min         float64 // range [0,5]
+	//MinString string  // range [0,5]
+	Max float64 // range [0,5]
 }
 
 type Language struct {
@@ -19,11 +23,15 @@ type Language struct {
 type LeftSideActionType int
 
 const (
-	TechSkill  = LeftSideActionType(1)
-	Interests  = LeftSideActionType(2)
-	SoftSkills = LeftSideActionType(3)
-	Languages  = LeftSideActionType(4)
-	Hobbies    = LeftSideActionType(5)
+	TechSkill     = LeftSideActionType(1)
+	Interests     = LeftSideActionType(2)
+	SoftSkills    = LeftSideActionType(3)
+	Languages     = LeftSideActionType(4)
+	Hobbies       = LeftSideActionType(5)
+	TimeAmount    = LeftSideActionType(6)
+	Quotation     = LeftSideActionType(7)
+	PersonalGoals = LeftSideActionType(8)
+	MoneyAmount   = LeftSideActionType(9)
 )
 
 func (x LeftSideActionType) FirstSide() bool {
@@ -91,6 +99,26 @@ type Education struct {
 	DocumentLinks []string
 }
 
+type Publication struct {
+	Id            ID
+	Title         lang.TranslationMap
+	Publisher     lang.TranslationMap
+	StartTime     string
+	EndTime       string
+	Focus         lang.TranslationMap
+	DocumentLinks []string
+}
+
+type Award struct {
+	Id            ID
+	Title         lang.TranslationMap
+	Institute     lang.TranslationMap
+	StartTime     string
+	EndTime       string
+	Focus         lang.TranslationMap
+	DocumentLinks []string
+}
+
 type ProfileAddress struct {
 	Street  string
 	Zip     string
@@ -138,9 +166,29 @@ type Profile struct {
 	CustomHobbiesLabel lang.TranslationMap
 	Hobbies            []LeftSideAction
 
+	// time amount
+	CustomTimeAmountLabel lang.TranslationMap
+	TimeAmount            []LeftSideAction
+
+	// money amount
+	CustomMoneyAmountLabel lang.TranslationMap
+	MoneyAmount            []LeftSideAction
+
+	// about me
+	CustomAboutMeTextLabel lang.TranslationMap
+	GeneralAboutMeText     lang.TranslationMap // your general profile text, this text can contains tex elements
+
 	// motivation
-	CustomMotivationTextLabel lang.TranslationMap
-	GeneralMotivationText     lang.TranslationMap // your general motivation text, this text can contains tex elements
+	CustomMyMotivationTextLabel lang.TranslationMap
+	GeneralMyMotivationText     lang.TranslationMap // your general motivation text, this text can contains tex elements
+
+	// values
+	CustomValuesLabel lang.TranslationMap
+	GeneralValuesText lang.TranslationMap // your values text, this text can contains tex elements
+
+	// main question
+	CustomMainQuestionTextLabel lang.TranslationMap
+	GeneralMainQuestionText     lang.TranslationMap // your main question text, this text can contains tex elements
 
 	// experience
 	CustomExperienceLabel lang.TranslationMap
@@ -149,4 +197,12 @@ type Profile struct {
 	// education
 	CustomEducationLabel lang.TranslationMap
 	Education            []Education
+
+	// publication
+	CustomPublicationLabel lang.TranslationMap
+	Publication            []Publication
+
+	// award
+	CustomAwardLabel lang.TranslationMap
+	Award            []Award
 }

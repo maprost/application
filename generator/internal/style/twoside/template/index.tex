@@ -15,6 +15,18 @@
 \usepackage[default,scale=0.95]{opensans}
 \usepackage[T1]{fontenc}
 \usepackage{tikz}
+\usepackage{float}
+\usepackage{framed}
+\usepackage{mdframed}
+\usepackage{enumitem}
+
+\usepackage[
+    left = \Large \flqq{},%
+    right = \frqq{}\normalsize ,%
+    leftsub = \flq{},%
+    rightsub = \frq{} %
+]{dirtytalk}
+
 \usetikzlibrary{shapes.geometric}
 \usepackage[utf8]{inputenc}
 \usepackage{ifthen}
@@ -50,16 +62,230 @@
 
 }
 
+\newcommand{\mainquestion}[1]{
+        {{ if and (ne .MainQuestionLabel "") (ne .MainQuestionLabel "xxx") }}
+        \colorbox{lightgray}{
+            \begin{minipage}[t]{1.0\linewidth}
+                \bigskip
+                \timeLineHeader{{print "{" .MainQuestionLabel "}"}}
+                {{.MainQuestion}}
+                \bigskip
+            \end{minipage}
+            \bigskip
+        }
+    {{end}}
+    \bigskip
+}
+
+\newcommand{\linepositiontime}[2]{
+    {\headerfont #1} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ #2
+    \smallskip
+
+    \begin{minipage}{\indentLength}
+        ~
+    \end{minipage}
+}
+
+\newcommand{\linefinalgrade}[1]{\checkPar{#1}{ {{$.Label.FinalGrade}}: #1}}
+
+\newcommand{\lineinstitute}[1]{\checkPar{#1}{#1}}
+
+\newcommand{\linepublisher}[1]{\checkPar{#1}{#1}}
+
+\newcommand{\linefocus}[1]{\checkPar{#1}{#1}}
+
+\newcommand{\linecontent}[1]{\checkPar{#1}{#1}}
+
+\newcommand{\linecompany}[1]{\checkPar{#1}{#1}}
+
+\newcommand{\linedescription}[1]{\checkPar{#1}{#1}}
+
+\newcommand{\lineproject}[1]{\checkPar{#1}{\projectIcon~ #1}}
+
+\newcommand{\linerole}[1]{\checkPar{#1}{\roleIcon~ #1}}
+
+\newcommand{\linetech}[1]{\checkPar{#1}{\techStackIcon~ #1}
+}
+
+\newcommand{\documentlink}[1]{\href{#1}{\documentIcon}~
+}
+
+\newcommand{\experiencesection}[1]{
+
+    \ifnum1=#1\relax
+    \timeLineHeader{{print "{" .SideOneExperienceLabel "}"}}
+    \else
+    \timeLineHeader{{print "{" .SideTwoExperienceLabel "}"}}
+    \fi
+
+    \begin{minipage}{\indentLength}
+    ~
+    \end{minipage}
+    \begin{minipage}{\outsidePageLength}
+
+        \ifnum1=#1\relax
+        {{range .SideOneExperience}}
+            \linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
+            \begin{minipage}{\insidePageLength}
+                {{range .DocumentLinks}}%
+                    \documentlink{{print "{" . "}"}}%
+                {{end}}%
+                \linecompany{{print "{" .Company "}"}}
+                \linedescription{{print "{" .Description "}"}}
+                \lineproject{{print "{" .Project "}"}}
+                \linerole{{print "{" .Role "}"}}
+                \linetech{{print "{" .Tech "}"}}
+            \end{minipage} \\[1ex]
+        {{end}}
+        \else
+        {{range .SideOneExperience}}
+            \linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
+            \begin{minipage}{\insidePageLength}
+                {{range .DocumentLinks}}%
+                    \documentlink{{print "{" . "}"}}%
+                {{end}}%
+                \linecompany{{print "{" .Company "}"}}
+                \linedescription{{print "{" .Description "}"}}
+                \lineproject{{print "{" .Project "}"}}
+                \linerole{{print "{" .Role "}"}}
+                \linetech{{print "{" .Tech "}"}}
+            \end{minipage} \\[1ex]
+        {{end}}
+        \fi
+    \end{minipage}
+}
+
+\newcommand{\educationsection}[1]{
+
+    \ifnum1=#1\relax
+    \timeLineHeader{{print "{" .SideOneEducationLabel "}"}}
+    \else
+    \timeLineHeader{{print "{" .SideTwoEducationLabel "}"}}
+    \fi
+
+    \begin{minipage}{\indentLength}
+    ~
+    \end{minipage}
+    \begin{minipage}{\outsidePageLength}
+
+        \ifnum1=#1\relax
+        {{range .SideOneEducation}}
+            \linepositiontime{{print "{" .Graduation "}" "{" .Time "}"}}
+            \begin{minipage}{\insidePageLength}
+                    {{range .DocumentLinks}}%
+                        \documentlink{{print "{" . "}"}}%
+                    {{end}}%
+                \linefocus{{print "{" .Institute "}"}}
+                \linefocus{{print "{" .Focus "}"}}
+                \linefinalgrade{{print "{" .FinalGrade "}"}}
+            \end{minipage} \\[1ex]
+        {{end}}
+        \else
+        {{range .SideTwoEducation}}
+            \linepositiontime{{print "{" .Graduation "}" "{" .Time "}"}}
+            \begin{minipage}{\insidePageLength}
+                    {{range .DocumentLinks}}%
+                        \documentlink{{print "{" . "}"}}%
+                    {{end}}%
+                \linefocus{{print "{" .Institute "}"}}
+                \linefocus{{print "{" .Focus "}"}}
+                \linefinalgrade{{print "{" .FinalGrade "}"}}
+            \end{minipage} \\[1ex]
+        {{end}}
+        \fi
+    \end{minipage}
+}
+
+\newcommand{\publicationsection}[1]{
+
+    \ifnum1=#1\relax
+    \timeLineHeader{{print "{" .SideOnePublicationLabel "}"}}
+    \else
+    \timeLineHeader{{print "{" .SideTwoPublicationLabel "}"}}
+    \fi
+
+    \begin{minipage}{\indentLength}
+    ~
+    \end{minipage}
+    \begin{minipage}{\outsidePageLength}
+        \ifnum1=#1\relax
+        {{range .SideOnePublication}}
+            \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
+            \begin{minipage}{\insidePageLength}
+                    {{range .DocumentLinks}}%
+                        \documentlink{{print "{" . "}"}}%
+                    {{end}}%
+                \linepublisher{{print "{" .Publisher "}"}}
+                \linecontent{{print "{" .Content "}"}}
+            \end{minipage} \\[1ex]
+        {{end}}
+        \else
+        {{range .SideTwoPublication}}
+            \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
+            \begin{minipage}{\insidePageLength}
+                    {{range .DocumentLinks}}%
+                        \documentlink{{print "{" . "}"}}%
+                    {{end}}%
+                \linepublisher{{print "{" .Publisher "}"}}
+                \linecontent{{print "{" .Content "}"}}
+            \end{minipage} \\[1ex]
+        {{end}}
+        \fi
+    \end{minipage}
+}
+
+
+\newcommand{\awardsection}[1]{
+
+    \ifnum1=#1\relax
+    \timeLineHeader{{print "{" .SideOneAwardLabel "}"}}
+    \else
+    \timeLineHeader{{print "{" .SideTwoAwardLabel "}"}}
+    \fi
+
+    \begin{minipage}{\indentLength}
+    ~
+    \end{minipage}
+    \begin{minipage}{\outsidePageLength}
+
+        \ifnum1=#1\relax
+        {{range .SideOneAward}}
+            \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
+            \begin{minipage}{\insidePageLength}
+                    {{range .DocumentLinks}}%
+                        \documentlink{{print "{" . "}"}}%
+                    {{end}}%
+                \lineinstitute{{print "{" .Institute "}"}}
+                \linecontent{{print "{" .Content "}"}}
+            \end{minipage} \\[1ex]
+        {{end}}
+        \else
+        {{range .SideTwoAward}}
+            \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
+            \begin{minipage}{\insidePageLength}
+                    {{range .DocumentLinks}}%
+                        \documentlink{{print "{" . "}"}}%
+                    {{end}}%
+                \lineinstitute{{print "{" .Institute "}"}}
+                \linecontent{{print "{" .Content "}"}}
+            \end{minipage} \\[1ex]
+        {{end}}
+        \fi
+    \end{minipage}
+}
+
 % company custom color
 \definecolor{maincolor}{HTML}{{"{"}}{{.MainColor}}}
 \definecolor{sidecolor}{HTML}{{"{"}}{{.SideColor}}}
-\definecolor{maingray}{HTML}{B9B9B9}
+\definecolor{maingray}{HTML}{D9D9D9}
+%\definecolor{maingray}{HTML}{B9B9B9}
+\definecolor{lightgray}{HTML}{D9D9D9}
 
 % icons
 \newcommand{\projectIcon}{\includegraphics[width=4mm]{{print "{" $.Icon.Project "}"}} }
 \newcommand{\roleIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
 \newcommand{\techStackIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.TechStack "}"}} }
-\newcommand{\documentIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Document "}"}} }
+\newcommand{\documentIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Document "}"}}}
 
 % Command for printing the contact information icons
 \newcommand{\icon}[1]{%
@@ -75,19 +301,103 @@
     \end{tikzpicture}
 }
 
+\newcommand{\linerating}[2]{
+    #1
+    &
+    \begin{tikzpicture}
+        \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
+        \draw[fill=white,maincolor](0,0) rectangle (#2/10,0.3);
+    \end{tikzpicture}
+    \\[1ex]
+}
+
+\newlength{\mylmin}
+\newlength{\mylmax}
+\newlength{\mylminhalf}
+\newlength{\mylmaxhalf}
+\newlength{\halfminmaxdelta}
+\newlength{\mysinglelabel}
+\newlength{\singlelabelhalf}
+
+\newcommand{\linerange}[9]{
+    \begin{minipage}[b]{\linewidth}#1:
+    \end{minipage}%
+
+    \smallskip
+
+    \settowidth{\mylmin}{#7}
+    \settowidth{\mylmax}{#8}
+    \setlength{\mylminhalf}{-0.5\mylmin}
+    \setlength{\mylmaxhalf}{-0.5\mylmax}
+
+
+%    \the\mylmin \\
+%    \the\mylmax \\
+%    \the\mylminhalf \\
+%    \the\mylmaxhalf \\
+
+    %TODO end RangeText
+    \begin{tikzpicture}
+    \draw[fill=maingray,maingray] (0,0) rectangle (5,0.3);
+    \draw[fill=white,maincolor] (5*#2,0) rectangle (5*#3,0.3);
+    \end{tikzpicture}
+
+    %\begin{mdframed}[linecolor=blue,innermargin=0cm]    \end{mdframed}
+
+    \ifcase\pdfstrcmp{#8}{}
+        \begin{minipage}[b]{#4\linewidth} \hphantom{}
+        \end{minipage}%
+        \begin{minipage}[b]{#9\linewidth} \hphantom{}
+        \end{minipage}%
+        \begin{minipage}[b]{#9\linewidth}\hspace*{\mylminhalf}\small \mbox{#7} \normalsize
+        \end{minipage}%
+        \begin{minipage}[b]{0.00001\linewidth} \hphantom{}
+        \end{minipage}%
+    \else
+        \begin{minipage}[b]{#4\linewidth} \hphantom{}
+        \end{minipage}%
+        \begin{minipage}[b]{#5\linewidth}\hspace*{\mylminhalf}\small #7 \normalsize
+        \end{minipage}%
+        \begin{minipage}[b]{#6\linewidth}\hspace*{\mylmaxhalf}\small #8 \normalsize
+        \end{minipage}%
+        \begin{minipage}[b]{0.00001\linewidth} \hphantom{}
+        \end{minipage}%
+    \fi
+
+    \smallskip
+    \smallskip
+}
+
 \newcommand{\sideOneleftSideAction}{%
     {{range .SideOneLeftSideAction}}
+
+%        %TODO if .BulletList
+%        \category{{print "{" .Label "}"}}
+%        \begin{itemize}[leftmargin=*,noitemsep,nolistsep]
+%            \item one
+%            \item two
+%            \item three
+%        \end{itemize}
+%        %TODO end
+%
+%        %TODO if .Quotation
+%        \category{{print "{" .Label "}"}}
+%        \say{Here, a quotation is written and even some \say{nested} quotations are possible.}
+%        %TODO end
+
+        {{ if .Range }}
+        %TODO if .RangeText
+            \category{{print "{" .Label "}"}}
+            {{range .Range}}
+                \linerange{{print "{" .Name "}" "{" .Min "}" "{" .Max "}" "{" .MinString "}" "{" .DeltaMaxMin "}" "{" .DeltaMaxFull "}" "{" .MinLabel "}" "{" .MaxLabel "}" "{" .DeltaMaxMinHalf "}"}}
+            {{ end }}
+        {{ end }}
+
         {{ if .Ratings }}
             \category{{print "{" .Label "}"}}
             \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
                 {{range .Ratings}}
-                    {{.Name}}
-                    &
-                    \begin{tikzpicture}
-                        \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
-                        \draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.3);
-                    \end{tikzpicture}
-                    \\[1ex]
+                    \linerating{{print "{" .Name "}" "{" .Rating "}"}}
                 {{end}}
             \end{tabular}
             \medskip
@@ -111,23 +421,27 @@
 
 \newcommand{\sideTwoleftSideAction}{%
     {{range .SideTwoLeftSideAction}}
+
+        {{ if .Range }}
+            %TODO if .RangeText
+            \category{{print "{" .Label "}"}}
+            {{range .Range}}
+                \linerange{{print "{" .Name "}" "{" .Min "}" "{" .Max "}" "{" .MinString "}" "{" .DeltaMaxMin "}" "{" .DeltaMaxFull "}" "{" .MinLabel "}" "{" .MaxLabel "}" "{" .DeltaMaxMinHalf "}"}}%
+            {{ end }}
+        {{ end }}
+
         {{ if .Ratings }}
             \category{{print "{" .Label "}"}}
             \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
                 {{range .Ratings}}
-                    {{.Name}}
-                    &
-                    \begin{tikzpicture}
-                        \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
-                        \draw[fill=white,maincolor](0,0) rectangle ({{.Rating}}/10,0.3);
-                    \end{tikzpicture}
-                    \\[1ex]
+                    \linerating{{print "{" .Name "}" "{" .Rating "}"}}
                 {{end}}
             \end{tabular}
             \medskip
 
             {{.OtherRatings}}
         {{ end }}
+
         {{ if .Languages }}
             \category{{print "{" .Label "}"}}
             \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
@@ -136,6 +450,7 @@
                 {{end}}
             \end{tabular}
         {{ end }}
+
         {{ if .List }}
             \category{{print "{" .Label "}"}}
             {{.List}}
@@ -148,9 +463,18 @@
 \renewcommand{\headrulewidth}{0pt}
 \cfoot{}
 \rfoot{%
-    {{if $.HasProject}} \projectIcon{} {{$.Label.SomeProjects}} ~~~~ {{else}} % {{end}}
-    {{if $.HasRole}}\roleIcon{} {{$.Label.SomeRoles}} ~~~~ {{else}} % {{end}}
-    {{if $.HasTechStack}}\techStackIcon{} {{$.Label.UsedTechs}} {{else}} % {{end}}
+    \small
+    \begin{minipage}[t]{0.3\textwidth} \hphantom{}
+    \end{minipage}
+    \begin{minipage}[t]{0.7\textwidth}\vspace*{-1cm}
+        \begin{flushright}
+            {{if $.HasDocumentLinks}}\documentIcon{} {{$.Label.DocumentLinks}} ~~~~ {{else}} % {{end}}
+            {{if $.HasProject}} \projectIcon{} {{$.Label.SomeProjects}} {{if $.HasRole}} \\ {{else}} ~~~~ {{end}} {{else}} % {{end}}
+            {{if $.HasRole}}\roleIcon{} {{$.Label.SomeRoles}} ~~~~ {{else}} % {{end}}
+            {{if $.HasTechStack}}\techStackIcon{} {{$.Label.UsedTechs}} {{else}} % {{end}}
+        \end{flushright}
+    \end{minipage}
+    \normalsize
 }
 
 \begin{document}
@@ -223,70 +547,27 @@
         \bigskip
 
 
-        {{if .SideOneExperience}}
-            \timeLineHeader{{print "{" .SideOneExperienceLabel "}"}}
+        {{if (ne .MyMotivation "") }}
+            \timeLineHeader{{print "{" .MyMotivationLabel "}"}}
+            {{.MyMotivation}}
+        {{end}}
 
-            \begin{minipage}{\indentLength}
-                ~
-            \end{minipage}
-            \begin{minipage}{\outsidePageLength}
-                {{range .SideOneExperience}}
-                    {\headerfont {{.Position}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+        \mainquestion{4}
 
-                    \smallskip
-
-                    \begin{minipage}{\indentLength}
-                        ~
-                    \end{minipage}
-                    \begin{minipage}{\insidePageLength}
-                        \checkPar{{print "{" .Company "}"}}{\scshape {{.Company}} ~ %
-                            {{range .DocumentLinks}}%
-                                \href{{print "{" . "}" }}{\documentIcon}%
-                            {{end}}%
-                        }
-
-                        \checkPar{{print "{" .Description "}"}}{{print "{" .Description "}"}}
-
-                        \checkPar{{print "{" .Project "}"}}{\projectIcon~ {{.Project }}}
-
-                        \checkPar{{print "{" .Role "}"}}{\roleIcon~ {{.Role }}}
-
-                        \checkPar{{print "{" .Tech "}"}}{\techStackIcon~ {{.Tech }}}
-
-                    \end{minipage} \\[1ex]
-                {{end}}
-            \end{minipage}
+        {{ if .SideOneExperience }}
+            \experiencesection{1}
         {{end}}
 
         {{ if .SideOneEducation }}
-            \timeLineHeader{{print "{" .SideOneEducationLabel "}"}}
+            \educationsection{1}
+        {{end}}
 
-            \begin{minipage}{\indentLength}
-            ~
-            \end{minipage}
-            \begin{minipage}{\outsidePageLength}
-                {{range .SideOneEducation}}
-                    {\headerfont {{.Graduation}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+        {{ if .SideOnePublication }}
+            \publicationsection{1}
+        {{end}}
 
-                    \smallskip
-
-                    \begin{minipage}{\indentLength}
-                    ~
-                    \end{minipage}
-                    \begin{minipage}{\insidePageLength}
-                        \checkPar{{print "{" .Institute "}"}}{\scshape {{.Institute}} ~ %
-                            {{range .DocumentLinks}}%
-                                \href{{print "{" . "}" }}{\documentIcon}%
-                            {{end}}%
-                        }
-
-                        \checkPar{{print "{" .Focus "}"}}{{print "{" .Focus "}"}}
-
-                        \checkPar{{print "{" .FinalGrade "}"}}{ {{$.Label.FinalGrade}}: {{.FinalGrade}}}
-
-                    \end{minipage} \\[1ex]
-                {{end}}
-            \end{minipage}
+        {{ if .SideOneAward }}
+            \awardsection{1}
         {{end}}
     \end{textblock}
 
@@ -307,70 +588,20 @@
             \pgfmathsetlength{\outsidePageLength}{140mm}
             \pgfmathsetlength{\insidePageLength}{135mm}
 
-            {{if .SideTwoExperience}}
-                \timeLineHeader{{print "{" .SideTwoExperienceLabel "}"}}
-
-                \begin{minipage}{\indentLength}
-                ~
-                \end{minipage}
-                \begin{minipage}{\outsidePageLength}
-                    {{range .SideTwoExperience}}
-                        {\headerfont {{.Position}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
-
-                        \smallskip
-
-                        \begin{minipage}{\indentLength}
-                        ~
-                        \end{minipage}
-                        \begin{minipage}{\insidePageLength}
-                            \checkPar{{print "{" .Company "}"}}{\scshape {{.Company}} ~ %
-                                {{range .DocumentLinks}}%
-                                    \href{{print "{" . "}" }}{\documentIcon}%
-                                {{end}}%
-                            }
-
-                            \checkPar{{print "{" .Description "}"}}{{print "{" .Description "}"}}
-
-                            \checkPar{{print "{" .Project "}"}}{\projectIcon~ {{.Project }}}
-
-                            \checkPar{{print "{" .Role "}"}}{\roleIcon~ {{.Role }}}
-
-                            \checkPar{{print "{" .Tech "}"}}{\techStackIcon~ {{.Tech }}}
-
-                        \end{minipage} \\[1ex]
-                    {{end}}
-                \end{minipage}
+            {{ if .SideTwoExperience }}
+                \experiencesection{2}
             {{end}}
 
             {{ if .SideTwoEducation }}
-                \timeLineHeader{{print "{" .SideTwoEducationLabel "}"}}
+                \educationsection{2}
+            {{end}}
 
-                \begin{minipage}{\indentLength}
-                ~
-                \end{minipage}
-                \begin{minipage}{\outsidePageLength}
-                    {{range .SideTwoEducation}}
-                        {\headerfont {{.Graduation}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
+            {{ if .SideTwoPublication }}
+            \publicationsection{2}
+            {{end}}
 
-                        \smallskip
-
-                        \begin{minipage}{\indentLength}
-                        ~
-                        \end{minipage}
-                        \begin{minipage}{\insidePageLength}
-                            \checkPar{{print "{" .Institute "}"}}{\scshape {{.Institute}} ~ %
-                                {{range .DocumentLinks}}%
-                                    \href{{print "{" . "}" }}{\documentIcon}%
-                                {{end}}%
-                            }
-
-                            \checkPar{{print "{" .Focus "}"}}{{print "{" .Focus "}"}}
-
-                            \checkPar{{print "{" .FinalGrade "}"}}{ {{$.Label.FinalGrade}}: {{.FinalGrade}}}
-
-                        \end{minipage} \\[1ex]
-                    {{end}}
-                \end{minipage}
+            {{ if .SideTwoAward }}
+            \awardsection{2}
             {{end}}
 
         \end{textblock}

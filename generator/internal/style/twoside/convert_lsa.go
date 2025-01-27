@@ -1,6 +1,8 @@
 package twoside
 
 import (
+	"fmt"
+	"log"
 	"sort"
 
 	"github.com/maprost/application/generator/genmodel"
@@ -64,6 +66,8 @@ func addLsa(data *texmodel.Index, app *genmodel.Application, lang lang.Language)
 			}
 		}
 	}
+	addLeftSideAction(convertTimeAmount(app, lang))
+	addLeftSideAction(convertMoneyAmount(app, lang))
 	addLeftSideAction(convertProfSkills(app, lang))
 	addLeftSideAction(convertSoftSkills(app, lang))
 	addLeftSideAction(convertHobbies(app, lang))
@@ -138,6 +142,133 @@ func convertHobbies(app *genmodel.Application, lang lang.Language) (texmodel.Lef
 	customLabel := app.Profile.CustomHobbiesLabel[lang]
 	defaultLabel := lang.Hobbies()
 	return convertListSkill(list, action, customLabel, defaultLabel, err, lang)
+}
+
+func convertTimeAmount(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+
+	log.Printf("convertTimeAmount start\n")
+
+	var res texmodel.LeftSideAction
+	res.Type = 1
+	res.Label = app.Profile.CustomTimeAmountLabel[lang]
+	if res.Label == "" {
+		res.Label = lang.TimeAmount()
+	}
+
+	log.Printf("convertTimeAmount 2\n")
+
+	skills, action, err := util.CalculateTimeAmount(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
+	if err != nil {
+		return res, action, false, err
+	}
+
+	log.Printf("convertTimeAmount 3\n")
+
+	//maxSkills := maxProfessionalSkills
+	//if maxProfessionalSkills+1 == len(skills) {
+	//	maxSkills = maxProfessionalSkills + 1
+	//}
+
+	fulltime := 40.0
+
+	for _, skill := range skills {
+
+		delta := (skill.Max - skill.Min) / fulltime
+		deltafull := 1 - (skill.Max / fulltime)
+
+		res.Range = append(res.Range, texmodel.RangeLsa{
+			Name:         lang.String(skill.Name),
+			Min:          skill.Min / fulltime,
+			MinString:    fmt.Sprintf("%.3f", skill.Min/fulltime),
+			MinLabel:     fmt.Sprintf("%.0fh\n", skill.Min),
+			Max:          skill.Max / fulltime,
+			MaxString:    fmt.Sprintf("%.3f", skill.Max/fulltime),
+			MaxLabel:     fmt.Sprintf("%.0fh\n", skill.Max),
+			DeltaMaxMin:  fmt.Sprintf("%f", delta),
+			DeltaMaxFull: fmt.Sprintf("%.3f", deltafull),
+		})
+	}
+	log.Printf("convertTimeAmount 4\n")
+	log.Printf("%+v\n", res)
+	log.Printf("convertTimeAmount 5\n")
+
+	return res, action, len(skills) > 0, nil
+}
+
+func convertMoneyAmount(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+
+	log.Printf("convertMoneyAmount start\n")
+
+	var res texmodel.LeftSideAction
+	res.Type = 1
+	res.Label = app.Profile.CustomMoneyAmountLabel[lang]
+	if res.Label == "" {
+		res.Label = lang.MoneyAmount()
+	}
+
+	log.Printf("convertMoneyAmount 2\n")
+
+	skills, action, err := util.CalculateMoneyAmount(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
+	if err != nil {
+		return res, action, false, err
+	}
+
+	log.Printf("convertMoneyAmount 3\n")
+
+	//maxSkills := maxProfessionalSkills
+	//if maxProfessionalSkills+1 == len(skills) {
+	//	maxSkills = maxProfessionalSkills + 1
+	//}
+
+	fullmoney := 100.0
+	currencyText := "T€"
+
+	for _, skill := range skills {
+
+		if skill.Max != 0 {
+			delta := (skill.Max - skill.Min) / fullmoney
+			deltafull := 1 - (skill.Max / fullmoney)
+
+			mainlabel := lang.String(skill.SingleLabel)
+			maxlabel := fmt.Sprintf("%.0f%s\n", skill.Max, currencyText)
+			if lang.String(skill.SingleLabel) == "" {
+				mainlabel = fmt.Sprintf("%.0f%s\n", skill.Min, currencyText)
+			} else {
+				maxlabel = ""
+			}
+
+			res.Range = append(res.Range, texmodel.RangeLsa{
+				Name:            lang.String(skill.Name),
+				Min:             skill.Min / fullmoney,
+				MinString:       fmt.Sprintf("%.3f", skill.Min/fullmoney),
+				MinLabel:        mainlabel,
+				Max:             skill.Max / fullmoney,
+				MaxString:       fmt.Sprintf("%.3f", skill.Max/fullmoney),
+				MaxLabel:        maxlabel,
+				DeltaMaxMin:     fmt.Sprintf("%f", delta),
+				DeltaMaxMinHalf: fmt.Sprintf("%f", delta/2),
+				DeltaMaxFull:    fmt.Sprintf("%.3f", deltafull),
+			})
+
+			//} else {
+			//	res.Range = append(res.Range, texmodel.RangeLsa{
+			//		Name:         lang.String(skill.Name),
+			//		Min:          skill.Min / fullmoney,
+			//		MinString:    fmt.Sprintf("%s", skill.Min),
+			//		MinLabel:     fmt.Sprintf("%s", skill.Min),
+			//		Max:          skill.Max / fullmoney,
+			//		MaxString:    fmt.Sprintf(""),
+			//		MaxLabel:     fmt.Sprintf(""),
+			//		DeltaMaxMin:  fmt.Sprintf(""),
+			//		DeltaMaxFull: fmt.Sprintf(""),
+			//	})
+		}
+	}
+	log.Printf("convertMoneyAmount 4\n")
+	log.Printf("%+v\n", res)
+	log.Printf("convertMoneyAmount 5\n")
+
+	return res, action, len(skills) > 0, nil
 }
 
 func convertListSkill(skills []genmodel.LeftSideAction, action genmodel.LeftSideActionType, customLabel string, defaultLabel string, err error, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {

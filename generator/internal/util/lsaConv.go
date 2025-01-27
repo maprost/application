@@ -23,6 +23,14 @@ func CalculateHobbies(app *genmodel.Application, needed map[genmodel.LeftSideAct
 	return CalculateLsa(app.Profile.Hobbies, needed, remove, genmodel.Hobbies)
 }
 
+func CalculateTimeAmount(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID, remove map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
+	return CalculateLsa(app.Profile.TimeAmount, needed, remove, genmodel.TimeAmount)
+}
+
+func CalculateMoneyAmount(app *genmodel.Application, needed map[genmodel.LeftSideActionType][]genmodel.ID, remove map[genmodel.LeftSideActionType][]genmodel.ID) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
+	return CalculateLsa(app.Profile.MoneyAmount, needed, remove, genmodel.MoneyAmount)
+}
+
 func CalculateLsa(lsaList []genmodel.LeftSideAction, needed map[genmodel.LeftSideActionType][]genmodel.ID, remove map[genmodel.LeftSideActionType][]genmodel.ID, action genmodel.LeftSideActionType) ([]genmodel.LeftSideAction, genmodel.LeftSideActionType, error) {
 	var result []genmodel.LeftSideAction
 	neededLsa := needed[action]

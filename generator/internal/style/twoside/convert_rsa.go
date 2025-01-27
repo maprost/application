@@ -4,6 +4,7 @@ import (
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 	"github.com/maprost/application/generator/lang"
+	"log"
 )
 
 func addExperiences(data *texmodel.Index, app *genmodel.Application, local lang.Language) {
@@ -133,6 +134,122 @@ func addEducation(data *texmodel.Index, app *genmodel.Application, lang lang.Lan
 		data.SideOneEducationLabel = label
 	} else if len(sideTwoEdu) > 0 {
 		data.SideTwoEducationLabel = label
+	}
+}
+
+func addPublication(data *texmodel.Index, app *genmodel.Application, lang lang.Language) {
+	style := app.JobPosition.TwoSideStyle
+
+	log.Printf("addPublication 1")
+
+	var sideOnePub []texmodel.Publication
+	var sideTwoPub []texmodel.Publication
+
+	appendSideOne := func(pub texmodel.Publication) {
+		// TODO improve?
+		if len(data.SideTwoExperience) > 0 {
+			sideTwoPub = append(sideTwoPub, pub)
+		} else {
+			sideOnePub = append(sideOnePub, pub)
+		}
+	}
+
+	for _, pub := range app.Profile.Publication {
+		if len(style.Publication) > 0 {
+			if !findId(pub.Id, style.Publication) {
+				continue
+			}
+		}
+		if findId(pub.Id, style.RemovePublication) {
+			continue
+		}
+
+		expRes := texmodel.Publication{
+			Title:         lang.String(pub.Title),
+			Publisher:     lang.String(pub.Publisher),
+			Time:          convertTime(pub.StartTime, pub.EndTime, lang),
+			Content:       "",
+			DocumentLinks: pub.DocumentLinks,
+		}
+
+		if style.SideOnePublicationSize > 0 {
+			if len(sideOnePub) < style.SideOnePublicationSize {
+				appendSideOne(expRes)
+			} else {
+				sideTwoPub = append(sideTwoPub, expRes)
+			}
+		} else {
+			//sideTwoPub = append(sideTwoPub, expRes)
+			appendSideOne(expRes)
+		}
+	}
+
+	data.SideOnePublication = sideOnePub
+	data.SideTwoPublication = sideTwoPub
+
+	label := customDefaultString(app.Profile.CustomPublicationLabel, lang, lang.Publication())
+	if len(sideOnePub) > 0 {
+		data.SideOnePublicationLabel = label
+	} else if len(sideTwoPub) > 0 {
+		data.SideTwoPublicationLabel = label
+	}
+
+	log.Printf("addPublication 2")
+	log.Printf("%+v", data)
+
+}
+
+func addAward(data *texmodel.Index, app *genmodel.Application, lang lang.Language) {
+	style := app.JobPosition.TwoSideStyle
+
+	var sideOnePub []texmodel.Award
+	var sideTwoPub []texmodel.Award
+
+	appendSideOne := func(awa texmodel.Award) {
+		if len(data.SideTwoExperience) > 0 {
+			sideTwoPub = append(sideTwoPub, awa)
+		} else {
+			sideOnePub = append(sideOnePub, awa)
+		}
+	}
+
+	for _, awa := range app.Profile.Award {
+		if len(style.Education) > 0 {
+			if !findId(awa.Id, style.Award) {
+				continue
+			}
+		}
+		if findId(awa.Id, style.RemoveAward) {
+			continue
+		}
+
+		expRes := texmodel.Award{
+			Title:         lang.String(awa.Title),
+			Institute:     lang.String(awa.Institute),
+			Time:          convertTime(awa.StartTime, awa.EndTime, lang),
+			Content:       "",
+			DocumentLinks: awa.DocumentLinks,
+		}
+
+		if style.SideOneAwardSize > 0 {
+			if len(sideOnePub) < style.SideOneAwardSize {
+				appendSideOne(expRes)
+			} else {
+				sideTwoPub = append(sideTwoPub, expRes)
+			}
+		} else {
+			sideTwoPub = append(sideTwoPub, expRes)
+		}
+	}
+
+	data.SideOneAward = sideOnePub
+	data.SideTwoAward = sideTwoPub
+
+	label := customDefaultString(app.Profile.CustomAwardLabel, lang, lang.Award())
+	if len(sideOnePub) > 0 {
+		data.SideOneAwardLabel = label
+	} else if len(sideTwoPub) > 0 {
+		data.SideTwoAwardLabel = label
 	}
 }
 

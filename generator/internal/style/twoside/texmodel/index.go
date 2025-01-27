@@ -1,6 +1,7 @@
 package texmodel
 
 import (
+	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/lang"
 )
 
@@ -21,6 +22,20 @@ type Language struct {
 	Level string
 }
 
+type RangeLsa struct {
+	Name            string
+	Min             float64 // range [0,1]
+	MinLabel        string
+	MinString       string  // needed for .tex
+	Max             float64 // range [0,1]
+	MaxLabel        string
+	MaxString       string // needed for .tex
+	DeltaMaxMin     string
+	DeltaMaxMinHalf string
+	DeltaMaxFull    string
+	SingleLabel     string
+}
+
 type LeftSideAction struct {
 	Type         int // 1: Skills + List, 2: List, 3: Language
 	Label        string
@@ -28,6 +43,7 @@ type LeftSideAction struct {
 	OtherRatings string
 	List         string
 	Languages    []Language
+	Range        []RangeLsa
 }
 
 type Website struct {
@@ -55,15 +71,32 @@ type Education struct {
 	DocumentLinks []string
 }
 
+type Publication struct {
+	Title         string
+	Publisher     string
+	Time          string
+	Content       string
+	DocumentLinks []string
+}
+
+type Award struct {
+	Title         string
+	Institute     string
+	Time          string
+	Content       string
+	DocumentLinks []string
+}
+
 type Index struct {
 	// config
-	MainColor    string
-	SideColor    string
-	HasProject   bool
-	HasRole      bool
-	HasTechStack bool
-	Icon         Icon
-	Label        lang.Language
+	MainColor        string
+	SideColor        string
+	HasDocumentLinks bool
+	HasProject       bool
+	HasRole          bool
+	HasTechStack     bool
+	Icon             Icon
+	Label            lang.Language
 
 	// main infos
 	Image       string // path
@@ -79,9 +112,25 @@ type Index struct {
 	SideOneLeftSideAction []LeftSideAction
 	SideTwoLeftSideAction []LeftSideAction
 
-	// motivation
+	// about me
 	AboutMeLabel string
 	AboutMe      string
+
+	// motivation
+	MyMotivationLabel string
+	MyMotivation      string
+
+	// main question
+	MainQuestionLabel string
+	MainQuestion      string
+
+	//TODO money amount
+	MoneyAmountLabel string
+	MoneyAmounts     []genmodel.LeftSideAction
+
+	//TODO time amount
+	TimeAmountLabel string
+	TimeAmounts     []genmodel.LeftSideAction
 
 	// experience
 	SideOneExperienceLabel string
@@ -94,6 +143,18 @@ type Index struct {
 	SideOneEducation      []Education
 	SideTwoEducationLabel string
 	SideTwoEducation      []Education
+
+	// publication
+	SideOnePublicationLabel string
+	SideOnePublication      []Publication
+	SideTwoPublicationLabel string
+	SideTwoPublication      []Publication
+
+	// award
+	SideOneAwardLabel string
+	SideOneAward      []Award
+	SideTwoAwardLabel string
+	SideTwoAward      []Award
 
 	Attachment []string
 }

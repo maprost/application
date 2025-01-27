@@ -19,7 +19,7 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 		return
 	}
 
-	aboutMe := util.DefaultValue(application.JobPosition.MotivationText, lang.String(application.Profile.GeneralMotivationText))
+	aboutMe := util.DefaultValue(application.JobPosition.ProfileText, lang.String(application.Profile.GeneralAboutMeText))
 
 	data = texmodel.Index{
 		Icon: texmodel.Icon{
@@ -50,7 +50,7 @@ func initData(application *genmodel.Application) (data texmodel.Index, err error
 		Interest:              lang.Join(application.Profile.Interest, ", "),
 		CustomLanguageLabel:   lang.String(application.Profile.CustomLanguageLabel),
 		Language:              convertLanguage(application, lang),
-		CustomAboutMeLabel:    lang.String(application.Profile.CustomMotivationTextLabel),
+		CustomAboutMeLabel:    lang.String(application.Profile.CustomAboutMeTextLabel),
 		AboutMe:               aboutMe,
 		CustomExperienceLabel: lang.String(application.Profile.CustomExperienceLabel),
 		Experience:            convertExperience(application, lang),

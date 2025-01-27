@@ -1,6 +1,7 @@
 package util
 
 import (
+	"github.com/maprost/application/generator/genmodel"
 	"strings"
 
 	"github.com/maprost/application/generator/internal/image"
@@ -35,4 +36,11 @@ func DefaultValue(value string, defaultValue string) string {
 		return defaultValue
 	}
 	return value
+}
+
+func DefaultLeftSideList(value []genmodel.LeftSideAction, defaultValue []genmodel.LeftSideAction) []genmodel.LeftSideAction {
+	if len(value) > 0 {
+		return value
+	}
+	return defaultValue
 }

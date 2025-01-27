@@ -15,7 +15,7 @@ func New() genmodel.JobPosition {
 		//},
 		//Title:              "Senior Egg Mover",
 		//ProfessionalSkills: []genmodel.ID{profile.TechSkillHiding, profile.TechSkillSneaking},
-		//MotivationText: `
+		//ProfileText: `
 		//I love eggs as long as I live and my biggest dream is to hide them. So no one can find them and
 		//I can eat them all after the party is over. I would love to apply for the position of a Senior
 		// Egg Mover, I'm your man. If you don't hire me. I think I will eat the next days some bunnies.
