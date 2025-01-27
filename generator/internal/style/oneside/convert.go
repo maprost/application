@@ -164,6 +164,9 @@ func convertEducation(application *genmodel.Application, lang lang.Language) (ed
 }
 
 func convertTime(start string, end string, lang lang.Language) string {
+	if end == start {
+		return start
+	}
 	if end == "" {
 		return lang.Since() + "~~" + start
 	}

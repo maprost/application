@@ -254,6 +254,9 @@ func addAward(data *texmodel.Index, app *genmodel.Application, lang lang.Languag
 }
 
 func convertTime(start string, end string, lang lang.Language) string {
+	if end == start {
+		return start
+	}
 	if end == "" {
 		return lang.Since() + "~~" + start
 	}
