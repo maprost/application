@@ -19,12 +19,12 @@ func Google() genmodel.JobPosition {
 			//Skills: map[genmodel.LeftSideActionType][]genmodel.ID{
 			//	genmodel.TimeAmount: {internal.Time_1632},
 			//},
-			//SideOneLeftSideActionTypes: []genmodel.LeftSideActionType{
+			//SideOneLSATypes: []genmodel.LeftSideActionType{
 			//	genmodel.TechSkill,
 			//	genmodel.TimeAmount,
 			//	genmodel.MoneyAmount,
 			//},
-			//SideTwoLeftSideActionTypes: []genmodel.LeftSideActionType{
+			//SideTwoLSATypes: []genmodel.LeftSideActionType{
 			//	genmodel.SoftSkills,
 			//	genmodel.Interests,
 			//	genmodel.Languages,

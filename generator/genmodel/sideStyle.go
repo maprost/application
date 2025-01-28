@@ -40,8 +40,8 @@ type TwoSideStyle struct {
 	// LSA
 	Skills                          map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
 	RemoveSkills                    map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
-	SideOneLeftSideActionTypes      LeftSideActionTypes
-	SideTwoLeftSideActionTypes      LeftSideActionTypes
+	SideOneLSATypes                 LeftSideActionTypes
+	SideTwoLSATypes                 LeftSideActionTypes
 	ViewProfessionalSkillRatingSize int
 
 	// RSA

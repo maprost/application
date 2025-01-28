@@ -28,6 +28,7 @@ func lsaFirstSide(x genmodel.LeftSideActionType) bool {
 }
 
 func addLsa(data *texmodel.Index, app *genmodel.Application, lang lang.Language) {
+	style := app.JobPosition.TwoSideStyle
 	if len(app.Profile.LeftSideActionType) == 0 {
 		app.Profile.LeftSideActionType = genmodel.LeftSideActionTypes{
 			genmodel.TechSkill,
@@ -52,18 +53,22 @@ func addLsa(data *texmodel.Index, app *genmodel.Application, lang lang.Language)
 			return
 		}
 
-		if idx, ok := app.JobPosition.TwoSideStyle.SideOneLeftSideActionTypes.Index(action); ok {
-			sideOneLsa = append(sideOneLsa, texmodelLeftSideAction{
-				LeftSideAction: skill,
-				action:         action,
-				orderIdx:       idx,
-			})
-		} else if idx, ok := app.JobPosition.TwoSideStyle.SideTwoLeftSideActionTypes.Index(action); ok {
-			sideTwoLsa = append(sideTwoLsa, texmodelLeftSideAction{
-				LeftSideAction: skill,
-				action:         action,
-				orderIdx:       idx,
-			})
+		if len(style.SideOneLSATypes) > 0 || len(style.SideTwoLSATypes) > 0 {
+			if idx, ok := style.SideOneLSATypes.Index(action); ok {
+				sideOneLsa = append(sideOneLsa, texmodelLeftSideAction{
+					LeftSideAction: skill,
+					action:         action,
+					orderIdx:       idx,
+				})
+			} else if idx, ok := style.SideTwoLSATypes.Index(action); ok {
+				sideTwoLsa = append(sideTwoLsa, texmodelLeftSideAction{
+					LeftSideAction: skill,
+					action:         action,
+					orderIdx:       idx,
+				})
+			} else {
+				// do nothing
+			}
 		} else if idx, ok := app.Profile.LeftSideActionType.Index(action); ok {
 			if lsaFirstSide(action) {
 				sideOneLsa = append(sideOneLsa, texmodelLeftSideAction{

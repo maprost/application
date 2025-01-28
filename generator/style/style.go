@@ -24,8 +24,8 @@ func (s Style) Data(application *genmodel.Application) (data interface{}, err er
 			// LSA
 			Skills:                          oneSideStyle.Skills,
 			RemoveSkills:                    oneSideStyle.RemoveSkills,
-			SideOneLeftSideActionTypes:      oneSideStyle.LeftSideActionTypes,
-			SideTwoLeftSideActionTypes:      nil,
+			SideOneLSATypes:                 oneSideStyle.LeftSideActionTypes,
+			SideTwoLSATypes:                 nil,
 			ViewProfessionalSkillRatingSize: oneSideStyle.ViewProfessionalSkillRatingSize,
 			// RSA
 			SideOneRSATypes: oneSideStyle.RightSideActionTypes,

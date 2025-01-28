@@ -60,18 +60,22 @@ func addRSA(data *texmodel.Index, app *genmodel.Application, local lang.Language
 			return
 		}
 
-		if idx, ok := style.SideOneRSATypes.Index(action); ok {
-			sideOneRsa = append(sideOneRsa, texmodelRightSideAction{
-				RSA:      rsa,
-				action:   action,
-				orderIdx: idx,
-			})
-		} else if idx, ok := style.SideTwoRSATypes.Index(action); ok {
-			sideTwoRsa = append(sideTwoRsa, texmodelRightSideAction{
-				RSA:      rsa,
-				action:   action,
-				orderIdx: idx,
-			})
+		if len(style.SideOneRSATypes) > 0 || len(style.SideTwoRSATypes) > 0 {
+			if idx, ok := style.SideOneRSATypes.Index(action); ok {
+				sideOneRsa = append(sideOneRsa, texmodelRightSideAction{
+					RSA:      rsa,
+					action:   action,
+					orderIdx: idx,
+				})
+			} else if idx, ok := style.SideTwoRSATypes.Index(action); ok {
+				sideTwoRsa = append(sideTwoRsa, texmodelRightSideAction{
+					RSA:      rsa,
+					action:   action,
+					orderIdx: idx,
+				})
+			} else {
+				// do nothing
+			}
 		} else if idx, ok := app.Profile.RightSideActionType.Index(action); ok {
 			if rsaFirstSide(action) {
 				sideOneRsa = append(sideOneRsa, texmodelRightSideAction{
