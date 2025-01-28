@@ -169,18 +169,18 @@ func Profile() genmodel.Profile {
 			lang.English: "I will.",
 			lang.German:  "Ich will.",
 		},
-		GeneralMyMotivationText: lang.TranslationMap{
-			lang.English: "GeneralMyMotivationText",
-			lang.German:  "GeneralMyMotivationText",
-		},
-		CustomMainQuestionTextLabel: lang.TranslationMap{
-			lang.English: "xxx",
-			lang.German:  "xxx",
-		},
-		GeneralMainQuestionText: lang.TranslationMap{
-			lang.English: "GeneralMainQuestionText",
-			lang.German:  "GeneralMainQuestionText",
-		},
+		//GeneralMyMotivationText: lang.TranslationMap{
+		//	lang.English: "GeneralMyMotivationText",
+		//	lang.German:  "GeneralMyMotivationText",
+		//},
+		//CustomMainQuestionTextLabel: lang.TranslationMap{
+		//	lang.English: "xxx",
+		//	lang.German:  "xxx",
+		//},
+		//GeneralMainQuestionText: lang.TranslationMap{
+		//	lang.English: "GeneralMainQuestionText",
+		//	lang.German:  "GeneralMainQuestionText",
+		//},
 		//CustomMyMotivationTextLabel: lang.TranslationMap{
 		//	lang.English: "CustomMyMotivationTextLabel",
 		//	lang.German:  "CustomMyMotivationTextLabel",

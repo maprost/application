@@ -120,33 +120,34 @@ func addRSA(data *texmodel.Index, app *genmodel.Application, local lang.Language
 }
 
 func convertProfile(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
-	return texmodel.RSA{
-		Label: customDefaultString(app.Profile.CustomProfilTextLabel, local, local.Profile()),
-		TexList: []string{
-			util.DefaultValue(app.JobPosition.ProfileText, local.String(app.Profile.GeneralProfileText)) +
-				"\\bigskip",
-		},
-	}, genmodel.Rsa_profile, true, nil
+	return convertTxt(
+		customDefaultString(app.Profile.CustomProfilTextLabel, local, local.Profile()),
+		util.DefaultValue(app.JobPosition.ProfileText, local.String(app.Profile.GeneralProfileText)),
+		genmodel.Rsa_profile,
+	)
 }
 
 func convertMyMotivation(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
-	return texmodel.RSA{
-		Label: customDefaultString(app.Profile.CustomMyMotivationTextLabel, local, local.Motivation()),
-		TexList: []string{
-			util.DefaultValue(app.JobPosition.MyMotivationText, local.String(app.Profile.GeneralMyMotivationText)) +
-				"\\bigskip",
-		},
-	}, genmodel.Rsa_myMotivation, true, nil
+	return convertTxt(
+		customDefaultString(app.Profile.CustomMyMotivationTextLabel, local, local.Motivation()),
+		util.DefaultValue(app.JobPosition.MyMotivationText, local.String(app.Profile.GeneralMyMotivationText)),
+		genmodel.Rsa_myMotivation,
+	)
 }
 
 func convertMainQuestion(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
+	return convertTxt(
+		customDefaultString(app.Profile.CustomMainQuestionTextLabel, local, local.MainQuestion()),
+		util.DefaultValue(app.JobPosition.MainQuestionText, local.String(app.Profile.GeneralMainQuestionText)),
+		genmodel.Rsa_mainQuestion,
+	)
+}
+
+func convertTxt(label string, txt string, action genmodel.RightSideActionType) (texmodel.RSA, genmodel.RightSideActionType, bool, error) {
 	return texmodel.RSA{
-		Label: customDefaultString(app.Profile.CustomMainQuestionTextLabel, local, local.MainQuestion()),
-		TexList: []string{
-			util.DefaultValue(app.JobPosition.MainQuestionText, local.String(app.Profile.GeneralMainQuestionText)) +
-				"\\bigskip",
-		},
-	}, genmodel.Rsa_mainQuestion, true, nil
+		Label:   label,
+		TexList: []string{txt + "\\bigskip"},
+	}, action, txt != "", nil
 }
 
 func convertExperience(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
