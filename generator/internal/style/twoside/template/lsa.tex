@@ -1,0 +1,35 @@
+{{range .}}
+    {{ if .Range }}
+        \category{{print "{" .Label "}"}}
+        {{range .Range}}
+            \linerange{{print "{" .Name "}" "{" .Min "}" "{" .Max "}" "{" .MinString "}" "{" .DeltaMaxMin "}" "{" .DeltaMaxFull "}" "{" .MinLabel "}" "{" .MaxLabel "}" "{" .DeltaMaxMinHalf "}"}}%
+        {{ end }}
+    {{ end }}
+
+    {{ if or (.Ratings) (.OtherRatings) }}
+        \category{{print "{" .Label "}"}}
+        {{ if .Ratings }}
+            \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
+            {{range .Ratings}}
+                \linerating{{print "{" .Name "}" "{" .Rating "}"}}
+            {{end}}
+            \end{tabular}
+            \medskip
+        {{end}}
+        {{.OtherRatings}}
+    {{ end }}
+
+    {{ if .Languages }}
+        \category{{print "{" .Label "}"}}
+        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+            {{range .Languages}}
+                {{.Name}} & {{.Level}} \\
+            {{end}}
+        \end{tabular}
+    {{ end }}
+
+    {{ if .List }}
+        \category{{print "{" .Label "}"}}
+        {{.List}}
+    {{ end }}
+{{ end }}

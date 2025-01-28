@@ -1,7 +1,6 @@
 package texmodel
 
 import (
-	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/lang"
 )
 
@@ -12,81 +11,9 @@ type Icon struct {
 	Document  string
 }
 
-type RatingLsa struct {
-	Name   string
-	Rating int // Rating range [1,10]
-}
-
-type Language struct {
-	Name  string
-	Level string
-}
-
-type RangeLsa struct {
-	Name            string
-	Min             float64 // range [0,1]
-	MinLabel        string
-	MinString       string  // needed for .tex
-	Max             float64 // range [0,1]
-	MaxLabel        string
-	MaxString       string // needed for .tex
-	DeltaMaxMin     string
-	DeltaMaxMinHalf string
-	DeltaMaxFull    string
-	SingleLabel     string
-}
-
-type LeftSideAction struct {
-	Type         int // 1: Skills + List, 2: List, 3: Language
-	Label        string
-	Ratings      []RatingLsa
-	OtherRatings string
-	List         string
-	Languages    []Language
-	Range        []RangeLsa
-}
-
 type Website struct {
 	Icon string // path
 	Url  string
-}
-
-type Experience struct {
-	Company       string
-	Position      string
-	Time          string
-	QuitReason    string
-	Description   string
-	Project       string // please add here your pet projects
-	Role          string // please add here more roles you did
-	Tech          string
-	DocumentLinks []string
-}
-
-type Education struct {
-	Graduation    string
-	FinalGrade    string
-	Institute     string
-	Time          string
-	QuitReason    string
-	Focus         string
-	DocumentLinks []string
-}
-
-type Publication struct {
-	Title         string
-	Publisher     string
-	Time          string
-	Content       string
-	DocumentLinks []string
-}
-
-type Award struct {
-	Title         string
-	Institute     string
-	Time          string
-	Content       string
-	DocumentLinks []string
 }
 
 type Index struct {
@@ -110,59 +37,16 @@ type Index struct {
 	Phone       string
 	Websites    []Website
 
-	// leftSide
-	SideOneLeftSideAction []LeftSideAction
-	SideTwoLeftSideAction []LeftSideAction
+	SideOneLSA string
+	SideTwoLSA string
 
-	// about me
-	AboutMeLabel string
-	AboutMe      string
-
-	// motivation
-	MyMotivationLabel string
-	MyMotivation      string
-
-	// main question
-	MainQuestionLabel string
-	MainQuestion      string
-
-	//TODO money amount
-	MoneyAmountLabel string
-	MoneyAmounts     []genmodel.LeftSideAction
-
-	//TODO time amount
-	TimeAmountLabel string
-	TimeAmounts     []genmodel.LeftSideAction
-
-	// experience
-	SideOneExperienceLabel string
-	SideOneExperience      []Experience
-	SideTwoExperienceLabel string
-	SideTwoExperience      []Experience
-
-	// education
-	SideOneEducationLabel string
-	SideOneEducation      []Education
-	SideTwoEducationLabel string
-	SideTwoEducation      []Education
-
-	// publication
-	SideOnePublicationLabel string
-	SideOnePublication      []Publication
-	SideTwoPublicationLabel string
-	SideTwoPublication      []Publication
-
-	// award
-	SideOneAwardLabel string
-	SideOneAward      []Award
-	SideTwoAwardLabel string
-	SideTwoAward      []Award
+	SideOneRSA []RSA
+	SideTwoRSA []RSA
 
 	Attachment []string
 }
 
 func (x Index) HasSideTwo() bool {
-	return len(x.SideTwoExperience) > 0 ||
-		len(x.SideTwoEducation) > 0 ||
-		len(x.SideTwoLeftSideAction) > 0
+	return len(x.SideTwoLSA) > 0 ||
+		len(x.SideTwoRSA) > 0
 }

@@ -1,0 +1,13 @@
+\linepositiontime{{print "{" .Graduation "}" "{" .Time "}"}}
+\begin{minipage}{\insidePageLength}
+    {{range .DocumentLinks}}%
+        \documentlink{{print "{" . "}"}}%
+    {{end}}%
+
+    \linefocus{{print "{" .Institute "}"}}
+
+    \linefocus{{print "{" .Focus "}"}}
+
+    \linefinalgrade{{print "{" .FinalGrade "}"}}
+
+\end{minipage} \\[1ex]

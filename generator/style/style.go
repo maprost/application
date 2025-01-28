@@ -2,9 +2,10 @@ package style
 
 import (
 	"errors"
+	"math"
 
 	"github.com/maprost/application/generator/genmodel"
-	"github.com/maprost/application/generator/internal/style/twoside"
+	twoside "github.com/maprost/application/generator/internal/style/twoside"
 )
 
 type Style int
@@ -20,25 +21,38 @@ func (s Style) Data(application *genmodel.Application) (data interface{}, err er
 		// convert oneSide into twoSide
 		oneSideStyle := application.JobPosition.OneSideStyle
 		application.JobPosition.TwoSideStyle = genmodel.TwoSideStyle{
-			Skills:                     oneSideStyle.Skills,
-			RemoveSkills:               oneSideStyle.RemoveSkills,
-			SideOneLeftSideActionTypes: oneSideStyle.LeftSideActionTypes,
-			SideTwoLeftSideActionTypes: nil,
-			Experience:                 oneSideStyle.Experience,
-			RemoveExperience:           oneSideStyle.RemoveExperience,
-			ShowExperiencePart:         oneSideStyle.ShowExperiencePart,
-			ShowExperienceParts:        oneSideStyle.ShowExperienceParts,
-			RemoveExperiencePart:       oneSideStyle.RemoveExperiencePart,
-			SideOneExperienceSize:      len(application.Profile.Experience),
-			Education:                  oneSideStyle.Education,
-			RemoveEducation:            oneSideStyle.RemoveEducation,
-			SideOneEducationSize:       len(application.Profile.Education),
+			// LSA
+			Skills:                          oneSideStyle.Skills,
+			RemoveSkills:                    oneSideStyle.RemoveSkills,
+			SideOneLeftSideActionTypes:      oneSideStyle.LeftSideActionTypes,
+			SideTwoLeftSideActionTypes:      nil,
+			ViewProfessionalSkillRatingSize: oneSideStyle.ViewProfessionalSkillRatingSize,
+			// RSA
+			SideOneRSATypes: oneSideStyle.RightSideActionTypes,
+			SideTwoRSATypes: nil,
+			SideOneRSAItems: math.MaxInt, // put all on side one
+			// experience
+			Experience:           oneSideStyle.Experience,
+			RemoveExperience:     oneSideStyle.RemoveExperience,
+			ShowExperienceParts:  oneSideStyle.ShowExperienceParts,
+			ShowExperiencePart:   oneSideStyle.ShowExperiencePart,
+			RemoveExperiencePart: oneSideStyle.RemoveExperiencePart,
+			// education
+			Education:       oneSideStyle.Education,
+			RemoveEducation: oneSideStyle.RemoveEducation,
+			// publication
+			Publication:       oneSideStyle.Publication,
+			RemovePublication: oneSideStyle.RemovePublication,
+			// award
+			Award:       oneSideStyle.Award,
+			RemoveAward: oneSideStyle.RemoveAward,
 		}
 		application.JobPosition.Style = TwoSide
 		return twoside.Data(application)
 
 	case TwoSide:
 		return twoside.Data(application)
+
 	}
 
 	err = errors.New("Style not found.")

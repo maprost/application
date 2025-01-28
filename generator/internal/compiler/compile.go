@@ -1,6 +1,7 @@
 package compiler
 
 import (
+	"bytes"
 	"fmt"
 	"os"
 	"text/template"
@@ -10,11 +11,11 @@ import (
 
 func CreateTexFile(outputPath string, file string, data interface{}, path string, mainFile string, subFiles ...string) (err error) {
 	indexPath := path + mainFile
-	c, err := os.ReadFile(indexPath)
-	if err != nil {
-		return err
-	}
-	fmt.Println(string(c))
+	//c, err := os.ReadFile(indexPath)
+	//if err != nil {
+	//	return err
+	//}
+	//fmt.Println(string(c))
 
 	indexFile, err := template.ParseFiles(indexPath)
 	if err != nil {
@@ -86,4 +87,22 @@ func texFile(path string, file string) string {
 
 func concat(path string, file string, end string) string {
 	return util.JoinStrings(path, "/", file+"."+end)
+}
+
+func CompileSubTex(path string, mainFile string, data interface{}) (string, error) {
+	subPath := path + mainFile
+	fmt.Println("----------------------------------------------")
+	fmt.Println("--- CompileSubTex: ", subPath)
+	subFile, err := template.ParseFiles(subPath)
+	if err != nil {
+		return "", err
+	}
+
+	var b bytes.Buffer
+	err = subFile.Execute(&b, data)
+	if err != nil {
+		return "", err
+	}
+
+	return b.String(), nil
 }

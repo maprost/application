@@ -1,0 +1,8 @@
+\linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
+\begin{minipage}{\insidePageLength}
+    {{range .DocumentLinks}}%
+        \documentlink{{print "{" . "}"}}%
+    {{end}}%
+    \lineinstitute{{print "{" .Institute "}"}}
+    \linecontent{{print "{" .Content "}"}}
+\end{minipage} \\[1ex]

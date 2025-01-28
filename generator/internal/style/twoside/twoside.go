@@ -18,10 +18,14 @@ func Data(application *genmodel.Application) (data interface{}, err error) {
 }
 
 func Files() (path string, mainFile string, subFiles []string) {
-	path = rootPath() + "/template/"
+	path = templatePath()
 	mainFile = "index.tex"
 	subFiles = []string{}
 	return
+}
+
+func templatePath() string {
+	return rootPath() + "/template/"
 }
 
 func rootPath() string {

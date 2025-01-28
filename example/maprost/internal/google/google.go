@@ -1,7 +1,6 @@
 package google
 
 import (
-	"github.com/maprost/application/example/maprost/internal"
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/lang"
 	"github.com/maprost/application/generator/style"
@@ -12,24 +11,24 @@ func Google() genmodel.JobPosition {
 		MainColor: "4285F4",
 		Style:     style.TwoSide,
 		TwoSideStyle: genmodel.TwoSideStyle{
-			RemoveSkills: map[genmodel.LeftSideActionType][]genmodel.ID{
-				genmodel.TechSkill:   {internal.TechSkill_Go},
-				genmodel.Languages:   {internal.Lang_De},
-				genmodel.MoneyAmount: {internal.Money_60for40, internal.Money_48for32},
-			},
-			Skills: map[genmodel.LeftSideActionType][]genmodel.ID{
-				genmodel.TimeAmount: {internal.Time_1632},
-			},
-			SideOneLeftSideActionTypes: []genmodel.LeftSideActionType{
-				genmodel.TechSkill,
-				genmodel.TimeAmount,
-				genmodel.MoneyAmount,
-			},
-			SideTwoLeftSideActionTypes: []genmodel.LeftSideActionType{
-				genmodel.SoftSkills,
-				genmodel.Interests,
-				genmodel.Languages,
-			},
+			//RemoveSkills: map[genmodel.LeftSideActionType][]genmodel.ID{
+			//	genmodel.TechSkill:   {internal.TechSkill_Go},
+			//	genmodel.Languages:   {internal.Lang_De},
+			//	genmodel.MoneyAmount: {internal.Money_60for40, internal.Money_48for32},
+			//},
+			//Skills: map[genmodel.LeftSideActionType][]genmodel.ID{
+			//	genmodel.TimeAmount: {internal.Time_1632},
+			//},
+			//SideOneLeftSideActionTypes: []genmodel.LeftSideActionType{
+			//	genmodel.TechSkill,
+			//	genmodel.TimeAmount,
+			//	genmodel.MoneyAmount,
+			//},
+			//SideTwoLeftSideActionTypes: []genmodel.LeftSideActionType{
+			//	genmodel.SoftSkills,
+			//	genmodel.Interests,
+			//	genmodel.Languages,
+			//},
 			//Education: []genmodel.ID{
 			//	internal.Edu_Comp,
 			//},
@@ -39,6 +38,7 @@ func Google() genmodel.JobPosition {
 			//SideOneEducationSize: 1,
 			//ShowExperienceParts:  1,
 			//RemoveExperiencePart: []genmodel.ExperiencePart{genmodel.ExperiencePart_techStack},
+			SideOneRSAItems: 9,
 		},
 		Lang:    lang.German,
 		Company: "Google",

@@ -20,40 +20,6 @@ type Language struct {
 	Level lang.TranslationMap
 }
 
-type LeftSideActionType int
-
-const (
-	TechSkill     = LeftSideActionType(1)
-	Interests     = LeftSideActionType(2)
-	SoftSkills    = LeftSideActionType(3)
-	Languages     = LeftSideActionType(4)
-	Hobbies       = LeftSideActionType(5)
-	TimeAmount    = LeftSideActionType(6)
-	Quotation     = LeftSideActionType(7)
-	PersonalGoals = LeftSideActionType(8)
-	MoneyAmount   = LeftSideActionType(9)
-)
-
-func (x LeftSideActionType) FirstSide() bool {
-	switch x {
-	case TechSkill, Interests, SoftSkills, Languages, Hobbies:
-		return true
-	default:
-		return false
-	}
-}
-
-type LeftSideActionTypes []LeftSideActionType
-
-func (x LeftSideActionTypes) Index(l LeftSideActionType) (int, bool) {
-	for i, a := range x {
-		if a == l {
-			return i, true
-		}
-	}
-	return 0, false
-}
-
 type ExperiencePart int
 
 const (
@@ -134,23 +100,25 @@ type FunFacts struct {
 }
 
 type Profile struct {
-	FirstName          string
-	LastName           string
-	Title              string
-	Image              string // path
-	Nationality        lang.TranslationMap
-	Birthday           string
-	Address            ProfileAddress
-	Email              string
-	Phone              string
-	SignPath           string   // path to the sign image
-	Websites           []string // url
-	Attachment         []string
-	LeftSideActionType LeftSideActionTypes // add here the order of leftSideActions
+	FirstName           string
+	LastName            string
+	Title               string
+	Image               string // path
+	Nationality         lang.TranslationMap
+	Birthday            string
+	Address             ProfileAddress
+	Email               string
+	Phone               string
+	SignPath            string   // path to the sign image
+	Websites            []string // url
+	Attachment          []string
+	LeftSideActionType  LeftSideActionTypes  // add here the order of leftSideActions
+	RightSideActionType RightSideActionTypes // add here the order of leftSideActions
 
 	// professional/tech skills
-	CustomProfessionalSkillLabel lang.TranslationMap
-	ProfessionalSkills           []LeftSideAction // should contains all professional skills you have
+	CustomProfessionalSkillLabel    lang.TranslationMap
+	ProfessionalSkills              []LeftSideAction // should contains all professional skills you have
+	ViewProfessionalSkillRatingSize int
 
 	// soft skills
 	CustomSoftSkillLabel lang.TranslationMap
@@ -176,9 +144,9 @@ type Profile struct {
 	CustomMoneyAmountLabel lang.TranslationMap
 	MoneyAmount            []LeftSideAction
 
-	// about me
-	CustomAboutMeTextLabel lang.TranslationMap
-	GeneralAboutMeText     lang.TranslationMap // your general profile text, this text can contains tex elements
+	// profile
+	CustomProfilTextLabel lang.TranslationMap
+	GeneralProfileText    lang.TranslationMap // your general profile text, this text can contains tex elements
 
 	// motivation
 	CustomMyMotivationTextLabel lang.TranslationMap

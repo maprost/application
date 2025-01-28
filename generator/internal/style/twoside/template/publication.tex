@@ -1,0 +1,8 @@
+\linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
+\begin{minipage}{\insidePageLength}
+    {{range .DocumentLinks}}%
+        \documentlink{{print "{" . "}"}}%
+    {{end}}%
+    \linepublisher{{print "{" .Publisher "}"}}
+    \linecontent{{print "{" .Content "}"}}
+\end{minipage} \\[1ex]

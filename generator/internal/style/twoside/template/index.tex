@@ -65,18 +65,7 @@
 }
 
 \newcommand{\mainquestion}[1]{
-        {{ if and (ne .MainQuestionLabel "") (ne .MainQuestionLabel "xxx") }}
-        \colorbox{lightgray}{
-            \begin{minipage}[t]{1.0\linewidth}
-                \bigskip
-                \timeLineHeader{{print "{" .MainQuestionLabel "}"}}
-                {{.MainQuestion}}
-                \bigskip
-            \end{minipage}
-            \bigskip
-        }
-    {{end}}
-    \bigskip
+
 }
 
 \newcommand{\linepositiontime}[2]{
@@ -116,174 +105,6 @@
 }
 
 \newcommand{\documentlink}[1]{\href{#1}{\documentIcon}~
-}
-
-\newcommand{\experiencesection}[1]{
-
-    \ifnum1=#1\relax
-    \timeLineHeader{{print "{" .SideOneExperienceLabel "}"}}
-    \else
-    \timeLineHeader{{print "{" .SideTwoExperienceLabel "}"}}
-    \fi
-
-    \begin{minipage}{\indentLength}
-    ~
-    \end{minipage}
-    \begin{minipage}{\outsidePageLength}
-
-        \ifnum1=#1\relax
-        {{range .SideOneExperience}}
-            \linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
-            \begin{minipage}{\insidePageLength}
-                {{range .DocumentLinks}}%
-                    \documentlink{{print "{" . "}"}}%
-                {{end}}%
-                \linecompany{{print "{" .Company "}"}}
-                \linedescription{{print "{" .Description "}"}}
-                \lineproject{{print "{" .Project "}"}}
-                \linerole{{print "{" .Role "}"}}
-                \linetech{{print "{" .Tech "}"}}
-                \linequit{{print "{" .QuitReason "}"}}
-            \end{minipage} \\[1ex]
-        {{end}}
-        \else
-        {{range .SideTwoExperience}}
-            \linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
-            \begin{minipage}{\insidePageLength}
-                {{range .DocumentLinks}}%
-                    \documentlink{{print "{" . "}"}}%
-                {{end}}%
-                \linecompany{{print "{" .Company "}"}}
-                \linedescription{{print "{" .Description "}"}}
-                \lineproject{{print "{" .Project "}"}}
-                \linerole{{print "{" .Role "}"}}
-                \linetech{{print "{" .Tech "}"}}
-                \linequit{{print "{" .QuitReason "}"}}
-            \end{minipage} \\[1ex]
-        {{end}}
-        \fi
-    \end{minipage}
-}
-
-\newcommand{\educationsection}[1]{
-
-    \ifnum1=#1\relax
-    \timeLineHeader{{print "{" .SideOneEducationLabel "}"}}
-    \else
-    \timeLineHeader{{print "{" .SideTwoEducationLabel "}"}}
-    \fi
-
-    \begin{minipage}{\indentLength}
-    ~
-    \end{minipage}
-    \begin{minipage}{\outsidePageLength}
-
-        \ifnum1=#1\relax
-        {{range .SideOneEducation}}
-            \linepositiontime{{print "{" .Graduation "}" "{" .Time "}"}}
-            \begin{minipage}{\insidePageLength}
-                    {{range .DocumentLinks}}%
-                        \documentlink{{print "{" . "}"}}%
-                    {{end}}%
-                \linefocus{{print "{" .Institute "}"}}
-                \linefocus{{print "{" .Focus "}"}}
-                \linefinalgrade{{print "{" .FinalGrade "}"}}
-                \linequit{{print "{" .QuitReason "}"}}
-            \end{minipage} \\[1ex]
-        {{end}}
-        \else
-        {{range .SideTwoEducation}}
-            \linepositiontime{{print "{" .Graduation "}" "{" .Time "}"}}
-            \begin{minipage}{\insidePageLength}
-                    {{range .DocumentLinks}}%
-                        \documentlink{{print "{" . "}"}}%
-                    {{end}}%
-                \linefocus{{print "{" .Institute "}"}}
-                \linefocus{{print "{" .Focus "}"}}
-                \linefinalgrade{{print "{" .FinalGrade "}"}}
-                \linequit{{print "{" .QuitReason "}"}}
-            \end{minipage} \\[1ex]
-        {{end}}
-        \fi
-    \end{minipage}
-}
-
-\newcommand{\publicationsection}[1]{
-
-    \ifnum1=#1\relax
-    \timeLineHeader{{print "{" .SideOnePublicationLabel "}"}}
-    \else
-    \timeLineHeader{{print "{" .SideTwoPublicationLabel "}"}}
-    \fi
-
-    \begin{minipage}{\indentLength}
-    ~
-    \end{minipage}
-    \begin{minipage}{\outsidePageLength}
-        \ifnum1=#1\relax
-        {{range .SideOnePublication}}
-            \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
-            \begin{minipage}{\insidePageLength}
-                    {{range .DocumentLinks}}%
-                        \documentlink{{print "{" . "}"}}%
-                    {{end}}%
-                \linepublisher{{print "{" .Publisher "}"}}
-                \linecontent{{print "{" .Content "}"}}
-            \end{minipage} \\[1ex]
-        {{end}}
-        \else
-        {{range .SideTwoPublication}}
-            \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
-            \begin{minipage}{\insidePageLength}
-                    {{range .DocumentLinks}}%
-                        \documentlink{{print "{" . "}"}}%
-                    {{end}}%
-                \linepublisher{{print "{" .Publisher "}"}}
-                \linecontent{{print "{" .Content "}"}}
-            \end{minipage} \\[1ex]
-        {{end}}
-        \fi
-    \end{minipage}
-}
-
-
-\newcommand{\awardsection}[1]{
-
-    \ifnum1=#1\relax
-    \timeLineHeader{{print "{" .SideOneAwardLabel "}"}}
-    \else
-    \timeLineHeader{{print "{" .SideTwoAwardLabel "}"}}
-    \fi
-
-    \begin{minipage}{\indentLength}
-    ~
-    \end{minipage}
-    \begin{minipage}{\outsidePageLength}
-
-        \ifnum1=#1\relax
-        {{range .SideOneAward}}
-            \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
-            \begin{minipage}{\insidePageLength}
-                    {{range .DocumentLinks}}%
-                        \documentlink{{print "{" . "}"}}%
-                    {{end}}%
-                \lineinstitute{{print "{" .Institute "}"}}
-                \linecontent{{print "{" .Content "}"}}
-            \end{minipage} \\[1ex]
-        {{end}}
-        \else
-        {{range .SideTwoAward}}
-            \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
-            \begin{minipage}{\insidePageLength}
-                    {{range .DocumentLinks}}%
-                        \documentlink{{print "{" . "}"}}%
-                    {{end}}%
-                \lineinstitute{{print "{" .Institute "}"}}
-                \linecontent{{print "{" .Content "}"}}
-            \end{minipage} \\[1ex]
-        {{end}}
-        \fi
-    \end{minipage}
 }
 
 % company custom color
@@ -381,96 +202,6 @@
     \smallskip
 }
 
-\newcommand{\sideOneleftSideAction}{%
-    {{range .SideOneLeftSideAction}}
-
-%        %TODO if .BulletList
-%        \category{{print "{" .Label "}"}}
-%        \begin{itemize}[leftmargin=*,noitemsep,nolistsep]
-%            \item one
-%            \item two
-%            \item three
-%        \end{itemize}
-%        %TODO end
-%
-%        %TODO if .Quotation
-%        \category{{print "{" .Label "}"}}
-%        \say{Here, a quotation is written and even some \say{nested} quotations are possible.}
-%        %TODO end
-
-        {{ if .Range }}
-        %TODO if .RangeText
-            \category{{print "{" .Label "}"}}
-            {{range .Range}}
-                \linerange{{print "{" .Name "}" "{" .Min "}" "{" .Max "}" "{" .MinString "}" "{" .DeltaMaxMin "}" "{" .DeltaMaxFull "}" "{" .MinLabel "}" "{" .MaxLabel "}" "{" .DeltaMaxMinHalf "}"}}
-            {{ end }}
-        {{ end }}
-
-        {{ if .Ratings }}
-            \category{{print "{" .Label "}"}}
-            \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
-                {{range .Ratings}}
-                    \linerating{{print "{" .Name "}" "{" .Rating "}"}}
-                {{end}}
-            \end{tabular}
-            \medskip
-
-            {{.OtherRatings}}
-        {{ end }}
-        {{ if .Languages }}
-            \category{{print "{" .Label "}"}}
-            \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
-                {{range .Languages}}
-                    {{.Name}} & {{.Level}} \\
-                {{end}}
-            \end{tabular}
-        {{ end }}
-        {{ if .List }}
-            \category{{print "{" .Label "}"}}
-            {{.List}}
-        {{ end }}
-    {{end}}
-}
-
-\newcommand{\sideTwoleftSideAction}{%
-    {{range .SideTwoLeftSideAction}}
-
-        {{ if .Range }}
-            %TODO if .RangeText
-            \category{{print "{" .Label "}"}}
-            {{range .Range}}
-                \linerange{{print "{" .Name "}" "{" .Min "}" "{" .Max "}" "{" .MinString "}" "{" .DeltaMaxMin "}" "{" .DeltaMaxFull "}" "{" .MinLabel "}" "{" .MaxLabel "}" "{" .DeltaMaxMinHalf "}"}}%
-            {{ end }}
-        {{ end }}
-
-        {{ if .Ratings }}
-            \category{{print "{" .Label "}"}}
-            \begin{tabular}{@{}p{38mm} @{\hskip 0.2cm}p{10mm}@{}}
-                {{range .Ratings}}
-                    \linerating{{print "{" .Name "}" "{" .Rating "}"}}
-                {{end}}
-            \end{tabular}
-            \medskip
-
-            {{.OtherRatings}}
-        {{ end }}
-
-        {{ if .Languages }}
-            \category{{print "{" .Label "}"}}
-            \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
-                {{range .Languages}}
-                    {{.Name}} & {{.Level}} \\
-                {{end}}
-            \end{tabular}
-        {{ end }}
-
-        {{ if .List }}
-            \category{{print "{" .Label "}"}}
-            {{.List}}
-        {{ end }}
-    {{end}}
-}
-
 % header/footer:
 \pagestyle{fancy} % Disable headers
 \renewcommand{\headrulewidth}{0pt}
@@ -524,14 +255,11 @@
 
         \smallskip
 
-
-        % Title
         {{.Title}}
 
         \medskip
 
-
-        % contact info
+        % contact infos
         \renewcommand{\arraystretch}{1.2}
         \begin{tabular}{@{}p{0.5cm} @{\hskip 0.2cm}p{43mm}@{}}
             \icon{\Mundus}  & {{.Nationality}}  \\
@@ -543,7 +271,9 @@
                 \href{{print "{" .Url "}" }}{\includegraphics[width=5mm]{{print "{" .Icon "}"}}}{{end}}\\
         \end{tabular}
 
-        \sideOneleftSideAction
+        \medskip
+
+        {{.SideOneLSA}}
 
     \end{textblock}
     \begin{textblock}{14.5}(6.5, 0.5)
@@ -552,35 +282,17 @@
         \pgfmathsetlength{\outsidePageLength}{140mm}
         \pgfmathsetlength{\insidePageLength}{135mm}
 
-        {{if (ne .AboutMe "") }}
-            \timeLineHeader{{print "{" .AboutMeLabel "}"}}
-            {{.AboutMe}}
-        {{end}}
+        {{range .SideOneRSA }}
+            \timeLineHeader{{print "{" .Label "}"}}
 
-        \bigskip
-
-
-        {{if (ne .MyMotivation "") }}
-            \timeLineHeader{{print "{" .MyMotivationLabel "}"}}
-            {{.MyMotivation}}
-        {{end}}
-
-        \mainquestion{4}
-
-        {{ if .SideOneExperience }}
-            \experiencesection{1}
-        {{end}}
-
-        {{ if .SideOneEducation }}
-            \educationsection{1}
-        {{end}}
-
-        {{ if .SideOnePublication }}
-            \publicationsection{1}
-        {{end}}
-
-        {{ if .SideOneAward }}
-            \awardsection{1}
+            \begin{minipage}{\indentLength}
+                ~
+            \end{minipage}
+            \begin{minipage}{\outsidePageLength}
+                {{ range .TexList }}
+                    {{.}}
+                {{end}}
+            \end{minipage}
         {{end}}
     \end{textblock}
 
@@ -592,7 +304,7 @@
         \backgroundColorForSideBar
         \begin{textblock}{5.1}(0.5, 0.2)
             \medskip
-            \sideTwoleftSideAction
+            {{.SideTwoLSA}}
 
         \end{textblock}
         \begin{textblock}{14.5}(6.5, 0.5)
@@ -601,31 +313,28 @@
             \pgfmathsetlength{\outsidePageLength}{140mm}
             \pgfmathsetlength{\insidePageLength}{135mm}
 
-            {{ if .SideTwoExperience }}
-                \experiencesection{2}
-            {{end}}
+            {{range .SideTwoRSA }}
+                \timeLineHeader{{print "{" .Label "}"}}
 
-            {{ if .SideTwoEducation }}
-                \educationsection{2}
-            {{end}}
-
-            {{ if .SideTwoPublication }}
-            \publicationsection{2}
-            {{end}}
-
-            {{ if .SideTwoAward }}
-            \awardsection{2}
+                \begin{minipage}{\indentLength}
+                    ~
+                \end{minipage}
+                \begin{minipage}{\outsidePageLength}
+                    {{ range .TexList }}
+                        {{.}}
+                    {{end}}
+                \end{minipage}
             {{end}}
 
         \end{textblock}
     {{end}}
+
     %------------------------------------------------
     %---- attachments
     %------------------------------------------------
-
     {{range .Attachment}}
         \newpage
-
+        {{.}}
     {{end}}
 
 \end{document}

@@ -80,22 +80,6 @@ func Profile() genmodel.Profile {
 			lang.English: "german",
 			lang.German:  "deutsch",
 		},
-		GeneralMyMotivationText: lang.TranslationMap{
-			lang.English: "GeneralMyMotivationText",
-			lang.German:  "GeneralMyMotivationText",
-		},
-		CustomMainQuestionTextLabel: lang.TranslationMap{
-			lang.English: "xxx",
-			lang.German:  "xxx",
-		},
-		GeneralMainQuestionText: lang.TranslationMap{
-			lang.English: "GeneralMainQuestionText",
-			lang.German:  "GeneralMainQuestionText",
-		},
-		//CustomMyMotivationTextLabel: lang.TranslationMap{
-		//	lang.English: "CustomMyMotivationTextLabel",
-		//	lang.German:  "CustomMyMotivationTextLabel",
-		//},
 		Phone:    "N/A",
 		Websites: []string{"https://github.com/maprost"},
 		Address: genmodel.ProfileAddress{
@@ -107,15 +91,15 @@ func Profile() genmodel.Profile {
 				lang.German:  "Deutschland",
 			},
 		},
-		LeftSideActionType: []genmodel.LeftSideActionType{
-			genmodel.Languages,
-			genmodel.Hobbies,
-			genmodel.SoftSkills,
-			genmodel.Interests,
-			genmodel.TechSkill,
-			genmodel.TimeAmount,
-			genmodel.MoneyAmount,
-		},
+		//LeftSideActionType: []genmodel.LeftSideActionType{
+		//	genmodel.Languages,
+		//	genmodel.Hobbies,
+		//	genmodel.SoftSkills,
+		//	genmodel.Interests,
+		//	genmodel.TechSkill,
+		//	genmodel.TimeAmount,
+		//	genmodel.MoneyAmount,
+		//},
 		TimeAmount: []genmodel.LeftSideAction{
 			{Id: Time_1632, Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 16, Max: 32},
 			{Id: Time_2432, Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 24, Max: 32},
@@ -164,11 +148,11 @@ func Profile() genmodel.Profile {
 			{Name: lang.DefaultTranslation("Backend development")},
 			{Name: lang.DefaultTranslation("Big Data")},
 		},
-		//Hobbies: []lang.TranslationMap{
-		//	{lang.English: "Boardgames", lang.German: "Brettspiele"},
-		//	{lang.English: "Traveling by bike", lang.German: "Fahrradtouren"},
-		//	{lang.English: "aikido", lang.German: "Aikido"},
-		//},
+		Hobbies: []genmodel.LeftSideAction{
+			{Name: lang.TranslationMap{lang.English: "Boardgames", lang.German: "Brettspiele"}},
+			{Name: lang.TranslationMap{lang.English: "Traveling by bike", lang.German: "Fahrradtouren"}},
+			{Name: lang.TranslationMap{lang.English: "aikido", lang.German: "Aikido"}},
+		},
 		Language: []genmodel.Language{
 			{
 				Id:    Lang_De,
@@ -181,10 +165,26 @@ func Profile() genmodel.Profile {
 				Level: lang.DefaultTranslation("B2"),
 			},
 		},
-		GeneralAboutMeText: lang.TranslationMap{
+		GeneralProfileText: lang.TranslationMap{
 			lang.English: "I will.",
 			lang.German:  "Ich will.",
 		},
+		GeneralMyMotivationText: lang.TranslationMap{
+			lang.English: "GeneralMyMotivationText",
+			lang.German:  "GeneralMyMotivationText",
+		},
+		CustomMainQuestionTextLabel: lang.TranslationMap{
+			lang.English: "xxx",
+			lang.German:  "xxx",
+		},
+		GeneralMainQuestionText: lang.TranslationMap{
+			lang.English: "GeneralMainQuestionText",
+			lang.German:  "GeneralMainQuestionText",
+		},
+		//CustomMyMotivationTextLabel: lang.TranslationMap{
+		//	lang.English: "CustomMyMotivationTextLabel",
+		//	lang.German:  "CustomMyMotivationTextLabel",
+		//},
 		Experience: []genmodel.Experience{
 			{
 				Id:          Exp_fitness,
