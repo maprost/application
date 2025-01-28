@@ -24,7 +24,7 @@ type RangeLsa struct {
 	SingleLabel     string
 }
 
-type RightSideAction struct {
+type LeftSideAction struct {
 	Type         int // 1: Skills + List, 2: List, 3: Language
 	Label        string
 	Ratings      []RatingLsa
