@@ -7,17 +7,17 @@
 \end{minipage}
 \begin{minipage}{\insidePageLength}
     \checkPar{{print "{" .Company "}"}}{\scshape {{.Company}} ~ %
-            {{range .DocumentLinks}}%
-        \href{{print "{" . "}" }}{\documentIcon}%
-{{end}}%
-}
+        {{range .DocumentLinks}}%
+            \href{{print "{" . "}" }}{\documentIcon}%
+        {{end}}%
+    }
 
-\checkPar{{print "{" .Description "}"}}{{print "{" .Description "}"}}
+    \checkPar{{print "{" .Description "}"}}{{print "{" .Description "}"}}
 
-\checkPar{{print "{" .Project "}"}}{\projectIcon~ {{.Project }}}
+    \checkPar{{print "{" .Project "}"}}{\projectIcon~ {{.Project }}}
 
-\checkPar{{print "{" .Role "}"}}{\roleIcon~ {{.Role }}}
+    \checkPar{{print "{" .Role "}"}}{\roleIcon~ {{.Role }}}
 
-\checkPar{{print "{" .Tech "}"}}{\techStackIcon~ {{.Tech }}}
+    \checkPar{{print "{" .Tech "}"}}{\techStackIcon~ {{.Tech }}}
 
 \end{minipage} \\[1ex]
