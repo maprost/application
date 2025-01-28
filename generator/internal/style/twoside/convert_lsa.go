@@ -69,19 +69,21 @@ func addLsa(data *texmodel.Index, app *genmodel.Application, lang lang.Language)
 			} else {
 				// do nothing
 			}
-		} else if idx, ok := app.Profile.LeftSideActionType.Index(action); ok {
-			if lsaFirstSide(action) {
-				sideOneLsa = append(sideOneLsa, texmodelLeftSideAction{
-					LeftSideAction: skill,
-					action:         action,
-					orderIdx:       idx,
-				})
-			} else {
-				sideTwoLsa = append(sideTwoLsa, texmodelLeftSideAction{
-					LeftSideAction: skill,
-					action:         action,
-					orderIdx:       idx,
-				})
+		} else {
+			if idx, ok := app.Profile.LeftSideActionType.Index(action); ok {
+				if lsaFirstSide(action) {
+					sideOneLsa = append(sideOneLsa, texmodelLeftSideAction{
+						LeftSideAction: skill,
+						action:         action,
+						orderIdx:       idx,
+					})
+				} else {
+					sideTwoLsa = append(sideTwoLsa, texmodelLeftSideAction{
+						LeftSideAction: skill,
+						action:         action,
+						orderIdx:       idx,
+					})
+				}
 			}
 		}
 	}

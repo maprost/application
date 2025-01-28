@@ -76,19 +76,21 @@ func addRSA(data *texmodel.Index, app *genmodel.Application, local lang.Language
 			} else {
 				// do nothing
 			}
-		} else if idx, ok := app.Profile.RightSideActionType.Index(action); ok {
-			if rsaFirstSide(action) {
-				sideOneRsa = append(sideOneRsa, texmodelRightSideAction{
-					RSA:      rsa,
-					action:   action,
-					orderIdx: idx,
-				})
-			} else {
-				sideTwoRsa = append(sideTwoRsa, texmodelRightSideAction{
-					RSA:      rsa,
-					action:   action,
-					orderIdx: idx,
-				})
+		} else {
+			if idx, ok := app.Profile.RightSideActionType.Index(action); ok {
+				if rsaFirstSide(action) {
+					sideOneRsa = append(sideOneRsa, texmodelRightSideAction{
+						RSA:      rsa,
+						action:   action,
+						orderIdx: idx,
+					})
+				} else {
+					sideTwoRsa = append(sideTwoRsa, texmodelRightSideAction{
+						RSA:      rsa,
+						action:   action,
+						orderIdx: idx,
+					})
+				}
 			}
 		}
 	}
