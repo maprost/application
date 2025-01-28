@@ -27,7 +27,7 @@ func lsaFirstSide(x genmodel.LeftSideActionType) bool {
 	}
 }
 
-func addLsa(data *texmodel.Index, app *genmodel.Application, lang lang.Language) {
+func addLsa(data *texmodel.Index, app *genmodel.Application, local lang.Language) {
 	style := app.JobPosition.TwoSideStyle
 	if len(app.Profile.LeftSideActionType) == 0 {
 		app.Profile.LeftSideActionType = genmodel.LeftSideActionTypes{
@@ -43,7 +43,8 @@ func addLsa(data *texmodel.Index, app *genmodel.Application, lang lang.Language)
 
 	var sideOneLsa []texmodelLeftSideAction
 	var sideTwoLsa []texmodelLeftSideAction
-	addLeftSideAction := func(skill texmodel.LeftSideAction, action genmodel.LeftSideActionType, ok bool, err error) {
+	addLeftSideAction := func(fn func(app *genmodel.Application, local lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error)) {
+		skill, action, ok, err := fn(app, local)
 		if err != nil {
 			fmt.Println("lsa err: " + err.Error())
 			return
@@ -88,13 +89,15 @@ func addLsa(data *texmodel.Index, app *genmodel.Application, lang lang.Language)
 		}
 	}
 
-	addLeftSideAction(convertProfSkills(app, lang))
-	addLeftSideAction(convertSoftSkills(app, lang))
-	addLeftSideAction(convertHobbies(app, lang))
-	addLeftSideAction(convertInterests(app, lang))
-	addLeftSideAction(convertLanguage(app, lang))
-	addLeftSideAction(convertTimeAmount(app, lang))
-	addLeftSideAction(convertMoneyAmount(app, lang))
+	addLeftSideAction(lsaConvProfSkills)
+	addLeftSideAction(lsaConvSoftSkills)
+	addLeftSideAction(lsaConvHobbies)
+	addLeftSideAction(lsaConvInterests)
+	addLeftSideAction(lsaConvLanguage)
+	addLeftSideAction(lsaConvTimeAmount)
+	addLeftSideAction(lsaConvMoneyAmount)
+	addLeftSideAction(lsaConvPublication)
+	addLeftSideAction(lsaConvAward)
 
 	conv := func(s []texmodelLeftSideAction) string {
 		sort.Slice(s, func(i, j int) bool {
@@ -117,9 +120,8 @@ func addLsa(data *texmodel.Index, app *genmodel.Application, lang lang.Language)
 	data.SideTwoLSA = conv(sideTwoLsa)
 }
 
-func convertProfSkills(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+func lsaConvProfSkills(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
 	var res texmodel.LeftSideAction
-	res.Type = 1
 	res.Label = app.Profile.CustomProfessionalSkillLabel[lang]
 	if res.Label == "" {
 		res.Label = lang.TechSkills()
@@ -157,46 +159,66 @@ func convertProfSkills(app *genmodel.Application, lang lang.Language) (texmodel.
 	return res, action, len(skills) > 0, nil
 }
 
-func convertSoftSkills(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+func lsaConvSoftSkills(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
 	list, action, err := util.CalculateSoftSkills(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	customLabel := app.Profile.CustomSoftSkillLabel[lang]
 	defaultLabel := lang.SoftSkills()
 	return convertListSkill(list, action, customLabel, defaultLabel, err, lang)
 }
 
-func convertInterests(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+func lsaConvInterests(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
 	list, action, err := util.CalculateInterest(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	customLabel := app.Profile.CustomInterestLabel[lang]
 	defaultLabel := lang.Interests()
 	return convertListSkill(list, action, customLabel, defaultLabel, err, lang)
 }
 
-func convertHobbies(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+func lsaConvHobbies(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
 	list, action, err := util.CalculateHobbies(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	customLabel := app.Profile.CustomHobbiesLabel[lang]
 	defaultLabel := lang.Hobbies()
 	return convertListSkill(list, action, customLabel, defaultLabel, err, lang)
 }
 
-func convertTimeAmount(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+func convertListSkill(skills []genmodel.LeftSideAction, action genmodel.LeftSideActionType, customLabel string, defaultLabel string, err error, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+	var res texmodel.LeftSideAction
 
-	log.Printf("convertTimeAmount start\n")
+	res.Label = customLabel
+	if res.Label == "" {
+		res.Label = defaultLabel
+	}
+
+	if err != nil {
+		return res, action, false, err
+	}
+
+	for i, skill := range skills {
+		if i > 0 {
+			res.List += ", "
+		}
+		res.List += lang.String(skill.Name)
+	}
+	return res, action, len(skills) > 0, nil
+}
+
+func lsaConvTimeAmount(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+
+	log.Printf("lsaConvTimeAmount start\n")
 
 	var res texmodel.LeftSideAction
-	res.Type = 1
 	res.Label = app.Profile.CustomTimeAmountLabel[lang]
 	if res.Label == "" {
 		res.Label = lang.TimeAmount()
 	}
 
-	log.Printf("convertTimeAmount 2\n")
+	log.Printf("lsaConvTimeAmount 2\n")
 
 	skills, action, err := util.CalculateTimeAmount(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	if err != nil {
 		return res, action, false, err
 	}
 
-	log.Printf("convertTimeAmount 3\n")
+	log.Printf("lsaConvTimeAmount 3\n")
 
 	//maxSkills := maxProfessionalSkills
 	//if maxProfessionalSkills+1 == len(skills) {
@@ -222,32 +244,31 @@ func convertTimeAmount(app *genmodel.Application, lang lang.Language) (texmodel.
 			DeltaMaxFull: fmt.Sprintf("%.3f", deltafull),
 		})
 	}
-	log.Printf("convertTimeAmount 4\n")
+	log.Printf("lsaConvTimeAmount 4\n")
 	log.Printf("%+v\n", res)
-	log.Printf("convertTimeAmount 5\n")
+	log.Printf("lsaConvTimeAmount 5\n")
 
 	return res, action, len(skills) > 0, nil
 }
 
-func convertMoneyAmount(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+func lsaConvMoneyAmount(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
 
-	log.Printf("convertMoneyAmount start\n")
+	log.Printf("lsaConvMoneyAmount start\n")
 
 	var res texmodel.LeftSideAction
-	res.Type = 1
 	res.Label = app.Profile.CustomMoneyAmountLabel[lang]
 	if res.Label == "" {
 		res.Label = lang.MoneyAmount()
 	}
 
-	log.Printf("convertMoneyAmount 2\n")
+	log.Printf("lsaConvMoneyAmount 2\n")
 
 	skills, action, err := util.CalculateMoneyAmount(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	if err != nil {
 		return res, action, false, err
 	}
 
-	log.Printf("convertMoneyAmount 3\n")
+	log.Printf("lsaConvMoneyAmount 3\n")
 
 	//maxSkills := maxProfessionalSkills
 	//if maxProfessionalSkills+1 == len(skills) {
@@ -298,40 +319,59 @@ func convertMoneyAmount(app *genmodel.Application, lang lang.Language) (texmodel
 			//	})
 		}
 	}
-	log.Printf("convertMoneyAmount 4\n")
+	log.Printf("lsaConvMoneyAmount 4\n")
 	log.Printf("%+v\n", res)
-	log.Printf("convertMoneyAmount 5\n")
+	log.Printf("lsaConvMoneyAmount 5\n")
 
 	return res, action, len(skills) > 0, nil
 }
 
-func convertListSkill(skills []genmodel.LeftSideAction, action genmodel.LeftSideActionType, customLabel string, defaultLabel string, err error, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+func lsaConvPublication(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
 	var res texmodel.LeftSideAction
-	res.Type = 2
+	action := genmodel.Lsa_publication
+	if !lsaTypeIsActive(app, action) {
+		return res, action, false, nil
+	}
 
-	res.Label = customLabel
+	res.Label = app.Profile.CustomPublicationLabel[lang]
 	if res.Label == "" {
-		res.Label = defaultLabel
+		res.Label = lang.Publication()
 	}
 
-	if err != nil {
-		return res, action, false, err
+	publications := filterPublication(app)
+	for _, pub := range publications {
+		res.PublicationLsa = append(res.PublicationLsa, texmodel.PublicationLsa{
+			Name: lang.String(pub.Title),
+		})
 	}
-
-	for i, skill := range skills {
-		if i > 0 {
-			res.List += ", "
-		}
-		res.List += lang.String(skill.Name)
-	}
-	return res, action, len(skills) > 0, nil
+	return res, action, len(publications) > 0, nil
 }
 
-func convertLanguage(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+func lsaConvAward(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
+	var res texmodel.LeftSideAction
+	action := genmodel.Lsa_award
+	if !lsaTypeIsActive(app, action) {
+		return res, action, false, nil
+	}
+
+	res.Label = app.Profile.CustomAwardLabel[lang]
+	if res.Label == "" {
+		res.Label = lang.Award()
+	}
+
+	awards := filterAward(app)
+	for _, award := range awards {
+		res.AwardLsa = append(res.AwardLsa, texmodel.AwardLsa{
+			Name: lang.String(award.Title),
+		})
+	}
+	return res, action, len(awards) > 0, nil
+}
+
+func lsaConvLanguage(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
 	langs, action, err := util.CalculateLanguage(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 
 	var res texmodel.LeftSideAction
-	res.Type = 3
 	res.Label = app.Profile.CustomLanguageLabel[lang]
 	if res.Label == "" {
 		res.Label = lang.Languages()
@@ -347,4 +387,18 @@ func convertLanguage(app *genmodel.Application, lang lang.Language) (texmodel.Le
 		})
 	}
 	return res, action, len(langs) > 0, nil
+}
+
+func lsaTypeIsActive(app *genmodel.Application, action genmodel.LeftSideActionType) bool {
+	style := style(app)
+	if _, ok := style.SideOneLSATypes.Index(action); ok {
+		return true
+	}
+	if _, ok := style.SideTwoLSATypes.Index(action); ok {
+		return true
+	}
+	if _, ok := app.Profile.LeftSideActionType.Index(action); ok {
+		return true
+	}
+	return false
 }

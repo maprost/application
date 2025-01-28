@@ -28,6 +28,24 @@
         \end{tabular}
     {{ end }}
 
+    {{ if .PublicationLsa }}
+        \category{{print "{" .Label "}"}}
+        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+            {{range .PublicationLsa}}
+                {{.Name}} & \\
+            {{end}}
+        \end{tabular}
+    {{ end }}
+
+    {{ if .AwardLsa }}
+        \category{{print "{" .Label "}"}}
+        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+            {{range .AwardLsa}}
+                {{.Name}} & \\
+            {{end}}
+        \end{tabular}
+    {{ end }}
+
     {{ if .List }}
         \category{{print "{" .Label "}"}}
         {{.List}}

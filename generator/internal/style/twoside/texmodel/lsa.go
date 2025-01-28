@@ -24,12 +24,21 @@ type RangeLsa struct {
 	SingleLabel     string
 }
 
+type PublicationLsa struct {
+	Name string
+}
+
+type AwardLsa struct {
+	Name string
+}
+
 type LeftSideAction struct {
-	Type         int // 1: Skills + List, 2: List, 3: Language
-	Label        string
-	Ratings      []RatingLsa
-	OtherRatings string
-	List         string
-	Languages    []Language
-	Range        []RangeLsa
+	Label          string
+	Ratings        []RatingLsa
+	OtherRatings   string
+	List           string
+	Languages      []Language
+	Range          []RangeLsa
+	PublicationLsa []PublicationLsa
+	AwardLsa       []AwardLsa
 }

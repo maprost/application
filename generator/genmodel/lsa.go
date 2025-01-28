@@ -12,16 +12,9 @@ const (
 	Quotation
 	PersonalGoals
 	MoneyAmount
+	Lsa_publication
+	Lsa_award
 )
-
-func (x LeftSideActionType) FirstSide() bool {
-	switch x {
-	case TechSkill, Interests, SoftSkills, Languages, Hobbies:
-		return true
-	default:
-		return false
-	}
-}
 
 func (x LeftSideActionType) String() string {
 	switch x {
@@ -39,6 +32,10 @@ func (x LeftSideActionType) String() string {
 		return "TimeAmount"
 	case MoneyAmount:
 		return "MoneyAmount"
+	case Lsa_publication:
+		return "Lsa_publication"
+	case Lsa_award:
+		return "Lsa_award"
 	default:
 		return "N/A"
 	}

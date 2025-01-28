@@ -71,8 +71,7 @@ type Publication struct {
 	Id            ID
 	Title         lang.TranslationMap
 	Publisher     lang.TranslationMap
-	StartTime     string
-	EndTime       string
+	Date          string
 	Focus         lang.TranslationMap
 	DocumentLinks []string
 }
@@ -81,8 +80,7 @@ type Award struct {
 	Id            ID
 	Title         lang.TranslationMap
 	Institute     lang.TranslationMap
-	StartTime     string
-	EndTime       string
+	Date          string
 	Focus         lang.TranslationMap
 	DocumentLinks []string
 }

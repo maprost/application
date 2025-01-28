@@ -31,7 +31,7 @@ func rsaFirstSide(x genmodel.RightSideActionType) bool {
 }
 
 func addRSA(data *texmodel.Index, app *genmodel.Application, local lang.Language) {
-	style := app.JobPosition.TwoSideStyle
+	style := style(app)
 	if len(app.Profile.RightSideActionType) == 0 {
 		app.Profile.RightSideActionType = genmodel.RightSideActionTypes{
 			genmodel.Rsa_profile,
@@ -46,7 +46,8 @@ func addRSA(data *texmodel.Index, app *genmodel.Application, local lang.Language
 
 	var sideOneRsa []texmodelRightSideAction
 	var sideTwoRsa []texmodelRightSideAction
-	addRightSideAction := func(rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
+	addRightSideAction := func(fn func(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error)) {
+		rsa, action, ok, err := fn(app, local)
 		if err != nil {
 			fmt.Println("rsa err: " + err.Error())
 			return
@@ -95,13 +96,13 @@ func addRSA(data *texmodel.Index, app *genmodel.Application, local lang.Language
 		}
 	}
 
-	addRightSideAction(convertProfile(app, local))
-	addRightSideAction(convertMyMotivation(app, local))
-	addRightSideAction(convertMainQuestion(app, local))
-	addRightSideAction(convertExperience(app, local))
-	addRightSideAction(convertEducation(app, local))
-	addRightSideAction(convertPublication(app, local))
-	addRightSideAction(convertAward(app, local))
+	addRightSideAction(convertProfile)
+	addRightSideAction(convertMyMotivation)
+	addRightSideAction(convertMainQuestion)
+	addRightSideAction(convertExperience)
+	addRightSideAction(convertEducation)
+	addRightSideAction(convertPublication)
+	addRightSideAction(convertAward)
 
 	conv := func(s []texmodelRightSideAction) []texmodel.RSA {
 		sort.Slice(s, func(i, j int) bool {
@@ -151,7 +152,7 @@ func convertTxt(label string, txt string, action genmodel.RightSideActionType) (
 }
 
 func convertExperience(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
-	style := app.JobPosition.TwoSideStyle
+	style := style(app)
 
 	convTransLang := func(typ genmodel.ExperiencePart, tm ...lang.TranslationMap) string {
 		for _, r := range style.RemoveExperiencePart {
@@ -219,7 +220,7 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 }
 
 func convertEducation(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
-	style := app.JobPosition.TwoSideStyle
+	style := style(app)
 
 	for _, edu := range app.Profile.Education {
 		if len(style.Education) > 0 {
@@ -255,22 +256,16 @@ func convertEducation(app *genmodel.Application, local lang.Language) (rsa texmo
 }
 
 func convertPublication(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
-	style := app.JobPosition.TwoSideStyle
+	action = genmodel.Rsa_publication
+	if lsaTypeIsActive(app, genmodel.Lsa_publication) {
+		return texmodel.RSA{}, action, false, nil
+	}
 
-	for _, pub := range app.Profile.Publication {
-		if len(style.Publication) > 0 {
-			if !findId(pub.Id, style.Publication) {
-				continue
-			}
-		}
-		if findId(pub.Id, style.RemovePublication) {
-			continue
-		}
-
+	for _, pub := range filterPublication(app) {
 		res := texmodel.Publication{
 			Title:         local.String(pub.Title),
 			Publisher:     local.String(pub.Publisher),
-			Time:          convertTime(pub.StartTime, pub.EndTime, local),
+			Time:          convertTime(pub.Date, pub.Date, local),
 			Content:       "",
 			DocumentLinks: pub.DocumentLinks,
 		}
@@ -285,33 +280,44 @@ func convertPublication(app *genmodel.Application, local lang.Language) (rsa tex
 	}
 
 	rsa.Label = customDefaultString(app.Profile.CustomPublicationLabel, local, local.Publication())
-	return rsa, genmodel.Rsa_publication, true, nil
+	return rsa, action, true, nil
 }
 
-func convertAward(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
-	style := app.JobPosition.TwoSideStyle
-
-	for _, awa := range app.Profile.Award {
-		if len(style.Education) > 0 {
-			if !findId(awa.Id, style.Award) {
+func filterPublication(app *genmodel.Application) []genmodel.Publication {
+	style := style(app)
+	var res []genmodel.Publication
+	for _, pub := range app.Profile.Publication {
+		if len(style.Publication) > 0 {
+			if !findId(pub.Id, style.Publication) {
 				continue
 			}
 		}
-		if findId(awa.Id, style.RemoveAward) {
+		if findId(pub.Id, style.RemovePublication) {
 			continue
 		}
+		res = append(res, pub)
+	}
+	return res
+}
 
+func convertAward(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
+	action = genmodel.Rsa_award
+	if lsaTypeIsActive(app, genmodel.Lsa_award) {
+		return texmodel.RSA{}, action, false, nil
+	}
+
+	for _, awa := range filterAward(app) {
 		res := texmodel.Award{
 			Title:         local.String(awa.Title),
 			Institute:     local.String(awa.Institute),
-			Time:          convertTime(awa.StartTime, awa.EndTime, local),
+			Time:          awa.Date,
 			Content:       "",
 			DocumentLinks: awa.DocumentLinks,
 		}
 
 		resTex, err := compiler.CompileSubTex(templatePath(), "award.tex", res)
 		if err != nil {
-			return texmodel.RSA{}, 0, false, err
+			return texmodel.RSA{}, action, false, err
 		}
 
 		rsa.TexList = append(rsa.TexList, resTex)
@@ -319,7 +325,24 @@ func convertAward(app *genmodel.Application, local lang.Language) (rsa texmodel.
 	}
 
 	rsa.Label = customDefaultString(app.Profile.CustomAwardLabel, local, local.Award())
-	return rsa, genmodel.Rsa_award, true, nil
+	return rsa, action, true, nil
+}
+
+func filterAward(app *genmodel.Application) []genmodel.Award {
+	style := style(app)
+	var res []genmodel.Award
+	for _, pub := range app.Profile.Award {
+		if len(style.Award) > 0 {
+			if !findId(pub.Id, style.Award) {
+				continue
+			}
+		}
+		if findId(pub.Id, style.RemoveAward) {
+			continue
+		}
+		res = append(res, pub)
+	}
+	return res
 }
 
 func convertTime(start string, end string, lang lang.Language) string {
@@ -333,7 +356,7 @@ func convertTime(start string, end string, lang lang.Language) string {
 }
 
 func splitRSA(app *genmodel.Application, sideOne []texmodel.RSA, sideTwo []texmodel.RSA) ([]texmodel.RSA, []texmodel.RSA) {
-	style := app.JobPosition.TwoSideStyle
+	style := style(app)
 	if style.SideOneRSAItems > 0 {
 		findIdx := func(l []texmodel.RSA, maxIdx int) (int, int, bool, int) {
 			count := 0

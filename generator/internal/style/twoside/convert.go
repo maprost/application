@@ -7,6 +7,10 @@ import (
 	"github.com/maprost/application/generator/lang"
 )
 
+func style(app *genmodel.Application) genmodel.TwoSideStyle {
+	return app.JobPosition.TwoSideStyle
+}
+
 func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 	local := app.JobPosition.Lang
 
