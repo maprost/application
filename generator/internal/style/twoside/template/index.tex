@@ -115,7 +115,7 @@
 \definecolor{lightgray}{HTML}{D9D9D9}
 
 % icons
-\newcommand{\projectIcon}{\includegraphics[width=4mm]{{print "{" $.Icon.Project "}"}} }
+\newcommand{\projectIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Project "}"}} }
 \newcommand{\roleIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
 \newcommand{\quitIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
 \newcommand{\techStackIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.TechStack "}"}} }
@@ -165,7 +165,6 @@
     \setlength{\mylminhalf}{-0.5\mylmin}
     \setlength{\mylmaxhalf}{-0.5\mylmax}
 
-
 %    \the\mylmin \\
 %    \the\mylmax \\
 %    \the\mylminhalf \\
@@ -191,9 +190,9 @@
     \else
         \begin{minipage}[b]{#4\linewidth} \hphantom{}
         \end{minipage}%
-        \begin{minipage}[b]{#5\linewidth}\hspace*{\mylminhalf}\small #7 \normalsize
+        \begin{minipage}[b]{#5\linewidth}\hspace*{\mylminhalf}\small \mbox{#7} \normalsize
         \end{minipage}%
-        \begin{minipage}[b]{#6\linewidth}\hspace*{\mylmaxhalf}\small #8 \normalsize
+        \begin{minipage}[b]{#6\linewidth}\hspace*{\mylmaxhalf}\small \mbox{#8} \normalsize
         \end{minipage}%
         \begin{minipage}[b]{0.00001\linewidth} \hphantom{}
         \end{minipage}%

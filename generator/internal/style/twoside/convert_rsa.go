@@ -192,15 +192,17 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 		}
 
 		res := texmodel.Experience{
-			Position:      convTransLang(genmodel.ExperiencePart_jobPosition, exp.JobPosition, exp.JobPosition2, exp.JobPosition3),
-			Description:   convTransLang(genmodel.ExperiencePart_description, exp.Description, exp.Description2, exp.Description3),
-			Project:       convTransLang(genmodel.ExperiencePart_project, exp.Project, exp.Project2, exp.Project3),
-			Role:          convTransLang(genmodel.ExperiencePart_role, exp.Role, exp.Role2, exp.Role3),
-			Company:       exp.Company,
-			Tech:          convTransLang(genmodel.ExperiencePart_techStack, exp.TechStack, exp.TechStack2, exp.TechStack3),
-			Time:          timeRange,
-			QuitReason:    local.String(exp.QuitReason),
-			DocumentLinks: exp.DocumentLinks,
+			Position:          convTransLang(genmodel.ExperiencePart_jobPosition, exp.JobPosition, exp.JobPosition2, exp.JobPosition3),
+			Description:       convTransLang(genmodel.ExperiencePart_description, exp.Description, exp.Description2, exp.Description3),
+			Project:           convTransLang(genmodel.ExperiencePart_project, exp.Project, exp.Project2, exp.Project3),
+			Role:              convTransLang(genmodel.ExperiencePart_role, exp.Role, exp.Role2, exp.Role3),
+			Company:           exp.Company,
+			Tech:              convTransLang(genmodel.ExperiencePart_techStack, exp.TechStack, exp.TechStack2, exp.TechStack3),
+			Time:              timeRange,
+			QuitReason:        local.String(exp.QuitReason),
+			DocumentLinks:     exp.DocumentLinks,
+			FutureExperience:  exp.FutureExperience,
+			FutureColorChange: exp.FutureColorChange,
 		}
 
 		resTex, err := compiler.CompileSubTex(templatePath(), "experience.tex", res)

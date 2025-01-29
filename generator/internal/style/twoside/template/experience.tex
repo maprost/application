@@ -1,23 +1,15 @@
-{\headerfont {{.Position}}} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ {{.Time}}
-
-\smallskip
-
-\begin{minipage}{\indentLength}
-    ~
-\end{minipage}
+{{if and (.FutureExperience) (.FutureColorChange)}}\color{sidecolor}{{end}}%
+    \linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
 \begin{minipage}{\insidePageLength}
-    \checkPar{{print "{" .Company "}"}}{\scshape {{.Company}} ~ %
-        {{range .DocumentLinks}}%
-            \href{{print "{" . "}" }}{\documentIcon}%
-        {{end}}%
-    }
-
-    \checkPar{{print "{" .Description "}"}}{{print "{" .Description "}"}}
-
-    \checkPar{{print "{" .Project "}"}}{\projectIcon~ {{.Project }}}
-
-    \checkPar{{print "{" .Role "}"}}{\roleIcon~ {{.Role }}}
-
-    \checkPar{{print "{" .Tech "}"}}{\techStackIcon~ {{.Tech }}}
-
+    {{range .DocumentLinks}}%
+    \documentlink{{print "{" . "}"}}%
+    {{end}}%
+    {{if and (.FutureExperience) (.FutureColorChange)}}\color{maincolor}{{end}}%
+    \linecompany{{print "{" .Company "}"}}
+    {{if .FutureExperience}}\color{black}{{end}}
+    \linedescription{{print "{" .Description "}"}}
+    \lineproject{{print "{" .Project "}"}}
+    \linerole{{print "{" .Role "}"}}
+    \linetech{{print "{" .Tech "}"}}
+    \linequit{{print "{" .QuitReason "}"}}
 \end{minipage} \\[1ex]

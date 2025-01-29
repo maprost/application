@@ -31,28 +31,29 @@ const (
 )
 
 type Experience struct {
-	Id               ID
-	JobPosition      lang.TranslationMap
-	JobPosition2     lang.TranslationMap
-	JobPosition3     lang.TranslationMap
-	Company          string
-	StartTime        string
-	EndTime          string
-	QuitReason       lang.TranslationMap
-	Description      lang.TranslationMap
-	Description2     lang.TranslationMap
-	Description3     lang.TranslationMap
-	Project          lang.TranslationMap
-	Project2         lang.TranslationMap
-	Project3         lang.TranslationMap
-	Role             lang.TranslationMap
-	Role2            lang.TranslationMap
-	Role3            lang.TranslationMap
-	TechStack        lang.TranslationMap
-	TechStack2       lang.TranslationMap
-	TechStack3       lang.TranslationMap
-	FutureExperience bool
-	DocumentLinks    []string
+	Id                ID
+	JobPosition       lang.TranslationMap
+	JobPosition2      lang.TranslationMap
+	JobPosition3      lang.TranslationMap
+	Company           string
+	StartTime         string
+	EndTime           string
+	QuitReason        lang.TranslationMap
+	Description       lang.TranslationMap
+	Description2      lang.TranslationMap
+	Description3      lang.TranslationMap
+	Project           lang.TranslationMap
+	Project2          lang.TranslationMap
+	Project3          lang.TranslationMap
+	Role              lang.TranslationMap
+	Role2             lang.TranslationMap
+	Role3             lang.TranslationMap
+	TechStack         lang.TranslationMap
+	TechStack2        lang.TranslationMap
+	TechStack3        lang.TranslationMap
+	FutureExperience  bool
+	FutureColorChange bool
+	DocumentLinks     []string
 }
 
 type Education struct {

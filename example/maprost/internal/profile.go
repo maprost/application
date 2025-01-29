@@ -55,6 +55,7 @@ const (
 const (
 	Time_1632 = genmodel.ID(iota) + 1
 	Time_2432
+	Time_20full
 )
 
 const (
@@ -104,6 +105,7 @@ func Profile() genmodel.Profile {
 		TimeAmount: []genmodel.LeftSideAction{
 			{Id: Time_1632, Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 16, Max: 32},
 			{Id: Time_2432, Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 24, Max: 32},
+			{Id: Time_20full, Name: lang.TranslationMap{lang.English: "open for part time", lang.German: "offen für Teilzeit"}, Min: 20, Max: 40},
 			//{Name: lang.TranslationMap{lang.English: "negotiable wish 2", lang.German: "vehandelbarer Wunsch 2"}, Min: 6, Max: 32},
 		},
 		MoneyAmount: []genmodel.LeftSideAction{
@@ -227,7 +229,7 @@ func Profile() genmodel.Profile {
 		Education: []genmodel.Education{
 			{
 				Id:            Edu_Uni,
-				Graduation:    lang.DefaultTranslation("Diplom Informatiker"),
+				Graduation:    lang.DefaultTranslation("Diplom Informatiker 123"),
 				Institute:     "German University",
 				StartTime:     "Sep. 2005",
 				EndTime:       "Oct. 2010",
@@ -297,13 +299,23 @@ func Profile() genmodel.Profile {
 		},
 		Award: []genmodel.Award{
 			{
-				Id:              Awa_Fami,
-				Title:           lang.DefaultTranslation("Beste XY"),
-				Institute:       lang.DefaultTranslation("XXX"),
-				Date:            "2011",
-				Content:         lang.DefaultTranslation("XXX"),
-				ContentShortLsa: lang.DefaultTranslation("short"),
-				DocumentLinks:   []string{"http://google.de"},
+				Id: Awa_Fami,
+				Title: lang.TranslationMap{
+					lang.German:  `Bundesbeste FaMI`,
+					lang.English: `Germany's best FaMI`,
+				},
+				Institute: lang.DefaultTranslation("IHK, Azubis Unsere Besten"),
+				Date:      "2011",
+				Content: lang.TranslationMap{
+					lang.German:  `bundesbeste FaMI 2011 in der Fachrichtung Medizinische Dokumentation`,
+					lang.English: `Germany's best FaMI specializing in medical documentation`,
+				},
+				ContentShortLsa: lang.TranslationMap{
+					lang.German:  `Bundesbeste FaMI, IHK, Azubis Unsere Besten`,
+					lang.English: `Germany's best FaMI, IHK, Azubis Unsere Besten [Our best apprentices]`,
+				},
+				// TODO LINKS
+				DocumentLinks: []string{"file:///C:/Users/Natalia/Downloads/Zeugnisse/urkunde_bundesbeste.pdf"},
 			},
 			{
 				Id:              Awa_BSS,

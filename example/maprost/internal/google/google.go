@@ -58,8 +58,9 @@ func Google() genmodel.JobPosition {
 			StartTime:   "Jan. 2018",
 			Description: "",
 		},
-		OutputPath: genmodel.OutputPath(),
-		FileName:   "",
+		FutureColorChange: true,
+		OutputPath:        genmodel.OutputPath(),
+		FileName:          "",
 		//TimeAmount: []genmodel.LeftSideAction{
 		//	{Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 12, Max: 32},
 		//	//{Name: lang.TranslationMap{lang.English: "negotiable wish 2", lang.German: "vehandelbarer Wunsch 2"}, Min: 6, Max: 32},

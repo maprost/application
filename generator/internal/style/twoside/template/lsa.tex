@@ -60,10 +60,10 @@
     {{ if .AwardLsa }}
         \category{{print "{" .Label "}"}}
 %        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
-        \begin{tabular}{@{}p{48mm} @{\hskip 0.2cm}p{1mm}@{}}
+%        \begin{tabular}{@{}p{52mm} @{\hskip 0.2cm}p{1mm}@{}}
             {{range .AwardLsa}}%
                 {{range .Links}}%
-                \href{{print "{" . "}" }}{\extlinkIcon}~ %
+                \href{{print "{" . "}" }}{\extlinkIcon}\,\,%
                 {{end}}%
                 {{.Time}}: %\\
                 {{.DescriptionShortLsa}}
@@ -71,7 +71,7 @@
 %                & \\[5pt]%
 %                {{.Name}} & {{.Time}} \\
             {{end}}%
-        \end{tabular}
+%        \end{tabular}
     {{ end }}
 
     {{ if .List }}

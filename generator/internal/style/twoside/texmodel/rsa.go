@@ -11,15 +11,17 @@ type RSA struct {
 }
 
 type Experience struct {
-	Company       string
-	Position      string
-	Time          string
-	QuitReason    string
-	Description   string
-	Project       string // please add here your pet projects
-	Role          string // please add here more roles you did
-	Tech          string
-	DocumentLinks []string
+	Company           string
+	Position          string
+	Time              string
+	QuitReason        string
+	Description       string
+	Project           string // please add here your pet projects
+	Role              string // please add here more roles you did
+	Tech              string
+	DocumentLinks     []string
+	FutureExperience  bool
+	FutureColorChange bool
 }
 
 type Education struct {
