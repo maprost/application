@@ -20,6 +20,10 @@ func (s Style) Data(application *genmodel.Application) (data interface{}, err er
 	case OneSide:
 		// convert oneSide into twoSide
 		oneSideStyle := application.JobPosition.OneSideStyle
+		if len(oneSideStyle.LeftSideActionTypes) == 0 {
+			oneSideStyle.LeftSideActionTypes = genmodel.AllLeftSideActionTypes
+		}
+
 		application.JobPosition.TwoSideStyle = genmodel.TwoSideStyle{
 			// LSA
 			Skills:                          oneSideStyle.Skills,

@@ -41,6 +41,10 @@ func (x LeftSideActionType) String() string {
 	}
 }
 
+var AllLeftSideActionTypes = LeftSideActionTypes{
+	TechSkill, SoftSkills, Interests, Languages, TimeAmount, MoneyAmount, Lsa_publication, Lsa_award, Hobbies,
+}
+
 type LeftSideActionTypes []LeftSideActionType
 
 func (x LeftSideActionTypes) Index(l LeftSideActionType) (int, bool) {

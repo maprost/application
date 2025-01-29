@@ -37,8 +37,11 @@ type JobPosition struct {
 	OutputPath string // will overwrite build(outputPath)
 
 	// customize your profile
-	ProfileText       string           //  your job specific profile text, this text can contains tex elements
-	MyMotivationText  string           //  your job specific motivation text, this text can contains tex elements
+	ProfileLabel      string
+	ProfileText       string //  your job specific profile text, this text can contains tex elements
+	MyMotivationLabel string
+	MyMotivationText  string //  your job specific motivation text, this text can contains tex elements
+	MainQuestionLabel string
 	MainQuestionText  string           //  your job specific question text, this text can contains tex elements
 	MoneyAmount       []LeftSideAction //  your job specific money amount
 	TimeAmount        []LeftSideAction //  your job specific time amount
