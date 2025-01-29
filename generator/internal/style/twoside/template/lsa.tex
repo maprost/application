@@ -63,7 +63,7 @@
         \begin{tabular}{@{}p{48mm} @{\hskip 0.2cm}p{1mm}@{}}
             {{range .AwardLsa}}%
                 {{range .Links}}%
-                \href{{print "{" . "}" }}{\includegraphics[width=3mm]{generator/internal/image/extlink.png}}~ %
+                \href{{print "{" . "}" }}{\extlinkIcon}~ %
                 {{end}}%
                 {{.Time}}: %\\
                 {{.Name}} ({{.Description}})
