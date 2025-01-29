@@ -68,23 +68,25 @@ type Education struct {
 }
 
 type Publication struct {
-	Id            ID
-	Title         lang.TranslationMap
-	SubTitle      lang.TranslationMap
-	Publisher     lang.TranslationMap
-	Date          string
-	CoverImage    string
-	Content       lang.TranslationMap
-	DocumentLinks []string
+	Id              ID
+	Title           lang.TranslationMap
+	SubTitle        lang.TranslationMap
+	Publisher       lang.TranslationMap
+	Date            string
+	CoverImage      string
+	Content         lang.TranslationMap
+	ContentShortLsa lang.TranslationMap
+	DocumentLinks   []string
 }
 
 type Award struct {
-	Id            ID
-	Title         lang.TranslationMap
-	Institute     lang.TranslationMap
-	Date          string
-	Content       lang.TranslationMap
-	DocumentLinks []string
+	Id              ID
+	Title           lang.TranslationMap
+	Institute       lang.TranslationMap
+	Date            string
+	Content         lang.TranslationMap
+	ContentShortLsa lang.TranslationMap
+	DocumentLinks   []string
 }
 
 type ProfileAddress struct {

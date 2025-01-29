@@ -341,13 +341,14 @@ func lsaConvPublication(app *genmodel.Application, lang lang.Language) (texmodel
 	publications := filterPublication(app)
 	for _, pub := range publications {
 		res.PublicationLsa = append(res.PublicationLsa, texmodel.PublicationLsa{
-			Name:        lang.String(pub.Title),
-			Time:        pub.Date,
-			SubTitle:    lang.String(pub.SubTitle),
-			Image:       pub.CoverImage,
-			Description: lang.String(pub.Content),
-			Publisher:   lang.String(pub.Publisher),
-			Links:       pub.DocumentLinks,
+			Name:                lang.String(pub.Title),
+			Time:                pub.Date,
+			SubTitle:            lang.String(pub.SubTitle),
+			Image:               pub.CoverImage,
+			Description:         lang.String(pub.Content),
+			DescriptionShortLsa: lang.String(pub.ContentShortLsa),
+			Publisher:           lang.String(pub.Publisher),
+			Links:               pub.DocumentLinks,
 		})
 	}
 	return res, action, len(publications) > 0, nil

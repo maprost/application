@@ -25,20 +25,22 @@ type RangeLsa struct {
 }
 
 type PublicationLsa struct {
-	Name        string
-	Time        string
-	SubTitle    string
-	Image       string
-	Description string
-	Publisher   string
-	Links       []string
+	Name                string
+	Time                string
+	SubTitle            string
+	Image               string
+	Description         string
+	DescriptionShortLsa string
+	Publisher           string
+	Links               []string
 }
 
 type AwardLsa struct {
-	Name        string
-	Time        string
-	Description string
-	Links       []string
+	Name                string
+	Time                string
+	Description         string
+	DescriptionShortLsa string
+	Links               []string
 }
 
 type TimeTitleLsa struct {
