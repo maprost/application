@@ -50,8 +50,9 @@ func Google() genmodel.JobPosition {
 			City:    "...",
 			Country: "...",
 		},
-		Title:       "Software Defender",
-		ProfileText: ``,
+		Title:        "Software Defender",
+		ProfileLabel: "Hot'n'Cold",
+		ProfileText:  ``,
 		FutureExperience: genmodel.FutureExperience{
 			JobPosition: "Go Backend Developer",
 			TechStack:   "Go, Docker",

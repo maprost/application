@@ -120,6 +120,16 @@ func customDefaultString(customMap lang.TranslationMap, lang lang.Language, def 
 	return custom
 }
 
+func customCustomDefaultString(custom string, customMap2 lang.TranslationMap, lang lang.Language, def string) string {
+	if custom == "" {
+		custom = lang.String(customMap2)
+	}
+	if custom == "" {
+		custom = def
+	}
+	return custom
+}
+
 func findId(checkId genmodel.ID, ids []genmodel.ID) bool {
 	for _, id := range ids {
 		if checkId == id {

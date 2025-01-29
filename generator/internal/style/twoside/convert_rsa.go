@@ -122,7 +122,7 @@ func addRSA(data *texmodel.Index, app *genmodel.Application, local lang.Language
 
 func convertProfile(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
 	return convertTxt(
-		customDefaultString(app.Profile.CustomProfilTextLabel, local, local.Profile()),
+		customCustomDefaultString(app.JobPosition.ProfileLabel, app.Profile.CustomProfilTextLabel, local, local.Profile()),
 		util.DefaultValue(app.JobPosition.ProfileText, local.String(app.Profile.GeneralProfileText)),
 		genmodel.Rsa_profile,
 	)
@@ -130,7 +130,7 @@ func convertProfile(app *genmodel.Application, local lang.Language) (rsa texmode
 
 func convertMyMotivation(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
 	return convertTxt(
-		customDefaultString(app.Profile.CustomMyMotivationTextLabel, local, local.Motivation()),
+		customCustomDefaultString(app.JobPosition.MyMotivationLabel, app.Profile.CustomMyMotivationTextLabel, local, local.Motivation()),
 		util.DefaultValue(app.JobPosition.MyMotivationText, local.String(app.Profile.GeneralMyMotivationText)),
 		genmodel.Rsa_myMotivation,
 	)
@@ -138,7 +138,7 @@ func convertMyMotivation(app *genmodel.Application, local lang.Language) (rsa te
 
 func convertMainQuestion(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
 	return convertTxt(
-		customDefaultString(app.Profile.CustomMainQuestionTextLabel, local, local.MainQuestion()),
+		customCustomDefaultString(app.JobPosition.MainQuestionText, app.Profile.CustomMainQuestionTextLabel, local, local.MainQuestion()),
 		util.DefaultValue(app.JobPosition.MainQuestionText, local.String(app.Profile.GeneralMainQuestionText)),
 		genmodel.Rsa_mainQuestion,
 	)
