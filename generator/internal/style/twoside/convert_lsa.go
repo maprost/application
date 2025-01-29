@@ -341,7 +341,13 @@ func lsaConvPublication(app *genmodel.Application, lang lang.Language) (texmodel
 	publications := filterPublication(app)
 	for _, pub := range publications {
 		res.PublicationLsa = append(res.PublicationLsa, texmodel.PublicationLsa{
-			Name: lang.String(pub.Title),
+			Name:        lang.String(pub.Title),
+			Time:        pub.Date,
+			SubTitle:    lang.String(pub.SubTitle),
+			Image:       pub.CoverImage,
+			Description: lang.String(pub.Content),
+			Publisher:   lang.String(pub.Publisher),
+			Links:       pub.DocumentLinks,
 		})
 	}
 	return res, action, len(publications) > 0, nil
@@ -362,7 +368,10 @@ func lsaConvAward(app *genmodel.Application, lang lang.Language) (texmodel.LeftS
 	awards := filterAward(app)
 	for _, award := range awards {
 		res.AwardLsa = append(res.AwardLsa, texmodel.AwardLsa{
-			Name: lang.String(award.Title),
+			Name:        lang.String(award.Title),
+			Time:        award.Date,
+			Description: lang.String(award.Content),
+			Links:       award.DocumentLinks,
 		})
 	}
 	return res, action, len(awards) > 0, nil

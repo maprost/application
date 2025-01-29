@@ -30,19 +30,43 @@
 
     {{ if .PublicationLsa }}
         \category{{print "{" .Label "}"}}
-        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+        \begin{tabular}{@{}p{10mm} @{\hskip 0.2cm}p{38mm}@{}}
             {{range .PublicationLsa}}
-                {{.Name}} & \\
+                \begin{minipage}[t]{.2\linewidth}
+                {{.Time}} \\[1ex]
+                \includegraphics[width=1cm]{{print "{" .Image "}"}}
+                \end{minipage}
+                &
+                \begin{minipage}[t]{.8\linewidth}
+                {{.Name}} \\[1ex]
+                {{.Description}}
+
+                {{range .Links}}%
+                \href{{print "{" . "}" }}{\documentIcon}%
+                {{end}}%
+                \end{minipage}
+
+                \\
+
+%                {{.Name}} & {{.Time}} \\
             {{end}}
         \end{tabular}
     {{ end }}
 
     {{ if .AwardLsa }}
         \category{{print "{" .Label "}"}}
-        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
-            {{range .AwardLsa}}
-                {{.Name}} & \\
-            {{end}}
+%        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+        \begin{tabular}{@{}p{48mm} @{\hskip 0.2cm}p{1mm}@{}}
+            {{range .AwardLsa}}%
+                {{range .Links}}%
+                \href{{print "{" . "}" }}{\includegraphics[width=3mm]{generator/internal/image/extlink.png}}~ %
+                {{end}}%
+                {{.Time}}: %\\
+                {{.Name}} ({{.Description}})
+                \\[5pt]%
+%                & \\[5pt]%
+%                {{.Name}} & {{.Time}} \\
+            {{end}}%
         \end{tabular}
     {{ end }}
 

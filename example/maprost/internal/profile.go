@@ -49,6 +49,7 @@ const (
 const (
 	Awa_Fami = genmodel.ID(iota) + 1
 	Awa_Mio
+	Awa_BSS
 )
 
 const (
@@ -252,7 +253,8 @@ func Profile() genmodel.Profile {
 				Title:         lang.DefaultTranslation("Das Calliope Buch"),
 				Publisher:     lang.DefaultTranslation("XXX"),
 				Date:          "2005",
-				Focus:         lang.DefaultTranslation("XXX"),
+				CoverImage:    "example/maprost/images/cv.jpeg",
+				Content:       lang.DefaultTranslation("XXX"),
 				DocumentLinks: []string{"http://google.de"},
 			},
 			//{
@@ -270,8 +272,16 @@ func Profile() genmodel.Profile {
 				Id:            Awa_Fami,
 				Title:         lang.DefaultTranslation("Beste XY"),
 				Institute:     lang.DefaultTranslation("XXX"),
-				Date:          "Oct. 2010",
-				Focus:         lang.DefaultTranslation("XXX"),
+				Date:          "2011",
+				Content:       lang.DefaultTranslation("XXX"),
+				DocumentLinks: []string{"http://google.de"},
+			},
+			{
+				Id:            Awa_BSS,
+				Title:         lang.DefaultTranslation("Berliner Startup Stipendium"),
+				Institute:     lang.DefaultTranslation("XXX"),
+				Date:          "01-12/2024",
+				Content:       lang.DefaultTranslation("XXX"),
 				DocumentLinks: []string{"http://google.de"},
 			},
 			//{

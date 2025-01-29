@@ -70,9 +70,11 @@ type Education struct {
 type Publication struct {
 	Id            ID
 	Title         lang.TranslationMap
+	SubTitle      lang.TranslationMap
 	Publisher     lang.TranslationMap
 	Date          string
-	Focus         lang.TranslationMap
+	CoverImage    string
+	Content       lang.TranslationMap
 	DocumentLinks []string
 }
 
@@ -81,7 +83,7 @@ type Award struct {
 	Title         lang.TranslationMap
 	Institute     lang.TranslationMap
 	Date          string
-	Focus         lang.TranslationMap
+	Content       lang.TranslationMap
 	DocumentLinks []string
 }
 
