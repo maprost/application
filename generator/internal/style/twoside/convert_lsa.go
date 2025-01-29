@@ -369,10 +369,11 @@ func lsaConvAward(app *genmodel.Application, lang lang.Language) (texmodel.LeftS
 	awards := filterAward(app)
 	for _, award := range awards {
 		res.AwardLsa = append(res.AwardLsa, texmodel.AwardLsa{
-			Name:        lang.String(award.Title),
-			Time:        award.Date,
-			Description: lang.String(award.Content),
-			Links:       award.DocumentLinks,
+			Name:                lang.String(award.Title),
+			Time:                award.Date,
+			Description:         lang.String(award.Content),
+			DescriptionShortLsa: lang.String(award.ContentShortLsa),
+			Links:               award.DocumentLinks,
 		})
 	}
 	return res, action, len(awards) > 0, nil

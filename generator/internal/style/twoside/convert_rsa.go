@@ -308,11 +308,12 @@ func convertAward(app *genmodel.Application, local lang.Language) (rsa texmodel.
 
 	for _, awa := range filterAward(app) {
 		res := texmodel.Award{
-			Title:         local.String(awa.Title),
-			Institute:     local.String(awa.Institute),
-			Time:          awa.Date,
-			Content:       "",
-			DocumentLinks: awa.DocumentLinks,
+			Title:           local.String(awa.Title),
+			Institute:       local.String(awa.Institute),
+			Time:            awa.Date,
+			Content:         local.String(awa.Content),
+			ContentShortLsa: local.String(awa.ContentShortLsa),
+			DocumentLinks:   awa.DocumentLinks,
 		}
 
 		resTex, err := compiler.CompileSubTex(templatePath(), "award.tex", res)

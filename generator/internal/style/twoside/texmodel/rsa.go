@@ -33,17 +33,19 @@ type Education struct {
 }
 
 type Publication struct {
-	Title         string
-	Publisher     string
-	Time          string
-	Content       string
-	DocumentLinks []string
+	Title           string
+	Publisher       string
+	Time            string
+	Content         string
+	ContentShortLsa string
+	DocumentLinks   []string
 }
 
 type Award struct {
-	Title         string
-	Institute     string
-	Time          string
-	Content       string
-	DocumentLinks []string
+	Title           string
+	Institute       string
+	Time            string
+	Content         string
+	ContentShortLsa string
+	DocumentLinks   []string
 }
