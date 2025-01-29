@@ -22,19 +22,25 @@
     {{ if .Languages }}
         \category{{print "{" .Label "}"}}
         \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
-            {{range .Languages}}
+            {{range .Languages}}%
                 {{.Name}} & {{.Level}} \\
-            {{end}}
+            {{end}}%
         \end{tabular}
     {{ end }}
 
+%beforePub
     {{ if .PublicationLsa }}
         \category{{print "{" .Label "}"}}
         \begin{tabular}{@{}p{10mm} @{\hskip 0.2cm}p{50mm}@{}}
             {{range .PublicationLsa}}%
                 \begin{minipage}[t]{.2\linewidth}
                 {{.Time}} \\[1ex]
-                \includegraphics[width=1cm]{{print "{" .Image "}"}}
+                {{if .Links }}%
+                {{$first := index .Links 0}}%
+                    \href{{print "{" $first "}"}}{\includegraphics[width=1cm]{{print "{" .Image "}"}}}
+                {{else}}%
+                    \includegraphics[width=1cm]{{print "{" .Image "}"}}
+                {{end}}%
                 \end{minipage}
                 &
                 \begin{minipage}[t]{.8\linewidth}
@@ -56,8 +62,11 @@
             {{end}}
         \end{tabular}
     {{ end }}
+%afterPub
 
+%beforeAward
     {{ if .AwardLsa }}
+%AwardStart
         \category{{print "{" .Label "}"}}
 %        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
 %        \begin{tabular}{@{}p{52mm} @{\hskip 0.2cm}p{1mm}@{}}
@@ -66,16 +75,18 @@
                 \href{{print "{" . "}" }}{\extlinkIcon}\,\,%
                 {{end}}%
                 {{.Time}}: %\\
-                {{.DescriptionShortLsa}}
-                \\[5pt]%
+                {{.DescriptionShortLsa}} \\[5pt]%
 %                & \\[5pt]%
 %                {{.Name}} & {{.Time}} \\
             {{end}}%
+        \vspace{-17pt}
 %        \end{tabular}
+%AwardEnd
     {{ end }}
+%afterAward
 
-    {{ if .List }}
+    {{ if .List }}%
         \category{{print "{" .Label "}"}}
         {{.List}}
-    {{ end }}
+    {{ end }}%
 {{ end }}

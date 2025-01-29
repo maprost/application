@@ -27,10 +27,10 @@ func Google() genmodel.JobPosition {
 			},
 			SideTwoLSATypes: []genmodel.LeftSideActionType{
 				genmodel.SoftSkills,
-				genmodel.Interests,
-				genmodel.Languages,
 				genmodel.Lsa_publication,
+				genmodel.Languages,
 				genmodel.Lsa_award,
+				genmodel.Interests,
 			},
 
 			//Education: []genmodel.ID{
@@ -40,7 +40,7 @@ func Google() genmodel.JobPosition {
 			//RemoveExperience: []genmodel.ID{internal.Exp_tutor},
 			//SideOneExperienceSize: 2,
 			//SideOneEducationSize: 1,
-			//ShowExperienceParts:  1,
+			ShowExperienceParts: 2,
 			//RemoveExperiencePart: []genmodel.ExperiencePart{genmodel.ExperiencePart_techStack},
 			SideOneRSAItems: 9,
 		},
@@ -62,7 +62,7 @@ func Google() genmodel.JobPosition {
 			// TODO multilanguage
 			EndTime: "Vertragsende",
 			//EndTime:     "12/2018",
-			Description: "an diesen Aufgaben hätte ich Spaß",
+			Description: "an diesen Aufgaben hätte ich Spaß und an diesen Aufgaben auch und an diesen sowieso",
 		},
 		FutureColorChange: true,
 		OutputPath:        genmodel.OutputPath(),

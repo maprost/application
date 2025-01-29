@@ -202,10 +202,15 @@ func Profile() genmodel.Profile {
 				},
 				TechStack: lang.DefaultTranslation("Java, Guice, GWT, MySQL, Hibernate, RESTful, Json, Docker, Go, \\LaTeX, Ubuntu, Bash, " +
 					"Python, Git, Scrum/Kanban, JIRA"),
+				TechStack2:    lang.DefaultTranslation("xxx"),
 				DocumentLinks: []string{"http://google.de"},
 				Project: lang.TranslationMap{
 					lang.English: "Project 1",
 					lang.German:  "Projekt 1",
+				},
+				Project2: lang.TranslationMap{
+					lang.English: "Project 2",
+					lang.German:  "Projekt 2",
 				},
 			},
 			{
@@ -256,7 +261,7 @@ func Profile() genmodel.Profile {
 		Publication: []genmodel.Publication{
 			{
 				Id:              Pub_Calliope,
-				Title:           lang.DefaultTranslation("Das Calliope Buch"),
+				Title:           lang.DefaultTranslation("Das Buch"),
 				Publisher:       lang.DefaultTranslation("XXX"),
 				Date:            "2005",
 				CoverImage:      "example/maprost/images/cv.jpeg",
@@ -310,6 +315,11 @@ func Profile() genmodel.Profile {
 				ContentShortLsa: lang.DefaultTranslation("short"),
 				DocumentLinks:   []string{"http://google.de"},
 			},
+		},
+
+		CustomPublicationLabel: lang.TranslationMap{
+			lang.German:  `Publikationen`,
+			lang.English: `Publications`,
 		},
 	}
 }

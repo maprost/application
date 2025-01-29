@@ -2,7 +2,9 @@ package twoside
 
 import (
 	"fmt"
+	"log"
 	"sort"
+	"strings"
 
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/compiler"
@@ -203,6 +205,106 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 			if exp.EndTime != "" {
 				timeRange2 += local.PossibleUntil() + " " + exp.EndTime
 			}
+		}
+
+		// TODO improve
+		if local.String(exp.JobPosition2) == "" && local.String(exp.JobPosition) != "" {
+			exp.JobPosition2 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.JobPosition2)) == "xxx" {
+			exp.JobPosition2 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.JobPosition3) == "" && local.String(exp.JobPosition) != "" {
+			exp.JobPosition3 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.JobPosition3)) == "xxx" {
+			exp.JobPosition3 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.Description2) == "" && local.String(exp.Description) != "" {
+			exp.Description2 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.Description2)) == "xxx" {
+			exp.Description2 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.Description3) == "" && local.String(exp.Description) != "" {
+			exp.Description3 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.Description3)) == "xxx" {
+			exp.Description3 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.Role2) == "" && local.String(exp.Role) != "" {
+			exp.Role2 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.Role2)) == "xxx" {
+			exp.Role2 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.Role3) == "" && local.String(exp.Role) != "" {
+			exp.Role3 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.Role3)) == "xxx" {
+			exp.Role3 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.Project2) == "" && local.String(exp.Project) != "" {
+			exp.Project2 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.Project2)) == "xxx" {
+			exp.Project2 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.Project3) == "" && local.String(exp.Project) != "" {
+			exp.Project3 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.Project3)) == "xxx" {
+			exp.Project3 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.TechStack2) == "" && local.String(exp.TechStack) != "" {
+			exp.TechStack2 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.TechStack2)) == "xxx" {
+			exp.TechStack2 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.TechStack3) == "" && local.String(exp.TechStack) != "" {
+			exp.TechStack3 = lang.DefaultTranslation("wie 1")
+		} else if strings.ToLower(local.String(exp.TechStack3)) == "xxx" {
+			exp.TechStack3 = lang.DefaultTranslation("")
+		}
+
+		if local.String(exp.JobPosition) != "" && strings.ToLower(local.String(exp.JobPosition2)) == "wie 1" {
+			log.Printf("wie 11111 %+v", exp.JobPosition)
+			exp.JobPosition2 = exp.JobPosition
+			log.Printf("wie 11111_2 %+v", exp.JobPosition2)
+		}
+		if local.String(exp.JobPosition) != "" && strings.ToLower(local.String(exp.JobPosition3)) == "wie 1" {
+			exp.JobPosition3 = exp.JobPosition
+		}
+
+		if local.String(exp.Description) != "" && strings.ToLower(local.String(exp.Description2)) == "wie 1" {
+			exp.Description2 = exp.Description
+		}
+		if local.String(exp.Description) != "" && strings.ToLower(local.String(exp.Description3)) == "wie 1" {
+			exp.Description3 = exp.Description
+		}
+
+		if local.String(exp.Project) != "" && strings.ToLower(local.String(exp.Project2)) == "wie 1" {
+			log.Printf("wie 11111 %+v", exp.Project)
+			exp.Project2 = exp.Project
+			log.Printf("wie 11111_2 %+v", exp.Project2)
+		}
+		if local.String(exp.Project) != "" && strings.ToLower(local.String(exp.Project3)) == "wie 1" {
+			exp.Project3 = exp.Project
+		}
+
+		if local.String(exp.Role) != "" && strings.ToLower(local.String(exp.Role2)) == "wie 1" {
+			exp.Role2 = exp.Role
+		}
+		if local.String(exp.Role) != "" && strings.ToLower(local.String(exp.Role3)) == "wie 1" {
+			exp.Role3 = exp.Role
+		}
+
+		if local.String(exp.TechStack) != "" && strings.ToLower(local.String(exp.TechStack2)) == "wie 1" {
+			exp.TechStack2 = exp.TechStack
+		}
+		if local.String(exp.TechStack) != "" && strings.ToLower(local.String(exp.TechStack3)) == "wie 1" {
+			exp.TechStack3 = exp.TechStack
 		}
 
 		res := texmodel.Experience{
