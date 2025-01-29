@@ -5,9 +5,9 @@
 \usepackage{graphicx}
 \usepackage{marvosym}
 \usepackage[
-	colorlinks=true,
-	urlcolor=blue,
-	linkcolor=blue,
+    colorlinks=true,
+    urlcolor=blue,
+    linkcolor=blue,
 ]{hyperref}
 \usepackage[ngerman]{babel}
 \usepackage{xhfill}
@@ -20,6 +20,8 @@
 \usepackage{mdframed}
 \usepackage{enumitem}
 \usepackage{shadowtext}
+\usepackage{pgffor}
+\usepackage{tabularray}
 %\usepackage{wsuipa}
 \usepackage{setspace}
 
@@ -34,6 +36,18 @@
 \usepackage[utf8]{inputenc}
 \usepackage{ifthen}
 \usepackage{fancyhdr}
+
+% company custom color
+\definecolor{maincolor}{HTML}{{"{"}}{{.MainColor}}}
+\definecolor{sidecolor}{HTML}{{"{"}}{{.SideColor}}}
+\definecolor{color1}{HTML}{{"{"}}{{.Color1}}}
+\definecolor{color2}{HTML}{{"{"}}{{.Color2}}}
+\definecolor{color3}{HTML}{{"{"}}{{.Color3}}}
+\definecolor{color4}{HTML}{{"{"}}{{.Color4}}}
+\definecolor{color5}{HTML}{{"{"}}{{.Color5}}}
+\definecolor{maingray}{HTML}{D9D9D9}
+%\definecolor{maingray}{HTML}{B9B9B9}
+\definecolor{lightgray}{HTML}{D9D9D9}
 
 
 \setlength{\parindent}{0pt} % Disable paragraph indentation
@@ -56,21 +70,49 @@
 
 }
 
+\newcommand{\colorLine}[1]{\xrfill[0.5ex]{1.5pt}[#1]}
+
+\newcommand{\mainColorLine}{\colorLine{maincolor}}
+
+\newcommand{\twoColorLine}{%
+    \colorLine{color1}%
+    \colorLine{color2}%
+}
+
+\newcommand{\threeColorLine}{%
+    \colorLine{color1}%
+    \colorLine{color2}%
+    \colorLine{color3}%
+}
+
+\newcommand{\fourColorLine}{%
+    \colorLine{color1}%
+    \colorLine{color2}%
+    \colorLine{color3}%
+    \colorLine{color4}%
+}
+
+\newcommand{\fiveColorLine}{%
+    \colorLine{color1}%
+    \colorLine{color2}%
+    \colorLine{color3}%
+    \colorLine{color4}%
+    \colorLine{color5}%
+}
+
 \newcommand{\category}[1]{
     \vspace{5mm}
 
-    {\headerfont #1 \xrfill[0.5ex]{1.5pt}[maincolor]}
+    {\headerfont #1} {{if .LSALineLatex}} {{.LSALineLatex}} {{else}} \mainColorLine {{end}}
 
     \medskip
 
 }
 
-\newcommand{\mainquestion}[1]{
-
-}
+\newcommand{\bottomColorLine}[1]{~\xrfill[0.0ex]{1.2pt}[#1]~}
 
 \newcommand{\linepositiontime}[2]{
-    {\headerfont #1} ~\xrfill[0.0ex]{1.2pt}[maincolor]~ #2
+    {\headerfont #1} \bottomColorLine{maincolor} #2
     \smallskip
 
     \begin{minipage}{\indentLength}
@@ -123,13 +165,6 @@
 
 \newcommand{\documentlink}[1]{\href{#1}{\documentIcon}~
 }
-
-% company custom color
-\definecolor{maincolor}{HTML}{{"{"}}{{.MainColor}}}
-\definecolor{sidecolor}{HTML}{{"{"}}{{.SideColor}}}
-\definecolor{maingray}{HTML}{D9D9D9}
-%\definecolor{maingray}{HTML}{B9B9B9}
-\definecolor{lightgray}{HTML}{D9D9D9}
 
 % icons
 \newcommand{\projectIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Project "}"}} }

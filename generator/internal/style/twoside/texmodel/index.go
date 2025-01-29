@@ -21,6 +21,12 @@ type Index struct {
 	// config
 	MainColor        string
 	SideColor        string
+	LSALineLatex     string
+	Color1           string
+	Color2           string
+	Color3           string
+	Color4           string
+	Color5           string
 	HasDocumentLinks bool
 	HasProject       bool
 	HasRole          bool
