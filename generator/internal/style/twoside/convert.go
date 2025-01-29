@@ -18,6 +18,11 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 		// config
 		MainColor: util.DefaultColor(app.JobPosition.MainColor),
 		SideColor: util.DefaultColor(app.JobPosition.SideColor),
+		Color1:    app.JobPosition.Color1,
+		Color2:    app.JobPosition.Color2,
+		Color3:    app.JobPosition.Color3,
+		Color4:    app.JobPosition.Color4,
+		Color5:    app.JobPosition.Color5,
 		Label:     local,
 		Icon: texmodel.Icon{
 			Project:   util.ProjectIconPath,
@@ -39,6 +44,19 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 
 		Attachment: util.DefaultStringArray(app.JobPosition.Attachment, app.Profile.Attachment),
 	}
+
+	checkColor := func(color *string, lsaLine string) {
+		if *color == "" {
+			*color = "ffffff"
+		} else {
+			data.LSALineLatex = lsaLine
+		}
+	}
+	checkColor(&data.Color1, "")
+	checkColor(&data.Color2, `\twoColorLine`)
+	checkColor(&data.Color3, `\threeColorLine`)
+	checkColor(&data.Color4, `\fourColorLine`)
+	checkColor(&data.Color5, `\fiveColorLine`)
 
 	addLsa(&data, app, local)
 	addRSA(&data, app, local)

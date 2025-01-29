@@ -9,6 +9,9 @@ import (
 func Google() genmodel.JobPosition {
 	return genmodel.JobPosition{
 		MainColor: "4285F4",
+		Color1:    "f73e59",
+		Color2:    "257af4",
+		Color3:    "ffbb33",
 		SideColor: "AAC9E7",
 		Style:     style.TwoSide,
 		TwoSideStyle: genmodel.TwoSideStyle{
