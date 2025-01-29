@@ -23,6 +23,7 @@ func JoinExperience(application *genmodel.Application) {
 			Description:       lang.DefaultTranslation(application.JobPosition.FutureExperience.Description),
 			TechStack:         lang.DefaultTranslation(application.JobPosition.FutureExperience.TechStack),
 			StartTime:         application.JobPosition.FutureExperience.StartTime,
+			EndTime:           application.JobPosition.FutureExperience.EndTime,
 			Company:           application.JobPosition.Company,
 			FutureExperience:  true,
 			FutureColorChange: application.JobPosition.FutureColorChange,

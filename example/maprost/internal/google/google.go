@@ -9,6 +9,7 @@ import (
 func Google() genmodel.JobPosition {
 	return genmodel.JobPosition{
 		MainColor: "4285F4",
+		SideColor: "AAC9E7",
 		Style:     style.TwoSide,
 		TwoSideStyle: genmodel.TwoSideStyle{
 			//RemoveSkills: map[genmodel.LeftSideActionType][]genmodel.ID{
@@ -31,6 +32,7 @@ func Google() genmodel.JobPosition {
 				genmodel.Lsa_publication,
 				genmodel.Lsa_award,
 			},
+
 			//Education: []genmodel.ID{
 			//	internal.Edu_Comp,
 			//},
@@ -55,9 +57,12 @@ func Google() genmodel.JobPosition {
 		ProfileText:  ``,
 		FutureExperience: genmodel.FutureExperience{
 			JobPosition: "Go Backend Developer",
-			TechStack:   "Go, Docker",
-			StartTime:   "Jan. 2018",
-			Description: "",
+			//TechStack:   "Go, Docker",
+			StartTime: "01/2018",
+			// TODO multilanguage
+			EndTime: "Vertragsende",
+			//EndTime:     "12/2018",
+			Description: "an diesen Aufgaben hätte ich Spaß",
 		},
 		FutureColorChange: true,
 		OutputPath:        genmodel.OutputPath(),
@@ -66,5 +71,7 @@ func Google() genmodel.JobPosition {
 		//	{Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 12, Max: 32},
 		//	//{Name: lang.TranslationMap{lang.English: "negotiable wish 2", lang.German: "vehandelbarer Wunsch 2"}, Min: 6, Max: 32},
 		//},
+		MainQuestionLabel: "MainQuestion Label",
+		MainQuestionText:  "MainQuestion Text",
 	}
 }

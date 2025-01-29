@@ -194,19 +194,23 @@ func Profile() genmodel.Profile {
 				Company:     "Fitness Company",
 				JobPosition: lang.DefaultTranslation("Java Backend Developer"),
 				StartTime:   "Jul. 2014",
-				Description: lang.TranslationMap{lang.English: "" +
-					"Part of the recruiting team since Oct. 2015.\n" +
-					"Product owner of a sub team from Jan. 2016 to Oct. 2016.",
-					lang.German: "Recruiter, ProductOwner"},
+				Description: lang.TranslationMap{
+					lang.German: "Recruiter, ProductOwner",
+					lang.English: "" +
+						"Part of the recruiting team since Oct. 2015.\n" +
+						"Product owner of a sub team from Jan. 2016 to Oct. 2016.",
+				},
 				TechStack: lang.DefaultTranslation("Java, Guice, GWT, MySQL, Hibernate, RESTful, Json, Docker, Go, \\LaTeX, Ubuntu, Bash, " +
 					"Python, Git, Scrum/Kanban, JIRA"),
 				DocumentLinks: []string{"http://google.de"},
-				Project: lang.TranslationMap{lang.English: "Project 1",
-					lang.German: "Projekt 1"},
+				Project: lang.TranslationMap{
+					lang.English: "Project 1",
+					lang.German:  "Projekt 1",
+				},
 			},
 			{
 				Id:          Exp_solar,
-				Company:     "Solar Company 123",
+				Company:     "Solar Company",
 				JobPosition: lang.DefaultTranslation("C++ Backend Developer"),
 				StartTime:   "Mar. 2011",
 				EndTime:     "May 2014",
@@ -246,7 +250,7 @@ func Profile() genmodel.Profile {
 				EndTime:       "Jan. 2005",
 				Focus:         lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
 				DocumentLinks: []string{"http://google.de", "http://ecosia.de"},
-				QuitReason:    lang.DefaultTranslation("für den Ausbau der Selbstständigkeit auf eigenen Wunsch beendet für den Ausbau der Selbstständigkeit auf eigenen Wunsch beendet"),
+				QuitReason:    lang.DefaultTranslation("für den Ausbau der Selbstständigkeit auf eigenen Wunsch beendet"),
 			},
 		},
 		Publication: []genmodel.Publication{
@@ -260,81 +264,52 @@ func Profile() genmodel.Profile {
 				ContentShortLsa: lang.DefaultTranslation("short"),
 				DocumentLinks:   []string{"http://google.de"},
 			},
-			//{
-			//	Id:            Pub_Machine,
-			//	Graduation:    lang.DefaultTranslation("Fachinformatiker Systemintegration"),
-			//	Institute:     "Telecommunication Company",
-			//	StartTime:     "Sep. 2002",
-			//	EndTime:       "Jan. 2005",
-			//	Focus:         lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
-			//	DocumentLinks: []string{"http://google.de", "http://ecosia.de"},
-			//},
-
 			{
 				Id:              Pub_Machine,
-				Title:           lang.DefaultTranslation("Machine Learning"),
-				Publisher:       lang.DefaultTranslation("Co-Autorin, FSM - Freiwillige Selbstkontrolle Medien"),
+				Title:           lang.DefaultTranslation("Buch 1"),
+				Publisher:       lang.DefaultTranslation("Verlag 1"),
 				Date:            "2019",
-				CoverImage:      "example/maprost/images/cover_machine-learning_s.png",
-				Content:         lang.DefaultTranslation("Material und Unterrichtseinheiten für intelligente Maschinen"),
+				CoverImage:      "generator/internal/image/noimage.png",
+				Content:         lang.DefaultTranslation("Bschreibung 1"),
 				ContentShortLsa: lang.DefaultTranslation("short"),
-				DocumentLinks:   []string{"https://www.medien-in-die-schule.de/unterrichtseinheiten/machine-learning-intelligente-maschinen/", "https://www.researchgate.net/publication/377078171_Machine_Learning_Intelligente_Maschinen"},
+				DocumentLinks:   []string{"http://google.de", "http://google.de"},
 			},
 			{
 				Id: Pub_Calliope,
 				Title: lang.TranslationMap{
-					lang.German:  `Das Calliope Buch`,
-					lang.English: `Das Calliope Buch [The Calliope Book]`,
+					lang.German:  `Buch 2`,
+					lang.English: `Book 2`,
 				},
-				Publisher:  lang.DefaultTranslation("Co-Autorin, Dpunkt.Verlag"),
+				Publisher:  lang.DefaultTranslation("Verlag 2"),
 				Date:       "2017",
-				CoverImage: "example/maprost/images/cover_calliope-buch_s.jpg",
+				CoverImage: "generator/internal/image/noimage.png",
 				Content: lang.TranslationMap{
-					lang.German:  `Spannende Bastelprojekte mit dem Calliope-Mini-Board`,
-					lang.English: `Exciting craft projects with the Calliope Mini Board`,
+					lang.German:  `Beschreibung 2`,
+					lang.English: `Beschreibung 2`,
 				},
 				ContentShortLsa: lang.DefaultTranslation("short"),
-				DocumentLinks:   []string{"https://www.amazon.de/Das-Calliope-Buch-Spannende-Bastelprojekte-Calliope-Mini-Board/dp/3864904684"},
+				DocumentLinks:   []string{"http://google.de"},
 			},
 		},
 		Award: []genmodel.Award{
 			{
-				Id: Awa_Fami,
-				Title: lang.TranslationMap{
-					lang.German:  `Bundesbeste FaMI`,
-					lang.English: `Germany's best FaMI`,
-				},
-				Institute: lang.DefaultTranslation("IHK, Azubis Unsere Besten"),
-				Date:      "2011",
-				Content: lang.TranslationMap{
-					lang.German:  `bundesbeste FaMI 2011 in der Fachrichtung Medizinische Dokumentation`,
-					lang.English: `Germany's best FaMI specializing in medical documentation`,
-				},
-				ContentShortLsa: lang.TranslationMap{
-					lang.German:  `Bundesbeste FaMI, IHK, Azubis Unsere Besten`,
-					lang.English: `Germany's best FaMI, IHK, Azubis Unsere Besten [Our best apprentices]`,
-				},
-				// TODO LINKS
-				DocumentLinks: []string{"file:///C:/Users/Natalia/Downloads/Zeugnisse/urkunde_bundesbeste.pdf"},
-			},
-			{
 				Id:              Awa_BSS,
-				Title:           lang.DefaultTranslation("Berliner Startup Stipendium"),
+				Title:           lang.DefaultTranslation("Stipendium"),
 				Institute:       lang.DefaultTranslation("XXX"),
 				Date:            "01-12/2024",
 				Content:         lang.DefaultTranslation("XXX"),
 				ContentShortLsa: lang.DefaultTranslation("short"),
 				DocumentLinks:   []string{"http://google.de"},
 			},
-			//{
-			//	Id:            Pub_Machine,
-			//	Graduation:    lang.DefaultTranslation("Fachinformatiker Systemintegration"),
-			//	Institute:     "Telecommunication Company",
-			//	StartTime:     "Sep. 2002",
-			//	EndTime:       "Jan. 2005",
-			//	Focus:         lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
-			//	DocumentLinks: []string{"http://google.de", "http://ecosia.de"},
-			//},
+			{
+				Id:              Awa_BSS,
+				Title:           lang.DefaultTranslation("Urkunde"),
+				Institute:       lang.DefaultTranslation("XXX"),
+				Date:            "2017",
+				Content:         lang.DefaultTranslation("XXX"),
+				ContentShortLsa: lang.DefaultTranslation("short"),
+				DocumentLinks:   []string{"http://google.de"},
+			},
 		},
 	}
 }

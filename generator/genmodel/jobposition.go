@@ -18,6 +18,7 @@ type JobAddress struct {
 type FutureExperience struct {
 	JobPosition string
 	StartTime   string
+	EndTime     string
 	Description string
 	TechStack   string
 }

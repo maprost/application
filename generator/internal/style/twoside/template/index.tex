@@ -19,6 +19,7 @@
 \usepackage{framed}
 \usepackage{mdframed}
 \usepackage{enumitem}
+\usepackage{shadowtext}
 %\usepackage{wsuipa}
 \usepackage{setspace}
 
@@ -69,12 +70,28 @@
 }
 
 \newcommand{\linepositiontime}[2]{
-    {\headerfont #1} ~\xrfill[0.0ex]{0.5pt}[maincolor]~ #2
+    {\headerfont #1} ~\xrfill[0.0ex]{1.2pt}[maincolor]~ #2
     \smallskip
 
     \begin{minipage}{\indentLength}
         ~
     \end{minipage}
+}
+
+\definecolor{futurecolor}{HTML}{666666}
+\newcommand{\linepositiontimefuture}[4]{
+    \color{futurecolor}
+    \shadowoffset{1pt}
+    \shadowcolor{sidecolor!40!white}
+%    \shadowrgb{0.8, 0.8, 1}
+    {\headerfont \shadowtext{#1}} ~\xrfill[0.0ex]{1.2pt}[futurecolor]~ \color{futurecolor}\normalsize#2\normalsize
+    \smallskip
+
+    \begin{minipage}{\indentLength}
+        ~
+    \end{minipage}
+    \begin{minipage}{\insidePageLength}
+    {\color{maincolor} #4} \hfill {\color{futurecolor} \footnotesize #3 \normalsize} \\
 }
 
 \newcommand{\linefinalgrade}[1]{\checkPar{#1}{ {{$.Label.FinalGrade}}: #1}}

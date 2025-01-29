@@ -14,6 +14,7 @@ type Experience struct {
 	Company           string
 	Position          string
 	Time              string
+	TimeSecondLine    string
 	QuitReason        string
 	Description       string
 	Project           string // please add here your pet projects

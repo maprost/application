@@ -137,9 +137,19 @@ func convertMyMotivation(app *genmodel.Application, local lang.Language) (rsa te
 }
 
 func convertMainQuestion(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
+	label := ""
+	//label += "\\colorbox{green}{"
+	label += customCustomDefaultString(app.JobPosition.MainQuestionLabel, app.Profile.CustomMainQuestionTextLabel, local, local.MainQuestion())
+	//label += "}"
+
+	value := ""
+	//value += "\\colorbox{green}{"
+	value += util.DefaultValue(app.JobPosition.MainQuestionText, local.String(app.Profile.GeneralMainQuestionText))
+	//value += "}"
+
 	return convertTxt(
-		customCustomDefaultString(app.JobPosition.MainQuestionText, app.Profile.CustomMainQuestionTextLabel, local, local.MainQuestion()),
-		util.DefaultValue(app.JobPosition.MainQuestionText, local.String(app.Profile.GeneralMainQuestionText)),
+		label,
+		value,
 		genmodel.Rsa_mainQuestion,
 	)
 }
@@ -187,8 +197,12 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 		}
 
 		timeRange := convertTime(exp.StartTime, exp.EndTime, local)
+		timeRange2 := ""
 		if i == 0 && exp.FutureExperience {
 			timeRange = local.PossibleAt() + "~~" + exp.StartTime
+			if exp.EndTime != "" {
+				timeRange2 += local.PossibleUntil() + " " + exp.EndTime
+			}
 		}
 
 		res := texmodel.Experience{
@@ -199,6 +213,7 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 			Company:           exp.Company,
 			Tech:              convTransLang(genmodel.ExperiencePart_techStack, exp.TechStack, exp.TechStack2, exp.TechStack3),
 			Time:              timeRange,
+			TimeSecondLine:    timeRange2,
 			QuitReason:        local.String(exp.QuitReason),
 			DocumentLinks:     exp.DocumentLinks,
 			FutureExperience:  exp.FutureExperience,

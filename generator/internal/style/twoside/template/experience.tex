@@ -1,12 +1,15 @@
-{{if and (.FutureExperience) (.FutureColorChange)}}\color{sidecolor}{{end}}%
-    \linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
+{{if and (.FutureExperience) (.FutureColorChange)}}
+\linepositiontimefuture{{print "{" .Position "}" "{" .Time "}" "{" .TimeSecondLine "}" "{" .Company "}"}}
+\color{black}
+{{else}}%
+\color{black}
+\linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
 \begin{minipage}{\insidePageLength}
-    {{range .DocumentLinks}}%
-    \documentlink{{print "{" . "}"}}%
-    {{end}}%
-    {{if and (.FutureExperience) (.FutureColorChange)}}\color{maincolor}{{end}}%
-    \linecompany{{print "{" .Company "}"}}
-    {{if .FutureExperience}}\color{black}{{end}}
+{{range .DocumentLinks}}%
+\documentlink{{print "{" . "}"}}%
+{{end}}%
+\linecompany{{print "{" .Company "}"}}
+{{end}}%
     \linedescription{{print "{" .Description "}"}}
     \lineproject{{print "{" .Project "}"}}
     \linerole{{print "{" .Role "}"}}

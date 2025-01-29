@@ -162,6 +162,15 @@ func (l Language) PossibleAt() string {
 	}
 }
 
+func (l Language) PossibleUntil() string {
+	switch l {
+	case German:
+		return "bis"
+	default:
+		return "until"
+	}
+}
+
 func (l Language) SomeProjects() string {
 	switch l {
 	case German:
