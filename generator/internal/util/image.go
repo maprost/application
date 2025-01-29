@@ -14,6 +14,7 @@ var (
 	ProjectIconPath   = image.ImagePath() + "project"
 	RoleIconPath      = image.ImagePath() + "role"
 	DocumentIconPath  = image.ImagePath() + "document"
+	ExtLinkIconPath   = image.ImagePath() + "extlink"
 )
 
 func WebsiteIcon(website string) (icon string) {

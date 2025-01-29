@@ -266,6 +266,31 @@ func Profile() genmodel.Profile {
 			//	Focus:         lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
 			//	DocumentLinks: []string{"http://google.de", "http://ecosia.de"},
 			//},
+
+			{
+				Id:            Pub_Machine,
+				Title:         lang.DefaultTranslation("Machine Learning"),
+				Publisher:     lang.DefaultTranslation("Co-Autorin, FSM - Freiwillige Selbstkontrolle Medien"),
+				Date:          "2019",
+				CoverImage:    "example/maprost/images/cover_machine-learning_s.png",
+				Content:       lang.DefaultTranslation("Material und Unterrichtseinheiten für intelligente Maschinen"),
+				DocumentLinks: []string{"https://www.medien-in-die-schule.de/unterrichtseinheiten/machine-learning-intelligente-maschinen/", "https://www.researchgate.net/publication/377078171_Machine_Learning_Intelligente_Maschinen"},
+			},
+			{
+				Id: Pub_Calliope,
+				Title: lang.TranslationMap{
+					lang.German:  `Das Calliope Buch`,
+					lang.English: `Das Calliope Buch [The Calliope Book]`,
+				},
+				Publisher:  lang.DefaultTranslation("Co-Autorin, Dpunkt.Verlag"),
+				Date:       "2017",
+				CoverImage: "example/maprost/images/cover_calliope-buch_s.jpg",
+				Content: lang.TranslationMap{
+					lang.German:  `Spannende Bastelprojekte mit dem Calliope-Mini-Board`,
+					lang.English: `Exciting craft projects with the Calliope Mini Board`,
+				},
+				DocumentLinks: []string{"https://www.amazon.de/Das-Calliope-Buch-Spannende-Bastelprojekte-Calliope-Mini-Board/dp/3864904684"},
+			},
 		},
 		Award: []genmodel.Award{
 			{

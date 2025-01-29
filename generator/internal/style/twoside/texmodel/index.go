@@ -9,6 +9,7 @@ type Icon struct {
 	Role      string
 	TechStack string
 	Document  string
+	ExtLink   string
 }
 
 type Website struct {

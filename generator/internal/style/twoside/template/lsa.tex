@@ -30,23 +30,27 @@
 
     {{ if .PublicationLsa }}
         \category{{print "{" .Label "}"}}
-        \begin{tabular}{@{}p{10mm} @{\hskip 0.2cm}p{38mm}@{}}
-            {{range .PublicationLsa}}
+        \begin{tabular}{@{}p{10mm} @{\hskip 0.2cm}p{50mm}@{}}
+            {{range .PublicationLsa}}%
                 \begin{minipage}[t]{.2\linewidth}
                 {{.Time}} \\[1ex]
                 \includegraphics[width=1cm]{{print "{" .Image "}"}}
                 \end{minipage}
                 &
                 \begin{minipage}[t]{.8\linewidth}
-                {{.Name}} \\[1ex]
+                {{.Name}} \\[.5ex]
+%                \begin{spacing}{0.8}%
+                \footnotesize
                 {{.Description}}
+                \normalsize
+%                \end{spacing}
 
                 {{range .Links}}%
-                \href{{print "{" . "}" }}{\documentIcon}%
+                \href{{print "{" . "}" }}{\extlinkIcon}~ %
                 {{end}}%
                 \end{minipage}
 
-                \\
+                \\[1ex]
 
 %                {{.Name}} & {{.Time}} \\
             {{end}}

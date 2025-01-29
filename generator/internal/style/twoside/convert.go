@@ -24,6 +24,7 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 			Role:      util.RoleIconPath,
 			TechStack: util.TechStackIconPath,
 			Document:  util.DocumentIconPath,
+			ExtLink:   util.ExtLinkIconPath,
 		},
 
 		// main infos
