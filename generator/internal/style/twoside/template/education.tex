@@ -1,7 +1,10 @@
 \linepositiontime{{print "{" .Graduation "}" "{" .Time "}"}}
 \begin{minipage}{\insidePageLength}
-{{range .DocumentLinks}}%
-    \documentlink{{print "{" . "}"}}%
+    {{range .DocumentLinks}}%
+        \documentlink{{print "{" . "}"}}%
+    {{end}}%
+    {{range .ExternalLinks}}%
+        \externallink{{print "{" . "}"}}%
     {{end}}%
     \lineinstitute{{print "{" .Institute "}"}}
     \linefocus{{print "{" .Focus "}"}}

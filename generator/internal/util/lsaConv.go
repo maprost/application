@@ -60,8 +60,11 @@ func CalculateLsa(lsaList []genmodel.LeftSideAction, needed map[genmodel.LeftSid
 				}
 			}
 			if !found {
+				// TODO improve?
 				err := fmt.Errorf("can't find lsa Id '%v' in the map'%v'", lsaId, lsaList)
-				return nil, action, err
+				panic(err)
+				//return nil, action, err
+				//continue
 			}
 			result = append(result, lsa)
 		}

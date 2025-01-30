@@ -56,6 +56,8 @@ const (
 	Time_1632 = genmodel.ID(iota) + 1
 	Time_2432
 	Time_20full
+	Time_HO2d
+	Time_HO16h
 )
 
 const (
@@ -67,6 +69,11 @@ const (
 const (
 	Lang_De = genmodel.ID(iota) + 1
 	Lang_En
+)
+
+const (
+	Doc_CV   = "generator/internal/files/maprost.pdf"
+	Doc_Plan = "generator/internal/files/Speiseplan-Kita-Krippe.pdf"
 )
 
 func Profile() genmodel.Profile {
@@ -106,6 +113,8 @@ func Profile() genmodel.Profile {
 			{Id: Time_1632, Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 16, Max: 32},
 			{Id: Time_2432, Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 24, Max: 32},
 			{Id: Time_20full, Name: lang.TranslationMap{lang.English: "open for part time", lang.German: "offen für Teilzeit"}, Min: 20, Max: 40},
+			{Id: Time_HO2d, Name: lang.TranslationMap{lang.English: "open for part time", lang.German: "je nach Aufgabe und Absprache anteilige Homeoffice-Möglichkeit"}, Min: 0, Max: 2, Full: 5, CurrencyEnding: "d"},
+			{Id: Time_HO16h, Name: lang.TranslationMap{lang.English: "open for part time", lang.German: "je nach Aufgabe und Absprache anteilige Homeoffice-Möglichkeit"}, Min: 0, Max: 16},
 			//{Name: lang.TranslationMap{lang.English: "negotiable wish 2", lang.German: "vehandelbarer Wunsch 2"}, Min: 6, Max: 32},
 		},
 		MoneyAmount: []genmodel.LeftSideAction{
@@ -254,7 +263,8 @@ func Profile() genmodel.Profile {
 				StartTime:     "Sep. 2002",
 				EndTime:       "Jan. 2005",
 				Focus:         lang.DefaultTranslation("C++, website development (PHP/mssql), system configuration, router programming"),
-				DocumentLinks: []string{"http://google.de", "http://ecosia.de"},
+				DocumentLinks: []string{"http://ecosia.de"},
+				ExternalLinks: []string{"http://google.de", "http://ecosia.de"},
 				QuitReason:    lang.DefaultTranslation("für den Ausbau der Selbstständigkeit auf eigenen Wunsch beendet"),
 			},
 		},
@@ -267,7 +277,7 @@ func Profile() genmodel.Profile {
 				CoverImage:      "example/maprost/images/cv.jpeg",
 				Content:         lang.DefaultTranslation("XXX"),
 				ContentShortLsa: lang.DefaultTranslation("short"),
-				DocumentLinks:   []string{"http://google.de"},
+				ExternalLinks:   []string{"http://google.de"},
 			},
 			{
 				Id:              Pub_Machine,
@@ -277,7 +287,7 @@ func Profile() genmodel.Profile {
 				CoverImage:      "generator/internal/image/noimage.png",
 				Content:         lang.DefaultTranslation("Bschreibung 1"),
 				ContentShortLsa: lang.DefaultTranslation("short"),
-				DocumentLinks:   []string{"http://google.de", "http://google.de"},
+				ExternalLinks:   []string{"http://google.de", "http://google.de"},
 			},
 			{
 				Id: Pub_Calliope,
@@ -293,7 +303,7 @@ func Profile() genmodel.Profile {
 					lang.English: `Beschreibung 2`,
 				},
 				ContentShortLsa: lang.DefaultTranslation("short"),
-				DocumentLinks:   []string{"http://google.de"},
+				ExternalLinks:   []string{"http://google.de"},
 			},
 		},
 		Award: []genmodel.Award{
@@ -301,10 +311,11 @@ func Profile() genmodel.Profile {
 				Id:              Awa_BSS,
 				Title:           lang.DefaultTranslation("Stipendium"),
 				Institute:       lang.DefaultTranslation("XXX"),
-				Date:            "01-12/2024",
+				Date:            "2016",
 				Content:         lang.DefaultTranslation("XXX"),
-				ContentShortLsa: lang.DefaultTranslation("short"),
+				ContentShortLsa: lang.DefaultTranslation("bester Abschluss im Fachbereich"),
 				DocumentLinks:   []string{"http://google.de"},
+				ExternalLinks:   []string{"http://google.de"},
 			},
 			{
 				Id:              Awa_BSS,

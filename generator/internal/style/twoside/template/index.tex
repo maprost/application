@@ -24,6 +24,8 @@
 \usepackage{tabularray}
 %\usepackage{wsuipa}
 \usepackage{setspace}
+\usepackage{pdfpages}
+\RequirePackage{fontawesome}
 
 \usepackage[
     left = \Large \flqq{},%
@@ -40,6 +42,7 @@
 % company custom color
 \definecolor{maincolor}{HTML}{{"{"}}{{.MainColor}}}
 \definecolor{sidecolor}{HTML}{{"{"}}{{.SideColor}}}
+\definecolor{shadowcolor}{HTML}{{"{"}}{{.ShadowColor}}}
 \definecolor{color1}{HTML}{{"{"}}{{.Color1}}}
 \definecolor{color2}{HTML}{{"{"}}{{.Color2}}}
 \definecolor{color3}{HTML}{{"{"}}{{.Color3}}}
@@ -49,6 +52,11 @@
 %\definecolor{maingray}{HTML}{B9B9B9}
 \definecolor{lightgray}{HTML}{D9D9D9}
 
+
+\hypersetup{colorlinks,
+linkcolor=maincolor,
+urlcolor=maincolor,
+}
 
 \setlength{\parindent}{0pt} % Disable paragraph indentation
 
@@ -133,7 +141,7 @@
         ~
     \end{minipage}
     \begin{minipage}{\insidePageLength}
-    {\color{maincolor} #4} \hfill {\color{futurecolor} \footnotesize #3 \normalsize} \\
+    {\color{futurecolor} #4} \hfill {\color{futurecolor} \footnotesize #3 \normalsize} \\
 }
 
 \newcommand{\linefinalgrade}[1]{\checkPar{#1}{ {{$.Label.FinalGrade}}: #1}}
@@ -163,7 +171,10 @@
 \newcommand{\linetech}[1]{\checkPar{#1}{\techStackIcon~ #1}
 }
 
-\newcommand{\documentlink}[1]{\href{#1}{\documentIcon}~
+\newcommand{\documentlink}[1]{\href{#1}{\shadowoffset{0.5pt}\shadowcolor{shadowcolor!40!white}\shadowtext{\documentIcon}}~
+}
+
+\newcommand{\externallink}[1]{\href{#1}{\shadowoffset{0.5pt}\shadowcolor{shadowcolor!40!white}\shadowtext{\extlinkIcon}}~
 }
 
 % icons
@@ -171,8 +182,11 @@
 \newcommand{\roleIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
 \newcommand{\quitIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
 \newcommand{\techStackIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.TechStack "}"}} }
-\newcommand{\documentIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Document "}"}}}
-\newcommand{\extlinkIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.ExtLink "}"}}}
+%\newcommand{\documentIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Document "}"}}}
+%\newcommand{\documentIcon}{\faFilePdfO} % these icons should not have a white background because of sidepart
+\newcommand{\documentIcon}{\faFileTextO} % these icons should not have a white background because of sidepart
+%\newcommand{\extlinkIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.ExtLink "}"}}}
+\newcommand{\extlinkIcon}{\faExternalLink} % these icons should not have a white background because of sidepart
 
 % Command for printing the contact information icons
 \newcommand{\icon}[1]{%
@@ -386,7 +400,7 @@
     %------------------------------------------------
     {{range .Attachment}}
         \newpage
-        {{.}}
+        \includepdf[pages={-}]{{print "{" . "}"}}
     {{end}}
 
 \end{document}

@@ -32,7 +32,8 @@ type PublicationLsa struct {
 	Description         string
 	DescriptionShortLsa string
 	Publisher           string
-	Links               []string
+	ExternalLinks       []string
+	DocumentLinks       []string
 }
 
 type AwardLsa struct {
@@ -40,7 +41,8 @@ type AwardLsa struct {
 	Time                string
 	Description         string
 	DescriptionShortLsa string
-	Links               []string
+	DocumentLinks       []string
+	ExternalLinks       []string
 }
 
 type TimeTitleLsa struct {

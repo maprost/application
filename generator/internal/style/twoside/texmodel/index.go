@@ -21,6 +21,7 @@ type Index struct {
 	// config
 	MainColor        string
 	SideColor        string
+	ShadowColor      string
 	LSALineLatex     string
 	Color1           string
 	Color2           string

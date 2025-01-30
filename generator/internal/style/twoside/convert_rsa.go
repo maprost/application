@@ -318,6 +318,7 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 			TimeSecondLine:    timeRange2,
 			QuitReason:        local.String(exp.QuitReason),
 			DocumentLinks:     exp.DocumentLinks,
+			ExternalLinks:     exp.ExternalLinks,
 			FutureExperience:  exp.FutureExperience,
 			FutureColorChange: exp.FutureColorChange,
 		}
@@ -359,6 +360,7 @@ func convertEducation(app *genmodel.Application, local lang.Language) (rsa texmo
 			Focus:         local.String(edu.Focus),
 			Time:          convertTime(edu.StartTime, edu.EndTime, local),
 			DocumentLinks: edu.DocumentLinks,
+			ExternalLinks: edu.ExternalLinks,
 		}
 
 		resTex, err := compiler.CompileSubTex(templatePath(), "education.tex", res)
@@ -433,6 +435,7 @@ func convertAward(app *genmodel.Application, local lang.Language) (rsa texmodel.
 			Content:         local.String(awa.Content),
 			ContentShortLsa: local.String(awa.ContentShortLsa),
 			DocumentLinks:   awa.DocumentLinks,
+			ExternalLinks:   awa.ExternalLinks,
 		}
 
 		resTex, err := compiler.CompileSubTex(templatePath(), "award.tex", res)

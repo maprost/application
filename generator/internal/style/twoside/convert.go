@@ -16,14 +16,15 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 
 	data = texmodel.Index{
 		// config
-		MainColor: util.DefaultColor(app.JobPosition.MainColor),
-		SideColor: util.DefaultColor(app.JobPosition.SideColor),
-		Color1:    app.JobPosition.Color1,
-		Color2:    app.JobPosition.Color2,
-		Color3:    app.JobPosition.Color3,
-		Color4:    app.JobPosition.Color4,
-		Color5:    app.JobPosition.Color5,
-		Label:     local,
+		MainColor:   util.DefaultColor(app.JobPosition.MainColor),
+		SideColor:   util.DefaultColor(app.JobPosition.SideColor),
+		ShadowColor: util.DefaultColor(app.JobPosition.ShadowColor),
+		Color1:      app.JobPosition.Color1,
+		Color2:      app.JobPosition.Color2,
+		Color3:      app.JobPosition.Color3,
+		Color4:      app.JobPosition.Color4,
+		Color5:      app.JobPosition.Color5,
+		Label:       local,
 		Icon: texmodel.Icon{
 			Project:   util.ProjectIconPath,
 			Role:      util.RoleIconPath,

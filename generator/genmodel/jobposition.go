@@ -28,27 +28,30 @@ func (e FutureExperience) Empty() bool {
 }
 
 type JobPosition struct {
-	MainColor  string // please use the HTML color signature: 800000, if the field is empty: standard color will used
-	SideColor  string
-	Color1     string
-	Color2     string
-	Color3     string
-	Color4     string
-	Color5     string
-	Lang       lang.Language
-	Company    string
-	Address    JobAddress
-	Title      string // of the job
-	FileName   string // default is 'application'
-	OutputPath string // will overwrite build(outputPath)
+	MainColor   string // please use the HTML color signature: 800000, if the field is empty: standard color will used
+	SideColor   string
+	ShadowColor string
+	Color1      string
+	Color2      string
+	Color3      string
+	Color4      string
+	Color5      string
+	Lang        lang.Language
+	Company     string
+	Address     JobAddress
+	Title       string // of the job
+	FileName    string // default is 'application'
+	OutputPath  string // will overwrite build(outputPath)
 
 	// customize your profile
 	ProfileLabel      string
-	ProfileText       string //  your job specific profile text, this text can contains tex elements
+	ProfileText       string //  your job specific profile text, this text can contain tex elements
 	MyMotivationLabel string
-	MyMotivationText  string //  your job specific motivation text, this text can contains tex elements
+	MyMotivationText  string //  your job specific motivation text, this text can contain tex elements
 	MainQuestionLabel string
-	MainQuestionText  string           //  your job specific question text, this text can contains tex elements
+	MainQuestionText  string //  your job specific question text, this text can contain tex elements
+	TechSkillsLabel   string
+	SoftSkillsLabel   string
 	MoneyAmount       []LeftSideAction //  your job specific money amount
 	TimeAmount        []LeftSideAction //  your job specific time amount
 	FutureExperience  FutureExperience // if set, this experience will be the top of your experience

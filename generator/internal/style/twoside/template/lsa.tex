@@ -34,26 +34,29 @@
         \begin{tabular}{@{}p{10mm} @{\hskip 0.2cm}p{50mm}@{}}
             {{range .PublicationLsa}}%
                 \begin{minipage}[t]{.2\linewidth}
-                {{.Time}} \\[1ex]
-                {{if .Links }}%
-                {{$first := index .Links 0}}%
-                    \href{{print "{" $first "}"}}{\includegraphics[width=1cm]{{print "{" .Image "}"}}}
-                {{else}}%
-                    \includegraphics[width=1cm]{{print "{" .Image "}"}}
-                {{end}}%
+                    {{.Time}} \\[1ex]
+                    {{if .ExternalLinks }}%
+                        {{$first := index .ExternalLinks 0}}%
+                        \href{{print "{" $first "}"}}{\includegraphics[width=1cm]{{print "{" .Image "}"}}}
+                    {{else}}%
+                        \includegraphics[width=1cm]{{print "{" .Image "}"}}
+                    {{end}}%
                 \end{minipage}
                 &
                 \begin{minipage}[t]{.8\linewidth}
-                {{.Name}} \\[.5ex]
-%                \begin{spacing}{0.8}%
-                \footnotesize
-                {{.DescriptionShortLsa}}
-                \normalsize
-%                \end{spacing}
+                    {{.Name}} \\[.5ex]
+    %                \begin{spacing}{0.8}%
+                    \footnotesize
+                    {{.DescriptionShortLsa}}
+                    \normalsize
+    %                \end{spacing}
 
-                {{range .Links}}%
-                \href{{print "{" . "}" }}{\extlinkIcon}~ %
-                {{end}}%
+                    {{range .ExternalLinks}}%
+                        \href{{print "{" . "}" }}{\extlinkIcon}~ %
+                    {{end}}%
+                    {{range .DocumentLinks}}%
+                        \href{{print "{" . "}" }}{\documentIcon}\,\,%
+                    {{end}}%
                 \end{minipage}
 
                 \\[1ex]
@@ -69,10 +72,13 @@
 %AwardStart
         \category{{print "{" .Label "}"}}
 %        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
-%        \begin{tabular}{@{}p{52mm} @{\hskip 0.2cm}p{1mm}@{}}
+        \begin{tabular}{@{}p{52mm} @{\hskip 0.2cm}p{1mm}@{}}
             {{range .AwardLsa}}%
-                {{range .Links}}%
-                \href{{print "{" . "}" }}{\extlinkIcon}\,\,%
+                {{range .ExternalLinks}}%
+                    \href{{print "{" . "}" }}{\extlinkIcon}\,\,%
+                {{end}}%
+                {{range .DocumentLinks}}%
+                    \href{{print "{" . "}" }}{\documentIcon}\,\,%
                 {{end}}%
                 {{.Time}}: %\\
                 {{.DescriptionShortLsa}} \\[5pt]%
@@ -80,7 +86,7 @@
 %                {{.Name}} & {{.Time}} \\
             {{end}}%
         \vspace{-17pt}
-%        \end{tabular}
+        \end{tabular}
 %AwardEnd
     {{ end }}
 %afterAward

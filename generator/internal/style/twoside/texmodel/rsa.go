@@ -21,6 +21,7 @@ type Experience struct {
 	Role              string // please add here more roles you did
 	Tech              string
 	DocumentLinks     []string
+	ExternalLinks     []string
 	FutureExperience  bool
 	FutureColorChange bool
 }
@@ -33,6 +34,7 @@ type Education struct {
 	QuitReason    string
 	Focus         string
 	DocumentLinks []string
+	ExternalLinks []string
 }
 
 type Publication struct {
@@ -51,4 +53,5 @@ type Award struct {
 	Content         string
 	ContentShortLsa string
 	DocumentLinks   []string
+	ExternalLinks   []string
 }

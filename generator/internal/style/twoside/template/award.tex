@@ -3,6 +3,9 @@
     {{range .DocumentLinks}}%
         \documentlink{{print "{" . "}"}}%
     {{end}}%
+    {{range .ExternalLinks}}%
+        \externallink{{print "{" . "}"}}%
+    {{end}}%
     \lineinstitute{{print "{" .Institute "}"}}
     \linecontent{{print "{" .Content "}"}}
 \end{minipage} \\[1ex]

@@ -1,18 +1,21 @@
 {{if and (.FutureExperience) (.FutureColorChange)}}
-\linepositiontimefuture{{print "{" .Position "}" "{" .Time "}" "{" .TimeSecondLine "}" "{" .Company "}"}}
-\color{black}
+    \linepositiontimefuture{{print "{" .Position "}" "{" .Time "}" "{" .TimeSecondLine "}" "{" .Company "}"}}
+    \color{black}
 {{else}}%
-\color{black}
-\linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
-\begin{minipage}{\insidePageLength}
-{{range .DocumentLinks}}%
-\documentlink{{print "{" . "}"}}%
-{{end}}%
-\linecompany{{print "{" .Company "}"}}
-{{end}}%
+    \color{black}
+    \linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
+    \begin{minipage}{\insidePageLength}
+        {{range .DocumentLinks}}%
+            \documentlink{{print "{" . "}"}}%
+        {{end}}%
+        {{range .ExternalLinks}}%
+            \externallink{{print "{" . "}"}}%
+        {{end}}%
+        \linecompany{{print "{" .Company "}"}}
+    {{end}}%
     \linedescription{{print "{" .Description "}"}}
     \lineproject{{print "{" .Project "}"}}
     \linerole{{print "{" .Role "}"}}
     \linetech{{print "{" .Tech "}"}}
     \linequit{{print "{" .QuitReason "}"}}
-\end{minipage} \\[1ex]
+    \end{minipage} \\[1ex]

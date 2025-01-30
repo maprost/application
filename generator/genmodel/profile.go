@@ -11,7 +11,9 @@ type LeftSideAction struct {
 	Rating      int     // Rating range [1,10]
 	Min         float64 // range [0,5]
 	//MinString string  // range [0,5]
-	Max float64 // range [0,5]
+	Max            float64 // range [0,5]
+	Full           float64
+	CurrencyEnding string
 }
 
 type Language struct {
@@ -54,6 +56,7 @@ type Experience struct {
 	FutureExperience  bool
 	FutureColorChange bool
 	DocumentLinks     []string
+	ExternalLinks     []string
 }
 
 type Education struct {
@@ -66,6 +69,7 @@ type Education struct {
 	Focus         lang.TranslationMap
 	FinalGrade    lang.TranslationMap
 	DocumentLinks []string
+	ExternalLinks []string
 }
 
 type Publication struct {
@@ -78,6 +82,7 @@ type Publication struct {
 	Content         lang.TranslationMap
 	ContentShortLsa lang.TranslationMap
 	DocumentLinks   []string
+	ExternalLinks   []string
 }
 
 type Award struct {
@@ -88,6 +93,7 @@ type Award struct {
 	Content         lang.TranslationMap
 	ContentShortLsa lang.TranslationMap
 	DocumentLinks   []string
+	ExternalLinks   []string
 }
 
 type ProfileAddress struct {

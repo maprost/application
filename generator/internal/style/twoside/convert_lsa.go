@@ -2,7 +2,6 @@ package twoside
 
 import (
 	"fmt"
-	"log"
 	"sort"
 
 	"github.com/maprost/application/generator/genmodel"
@@ -126,6 +125,10 @@ func lsaConvProfSkills(app *genmodel.Application, lang lang.Language) (texmodel.
 	if res.Label == "" {
 		res.Label = lang.TechSkills()
 	}
+	// TODO improve
+	if app.JobPosition.TechSkillsLabel != "" {
+		res.Label = app.JobPosition.TechSkillsLabel
+	}
 
 	skills, action, err := util.CalculateProfessionalSkills(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	if err != nil {
@@ -162,6 +165,10 @@ func lsaConvProfSkills(app *genmodel.Application, lang lang.Language) (texmodel.
 func lsaConvSoftSkills(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
 	list, action, err := util.CalculateSoftSkills(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	customLabel := app.Profile.CustomSoftSkillLabel[lang]
+	// TODO improve
+	if app.JobPosition.SoftSkillsLabel != "" {
+		customLabel = app.JobPosition.SoftSkillsLabel
+	}
 	defaultLabel := lang.SoftSkills()
 	return convertListSkill(list, action, customLabel, defaultLabel, err, lang)
 }
@@ -202,23 +209,18 @@ func convertListSkill(skills []genmodel.LeftSideAction, action genmodel.LeftSide
 }
 
 func lsaConvTimeAmount(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
-
-	log.Printf("lsaConvTimeAmount start\n")
-
 	var res texmodel.LeftSideAction
 	res.Label = app.Profile.CustomTimeAmountLabel[lang]
 	if res.Label == "" {
 		res.Label = lang.TimeAmount()
 	}
 
-	log.Printf("lsaConvTimeAmount 2\n")
-
 	skills, action, err := util.CalculateTimeAmount(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	if err != nil {
 		return res, action, false, err
 	}
 
-	log.Printf("lsaConvTimeAmount 3\n")
+	//log.Printf("lsaConvTimeAmount 2 %d\n", len(skills))
 
 	//maxSkills := maxProfessionalSkills
 	//if maxProfessionalSkills+1 == len(skills) {
@@ -226,8 +228,21 @@ func lsaConvTimeAmount(app *genmodel.Application, lang lang.Language) (texmodel.
 	//}
 
 	fulltime := 40.0
+	endingText := "h"
 
 	for _, skill := range skills {
+		fulltime = 40.0
+		endingText = "h"
+
+		if skill.Full > 0.1 {
+			fulltime = skill.Full
+		}
+		//log.Printf("lsaConvTimeAmount 3 %f - %f\n", skill.Full, fulltime)
+
+		if skill.CurrencyEnding != "" {
+			endingText = skill.CurrencyEnding
+		}
+		//log.Printf("lsaConvTimeAmount 4 %s - %s\n", skill.CurrencyEnding, endingText)
 
 		delta := (skill.Max - skill.Min) / fulltime
 		deltafull := 1 - (skill.Max / fulltime)
@@ -236,39 +251,29 @@ func lsaConvTimeAmount(app *genmodel.Application, lang lang.Language) (texmodel.
 			Name:         lang.String(skill.Name),
 			Min:          skill.Min / fulltime,
 			MinString:    fmt.Sprintf("%.3f", skill.Min/fulltime),
-			MinLabel:     fmt.Sprintf("%.0fh\n", skill.Min),
+			MinLabel:     fmt.Sprintf("%.0f%s\n", skill.Min, endingText),
 			Max:          skill.Max / fulltime,
 			MaxString:    fmt.Sprintf("%.3f", skill.Max/fulltime),
-			MaxLabel:     fmt.Sprintf("%.0fh\n", skill.Max),
+			MaxLabel:     fmt.Sprintf("%.0f%s\n", skill.Max, endingText),
 			DeltaMaxMin:  fmt.Sprintf("%f", delta),
 			DeltaMaxFull: fmt.Sprintf("%.3f", deltafull),
 		})
 	}
-	log.Printf("lsaConvTimeAmount 4\n")
-	log.Printf("%+v\n", res)
-	log.Printf("lsaConvTimeAmount 5\n")
 
 	return res, action, len(skills) > 0, nil
 }
 
 func lsaConvMoneyAmount(app *genmodel.Application, lang lang.Language) (texmodel.LeftSideAction, genmodel.LeftSideActionType, bool, error) {
-
-	log.Printf("lsaConvMoneyAmount start\n")
-
 	var res texmodel.LeftSideAction
 	res.Label = app.Profile.CustomMoneyAmountLabel[lang]
 	if res.Label == "" {
 		res.Label = lang.MoneyAmount()
 	}
 
-	log.Printf("lsaConvMoneyAmount 2\n")
-
 	skills, action, err := util.CalculateMoneyAmount(app, app.JobPosition.TwoSideStyle.Skills, app.JobPosition.TwoSideStyle.RemoveSkills)
 	if err != nil {
 		return res, action, false, err
 	}
-
-	log.Printf("lsaConvMoneyAmount 3\n")
 
 	//maxSkills := maxProfessionalSkills
 	//if maxProfessionalSkills+1 == len(skills) {
@@ -279,6 +284,12 @@ func lsaConvMoneyAmount(app *genmodel.Application, lang lang.Language) (texmodel
 	currencyText := "T€"
 
 	for _, skill := range skills {
+		if skill.Full > 0.0 {
+			fullmoney = skill.Full
+		}
+		if skill.CurrencyEnding != "" {
+			currencyText = skill.CurrencyEnding
+		}
 
 		if skill.Max != 0 {
 			delta := (skill.Max - skill.Min) / fullmoney
@@ -319,9 +330,6 @@ func lsaConvMoneyAmount(app *genmodel.Application, lang lang.Language) (texmodel
 			//	})
 		}
 	}
-	log.Printf("lsaConvMoneyAmount 4\n")
-	log.Printf("%+v\n", res)
-	log.Printf("lsaConvMoneyAmount 5\n")
 
 	return res, action, len(skills) > 0, nil
 }
@@ -348,7 +356,8 @@ func lsaConvPublication(app *genmodel.Application, lang lang.Language) (texmodel
 			Description:         lang.String(pub.Content),
 			DescriptionShortLsa: lang.String(pub.ContentShortLsa),
 			Publisher:           lang.String(pub.Publisher),
-			Links:               pub.DocumentLinks,
+			ExternalLinks:       pub.ExternalLinks,
+			DocumentLinks:       pub.DocumentLinks,
 		})
 	}
 	return res, action, len(publications) > 0, nil
@@ -373,7 +382,8 @@ func lsaConvAward(app *genmodel.Application, lang lang.Language) (texmodel.LeftS
 			Time:                award.Date,
 			Description:         lang.String(award.Content),
 			DescriptionShortLsa: lang.String(award.ContentShortLsa),
-			Links:               award.DocumentLinks,
+			ExternalLinks:       award.ExternalLinks,
+			DocumentLinks:       award.DocumentLinks,
 		})
 	}
 	return res, action, len(awards) > 0, nil

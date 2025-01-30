@@ -1,6 +1,7 @@
 package google
 
 import (
+	"github.com/maprost/application/example/maprost/internal"
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/lang"
 	"github.com/maprost/application/generator/style"
@@ -8,10 +9,15 @@ import (
 
 func Google() genmodel.JobPosition {
 	return genmodel.JobPosition{
-		MainColor: "4285F4",
-		Color1:    "f73e59",
-		Color2:    "257af4",
-		Color3:    "ffbb33",
+		Attachment: []string{
+			internal.Doc_CV,
+			internal.Doc_Plan,
+		},
+		MainColor:   "4285F4",
+		ShadowColor: "000000",
+		//Color1:    "f73e59",
+		//Color2:    "257af4",
+		//Color3:    "ffbb33",
 		SideColor: "AAC9E7",
 		Style:     style.TwoSide,
 		TwoSideStyle: genmodel.TwoSideStyle{
@@ -20,9 +26,9 @@ func Google() genmodel.JobPosition {
 			//	genmodel.Languages:   {internal.Lang_De},
 			//	genmodel.MoneyAmount: {internal.Money_60for40, internal.Money_48for32},
 			//},
-			//Skills: map[genmodel.LeftSideActionType][]genmodel.ID{
-			//	genmodel.TimeAmount: {internal.Time_1632},
-			//},
+			Skills: map[genmodel.LeftSideActionType][]genmodel.ID{
+				genmodel.TimeAmount: {internal.Time_HO16h, internal.Time_20full, internal.Time_1632},
+			},
 			SideOneLSATypes: []genmodel.LeftSideActionType{
 				genmodel.TechSkill,
 				genmodel.TimeAmount,
@@ -70,10 +76,8 @@ func Google() genmodel.JobPosition {
 		FutureColorChange: true,
 		OutputPath:        genmodel.OutputPath(),
 		FileName:          "",
-		//TimeAmount: []genmodel.LeftSideAction{
-		//	{Name: lang.TranslationMap{lang.English: "negotiable wish", lang.German: "vehandelbarer Wunsch"}, Min: 12, Max: 32},
-		//	//{Name: lang.TranslationMap{lang.English: "negotiable wish 2", lang.German: "vehandelbarer Wunsch 2"}, Min: 6, Max: 32},
-		//},
+		TechSkillsLabel:   "Fachkompetenz",
+		SoftSkillsLabel:   "Sozialkompetenz",
 		MainQuestionLabel: "MainQuestion Label",
 		MainQuestionText:  "MainQuestion Text",
 	}
