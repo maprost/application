@@ -17,9 +17,9 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 
 	data = texmodel.Index{
 		// config
-		MainColor:   util.GetSpecificDefaultColor(app.JobPosition.ScaleLineBG, util.DefaultMainColorValue),
-		SideColor:   util.GetSpecificDefaultColor(app.JobPosition.ScaleLineBG, util.DefaultSideColorValue),
-		ShadowColor: util.GetSpecificDefaultColor(app.JobPosition.ScaleLineBG, util.DefaultShadowColorValue),
+		MainColor:   util.GetSpecificDefaultColor(app.JobPosition.MainColor, util.DefaultMainColorValue),
+		SideColor:   util.GetSpecificDefaultColor(app.JobPosition.SideColor, util.DefaultSideColorValue),
+		ShadowColor: util.GetSpecificDefaultColor(app.JobPosition.ShadowColor, util.DefaultShadowColorValue),
 		ScaleLineBG: util.GetSpecificDefaultColor(app.JobPosition.ScaleLineBG, util.DefaultScaleBgColorValue),
 		Color1:      app.JobPosition.Color1,
 		Color2:      app.JobPosition.Color2,
