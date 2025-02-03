@@ -11,6 +11,15 @@ type RSA struct {
 	HasTechStack     bool
 }
 
+func (x RSA) Split(idx int) (RSA, RSA) {
+	first := x // copy
+	first.TexList = x.TexList[:idx]
+	second := RSA{
+		TexList: x.TexList[idx:],
+	}
+	return first, second
+}
+
 type Experience struct {
 	Company           string
 	Position          string

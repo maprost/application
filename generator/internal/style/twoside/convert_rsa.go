@@ -554,14 +554,9 @@ func splitSideOneRSA(sideOne []texmodel.RSA, sideTwo []texmodel.RSA, rsaIdx int,
 		newSideTwo = append(newSideTwo, rsa)
 	} else {
 		// split textList
-		newSideOne = append(newSideOne, texmodel.RSA{
-			Label:   rsa.Label,
-			TexList: rsa.TexList[:rsaListIdx],
-		})
-		newSideTwo = append(newSideTwo, texmodel.RSA{
-			// no label
-			TexList: rsa.TexList[rsaListIdx:],
-		})
+		sOne, sTwo := rsa.Split(rsaListIdx)
+		newSideOne = append(newSideOne, sOne)
+		newSideTwo = append(newSideTwo, sTwo)
 	}
 
 	if rsaIdx < len(sideOne) {
@@ -587,14 +582,9 @@ func splitSideTwoRSA(sideOne []texmodel.RSA, sideTwo []texmodel.RSA, rsaIdx int,
 		newSideTwo = append(newSideTwo, rsa)
 	} else {
 		// split textList
-		newSideOne = append(newSideOne, texmodel.RSA{
-			Label:   rsa.Label,
-			TexList: rsa.TexList[:rsaListIdx],
-		})
-		newSideTwo = append(newSideTwo, texmodel.RSA{
-			// no label
-			TexList: rsa.TexList[rsaListIdx:],
-		})
+		sOne, sTwo := rsa.Split(rsaListIdx)
+		newSideOne = append(newSideOne, sOne)
+		newSideTwo = append(newSideTwo, sTwo)
 	}
 
 	if rsaIdx < len(sideTwo) {
