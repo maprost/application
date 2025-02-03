@@ -306,9 +306,6 @@ urlcolor=linkcolor,
     \end{minipage}
     \begin{minipage}[t]{0.7\textwidth}\vspace*{-1cm}
         \begin{flushright}
-        {{$.HasDocumentLinks}}||{{$.HasExternalLinks}}||{{$.HasProject}}||{{$.HasRole}}||{{$.HasTechStack}}
-
-
             {{if $.HasDocumentLinks}}\documentIcon{}\footnotesize~ {{$.Label.DocumentLinks}} ~~~~ {{end}} %
             {{if $.HasExternalLinks}}\extlinkIcon{}\footnotesize~ {{$.Label.ExternalLinks}} {{if (or (eq $.HasLegendCount 5) (eq $.HasLegendCount 4))}} \\ {{else}} ~~~~ {{end}} {{end}} %
             {{if $.HasProject}} \projectIcon{}\footnotesize~ {{$.Label.SomeProjects}} {{if (and (not $.HasExternalLinks) (or (eq $.HasLegendCount 5) (eq $.HasLegendCount 4)))}} \\ {{else}} ~~~~ {{end}} {{end}} %
