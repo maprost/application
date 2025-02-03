@@ -4,12 +4,12 @@
 {{else}}%
     \color{black}
     \linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
-    \begin{minipage}{\insidePageLength}
+    \begin{minipage}{\insidePageLengthSubIndent}
         {{range .DocumentLinks}}%
-            \documentlink{{print "{" . "}"}}%
+        \hspace*{-3pt}\documentlink{{print "{" . "}"}}%
         {{end}}%
         {{range .ExternalLinks}}%
-            \externallink{{print "{" . "}"}}%
+        \hspace*{-3pt}\externallink{{print "{" . "}"}}%
         {{end}}%
         \linecompany{{print "{" .Company "}"}}
     {{end}}%

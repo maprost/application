@@ -48,18 +48,22 @@ func (l Language) Hobbies() string {
 func (l Language) TimeAmount() string {
 	switch l {
 	case German:
-		return "Zeitpräferenz"
+		//return "Zeitpräferenz"
+		return "{\\small\\faClockO}\\,Zeitpräferenz"
 	default:
-		return "Time preference"
+		//return "Time preference"
+		return "{\\small\\faClockO}\\,Time preference"
 	}
 }
 
 func (l Language) MoneyAmount() string {
 	switch l {
 	case German:
-		return "Gehaltswunsch"
+		//return "{\\small\\faEuro}~ Gehaltswunsch"
+		return "{\\small\\faEuro}\\,Vorstellung"
 	default:
-		return "Desired Salary"
+		//return "Desired Salary"
+		return "{\\small\\faEuro}\\,Expectations"
 	}
 }
 
@@ -201,8 +205,74 @@ func (l Language) UsedTechs() string {
 func (l Language) DocumentLinks() string {
 	switch l {
 	case German:
-		return "Dokumente, Zeugnisse"
+		return "\\textbf{verlinkte} Dokumente, Zeugnisse"
+		//return "{\\color{linkcolor}verlinkte} Dokumente, Zeugnisse"
+		//return "verlinkte Dokumente, Zeugnisse"
 	default:
-		return "Documents, certificates"
+		return "linked documents, certificates"
+	}
+}
+
+func (l Language) ExternalLinks() string {
+	switch l {
+	case German:
+		return "externe Links"
+	default:
+		return "externe Links"
+	}
+}
+
+func (l Language) LanguageReference() string {
+	//return "test"
+	switch l {
+	case German:
+		return "\\small\\textit{* gem. EU-Referenzrahmen} \\href{https://www.goethe.de/ins/de/de/uun/dln/ger.html}{\\faInfo}"
+	default:
+		return "\\small\\textit{* acc. EU framework} \\href{https://www.goethe.de/ins/de/de/uun/dln/ger.html}{\\faInfo}"
+	}
+}
+
+func (l Language) AttachmentTitle() string {
+	switch l {
+	case German:
+		return "Anhang und Hinweise"
+	default:
+		return "Attachment and Hints"
+	}
+}
+
+func (l Language) AttachmentParaIntro() string {
+	switch l {
+	case German:
+		return "Der Lebenslauf enthält interaktive Verlinkungen zu Dokumenten, Zeugnissen und anderen Nachweisen."
+	default:
+		return "The CV contains interactive links to documents, certificates and other evidence."
+	}
+}
+
+func (l Language) AttachmentParaDocuments() string {
+	switch l {
+	case German:
+		return "verlinken auf Dokumente und Zeugnisse \\\\(auf www.nat-pro.de/...)"
+	default:
+		return "link to documeents and certificates \\\\(on www.nat-pro.de/...)"
+	}
+}
+
+func (l Language) AttachmentParaLinks() string {
+	switch l {
+	case German:
+		return "verlinken auf andere Webseiten"
+	default:
+		return "link to other websites"
+	}
+}
+
+func (l Language) AttachmentParaOutro() string {
+	switch l {
+	case German:
+		return "Eine Auswahl relevanter Dokumente befindet sich im folgenden Anhang."
+	default:
+		return "A selection of relevant documents can be found in the following appendix."
 	}
 }

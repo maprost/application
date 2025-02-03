@@ -5,6 +5,7 @@ import (
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 	"github.com/maprost/application/generator/internal/util"
 	"github.com/maprost/application/generator/lang"
+	"log"
 )
 
 func style(app *genmodel.Application) genmodel.TwoSideStyle {
@@ -16,9 +17,10 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 
 	data = texmodel.Index{
 		// config
-		MainColor:   util.DefaultColor(app.JobPosition.MainColor),
-		SideColor:   util.DefaultColor(app.JobPosition.SideColor),
-		ShadowColor: util.DefaultColor(app.JobPosition.ShadowColor),
+		MainColor:   util.GetSpecificDefaultColor(app.JobPosition.ScaleLineBG, util.DefaultMainColorValue),
+		SideColor:   util.GetSpecificDefaultColor(app.JobPosition.ScaleLineBG, util.DefaultSideColorValue),
+		ShadowColor: util.GetSpecificDefaultColor(app.JobPosition.ScaleLineBG, util.DefaultShadowColorValue),
+		ScaleLineBG: util.GetSpecificDefaultColor(app.JobPosition.ScaleLineBG, util.DefaultScaleBgColorValue),
 		Color1:      app.JobPosition.Color1,
 		Color2:      app.JobPosition.Color2,
 		Color3:      app.JobPosition.Color3,
@@ -63,9 +65,28 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 	addRSA(&data, app, local)
 
 	addHasDocumentLinks(&data)
+	addHasExternalLinks(&data)
 	addHasProjects(&data)
 	addHasRole(&data)
 	addHasTechStack(&data)
+
+	hasCount := 0
+	if data.HasDocumentLinks {
+		hasCount += 1
+	}
+	if data.HasExternalLinks {
+		hasCount += 1
+	}
+	if data.HasProject {
+		hasCount += 1
+	}
+	if data.HasRole {
+		hasCount += 1
+	}
+	if data.HasTechStack {
+		hasCount += 1
+	}
+	data.HasLegendCount = hasCount
 
 	return
 }
@@ -81,6 +102,7 @@ func convertWebsites(application *genmodel.Application) (websites []texmodel.Web
 }
 
 func addHasProjects(data *texmodel.Index) {
+	log.Printf("addHasProjects")
 	if checkTwoRSA(data, func(e texmodel.RSA) bool {
 		return e.HasProjects
 	}) {
@@ -101,6 +123,14 @@ func addHasTechStack(data *texmodel.Index) {
 		return e.HasTechStack
 	}) {
 		data.HasTechStack = true
+	}
+}
+
+func addHasExternalLinks(data *texmodel.Index) {
+	if checkTwoRSA(data, func(e texmodel.RSA) bool {
+		return e.HasExternalLinks
+	}) {
+		data.HasExternalLinks = true
 	}
 }
 

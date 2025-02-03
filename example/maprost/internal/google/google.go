@@ -13,13 +13,14 @@ func Google() genmodel.JobPosition {
 			internal.Doc_CV,
 			internal.Doc_Plan,
 		},
-		MainColor:   "4285F4",
-		ShadowColor: "000000",
+		MainColor: "4285F4",
+		SideColor: "AAC9E7",
+		//ShadowColor: "000000",
 		//Color1:    "f73e59",
 		//Color2:    "257af4",
 		//Color3:    "ffbb33",
-		SideColor: "AAC9E7",
-		Style:     style.TwoSide,
+		//ScaleLineBG: "ffffff",
+		Style: style.TwoSide,
 		TwoSideStyle: genmodel.TwoSideStyle{
 			//RemoveSkills: map[genmodel.LeftSideActionType][]genmodel.ID{
 			//	genmodel.TechSkill:   {internal.TechSkill_Go},

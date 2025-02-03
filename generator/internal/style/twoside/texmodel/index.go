@@ -28,10 +28,13 @@ type Index struct {
 	Color3           string
 	Color4           string
 	Color5           string
+	ScaleLineBG      string
 	HasDocumentLinks bool
+	HasExternalLinks bool
 	HasProject       bool
 	HasRole          bool
 	HasTechStack     bool
+	HasLegendCount   int
 	Icon             Icon
 	Label            lang.Language
 

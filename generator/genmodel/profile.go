@@ -14,12 +14,15 @@ type LeftSideAction struct {
 	Max            float64 // range [0,5]
 	Full           float64
 	CurrencyEnding string
+	DefaultShow    string // no - if it should be hidden by default
 }
 
 type Language struct {
-	Id    ID
-	Name  lang.TranslationMap
-	Level lang.TranslationMap
+	Id            ID
+	Name          lang.TranslationMap
+	Level         lang.TranslationMap
+	DocumentLinks []string
+	DefaultShow   string // no - if it should be hidden by default
 }
 
 type ExperiencePart int
@@ -57,6 +60,7 @@ type Experience struct {
 	FutureColorChange bool
 	DocumentLinks     []string
 	ExternalLinks     []string
+	DefaultShow       string // no - if it should be hidden by default
 }
 
 type Education struct {
@@ -70,6 +74,7 @@ type Education struct {
 	FinalGrade    lang.TranslationMap
 	DocumentLinks []string
 	ExternalLinks []string
+	DefaultShow   string // no - if it should be hidden by default
 }
 
 type Publication struct {
@@ -83,6 +88,7 @@ type Publication struct {
 	ContentShortLsa lang.TranslationMap
 	DocumentLinks   []string
 	ExternalLinks   []string
+	DefaultShow     string // no - if it should be hidden by default
 }
 
 type Award struct {
@@ -94,6 +100,7 @@ type Award struct {
 	ContentShortLsa lang.TranslationMap
 	DocumentLinks   []string
 	ExternalLinks   []string
+	DefaultShow     string // no - if it should be hidden by default
 }
 
 type ProfileAddress struct {

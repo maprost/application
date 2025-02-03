@@ -8,8 +8,11 @@ import (
 )
 
 const (
-	DefaultColorValue     = "e3593b"
-	DefaultSideColorValue = "e7e7e7"
+	DefaultColorValue        = "e3593b"
+	DefaultMainColorValue    = "e7e7e7"
+	DefaultSideColorValue    = "e7e7e7"
+	DefaultShadowColorValue  = "cccccc"
+	DefaultScaleBgColorValue = "ffffff"
 )
 
 var (
@@ -18,6 +21,10 @@ var (
 
 func DefaultColor(color string) string {
 	return DefaultValue(color, DefaultColorValue)
+}
+
+func GetSpecificDefaultColor(color string, defaultValue string) string {
+	return DefaultValue(color, defaultValue)
 }
 
 func DefaultImage(path string) string {

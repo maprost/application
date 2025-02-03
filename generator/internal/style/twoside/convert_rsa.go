@@ -189,6 +189,11 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 	}
 
 	for i, exp := range app.Profile.Experience {
+		// TODO improve with something like 'and not mentioned explicitly'
+		//if exp.DefaultShow == "no" {
+		//	continue
+		//}
+
 		if len(style.Experience) > 0 {
 			if !findId(exp.Id, style.Experience) {
 				continue
@@ -333,6 +338,7 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 		rsa.HasProjects = rsa.HasProjects || len(res.Project) > 0
 		rsa.HasRole = rsa.HasRole || len(res.Role) > 0
 		rsa.HasDocumentLinks = rsa.HasDocumentLinks || len(res.DocumentLinks) > 0
+		rsa.HasExternalLinks = rsa.HasExternalLinks || len(res.ExternalLinks) > 0
 	}
 
 	rsa.Label = customDefaultString(app.Profile.CustomExperienceLabel, local, local.Experience())
@@ -370,6 +376,7 @@ func convertEducation(app *genmodel.Application, local lang.Language) (rsa texmo
 
 		rsa.TexList = append(rsa.TexList, resTex)
 		rsa.HasDocumentLinks = rsa.HasDocumentLinks || len(res.DocumentLinks) > 0
+		rsa.HasExternalLinks = rsa.HasExternalLinks || len(res.ExternalLinks) > 0
 	}
 
 	rsa.Label = customDefaultString(app.Profile.CustomEducationLabel, local, local.Education())
@@ -389,6 +396,7 @@ func convertPublication(app *genmodel.Application, local lang.Language) (rsa tex
 			Time:          convertTime(pub.Date, pub.Date, local),
 			Content:       "",
 			DocumentLinks: pub.DocumentLinks,
+			ExternalLinks: pub.ExternalLinks,
 		}
 
 		resTex, err := compiler.CompileSubTex(templatePath(), "publication.tex", res)
@@ -398,6 +406,7 @@ func convertPublication(app *genmodel.Application, local lang.Language) (rsa tex
 
 		rsa.TexList = append(rsa.TexList, resTex)
 		rsa.HasDocumentLinks = rsa.HasDocumentLinks || len(res.DocumentLinks) > 0
+		rsa.HasExternalLinks = rsa.HasExternalLinks || len(res.ExternalLinks) > 0
 	}
 
 	rsa.Label = customDefaultString(app.Profile.CustomPublicationLabel, local, local.Publication())
@@ -445,6 +454,7 @@ func convertAward(app *genmodel.Application, local lang.Language) (rsa texmodel.
 
 		rsa.TexList = append(rsa.TexList, resTex)
 		rsa.HasDocumentLinks = rsa.HasDocumentLinks || len(res.DocumentLinks) > 0
+		rsa.HasExternalLinks = rsa.HasExternalLinks || len(res.ExternalLinks) > 0
 	}
 
 	rsa.Label = customDefaultString(app.Profile.CustomAwardLabel, local, local.Award())

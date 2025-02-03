@@ -27,6 +27,9 @@
 \usepackage{pdfpages}
 \RequirePackage{fontawesome}
 
+\usepackage{lipsum}
+\usepackage{blindtext}
+
 \usepackage[
     left = \Large \flqq{},%
     right = \frqq{}\normalsize ,%
@@ -43,6 +46,8 @@
 \definecolor{maincolor}{HTML}{{"{"}}{{.MainColor}}}
 \definecolor{sidecolor}{HTML}{{"{"}}{{.SideColor}}}
 \definecolor{shadowcolor}{HTML}{{"{"}}{{.ShadowColor}}}
+\definecolor{linkcolor}{HTML}{{"{"}}{{.MainColor}}}
+\definecolor{scalelinebg}{HTML}{{"{"}}{{.ScaleLineBG}}}
 \definecolor{color1}{HTML}{{"{"}}{{.Color1}}}
 \definecolor{color2}{HTML}{{"{"}}{{.Color2}}}
 \definecolor{color3}{HTML}{{"{"}}{{.Color3}}}
@@ -54,8 +59,8 @@
 
 
 \hypersetup{colorlinks,
-linkcolor=maincolor,
-urlcolor=maincolor,
+linkcolor=linkcolor,
+urlcolor=linkcolor,
 }
 
 \setlength{\parindent}{0pt} % Disable paragraph indentation
@@ -163,7 +168,7 @@ urlcolor=maincolor,
 \newcommand{\linerole}[1]{\checkPar{#1}{\roleIcon~ #1}}
 
 %\newcommand{\linequit}[1]{\checkPar{#1}{\smallskip \begin{spacing}{0.5} \color{black} \Large¬\footnotesize~\textit{#1}\normalsize \end{spacing}}}
-\newcommand{\linequit}[1]{\checkPar{#1}{\smallskip \begin{spacing}{0.5} \color{black} \Large¬\footnotesize~#1\normalsize \end{spacing}}}
+\newcommand{\linequit}[1]{\checkPar{#1}{\smallskip \begin{spacing}{0.5} \color{black} \Large\quitIcon\footnotesize~#1\normalsize \end{spacing}}}
 %\newcommand{\linequit}[1]{\checkPar{#1}{\smallskip \begin{spacing}{0.5} \color{black} \Large¬\normalsize~#1\normalsize \end{spacing}}}
 %\newcommand{\linequit}[1]{\checkPar{#1}{\smallskip \begin{spacing}{0.5} \color{darkgray} \Large¬\footnotesize~#1\normalsize \end{spacing}}}
 %\newcommand{\linequit}[1]{\checkPar{#1}{\color{gray} ¬\small~ \textit{#1}\normalsize}}
@@ -171,17 +176,40 @@ urlcolor=maincolor,
 \newcommand{\linetech}[1]{\checkPar{#1}{\techStackIcon~ #1}
 }
 
-\newcommand{\documentlink}[1]{\href{#1}{\shadowoffset{0.5pt}\shadowcolor{shadowcolor!40!white}\shadowtext{\documentIcon}}~
+\newcommand{\shadowedicon}[1]{
+    \shadowoffset{0.7pt}\shadowcolor{shadowcolor!40!white}\shadowtext{#1}
 }
 
-\newcommand{\externallink}[1]{\href{#1}{\shadowoffset{0.5pt}\shadowcolor{shadowcolor!40!white}\shadowtext{\extlinkIcon}}~
+\newcommand{\documentlink}[1]{\href{#1}{\shadowedicon{\documentIcon}}~
+}
+
+\newcommand{\externallink}[1]{\href{#1}{\shadowedicon{\extlinkIcon}}~
+}
+
+\newcommand{\externallinksmall}[1]{\small\href{#1}{\shadowedicon{\extlinkIcon}\normalsize}~
+}
+
+\newcommand{\externallinksmallblack}[1]{\footnotesize\href{#1}{\shadowedicon{\color{black}\extlinkIcon}\normalsize}~
+}
+
+\newcommand{\documentlinkexample}{\color{linkcolor}\shadowedicon{\documentIcon}\color{black}~
+}
+
+\newcommand{\externallinkexample}{\color{linkcolor}\shadowedicon{\extlinkIcon}\color{black}~
 }
 
 % icons
-\newcommand{\projectIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Project "}"}} }
-\newcommand{\roleIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
-\newcommand{\quitIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
-\newcommand{\techStackIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.TechStack "}"}} }
+%\newcommand{\projectIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Project "}"}} }
+\newcommand{\projectIcon}{\normalsize\faCheckSquareO\normalsize}
+%\newcommand{\roleIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
+%\newcommand{\roleIcon}{\faUser}
+\newcommand{\roleIcon}{\faCommentsO}
+%\newcommand{\quitIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Role "}"}} }
+%\newcommand{\quitIcon}{¬}
+\newcommand{\quitIcon}{\small\faCalendarTimesO\normalsize}
+%\newcommand{\quitIcon}{\faHourglassEnd}
+%\newcommand{\techStackIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.TechStack "}"}} }
+\newcommand{\techStackIcon}{\small\faGears\normalsize}
 %\newcommand{\documentIcon}{\includegraphics[width=3mm]{{print "{" $.Icon.Document "}"}}}
 %\newcommand{\documentIcon}{\faFilePdfO} % these icons should not have a white background because of sidepart
 \newcommand{\documentIcon}{\faFileTextO} % these icons should not have a white background because of sidepart
@@ -206,7 +234,7 @@ urlcolor=maincolor,
     #1
     &
     \begin{tikzpicture}
-        \draw[fill=maingray,maingray] (0,0) rectangle (1,0.3);
+        \draw[fill=scalelinebg,scalelinebg] (0,0) rectangle (1,0.3);
         \draw[fill=white,maincolor](0,0) rectangle (#2/10,0.3);
     \end{tikzpicture}
     \\[1ex]
@@ -238,7 +266,7 @@ urlcolor=maincolor,
 
     %TODO end RangeText
     \begin{tikzpicture}
-    \draw[fill=maingray,maingray] (0,0) rectangle (5,0.3);
+    \draw[fill=scalelinebg,scalelinebg] (0,0) rectangle (5,0.3);
     \draw[fill=white,maincolor] (5*#2,0) rectangle (5*#3,0.3);
     \end{tikzpicture}
 
@@ -278,10 +306,11 @@ urlcolor=maincolor,
     \end{minipage}
     \begin{minipage}[t]{0.7\textwidth}\vspace*{-1cm}
         \begin{flushright}
-            {{if $.HasDocumentLinks}}\documentIcon{} {{$.Label.DocumentLinks}} ~~~~ {{else}} % {{end}}
-            {{if $.HasProject}} \projectIcon{} {{$.Label.SomeProjects}} {{if $.HasRole}} \\ {{else}} ~~~~ {{end}} {{else}} % {{end}}
-            {{if $.HasRole}}\roleIcon{} {{$.Label.SomeRoles}} ~~~~ {{else}} % {{end}}
-            {{if $.HasTechStack}}\techStackIcon{} {{$.Label.UsedTechs}} {{else}} % {{end}}
+            {{if $.HasDocumentLinks}}\documentIcon{}\footnotesize~ {{$.Label.DocumentLinks}} ~~~~ {{end}} %
+            {{if $.HasExternalLinks}}\extlinkIcon{}\footnotesize~ {{$.Label.ExternalLinks}} {{if (or (eq $.HasLegendCount 5) (eq $.HasLegendCount 4))}} \\ {{else}} ~~~~ {{end}} {{end}} %
+            {{if $.HasProject}} \projectIcon{}\footnotesize~ {{$.Label.SomeProjects}} {{if (and (not $.HasExternalLinks) (or (eq $.HasLegendCount 5) (eq $.HasLegendCount 4)))}} \\ {{else}} ~~~~ {{end}} {{end}} %
+            {{if $.HasRole}}\roleIcon{}\footnotesize~ {{$.Label.SomeRoles}} ~~~~ {{end}} %
+            {{if $.HasTechStack}}\techStackIcon{}\footnotesize~ {{$.Label.UsedTechs}} {{end}} %
         \end{flushright}
     \end{minipage}
     \normalsize
@@ -300,6 +329,7 @@ urlcolor=maincolor,
     \newlength\indentLength
     \newlength\outsidePageLength
     \newlength\insidePageLength
+    \newlength\insidePageLengthSubIndent
 
     %------------------------------------------------
     %---- first page
@@ -347,6 +377,7 @@ urlcolor=maincolor,
         \pgfmathsetlength{\indentLength}{5mm}
         \pgfmathsetlength{\outsidePageLength}{140mm}
         \pgfmathsetlength{\insidePageLength}{135mm}
+        \pgfmathsetlength{\insidePageLengthSubIndent}{132mm}
 
         {{range .SideOneRSA }}
             \timeLineHeader{{print "{" .Label "}"}}
@@ -378,6 +409,7 @@ urlcolor=maincolor,
             \pgfmathsetlength{\indentLength}{5mm}
             \pgfmathsetlength{\outsidePageLength}{140mm}
             \pgfmathsetlength{\insidePageLength}{135mm}
+            \pgfmathsetlength{\insidePageLengthSubIndent}{132mm}
 
             {{range .SideTwoRSA }}
                 \timeLineHeader{{print "{" .Label "}"}}
@@ -398,9 +430,33 @@ urlcolor=maincolor,
     %------------------------------------------------
     %---- attachments
     %------------------------------------------------
-    {{range .Attachment}}
-        \newpage
-        \includepdf[pages={-}]{{print "{" . "}"}}
+    {{if .Attachment}}
+
+    \newpage
+    \rfoot{}
+    \topskip0pt
+%    \vspace*{200pt}
+    \vspace*{\fill}
+    \begin{center}
+        \begin{minipage}[b]{0.7\linewidth}
+            \begin{center}
+                % TODO multilanguage
+                {\headerfont{{print "{" $.Label.AttachmentTitle "}"}}} \\[10ex]
+
+                {{$.Label.AttachmentParaIntro}} \\[5ex]
+                \documentlinkexample{} {{$.Label.AttachmentParaDocuments}} \\[3ex]
+                \externallinkexample{} {{$.Label.AttachmentParaLinks}} \\[5ex]
+
+                {{$.Label.AttachmentParaOutro}}
+            \end{center}
+        \end{minipage}
+    \end{center}
+    \vspace*{\fill}
+
+        {{range .Attachment}}
+            \newpage
+            \includepdf[pages={-}]{{print "{" . "}"}}
+        {{end}}
     {{end}}
 
 \end{document}

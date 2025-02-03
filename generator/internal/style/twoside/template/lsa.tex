@@ -21,11 +21,19 @@
 
     {{ if .Languages }}
         \category{{print "{" .Label "}"}}
-        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
+        \begin{tabular}{@{}p{18mm} @{\hskip 0.2cm}p{30mm}@{}}
             {{range .Languages}}%
-                {{.Name}} & {{.Level}} \\
+                {{.Name}} & {{.Level}}{\small\textsuperscript{*}\normalsize}
+            {{range .DocumentLinks}}%
+                \href{{print "{" . "}" }}{\documentIcon}\,\,%
             {{end}}%
-        \end{tabular}
+            \\
+            {{end}}%
+        \end{tabular}\\[3pt]
+        % TODO improve
+        {\small\textit{\textsuperscript{*} gem. EU-Referenzrahmen}} \externallinksmallblack{https://www.goethe.de/ins/de/de/uun/dln/ger.html}
+        \normalsize
+%        Label.LanguageReference
     {{ end }}
 
 %beforePub
@@ -68,7 +76,9 @@
 %afterPub
 
 %beforeAward
-    {{ if .AwardLsa }}
+{{ if .AwardLsa }}
+%{{ $length := len .AwardLsa }}
+%{{ $length }}
 %AwardStart
         \category{{print "{" .Label "}"}}
 %        \begin{tabular}{@{}p{24mm} @{\hskip 0.2cm}p{24mm}@{}}
@@ -81,11 +91,12 @@
                     \href{{print "{" . "}" }}{\documentIcon}\,\,%
                 {{end}}%
                 {{.Time}}: %\\
-                {{.DescriptionShortLsa}} \\[5pt]%
+                {{.DescriptionShortLsa}} \\[3pt]
+
 %                & \\[5pt]%
 %                {{.Name}} & {{.Time}} \\
             {{end}}%
-        \vspace{-17pt}
+%        \vspace{-5pt}
         \end{tabular}
 %AwardEnd
     {{ end }}

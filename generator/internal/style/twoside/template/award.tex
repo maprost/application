@@ -1,10 +1,10 @@
 \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
 \begin{minipage}{\insidePageLength}
     {{range .DocumentLinks}}%
-        \documentlink{{print "{" . "}"}}%
+    \hspace*{-3pt}\documentlink{{print "{" . "}"}}%
     {{end}}%
     {{range .ExternalLinks}}%
-        \externallink{{print "{" . "}"}}%
+    \hspace*{-3pt}\externallink{{print "{" . "}"}}%
     {{end}}%
     \lineinstitute{{print "{" .Institute "}"}}
     \linecontent{{print "{" .Content "}"}}

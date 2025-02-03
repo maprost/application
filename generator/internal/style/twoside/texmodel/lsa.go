@@ -6,8 +6,9 @@ type RatingLsa struct {
 }
 
 type Language struct {
-	Name  string
-	Level string
+	Name          string
+	Level         string
+	DocumentLinks []string
 }
 
 type RangeLsa struct {

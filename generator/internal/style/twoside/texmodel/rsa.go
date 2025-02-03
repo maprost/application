@@ -5,6 +5,7 @@ type RSA struct {
 	TexList []string
 
 	HasDocumentLinks bool //
+	HasExternalLinks bool //
 	HasProjects      bool
 	HasRole          bool
 	HasTechStack     bool
@@ -44,6 +45,7 @@ type Publication struct {
 	Content         string
 	ContentShortLsa string
 	DocumentLinks   []string
+	ExternalLinks   []string
 }
 
 type Award struct {

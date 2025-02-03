@@ -1,7 +1,7 @@
 \linepositiontime{{print "{" .Title "}" "{" .Time "}"}}
 \begin{minipage}{\insidePageLength}
     {{range .DocumentLinks}}%
-        \documentlink{{print "{" . "}"}}%
+    \hspace*{-3pt}\documentlink{{print "{" . "}"}}%
     {{end}}%
     \linepublisher{{print "{" .Publisher "}"}}
     \linecontent{{print "{" .Content "}"}}

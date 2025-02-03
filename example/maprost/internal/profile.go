@@ -68,6 +68,7 @@ const (
 
 const (
 	Lang_De = genmodel.ID(iota) + 1
+	Lang_DeInvisible
 	Lang_En
 )
 
@@ -172,9 +173,16 @@ func Profile() genmodel.Profile {
 				Level: lang.TranslationMap{lang.English: "Native", lang.German: "Muttersprache"},
 			},
 			{
-				Id:    Lang_En,
-				Name:  lang.TranslationMap{lang.English: "English", lang.German: "Englisch"},
-				Level: lang.DefaultTranslation("B2"),
+				Id:          Lang_DeInvisible,
+				Name:        lang.TranslationMap{lang.English: "German2", lang.German: "Deutsch2"},
+				Level:       lang.TranslationMap{lang.English: "Native", lang.German: "Muttersprache"},
+				DefaultShow: "no",
+			},
+			{
+				Id:            Lang_En,
+				Name:          lang.TranslationMap{lang.English: "English", lang.German: "Englisch"},
+				Level:         lang.DefaultTranslation("B2"),
+				DocumentLinks: []string{"http://google.de", "http://google.de"},
 			},
 		},
 		GeneralProfileText: lang.TranslationMap{
@@ -232,6 +240,7 @@ func Profile() genmodel.Profile {
 					lang.German: ""},
 				TechStack:  lang.DefaultTranslation("C++, cmake, Boost, PostgreSQL, XML, Bash, Python, OpenSuse, Valgrind, SVN, Mantis"),
 				TechStack2: lang.DefaultTranslation("C++, PostgreSQL"),
+				Role:       lang.DefaultTranslation("Meine Rollen"),
 			},
 			{
 				Id:          Exp_tutor,
@@ -247,7 +256,7 @@ func Profile() genmodel.Profile {
 		Education: []genmodel.Education{
 			{
 				Id:            Edu_Uni,
-				Graduation:    lang.DefaultTranslation("Diplom Informatiker 123"),
+				Graduation:    lang.DefaultTranslation("Diplom Informatiker"),
 				Institute:     "German University",
 				StartTime:     "Sep. 2005",
 				EndTime:       "Oct. 2010",
