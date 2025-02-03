@@ -88,6 +88,8 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 	}
 	data.HasLegendCount = hasCount
 
+	log.Printf("data after legend checks %+v\n", data)
+
 	return
 }
 
