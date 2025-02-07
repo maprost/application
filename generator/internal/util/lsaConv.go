@@ -44,7 +44,11 @@ func CalculateLsa(lsaList []genmodel.LeftSideAction, needed map[genmodel.LeftSid
 	neededLsa := needed[action]
 	removeLsa := remove[action]
 	if len(neededLsa) == 0 && len(removeLsa) == 0 {
-		result = sortLsa(lsaList)
+		for _, l := range sortLsa(lsaList) {
+			if !l.MustBeSelected {
+				result = append(result, l)
+			}
+		}
 		return result, action, nil
 	}
 
@@ -63,13 +67,15 @@ func CalculateLsa(lsaList []genmodel.LeftSideAction, needed map[genmodel.LeftSid
 				// TODO improve?
 				err := fmt.Errorf("can't find lsa Id '%v' in the map'%v'", lsaId, lsaList)
 				panic(err)
-				//return nil, action, err
-				//continue
 			}
 			result = append(result, lsa)
 		}
 	} else {
-		result = sortLsa(lsaList)
+		for _, l := range sortLsa(lsaList) {
+			if !l.MustBeSelected {
+				result = append(result, l)
+			}
+		}
 	}
 
 	if len(removeLsa) > 0 {
@@ -107,7 +113,12 @@ func CalculateLanguage(app *genmodel.Application, needed map[genmodel.LeftSideAc
 	neededLanguages := needed[action]
 	removeLanguages := remove[action]
 	if len(neededLanguages) == 0 && len(removeLanguages) == 0 {
-		return app.Profile.Language, action, nil
+		for _, l := range app.Profile.Language {
+			if !l.MustBeSelected {
+				result = append(result, l)
+			}
+		}
+		return result, action, nil
 	}
 
 	if len(neededLanguages) > 0 {
@@ -129,7 +140,11 @@ func CalculateLanguage(app *genmodel.Application, needed map[genmodel.LeftSideAc
 			result = append(result, lang)
 		}
 	} else {
-		result = app.Profile.Language
+		for _, l := range app.Profile.Language {
+			if !l.MustBeSelected {
+				result = append(result, l)
+			}
+		}
 	}
 
 	if len(removeLanguages) > 0 {

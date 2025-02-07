@@ -14,15 +14,15 @@ type LeftSideAction struct {
 	Max            float64 // range [0,5]
 	Full           float64
 	CurrencyEnding string
-	DefaultShow    string // no - if it should be hidden by default
+	MustBeSelected bool // is hidden by default
 }
 
 type Language struct {
-	Id            ID
-	Name          lang.TranslationMap
-	Level         lang.TranslationMap
-	DocumentLinks []string
-	DefaultShow   string // no - if it should be hidden by default
+	Id             ID
+	Name           lang.TranslationMap
+	Level          lang.TranslationMap
+	DocumentLinks  []string
+	MustBeSelected bool // is hidden by default
 }
 
 type ExperiencePart int
@@ -60,21 +60,21 @@ type Experience struct {
 	FutureColorChange bool
 	DocumentLinks     []string
 	ExternalLinks     []string
-	DefaultShow       string // no - if it should be hidden by default
+	MustBeSelected    bool // is hidden by default
 }
 
 type Education struct {
-	Id            ID
-	Graduation    lang.TranslationMap
-	Institute     string
-	StartTime     string
-	EndTime       string
-	QuitReason    lang.TranslationMap
-	Focus         lang.TranslationMap
-	FinalGrade    lang.TranslationMap
-	DocumentLinks []string
-	ExternalLinks []string
-	DefaultShow   string // no - if it should be hidden by default
+	Id             ID
+	Graduation     lang.TranslationMap
+	Institute      string
+	StartTime      string
+	EndTime        string
+	QuitReason     lang.TranslationMap
+	Focus          lang.TranslationMap
+	FinalGrade     lang.TranslationMap
+	DocumentLinks  []string
+	ExternalLinks  []string
+	MustBeSelected bool // is hidden by default
 }
 
 type Publication struct {
@@ -88,7 +88,7 @@ type Publication struct {
 	ContentShortLsa lang.TranslationMap
 	DocumentLinks   []string
 	ExternalLinks   []string
-	DefaultShow     string // no - if it should be hidden by default
+	MustBeSelected  bool // is hidden by default
 }
 
 type Award struct {
@@ -100,7 +100,7 @@ type Award struct {
 	ContentShortLsa lang.TranslationMap
 	DocumentLinks   []string
 	ExternalLinks   []string
-	DefaultShow     string // no - if it should be hidden by default
+	MustBeSelected  bool // is hidden by default
 }
 
 type ProfileAddress struct {

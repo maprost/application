@@ -173,10 +173,10 @@ func Profile() genmodel.Profile {
 				Level: lang.TranslationMap{lang.English: "Native", lang.German: "Muttersprache"},
 			},
 			{
-				Id:          Lang_DeInvisible,
-				Name:        lang.TranslationMap{lang.English: "German2", lang.German: "Deutsch2"},
-				Level:       lang.TranslationMap{lang.English: "Native", lang.German: "Muttersprache"},
-				DefaultShow: "no",
+				Id:             Lang_DeInvisible,
+				Name:           lang.TranslationMap{lang.English: "German2", lang.German: "Deutsch2"},
+				Level:          lang.TranslationMap{lang.English: "Native", lang.German: "Muttersprache"},
+				MustBeSelected: true,
 			},
 			{
 				Id:            Lang_En,
@@ -207,10 +207,11 @@ func Profile() genmodel.Profile {
 		//},
 		Experience: []genmodel.Experience{
 			{
-				Id:          Exp_fitness,
-				Company:     "Fitness Company",
-				JobPosition: lang.DefaultTranslation("Java Backend Developer"),
-				StartTime:   "Jul. 2014",
+				Id:             Exp_fitness,
+				MustBeSelected: true,
+				Company:        "Fitness Company",
+				JobPosition:    lang.DefaultTranslation("Java Backend Developer"),
+				StartTime:      "Jul. 2014",
 				Description: lang.TranslationMap{
 					lang.German: "Recruiter, ProductOwner",
 					lang.English: "" +

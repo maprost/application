@@ -1,5 +1,9 @@
 package texmodel
 
+import (
+	"github.com/maprost/application/generator/lang"
+)
+
 type RatingLsa struct {
 	Name   string
 	Rating int // Rating range [1,10]
@@ -58,4 +62,9 @@ type LeftSideAction struct {
 	Range          []RangeLsa
 	PublicationLsa []PublicationLsa
 	AwardLsa       []AwardLsa
+}
+
+type LSAIndex struct {
+	Label lang.Language
+	List  []LeftSideAction
 }

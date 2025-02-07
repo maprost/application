@@ -109,7 +109,10 @@ func addLsa(data *texmodel.Index, app *genmodel.Application, local lang.Language
 		}
 
 		fmt.Printf("%+v\n", res)
-		resTex, err := compiler.CompileSubTex(templatePath(), "lsa.tex", res)
+		resTex, err := compiler.CompileSubTex(templatePath(), "lsa.tex", texmodel.LSAIndex{
+			Label: local,
+			List:  res,
+		})
 		if err != nil {
 			return "error: " + err.Error()
 		}

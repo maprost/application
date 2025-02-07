@@ -11,7 +11,7 @@ func Google() genmodel.JobPosition {
 	return genmodel.JobPosition{
 		Attachment: []string{
 			internal.Doc_CV,
-			internal.Doc_Plan,
+			//internal.Doc_Plan,
 		},
 		MainColor: "4285F4",
 		SideColor: "AAC9E7",
@@ -28,21 +28,23 @@ func Google() genmodel.JobPosition {
 			//	genmodel.MoneyAmount: {internal.Money_60for40, internal.Money_48for32},
 			//},
 			Skills: map[genmodel.LeftSideActionType][]genmodel.ID{
-				genmodel.TimeAmount: {internal.Time_HO16h, internal.Time_20full, internal.Time_1632},
+				//genmodel.TimeAmount: {internal.Time_HO16h, internal.Time_20full, internal.Time_1632},
+				genmodel.Languages: {internal.Lang_DeInvisible},
 			},
-			SideOneLSATypes: []genmodel.LeftSideActionType{
-				genmodel.TechSkill,
-				genmodel.TimeAmount,
-				genmodel.MoneyAmount,
-			},
-			SideTwoLSATypes: []genmodel.LeftSideActionType{
-				genmodel.SoftSkills,
-				genmodel.Lsa_publication,
-				genmodel.Languages,
-				genmodel.Lsa_award,
-				genmodel.Interests,
-			},
+			//SideOneLSATypes: []genmodel.LeftSideActionType{
+			//	genmodel.TechSkill,
+			//	genmodel.TimeAmount,
+			//	genmodel.MoneyAmount,
+			//},
+			//SideTwoLSATypes: []genmodel.LeftSideActionType{
+			//	genmodel.SoftSkills,
+			//	genmodel.Lsa_publication,
+			//	genmodel.Languages,
+			//	genmodel.Lsa_award,
+			//	genmodel.Interests,
+			//},
 
+			Experience: []genmodel.ID{internal.Exp_solar, internal.Exp_fitness, internal.Exp_tutor},
 			//Education: []genmodel.ID{
 			//	internal.Edu_Comp,
 			//},
@@ -50,9 +52,9 @@ func Google() genmodel.JobPosition {
 			//RemoveExperience: []genmodel.ID{internal.Exp_tutor},
 			//SideOneExperienceSize: 2,
 			//SideOneEducationSize: 1,
-			ShowExperienceParts: 2,
+			//ShowExperienceParts: 2,
 			//RemoveExperiencePart: []genmodel.ExperiencePart{genmodel.ExperiencePart_techStack},
-			SideOneRSAItems: 9,
+			//SideOneRSAItems: 9,
 		},
 		Lang:    lang.German,
 		Company: "Google",

@@ -193,14 +193,18 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 		//if exp.DefaultShow == "no" {
 		//	continue
 		//}
-
-		if len(style.Experience) > 0 {
-			if !findId(exp.Id, style.Experience) {
+		if !exp.FutureExperience {
+			if len(style.Experience) > 0 {
+				if !findId(exp.Id, style.Experience) {
+					continue
+				}
+			}
+			if findId(exp.Id, style.RemoveExperience) {
 				continue
 			}
-		}
-		if findId(exp.Id, style.RemoveExperience) {
-			continue
+			if exp.MustBeSelected && len(style.Experience) == 0 {
+				continue
+			}
 		}
 
 		timeRange := convertTime(exp.StartTime, exp.EndTime, local)
@@ -357,6 +361,9 @@ func convertEducation(app *genmodel.Application, local lang.Language) (rsa texmo
 		if findId(edu.Id, style.RemoveEducation) {
 			continue
 		}
+		if edu.MustBeSelected && len(style.Education) == 0 {
+			continue
+		}
 
 		res := texmodel.Education{
 			Graduation:    local.String(edu.Graduation),
@@ -425,6 +432,9 @@ func filterPublication(app *genmodel.Application) []genmodel.Publication {
 		if findId(pub.Id, style.RemovePublication) {
 			continue
 		}
+		if pub.MustBeSelected && len(style.Publication) == 0 {
+			continue
+		}
 		res = append(res, pub)
 	}
 	return res
@@ -464,16 +474,19 @@ func convertAward(app *genmodel.Application, local lang.Language) (rsa texmodel.
 func filterAward(app *genmodel.Application) []genmodel.Award {
 	style := style(app)
 	var res []genmodel.Award
-	for _, pub := range app.Profile.Award {
+	for _, award := range app.Profile.Award {
 		if len(style.Award) > 0 {
-			if !findId(pub.Id, style.Award) {
+			if !findId(award.Id, style.Award) {
 				continue
 			}
 		}
-		if findId(pub.Id, style.RemoveAward) {
+		if findId(award.Id, style.RemoveAward) {
 			continue
 		}
-		res = append(res, pub)
+		if award.MustBeSelected && len(style.Award) == 0 {
+			continue
+		}
+		res = append(res, award)
 	}
 	return res
 }

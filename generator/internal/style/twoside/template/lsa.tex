@@ -1,4 +1,4 @@
-{{range .}}
+{{range .List }}
     {{ if .Range }}
         \category{{print "{" .Label "}"}}
         {{range .Range}}
@@ -31,7 +31,7 @@
             {{end}}%
         \end{tabular}\\[3pt]
         % TODO improve
-        {\small\textit{\textsuperscript{*} gem. EU-Referenzrahmen}} \externallinksmallblack{https://www.goethe.de/ins/de/de/uun/dln/ger.html}
+         {{ $.Label.LanguageReference }}  \externallinksmallblack{https://www.goethe.de/ins/de/de/uun/dln/ger.html}
         \normalsize
 %        Label.LanguageReference
     {{ end }}
