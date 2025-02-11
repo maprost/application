@@ -1,11 +1,12 @@
 package twoside
 
 import (
+	"log"
+
 	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 	"github.com/maprost/application/generator/internal/util"
 	"github.com/maprost/application/generator/lang"
-	"log"
 )
 
 func style(app *genmodel.Application) genmodel.TwoSideStyle {
@@ -37,7 +38,7 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 
 		// main infos
 		Name:        util.JoinStrings(app.Profile.FirstName, " ", app.Profile.LastName),
-		Title:       util.DefaultValue(app.JobPosition.Title, app.Profile.Title),
+		Title:       util.DefaultValue(app.JobPosition.Title, local.String(app.Profile.Title)),
 		Image:       util.DefaultImage(app.Profile.Image),
 		Email:       app.Profile.Email,
 		Phone:       app.Profile.Phone,
