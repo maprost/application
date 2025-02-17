@@ -410,10 +410,15 @@ func lsaConvLanguage(app *genmodel.Application, lang lang.Language) (texmodel.Le
 		//	continue
 		//}
 		res.Languages = append(res.Languages, texmodel.Language{
-			Name:          lang.String(l.Name),
-			Level:         lang.String(l.Level),
-			DocumentLinks: l.DocumentLinks,
+			Name:           lang.String(l.Name),
+			Level:          lang.String(l.Level),
+			ShowRefExplain: l.ShowRefExplain,
+			DocumentLinks:  l.DocumentLinks,
 		})
+
+		if l.ShowRefExplain {
+			res.ShowLanguageRef = true
+		}
 	}
 	return res, action, len(langs) > 0, nil
 }

@@ -10,9 +10,10 @@ type RatingLsa struct {
 }
 
 type Language struct {
-	Name          string
-	Level         string
-	DocumentLinks []string
+	Name           string
+	Level          string
+	ShowRefExplain bool
+	DocumentLinks  []string
 }
 
 type RangeLsa struct {
@@ -54,14 +55,15 @@ type TimeTitleLsa struct {
 }
 
 type LeftSideAction struct {
-	Label          string
-	Ratings        []RatingLsa
-	OtherRatings   string
-	List           string
-	Languages      []Language
-	Range          []RangeLsa
-	PublicationLsa []PublicationLsa
-	AwardLsa       []AwardLsa
+	Label           string
+	Ratings         []RatingLsa
+	OtherRatings    string
+	List            string
+	Languages       []Language
+	ShowLanguageRef bool
+	Range           []RangeLsa
+	PublicationLsa  []PublicationLsa
+	AwardLsa        []AwardLsa
 }
 
 type LSAIndex struct {

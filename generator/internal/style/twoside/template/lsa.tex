@@ -4,6 +4,7 @@
         {{range .Range}}
             \linerange{{print "{" .Name "}" "{" .Min "}" "{" .Max "}" "{" .MinString "}" "{" .DeltaMaxMin "}" "{" .DeltaMaxFull "}" "{" .MinLabel "}" "{" .MaxLabel "}" "{" .DeltaMaxMinHalf "}"}}%
         {{ end }}
+        \vspace{-3pt}
     {{ end }}
 
     {{ if or (.Ratings) (.OtherRatings) }}
@@ -21,9 +22,9 @@
 
     {{ if .Languages }}
         \category{{print "{" .Label "}"}}
-        \begin{tabular}{@{}p{18mm} @{\hskip 0.2cm}p{30mm}@{}}
+        \begin{tabular}{@{}p{15mm} @{\hskip 0.2cm}p{33mm}@{}}
             {{range .Languages}}%
-                {{.Name}} & {{.Level}}{\small\textsuperscript{*}\normalsize}
+                {{.Name}} & {{.Level}}{{if .ShowRefExplain}}{\small\textsuperscript{*}\normalsize}{{end}}
             {{range .DocumentLinks}}%
                 \href{{print "{" . "}" }}{\documentIcon}\,\,%
             {{end}}%
@@ -31,7 +32,9 @@
             {{end}}%
         \end{tabular}\\[3pt]
         % TODO improve
-         {{ $.Label.LanguageReference }}  \externallinksmallblack{https://www.goethe.de/ins/de/de/uun/dln/ger.html}
+        {{if .ShowLanguageRef}}
+            {{ $.Label.LanguageReference }}
+        {{end}}
         \normalsize
 %        Label.LanguageReference
     {{ end }}

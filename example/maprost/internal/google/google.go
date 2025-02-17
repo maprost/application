@@ -29,7 +29,7 @@ func Google() genmodel.JobPosition {
 			//},
 			Skills: map[genmodel.LeftSideActionType][]genmodel.ID{
 				//genmodel.TimeAmount: {internal.Time_HO16h, internal.Time_20full, internal.Time_1632},
-				genmodel.Languages: {internal.Lang_DeInvisible},
+				//genmodel.Languages: {internal.Lang_DeInvisible},
 			},
 			//SideOneLSATypes: []genmodel.LeftSideActionType{
 			//	genmodel.TechSkill,
@@ -64,6 +64,7 @@ func Google() genmodel.JobPosition {
 			City:    "...",
 			Country: "...",
 		},
+		UseMig:       true,
 		Title:        "Software Defender",
 		ProfileLabel: "Hot'n'Cold",
 		ProfileText:  ``,

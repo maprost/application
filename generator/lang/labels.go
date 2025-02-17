@@ -49,10 +49,10 @@ func (l Language) TimeAmount() string {
 	switch l {
 	case German:
 		//return "Zeitpräferenz"
-		return "{\\small\\faClockO}\\,Zeitpräferenz"
+		return "{\\large\\faClockO}~Zeitpräferenz"
 	default:
 		//return "Time preference"
-		return "{\\small\\faClockO}\\,Time preference"
+		return "{\\large\\faClockO}~Time preference"
 	}
 }
 
@@ -60,10 +60,10 @@ func (l Language) MoneyAmount() string {
 	switch l {
 	case German:
 		//return "{\\small\\faEuro}~ Gehaltswunsch"
-		return "{\\small\\faEuro}\\,Vorstellung"
+		return "{\\large\\faEuro}~Vorstellung"
 	default:
 		//return "Desired Salary"
-		return "{\\small\\faEuro}\\,Expectations"
+		return "{\\large\\faEuro}~Expectations"
 	}
 }
 
@@ -223,12 +223,13 @@ func (l Language) ExternalLinks() string {
 }
 
 func (l Language) LanguageReference() string {
-	//return "test"
 	switch l {
 	case German:
-		return "\\small\\textit{* gem. EU-Referenzrahmen} \\href{https://www.goethe.de/ins/de/de/uun/dln/ger.html}{\\faInfo}"
+		//return "\\small\\textit{* gem. EU-Referenzrahmen} \\href{https://www.goethe.de/ins/de/de/uun/dln/ger.html}{\\faInfo}"
+		return "\\small\\textit{* gem. EU-Referenzrahmen} \\externallinksmallblack{https://www.goethe.de/ins/de/de/uun/dln/ger.html}"
 	default:
-		return "\\small\\textit{* acc. EU framework} \\href{https://www.goethe.de/ins/de/de/uun/dln/ger.html}{\\faInfo}"
+		//return "\\small\\textit{* acc. EU framework} \\href{https://www.goethe.de/ins/de/de/uun/dln/ger.html}{\\faInfo}"
+		return "\\small\\textit{* see EU framework, CEFR} \\externallinksmallblack{https://www.goethe.de/ins/de/en/uun/dln/ger.html}"
 	}
 }
 

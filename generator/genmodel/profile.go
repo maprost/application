@@ -22,6 +22,7 @@ type Language struct {
 	Name           lang.TranslationMap
 	Level          lang.TranslationMap
 	DocumentLinks  []string
+	ShowRefExplain bool
 	MustBeSelected bool // is hidden by default
 }
 
@@ -121,6 +122,7 @@ type Profile struct {
 	Title               lang.TranslationMap
 	Image               string // path
 	Nationality         lang.TranslationMap
+	NationalityMig      lang.TranslationMap
 	Birthday            string
 	Address             ProfileAddress
 	Email               string

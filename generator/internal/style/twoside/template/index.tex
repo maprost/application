@@ -251,19 +251,19 @@ urlcolor=linkcolor,
 \newcommand{\linerange}[9]{
     \begin{minipage}[b]{\linewidth}#1:
     \end{minipage}%
-
-    \smallskip
-
+%
+%    \smallskip
+%
     \settowidth{\mylmin}{#7}
     \settowidth{\mylmax}{#8}
     \setlength{\mylminhalf}{-0.5\mylmin}
     \setlength{\mylmaxhalf}{-0.5\mylmax}
-
+%
 %    \the\mylmin \\
 %    \the\mylmax \\
 %    \the\mylminhalf \\
 %    \the\mylmaxhalf \\
-
+%
     %TODO end RangeText
     \begin{tikzpicture}
     \draw[fill=scalelinebg,scalelinebg] (0,0) rectangle (5,0.3);
@@ -291,9 +291,10 @@ urlcolor=linkcolor,
         \begin{minipage}[b]{0.00001\linewidth} \hphantom{}
         \end{minipage}%
     \fi
-
-    \smallskip
-    \smallskip
+%
+    \\[3pt]
+%    \smallskip
+%    \smallskip
 }
 
 % header/footer:

@@ -90,6 +90,10 @@ func Profile() genmodel.Profile {
 			lang.English: "german",
 			lang.German:  "deutsch",
 		},
+		NationalityMig: lang.TranslationMap{
+			lang.English: "german, 2",
+			lang.German:  "deutsch, 2",
+		},
 		Phone:    "N/A",
 		Websites: []string{"https://github.com/maprost"},
 		Address: genmodel.ProfileAddress{
@@ -179,10 +183,11 @@ func Profile() genmodel.Profile {
 				MustBeSelected: true,
 			},
 			{
-				Id:            Lang_En,
-				Name:          lang.TranslationMap{lang.English: "English", lang.German: "Englisch"},
-				Level:         lang.DefaultTranslation("B2"),
-				DocumentLinks: []string{"http://google.de", "http://google.de"},
+				Id:             Lang_En,
+				Name:           lang.TranslationMap{lang.English: "English", lang.German: "Englisch"},
+				Level:          lang.DefaultTranslation("B2"),
+				ShowRefExplain: true,
+				DocumentLinks:  []string{"http://google.de", "http://google.de"},
 			},
 		},
 		GeneralProfileText: lang.TranslationMap{

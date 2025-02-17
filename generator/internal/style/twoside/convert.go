@@ -16,6 +16,11 @@ func style(app *genmodel.Application) genmodel.TwoSideStyle {
 func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 	local := app.JobPosition.Lang
 
+	nationality := local.String(app.Profile.Nationality)
+	if local.String(app.Profile.NationalityMig) != "" && app.JobPosition.UseMig {
+		nationality = local.String(app.Profile.NationalityMig)
+	}
+
 	data = texmodel.Index{
 		// config
 		MainColor:   util.GetSpecificDefaultColor(app.JobPosition.MainColor, util.DefaultMainColorValue),
@@ -43,7 +48,7 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 		Email:       app.Profile.Email,
 		Phone:       app.Profile.Phone,
 		Location:    util.JoinStrings(local.String(app.Profile.Address.City), ", ", local.String(app.Profile.Address.Country)),
-		Nationality: local.String(app.Profile.Nationality),
+		Nationality: nationality,
 		Websites:    convertWebsites(app),
 
 		Attachment: util.DefaultStringArray(app.JobPosition.Attachment, app.Profile.Attachment),

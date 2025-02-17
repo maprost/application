@@ -40,6 +40,7 @@ type JobPosition struct {
 	Lang        lang.Language
 	Company     string
 	Address     JobAddress
+	UseMig      bool
 	Title       string // of the job
 	FileName    string // default is 'application'
 	OutputPath  string // will overwrite build(outputPath)
