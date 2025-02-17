@@ -3,6 +3,9 @@
     {{range .DocumentLinks}}%
     \hspace*{-3pt}\documentlink{{print "{" . "}"}}%
     {{end}}%
-    \linepublisher{{print "{" .Publisher "}"}}
+    {{range .ExternalLinks}}%
+    \hspace*{-3pt}\externallink{{print "{" . "}"}}%
+    {{end}}%
     \linecontent{{print "{" .Content "}"}}
+    \linepublisher{{print "{" .Publisher "}"}}
 \end{minipage} \\[1ex]

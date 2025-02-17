@@ -398,12 +398,13 @@ func convertPublication(app *genmodel.Application, local lang.Language) (rsa tex
 
 	for _, pub := range filterPublication(app) {
 		res := texmodel.Publication{
-			Title:         local.String(pub.Title),
-			Publisher:     local.String(pub.Publisher),
-			Time:          convertTime(pub.Date, pub.Date, local),
-			Content:       "",
-			DocumentLinks: pub.DocumentLinks,
-			ExternalLinks: pub.ExternalLinks,
+			Title:           local.String(pub.Title),
+			Publisher:       local.String(pub.Publisher),
+			Time:            convertTime(pub.Date, pub.Date, local),
+			Content:         local.String(pub.Content),
+			ContentShortLsa: local.String(pub.ContentShortLsa),
+			DocumentLinks:   pub.DocumentLinks,
+			ExternalLinks:   pub.ExternalLinks,
 		}
 
 		resTex, err := compiler.CompileSubTex(templatePath(), "publication.tex", res)

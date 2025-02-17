@@ -249,6 +249,7 @@ func Profile() genmodel.Profile {
 				TechStack:  lang.DefaultTranslation("C++, cmake, Boost, PostgreSQL, XML, Bash, Python, OpenSuse, Valgrind, SVN, Mantis"),
 				TechStack2: lang.DefaultTranslation("C++, PostgreSQL"),
 				Role:       lang.DefaultTranslation("Meine Rollen"),
+				QuitReason: lang.DefaultTranslation("befristeter Vertrag"),
 			},
 			{
 				Id:          Exp_tutor,
@@ -258,7 +259,8 @@ func Profile() genmodel.Profile {
 				EndTime:     "Sep. 2010",
 				Description: lang.TranslationMap{lang.English: "Teach first and second semester students the basics of programming",
 					lang.German: ""},
-				TechStack: lang.DefaultTranslation("Java, object orientation, algorithms, data structures"),
+				TechStack:  lang.DefaultTranslation("Java, object orientation, algorithms, data structures"),
+				QuitReason: lang.DefaultTranslation("befristeter Vertrag"),
 			},
 		},
 		Education: []genmodel.Education{

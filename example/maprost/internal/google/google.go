@@ -44,6 +44,17 @@ func Google() genmodel.JobPosition {
 			//	genmodel.Interests,
 			//},
 
+			SideOneRSATypes: []genmodel.RightSideActionType{
+				genmodel.Rsa_profile,
+				genmodel.Rsa_mainQuestion,
+				genmodel.Rsa_myMotivation,
+				genmodel.Rsa_experience,
+				genmodel.Rsa_publication,
+				genmodel.Rsa_education,
+				genmodel.Rsa_award,
+			},
+			SideOneRSAItems: 10,
+
 			Experience: []genmodel.ID{internal.Exp_solar, internal.Exp_fitness, internal.Exp_tutor},
 			//Education: []genmodel.ID{
 			//	internal.Edu_Comp,
