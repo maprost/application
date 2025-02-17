@@ -250,16 +250,25 @@ func lsaConvTimeAmount(app *genmodel.Application, lang lang.Language) (texmodel.
 		delta := (skill.Max - skill.Min) / fulltime
 		deltafull := 1 - (skill.Max / fulltime)
 
+		mainlabel := lang.String(skill.SingleLabel)
+		maxlabel := fmt.Sprintf("%.0f%s\n", skill.Max, endingText)
+		if lang.String(skill.SingleLabel) == "" {
+			mainlabel = fmt.Sprintf("%.0f%s\n", skill.Min, endingText)
+		} else {
+			maxlabel = ""
+		}
+
 		res.Range = append(res.Range, texmodel.RangeLsa{
-			Name:         lang.String(skill.Name),
-			Min:          skill.Min / fulltime,
-			MinString:    fmt.Sprintf("%.3f", skill.Min/fulltime),
-			MinLabel:     fmt.Sprintf("%.0f%s\n", skill.Min, endingText),
-			Max:          skill.Max / fulltime,
-			MaxString:    fmt.Sprintf("%.3f", skill.Max/fulltime),
-			MaxLabel:     fmt.Sprintf("%.0f%s\n", skill.Max, endingText),
-			DeltaMaxMin:  fmt.Sprintf("%f", delta),
-			DeltaMaxFull: fmt.Sprintf("%.3f", deltafull),
+			Name:            lang.String(skill.Name),
+			Min:             skill.Min / fulltime,
+			MinString:       fmt.Sprintf("%.3f", skill.Min/fulltime),
+			MinLabel:        mainlabel,
+			Max:             skill.Max / fulltime,
+			MaxString:       fmt.Sprintf("%.3f", skill.Max/fulltime),
+			MaxLabel:        maxlabel,
+			DeltaMaxMin:     fmt.Sprintf("%f", delta),
+			DeltaMaxMinHalf: fmt.Sprintf("%f", delta/2),
+			DeltaMaxFull:    fmt.Sprintf("%.3f", deltafull),
 		})
 	}
 

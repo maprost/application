@@ -240,6 +240,7 @@ urlcolor=linkcolor,
     \\[1ex]
 }
 
+\newlength{\mylminTitle}
 \newlength{\mylmin}
 \newlength{\mylmax}
 \newlength{\mylminhalf}
@@ -254,6 +255,7 @@ urlcolor=linkcolor,
 %
 %    \smallskip
 %
+    \settowidth{\mylminTitle}{#1}
     \settowidth{\mylmin}{#7}
     \settowidth{\mylmax}{#8}
     \setlength{\mylminhalf}{-0.5\mylmin}
@@ -261,6 +263,9 @@ urlcolor=linkcolor,
 %
 %    \the\mylmin \\
 %    \the\mylmax \\
+%    #9 \\
+%    \the\linewidth \\
+%    \the\mylminTitle \\
 %    \the\mylminhalf \\
 %    \the\mylmaxhalf \\
 %

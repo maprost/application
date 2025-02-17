@@ -58,6 +58,7 @@ const (
 	Time_20full
 	Time_HO2d
 	Time_HO16h
+	Time_HomeofficeFull
 )
 
 const (
@@ -120,6 +121,7 @@ func Profile() genmodel.Profile {
 			{Id: Time_20full, Name: lang.TranslationMap{lang.English: "open for part time", lang.German: "offen für Teilzeit"}, Min: 20, Max: 40},
 			{Id: Time_HO2d, Name: lang.TranslationMap{lang.English: "open for part time", lang.German: "je nach Aufgabe und Absprache anteilige Homeoffice-Möglichkeit"}, Min: 0, Max: 2, Full: 5, CurrencyEnding: "d"},
 			{Id: Time_HO16h, Name: lang.TranslationMap{lang.English: "open for part time", lang.German: "je nach Aufgabe und Absprache anteilige Homeoffice-Möglichkeit"}, Min: 0, Max: 16},
+			{Id: Time_HomeofficeFull, Name: lang.TranslationMap{lang.English: "desired homeoffice", lang.German: "gewünschtes Homeoffice"}, Min: 32, Max: 40, SingleLabel: lang.TranslationMap{lang.English: "80-100\\% \\\\\\ HO", lang.German: "80-100\\% \\\\\\ HO"}},
 			//{Name: lang.TranslationMap{lang.English: "negotiable wish 2", lang.German: "vehandelbarer Wunsch 2"}, Min: 6, Max: 32},
 		},
 		MoneyAmount: []genmodel.LeftSideAction{
