@@ -133,16 +133,49 @@ urlcolor=linkcolor,
     \end{minipage}
 }
 
+\newlength{\oldparindent}%
+\setlength{\oldparindent}{\parindent}% save old indentation amount
+
+\newcommand{\linepositiontimeThree}[3]{
+    \ifx&#3&%
+        % #1 is empty
+        {\headerfont #1} \bottomColorLine{maincolor} #2
+    \else
+        % #1 is NOT empty
+        \setlength{\parindent}{0em}% zero out indentation
+        {\headerfont #3} \normalsize \\
+        {\headerfont #1} \bottomColorLine{maincolor} #2
+        \setlength{\parindent}{\oldparindent}% return to old indent amount
+    \fi
+    \smallskip
+
+    \begin{minipage}{\indentLength}
+        ~
+    \end{minipage}
+}
+
 \definecolor{futurecolor}{HTML}{666666}
-\newcommand{\linepositiontimefuture}[4]{
+\newcommand{\linepositiontimefuture}[5]{
     \color{futurecolor}
     \shadowoffset{1pt}
     \shadowcolor{sidecolor!40!white}
 %    \shadowrgb{0.8, 0.8, 1}
-    {\headerfont \shadowtext{#1}} ~\xrfill[0.0ex]{1.2pt}[futurecolor]~ \color{futurecolor}\normalsize#2\normalsize
+
+     \ifx&#5&%
+        % #1 is empty
+        {\headerfont \shadowtext{#1}} ~\xrfill[0.0ex]{1.2pt}[futurecolor]~ \color{futurecolor}\normalsize#2\normalsize
+    \else
+        % #1 is NOT empty
+        \setlength{\parindent}{0em}% zero out indentation
+        {\headerfont \shadowtext{#5}} \normalsize \\
+        {\headerfont \shadowtext{#1}} ~\xrfill[0.0ex]{1.2pt}[futurecolor]~ \color{futurecolor}\normalsize#2\normalsize
+        \setlength{\parindent}{\oldparindent}% return to old indent amount
+    \fi
+
+ %   {\headerfont \shadowtext{\begin{minipage}[l]{.6\outsidePageLength}\begin{spacing}{0.5}#1\end{spacing}\end{minipage}}} \begin{minipage}[l]{.4\outsidePageLength}~\xrfill[0.0ex]{1.2pt}[futurecolor]~ \color{futurecolor}\normalsize#2\normalsize\end{minipage}
     \smallskip
 
-    \begin{minipage}{\indentLength}
+    \begin{minipage}{1.3\indentLength}
         ~
     \end{minipage}
     \begin{minipage}{\insidePageLength}

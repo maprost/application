@@ -37,45 +37,47 @@ const (
 )
 
 type Experience struct {
-	Id                ID
-	JobPosition       lang.TranslationMap
-	JobPosition2      lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	JobPosition3      lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	Company           string
-	StartTime         string
-	EndTime           string
-	QuitReason        lang.TranslationMap
-	Description       lang.TranslationMap
-	Description2      lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	Description3      lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	Project           lang.TranslationMap
-	Project2          lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	Project3          lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	Role              lang.TranslationMap
-	Role2             lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	Role3             lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	TechStack         lang.TranslationMap
-	TechStack2        lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	TechStack3        lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
-	FutureExperience  bool
-	FutureColorChange bool
-	DocumentLinks     []string
-	ExternalLinks     []string
-	MustBeSelected    bool // is hidden by default
+	Id                   ID
+	JobPositionFirstLine lang.TranslationMap
+	JobPosition          lang.TranslationMap
+	JobPosition2         lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	JobPosition3         lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	Company              string
+	StartTime            string
+	EndTime              string
+	QuitReason           lang.TranslationMap
+	Description          lang.TranslationMap
+	Description2         lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	Description3         lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	Project              lang.TranslationMap
+	Project2             lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	Project3             lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	Role                 lang.TranslationMap
+	Role2                lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	Role3                lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	TechStack            lang.TranslationMap
+	TechStack2           lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	TechStack3           lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
+	FutureExperience     bool
+	FutureColorChange    bool
+	DocumentLinks        []string
+	ExternalLinks        []string
+	MustBeSelected       bool // is hidden by default
 }
 
 type Education struct {
-	Id             ID
-	Graduation     lang.TranslationMap
-	Institute      string
-	StartTime      string
-	EndTime        string
-	QuitReason     lang.TranslationMap
-	Focus          lang.TranslationMap
-	FinalGrade     lang.TranslationMap
-	DocumentLinks  []string
-	ExternalLinks  []string
-	MustBeSelected bool // is hidden by default
+	Id                  ID
+	GraduationFirstLine lang.TranslationMap
+	Graduation          lang.TranslationMap
+	Institute           string
+	StartTime           string
+	EndTime             string
+	QuitReason          lang.TranslationMap
+	Focus               lang.TranslationMap
+	FinalGrade          lang.TranslationMap
+	DocumentLinks       []string
+	ExternalLinks       []string
+	MustBeSelected      bool // is hidden by default
 }
 
 type Publication struct {

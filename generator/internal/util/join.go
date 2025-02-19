@@ -19,14 +19,15 @@ func JoinExperience(application *genmodel.Application) {
 	empty := application.JobPosition.FutureExperience.Empty()
 	if !empty {
 		futureExp := genmodel.Experience{
-			JobPosition:       lang.DefaultTranslation(application.JobPosition.FutureExperience.JobPosition),
-			Description:       lang.DefaultTranslation(application.JobPosition.FutureExperience.Description),
-			TechStack:         lang.DefaultTranslation(application.JobPosition.FutureExperience.TechStack),
-			StartTime:         application.JobPosition.FutureExperience.StartTime,
-			EndTime:           application.JobPosition.FutureExperience.EndTime,
-			Company:           application.JobPosition.Company,
-			FutureExperience:  true,
-			FutureColorChange: application.JobPosition.FutureColorChange,
+			JobPositionFirstLine: lang.DefaultTranslation(application.JobPosition.FutureExperience.JobPositionFirstLine),
+			JobPosition:          lang.DefaultTranslation(application.JobPosition.FutureExperience.JobPosition),
+			Description:          lang.DefaultTranslation(application.JobPosition.FutureExperience.Description),
+			TechStack:            lang.DefaultTranslation(application.JobPosition.FutureExperience.TechStack),
+			StartTime:            application.JobPosition.FutureExperience.StartTime,
+			EndTime:              application.JobPosition.FutureExperience.EndTime,
+			Company:              application.JobPosition.Company,
+			FutureExperience:     true,
+			FutureColorChange:    application.JobPosition.FutureColorChange,
 		}
 
 		application.Profile.Experience = append([]genmodel.Experience{futureExp}, application.Profile.Experience...)

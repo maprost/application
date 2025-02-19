@@ -80,7 +80,9 @@ func Google() genmodel.JobPosition {
 		ProfileLabel: "Hot'n'Cold",
 		ProfileText:  ``,
 		FutureExperience: genmodel.FutureExperience{
-			JobPosition: "Go Backend Developer",
+			//JobPosition: "Go Backend Developer",
+			JobPositionFirstLine: `Go Backend Developer`,
+			JobPosition:          `für ganz, ganz langer Titel`,
 			//TechStack:   "Go, Docker",
 			StartTime: "01/2018",
 			// TODO multilanguage

@@ -1,9 +1,9 @@
 {{if and (.FutureExperience) (.FutureColorChange)}}
-    \linepositiontimefuture{{print "{" .Position "}" "{" .Time "}" "{" .TimeSecondLine "}" "{" .Company "}"}}
+    \linepositiontimefuture{{print "{" .Position "}" "{" .Time "}" "{" .TimeSecondLine "}" "{" .Company "}" "{" .PositionFirstLine "}"}}
     \color{black}
 {{else}}%
     \color{black}
-    \linepositiontime{{print "{" .Position "}" "{" .Time "}"}}
+    \linepositiontimeThree{{print "{" .Position "}" "{" .Time "}" "{" .PositionFirstLine "}"}}
     \begin{minipage}{\insidePageLengthSubIndent}
         {{range .DocumentLinks}}%
         \hspace*{-3pt}\documentlink{{print "{" . "}"}}%

@@ -317,6 +317,7 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 		}
 
 		res := texmodel.Experience{
+			PositionFirstLine: local.String(exp.JobPositionFirstLine),
 			Position:          convTransLang(genmodel.ExperiencePart_jobPosition, exp.JobPosition, exp.JobPosition2, exp.JobPosition3),
 			Description:       convTransLang(genmodel.ExperiencePart_description, exp.Description, exp.Description2, exp.Description3),
 			Project:           convTransLang(genmodel.ExperiencePart_project, exp.Project, exp.Project2, exp.Project3),
@@ -366,14 +367,15 @@ func convertEducation(app *genmodel.Application, local lang.Language) (rsa texmo
 		}
 
 		res := texmodel.Education{
-			Graduation:    local.String(edu.Graduation),
-			FinalGrade:    local.String(edu.FinalGrade),
-			QuitReason:    local.String(edu.QuitReason),
-			Institute:     edu.Institute,
-			Focus:         local.String(edu.Focus),
-			Time:          convertTime(edu.StartTime, edu.EndTime, local),
-			DocumentLinks: edu.DocumentLinks,
-			ExternalLinks: edu.ExternalLinks,
+			GraduationFirstLine: local.String(edu.GraduationFirstLine),
+			Graduation:          local.String(edu.Graduation),
+			FinalGrade:          local.String(edu.FinalGrade),
+			QuitReason:          local.String(edu.QuitReason),
+			Institute:           edu.Institute,
+			Focus:               local.String(edu.Focus),
+			Time:                convertTime(edu.StartTime, edu.EndTime, local),
+			DocumentLinks:       edu.DocumentLinks,
+			ExternalLinks:       edu.ExternalLinks,
 		}
 
 		resTex, err := compiler.CompileSubTex(templatePath(), "education.tex", res)

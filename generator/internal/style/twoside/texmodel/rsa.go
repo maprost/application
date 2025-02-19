@@ -22,6 +22,7 @@ func (x RSA) Split(idx int) (RSA, RSA) {
 
 type Experience struct {
 	Company           string
+	PositionFirstLine string
 	Position          string
 	Time              string
 	TimeSecondLine    string
@@ -37,14 +38,15 @@ type Experience struct {
 }
 
 type Education struct {
-	Graduation    string
-	FinalGrade    string
-	Institute     string
-	Time          string
-	QuitReason    string
-	Focus         string
-	DocumentLinks []string
-	ExternalLinks []string
+	GraduationFirstLine string
+	Graduation          string
+	FinalGrade          string
+	Institute           string
+	Time                string
+	QuitReason          string
+	Focus               string
+	DocumentLinks       []string
+	ExternalLinks       []string
 }
 
 type Publication struct {
