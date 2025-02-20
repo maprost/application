@@ -45,6 +45,7 @@ func WebsiteIcon(website string) (icon string) {
 
 func WebsiteFontAwesome(website string) (faIcon string) {
 	faIcon = `\faGlobe`
+	faIcon = `\faLink`
 	website = strings.ToLower(website)
 
 	// repair urls

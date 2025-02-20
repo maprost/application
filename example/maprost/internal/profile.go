@@ -86,7 +86,7 @@ func Profile() genmodel.Profile {
 		LastName:  "",
 		Image:     path.Dir(file) + "/images/cv",
 		Birthday:  "",
-		Email:     "N/A",
+		Email:     "mat@test.de",
 		Nationality: lang.TranslationMap{
 			lang.English: "german",
 			lang.German:  "deutsch",

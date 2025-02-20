@@ -256,6 +256,13 @@ urlcolor=linkcolor,
         \node[shape=circle,draw,inner sep=1pt, fill=maincolor,maincolor,text=white] (char) {#1};
     }%
 }
+% Command for printing the contact information icons
+\newcommand{\iconFA}[1]{%
+    \tikz[baseline=(char.base)]{
+        \node[shape=circle,draw,inner sep=1pt, fill=maincolor,maincolor,text=white] (char) {\small#1\normalsize};
+%        \node[shape=circle,draw,inner sep=1pt, fill=scalelinebg,scalelinebg,text=maincolor] (char) {#1};
+    }%
+}
 
 \newcommand{\backgroundColorForSideBar}{%
     % color background for side bar
@@ -398,10 +405,15 @@ urlcolor=linkcolor,
         % contact infos
         \renewcommand{\arraystretch}{1.2}
         \begin{tabular}{@{}p{0.5cm} @{\hskip 0.2cm}p{43mm}@{}}
-            \icon{\Mundus}  & {{.Nationality}}  \\
-            \icon{\Letter}  & {{.Location}}  \\
-            \icon{\Telefon} & {{.Phone}}    \\
-            \icon{\Email}   & {{.Email}}    \\[1ex]
+%            \icon{\Mundus} \iconFA{\faGlobe}  & {{.Nationality}}  \\
+            \iconFA{\faGlobe}  & {{.Nationality}}  \\[.5ex]
+%            \icon{\Letter} \iconFA{\faEnvelopeO}  & {{.Location}}  \\
+            \iconFA{\faEnvelopeO}  & {{.Location}}  \\[.5ex]
+%            \icon{\Email} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\
+            \iconFA{\faAt} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\[.5ex]
+%            \icon{\Email}   & {{.Email}}    \\
+%            \icon{\Telefon} & {{.Phone}}    \\[1ex]
+            \iconFA{\faPhone} & {{.Phone}}    \\[1ex]
                             &
             {{range .Websites}}
 %                \mbox{\LARGE \href{{print "{" .Url "}" }}{{print "{" .FontAwesome "}" }}\normalsize~~}
