@@ -404,7 +404,10 @@ urlcolor=linkcolor,
             \icon{\Email}   & {{.Email}}    \\[1ex]
                             &
             {{range .Websites}}
-                \href{{print "{" .Url "}" }}{\includegraphics[width=5mm]{{print "{" .Icon "}"}}}{{end}}\\
+%                \mbox{\LARGE \href{{print "{" .Url "}" }}{{print "{" .FontAwesome "}" }}\normalsize~~}
+                \Large \href{{print "{" .Url "}" }}{{print "{" .FontAwesome "}" }}\normalsize ~
+%                \href{{print "{" .Url "}" }}{\includegraphics[width=5mm]{{print "{" .Icon "}"}}}
+%            {{end}}\\
         \end{tabular}
 
         \medskip

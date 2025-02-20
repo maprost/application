@@ -13,8 +13,9 @@ type Icon struct {
 }
 
 type Website struct {
-	Icon string // path
-	Url  string
+	Icon        string // path
+	FontAwesome string
+	Url         string
 }
 
 type Index struct {

@@ -96,7 +96,7 @@ func Profile() genmodel.Profile {
 			lang.German:  "deutsch, 2",
 		},
 		Phone:    "N/A",
-		Websites: []string{"https://github.com/maprost"},
+		Websites: []string{"https://test.com/maprost", "https://github.com/maprost", "https://www.xing.com", "https://www.linkedin.com"},
 		Address: genmodel.ProfileAddress{
 			Street: "",
 			Zip:    "",

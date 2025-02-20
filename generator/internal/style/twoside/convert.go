@@ -102,8 +102,9 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 func convertWebsites(application *genmodel.Application) (websites []texmodel.Website) {
 	for _, website := range application.Profile.Websites {
 		websites = append(websites, texmodel.Website{
-			Icon: util.WebsiteIcon(website),
-			Url:  website,
+			Icon:        util.WebsiteIcon(website),
+			FontAwesome: util.WebsiteFontAwesome(website),
+			Url:         website,
 		})
 	}
 	return
