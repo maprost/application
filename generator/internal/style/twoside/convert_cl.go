@@ -35,6 +35,7 @@ func addCoverLetter(data *texmodel.Index, app *genmodel.Application, outputPath 
 	res.Text = util.DefaultValue(app.JobPosition.CoverLetterTxt, local.String(app.Profile.CoverLetterTxt))
 	res.TextOutro = util.DefaultValue(app.JobPosition.CoverLetterTxtOutro, local.String(app.Profile.CoverLetterTxtOutro))
 	res.Date = local.Date()
+	res.Sign = app.Profile.SignPath
 
 	if len(app.JobPosition.CoverLetterAttachment) > 0 {
 		for _, att := range app.JobPosition.CoverLetterAttachment {

@@ -39,6 +39,10 @@
 
 % TODO Signature Image!
 
+{{if .Sign}}
+    \includegraphics[width=\imagewidth]{{print "{" .Sign "}"}}
+{{end}}
+
 \par\noindent\rule{4cm}{0.4pt}\\
 {{.MyAddress.Name}}
 

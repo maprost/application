@@ -17,5 +17,6 @@ type CoverLetter struct {
 	TextIntro      string
 	Text           string
 	TextOutro      string
+	Sign           string // path
 	AttachmentList []string
 }

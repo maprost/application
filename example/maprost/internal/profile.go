@@ -80,11 +80,12 @@ const (
 
 func Profile() genmodel.Profile {
 	_, file, _, _ := runtime.Caller(1)
+	path := path.Dir(file)
 
 	return genmodel.Profile{
 		FirstName: "My First",
 		LastName:  "My Last",
-		Image:     path.Dir(file) + "/images/cv",
+		Image:     path + "/images/cv",
 		Birthday:  "",
 		Email:     "mat@test.de",
 		Nationality: lang.TranslationMap{
@@ -106,6 +107,7 @@ func Profile() genmodel.Profile {
 				lang.German:  "Deutschland",
 			},
 		},
+		//SignPath: path + "/images/cv",
 		//LeftSideActionType: []genmodel.LeftSideActionType{
 		//	genmodel.Languages,
 		//	genmodel.Hobbies,
@@ -296,7 +298,7 @@ func Profile() genmodel.Profile {
 				Title:           lang.DefaultTranslation("Das Buch"),
 				Publisher:       lang.DefaultTranslation("XXX"),
 				Date:            "2005",
-				CoverImage:      "example/maprost/images/cv.jpeg",
+				CoverImage:      path + "/images/cv",
 				Content:         lang.DefaultTranslation("XXX"),
 				ContentShortLsa: lang.DefaultTranslation("short"),
 				ExternalLinks:   []string{"http://google.de"},
