@@ -379,74 +379,85 @@ urlcolor=linkcolor,
     \newlength\insidePageLengthSubIndent
 
     %------------------------------------------------
+    %---- cover letter
+    %------------------------------------------------
+    {{if .CoverLetter}}
+        \thispagestyle{empty}
+        {{.CoverLetter}}
+        \newpage
+    {{end}}
+
+    %------------------------------------------------
     %---- first page
     %------------------------------------------------
-    \backgroundColorForSideBar
-    \begin{textblock}{5.1}(0.5, 0.2)
-        \raggedright
+    {{ if .HasSideOne }}
+        \backgroundColorForSideBar
+        \begin{textblock}{5.1}(0.5, 0.2)
+            \raggedright
 
-        % profile picture
-        \begin{center}
-            \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
-                \clip (600/2, 567/2) circle (567/2);
-                \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{{print "{" .Image "}"}}};
-            \end{tikzpicture}
-        \end{center}
+            % profile picture
+            \begin{center}
+                \begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+                    \clip (600/2, 567/2) circle (567/2);
+                    \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{{print "{" .Image "}"}}};
+                \end{tikzpicture}
+            \end{center}
 
-        % Name
-        {\Huge {{.Name}}}
+            % Name
+            {\Huge {{.Name}}}
 
-        \smallskip
+            \smallskip
 
-        {{.Title}}
+            {{.Title}}
 
-        \medskip
+            \medskip
 
-        % contact infos
-        \renewcommand{\arraystretch}{1.2}
-        \begin{tabular}{@{}p{0.5cm} @{\hskip 0.2cm}p{43mm}@{}}
+            % contact infos
+            \renewcommand{\arraystretch}{1.2}
+            \begin{tabular}{@{}p{0.5cm} @{\hskip 0.2cm}p{43mm}@{}}
 %            \icon{\Mundus} \iconFA{\faGlobe}  & {{.Nationality}}  \\
-            \iconFA{\faGlobe}  & {{.Nationality}}  \\[.5ex]
+                \iconFA{\faGlobe}  & {{.Nationality}}  \\[.5ex]
 %            \icon{\Letter} \iconFA{\faEnvelopeO}  & {{.Location}}  \\
-            \iconFA{\faEnvelopeO}  & {{.Location}}  \\[.5ex]
+                \iconFA{\faEnvelopeO}  & {{.Location}}  \\[.5ex]
 %            \icon{\Email} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\
-            \iconFA{\faAt} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\[.5ex]
+                \iconFA{\faAt} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\[.5ex]
 %            \icon{\Email}   & {{.Email}}    \\
 %            \icon{\Telefon} & {{.Phone}}    \\[1ex]
-            \iconFA{\faPhone} & {{.Phone}}    \\[1ex]
-                            &
-            {{range .Websites}}
+                \iconFA{\faPhone} & {{.Phone}}    \\[1ex]
+                                &
+                {{range .Websites}}
 %                \mbox{\LARGE \href{{print "{" .Url "}" }}{{print "{" .FontAwesome "}" }}\normalsize~~}
-                \Large \href{{print "{" .Url "}" }}{{print "{" .FontAwesome "}" }}\normalsize ~
+                    \Large \href{{print "{" .Url "}" }}{{print "{" .FontAwesome "}" }}\normalsize ~
 %                \href{{print "{" .Url "}" }}{\includegraphics[width=5mm]{{print "{" .Icon "}"}}}
-%            {{end}}\\
-        \end{tabular}
+%                {{end}}\\
+            \end{tabular}
 
-        \medskip
+            \medskip
 
-        {{.SideOneLSA}}
+            {{.SideOneLSA}}
 
-    \end{textblock}
-    \begin{textblock}{14.5}(6.5, 0.5)
-         % config length
-        \pgfmathsetlength{\indentLength}{5mm}
-        \pgfmathsetlength{\outsidePageLength}{140mm}
-        \pgfmathsetlength{\insidePageLength}{135mm}
-        \pgfmathsetlength{\insidePageLengthSubIndent}{132mm}
+        \end{textblock}
+        \begin{textblock}{14.5}(6.5, 0.5)
+             % config length
+            \pgfmathsetlength{\indentLength}{5mm}
+            \pgfmathsetlength{\outsidePageLength}{140mm}
+            \pgfmathsetlength{\insidePageLength}{135mm}
+            \pgfmathsetlength{\insidePageLengthSubIndent}{132mm}
 
-        {{range .SideOneRSA }}
-            \timeLineHeader{{print "{" .Label "}"}}
+            {{range .SideOneRSA }}
+                \timeLineHeader{{print "{" .Label "}"}}
 
-            \begin{minipage}{\indentLength}
-                ~
-            \end{minipage}
-            \begin{minipage}{\outsidePageLength}
-                {{ range .TexList }}
-                    {{.}}
-                {{end}}
-            \end{minipage}
-        {{end}}
-    \end{textblock}
+                \begin{minipage}{\indentLength}
+                    ~
+                \end{minipage}
+                \begin{minipage}{\outsidePageLength}
+                    {{ range .TexList }}
+                        {{.}}
+                    {{end}}
+                \end{minipage}
+            {{end}}
+        \end{textblock}
+    {{end}}
 
     %------------------------------------------------
     %---- second page
@@ -487,26 +498,26 @@ urlcolor=linkcolor,
     %------------------------------------------------
     {{if .Attachment}}
 
-    \newpage
-    \rfoot{}
-    \topskip0pt
-%    \vspace*{200pt}
-    \vspace*{\fill}
-    \begin{center}
-        \begin{minipage}[b]{0.7\linewidth}
-            \begin{center}
-                % TODO multilanguage
-                {\headerfont{{print "{" $.Label.AttachmentTitle "}"}}} \\[10ex]
+        \newpage
+        \rfoot{}
+        \topskip0pt
+    %    \vspace*{200pt}
+        \vspace*{\fill}
+        \begin{center}
+            \begin{minipage}[b]{0.7\linewidth}
+                \begin{center}
+                    % TODO multilanguage
+                    {\headerfont{{print "{" $.Label.AttachmentTitle "}"}}} \\[10ex]
 
-                {{$.Label.AttachmentParaIntro}} \\[5ex]
-                \documentlinkexample{} {{$.Label.AttachmentParaDocuments}} \\[3ex]
-                \externallinkexample{} {{$.Label.AttachmentParaLinks}} \\[5ex]
+                    {{$.Label.AttachmentParaIntro}} \\[5ex]
+                    \documentlinkexample{} {{$.Label.AttachmentParaDocuments}} \\[3ex]
+                    \externallinkexample{} {{$.Label.AttachmentParaLinks}} \\[5ex]
 
-                {{$.Label.AttachmentParaOutro}}
-            \end{center}
-        \end{minipage}
-    \end{center}
-    \vspace*{\fill}
+                    {{$.Label.AttachmentParaOutro}}
+                \end{center}
+            \end{minipage}
+        \end{center}
+        \vspace*{\fill}
 
         {{range .Attachment}}
             \newpage

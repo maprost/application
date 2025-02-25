@@ -22,6 +22,8 @@ func Google() genmodel.JobPosition {
 		//ScaleLineBG: "ffffff",
 		Style: style.TwoSide,
 		TwoSideStyle: genmodel.TwoSideStyle{
+			ActivateCoverLetter: true,
+			//CoverLetterOnSeparatePdf: true,
 			//RemoveSkills: map[genmodel.LeftSideActionType][]genmodel.ID{
 			//	genmodel.TechSkill:   {internal.TechSkill_Go},
 			//	genmodel.Languages:   {internal.Lang_De},

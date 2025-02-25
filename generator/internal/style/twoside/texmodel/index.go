@@ -39,6 +39,9 @@ type Index struct {
 	Icon             Icon
 	Label            lang.Language
 
+	// cover letter
+	CoverLetter string
+
 	// main infos
 	Image       string // path
 	Name        string
@@ -56,6 +59,11 @@ type Index struct {
 	SideTwoRSA []RSA
 
 	Attachment []string
+}
+
+func (x Index) HasSideOne() bool {
+	return len(x.SideOneLSA) > 0 ||
+		len(x.SideOneRSA) > 0
 }
 
 func (x Index) HasSideTwo() bool {

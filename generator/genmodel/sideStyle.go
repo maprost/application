@@ -1,7 +1,7 @@
 package genmodel
 
 type Style interface {
-	Data(application *Application) (data interface{}, err error)
+	Data(app *Application, outputPath string) (data interface{}, err error)
 	Files() (path string, mainFile string, subFiles []string)
 }
 
@@ -37,6 +37,10 @@ type OneSideStyle struct {
 }
 
 type TwoSideStyle struct {
+	// cover letter
+	ActivateCoverLetter      bool
+	CoverLetterOnSeparatePdf bool
+
 	// LSA
 	Skills                          map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
 	RemoveSkills                    map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile

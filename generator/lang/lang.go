@@ -1,5 +1,10 @@
 package lang
 
+import (
+	"fmt"
+	"time"
+)
+
 type Language int
 
 const (
@@ -41,4 +46,19 @@ func (l Language) Join(t []TranslationMap, sep string) (result string) {
 		result += l.String(tm)
 	}
 	return
+}
+
+func (l Language) CityZip(city string, zip string) string {
+	if l == German {
+		return fmt.Sprintf("%s %s", zip, city)
+	}
+	return fmt.Sprintf("%s, %s", city, zip)
+}
+
+func (l Language) Date() string {
+	now := time.Now().Local()
+	if l == German {
+		return now.Format("02.01.2006")
+	}
+	return now.Format("01/02/2006")
 }

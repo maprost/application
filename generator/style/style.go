@@ -15,16 +15,16 @@ const (
 	TwoSide
 )
 
-func (s Style) Data(application *genmodel.Application) (data interface{}, err error) {
+func (s Style) Data(app *genmodel.Application, outputPath string) (data interface{}, err error) {
 	switch s {
 	case OneSide:
 		// convert oneSide into twoSide
-		oneSideStyle := application.JobPosition.OneSideStyle
+		oneSideStyle := app.JobPosition.OneSideStyle
 		if len(oneSideStyle.LeftSideActionTypes) == 0 {
 			oneSideStyle.LeftSideActionTypes = genmodel.AllLeftSideActionTypes
 		}
 
-		application.JobPosition.TwoSideStyle = genmodel.TwoSideStyle{
+		app.JobPosition.TwoSideStyle = genmodel.TwoSideStyle{
 			// LSA
 			Skills:                          oneSideStyle.Skills,
 			RemoveSkills:                    oneSideStyle.RemoveSkills,
@@ -51,11 +51,11 @@ func (s Style) Data(application *genmodel.Application) (data interface{}, err er
 			Award:       oneSideStyle.Award,
 			RemoveAward: oneSideStyle.RemoveAward,
 		}
-		application.JobPosition.Style = TwoSide
-		return twoside.Data(application)
+		app.JobPosition.Style = TwoSide
+		return twoside.Data(app, outputPath)
 
 	case TwoSide:
-		return twoside.Data(application)
+		return twoside.Data(app, outputPath)
 
 	}
 

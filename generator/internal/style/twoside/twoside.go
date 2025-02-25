@@ -7,8 +7,8 @@ import (
 	"github.com/maprost/application/generator/genmodel"
 )
 
-func Data(application *genmodel.Application) (data interface{}, err error) {
-	index, err := initData(application)
+func Data(application *genmodel.Application, outputPath string) (data interface{}, err error) {
+	index, err := initData(application, outputPath)
 	if err != nil {
 		return
 	}

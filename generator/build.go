@@ -6,17 +6,17 @@ import (
 	"github.com/maprost/application/generator/internal/util"
 )
 
-func Build(application genmodel.Application, outputPath string) (err error) {
-	outputPath, file := generateOutput(outputPath, &application)
-	err = build(application, outputPath, file)
+func Build(app genmodel.Application, outputPath string) (err error) {
+	outputPath, file := generateOutput(outputPath, &app)
+	err = build(app, outputPath, file)
 
 	return
 }
 
-func BuildAndClean(application genmodel.Application, outputPath string) (err error) {
-	outputPath, file := generateOutput(outputPath, &application)
+func BuildAndClean(app genmodel.Application, outputPath string) (err error) {
+	outputPath, file := generateOutput(outputPath, &app)
 
-	err = build(application, outputPath, file)
+	err = build(app, outputPath, file)
 	if err != nil {
 		return
 	}
@@ -25,37 +25,27 @@ func BuildAndClean(application genmodel.Application, outputPath string) (err err
 	return
 }
 
-func generalConvert(application *genmodel.Application) {
-	util.JoinExperience(application)
+func generalConvert(app *genmodel.Application) {
+	util.JoinExperience(app)
 }
 
-func generateOutput(outputPath string, application *genmodel.Application) (path string, file string) {
-	path = application.JobPosition.OutputPath
-	if path == "" {
-		path = outputPath
-	}
-
-	file = application.JobPosition.FileName
-	if file == "" {
-		file = "application"
-	}
-
-	return path, file
+func generateOutput(outputPath string, app *genmodel.Application) (path string, file string) {
+	return compiler.GenerateOutput(outputPath, app)
 }
 
-func build(application genmodel.Application, outputPath string, file string) (err error) {
+func build(app genmodel.Application, outputPath string, file string) (err error) {
 	var data interface{}
 	var path string
 	var mainFile string
 	var subFiles []string
 
-	generalConvert(&application)
+	generalConvert(&app)
 
-	data, err = application.JobPosition.Style.Data(&application)
+	data, err = app.JobPosition.Style.Data(&app, outputPath)
 	if err != nil {
 		return
 	}
-	path, mainFile, subFiles = application.JobPosition.Style.Files()
+	path, mainFile, subFiles = app.JobPosition.Style.Files()
 
 	err = compiler.CreateTexFile(outputPath, file, data, path, mainFile, subFiles...)
 	if err != nil {

@@ -47,19 +47,22 @@ type JobPosition struct {
 	OutputPath  string // will overwrite build(outputPath)
 
 	// customize your profile
-	ProfileLabel      string
-	ProfileText       string //  your job specific profile text, this text can contain tex elements
-	MyMotivationLabel string
-	MyMotivationText  string //  your job specific motivation text, this text can contain tex elements
-	MainQuestionLabel string
-	MainQuestionText  string //  your job specific question text, this text can contain tex elements
-	TechSkillsLabel   string
-	SoftSkillsLabel   string
-	MoneyAmount       []LeftSideAction //  your job specific money amount
-	TimeAmount        []LeftSideAction //  your job specific time amount
-	FutureExperience  FutureExperience // if set, this experience will be the top of your experience
-	FutureColorChange bool
-	Attachment        []string
+	CoverLetterSubject    string   //  your cover letter subject, this text can contain tex elements
+	CoverLetterTxt        string   //  your cover letter text, this text can contain tex elements
+	CoverLetterAttachment []string //  your cover letter attachment, this text can contain tex elements
+	ProfileLabel          string
+	ProfileText           string //  your job specific profile text, this text can contain tex elements
+	MyMotivationLabel     string
+	MyMotivationText      string //  your job specific motivation text, this text can contain tex elements
+	MainQuestionLabel     string
+	MainQuestionText      string //  your job specific question text, this text can contain tex elements
+	TechSkillsLabel       string
+	SoftSkillsLabel       string
+	MoneyAmount           []LeftSideAction //  your job specific money amount
+	TimeAmount            []LeftSideAction //  your job specific time amount
+	FutureExperience      FutureExperience // if set, this experience will be the top of your experience
+	FutureColorChange     bool
+	Attachment            []string
 
 	// customize style
 	Style        Style

@@ -13,7 +13,7 @@ func style(app *genmodel.Application) genmodel.TwoSideStyle {
 	return app.JobPosition.TwoSideStyle
 }
 
-func initData(app *genmodel.Application) (data texmodel.Index, err error) {
+func initData(app *genmodel.Application, outputPath string) (data texmodel.Index, err error) {
 	local := app.JobPosition.Lang
 
 	nationality := local.String(app.Profile.Nationality)
@@ -67,6 +67,7 @@ func initData(app *genmodel.Application) (data texmodel.Index, err error) {
 	checkColor(&data.Color4, `\fourColorLine`)
 	checkColor(&data.Color5, `\fiveColorLine`)
 
+	addCoverLetter(&data, app, outputPath, local)
 	addLsa(&data, app, local)
 	addRSA(&data, app, local)
 

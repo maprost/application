@@ -6,6 +6,7 @@ import (
 	"os"
 	"text/template"
 
+	"github.com/maprost/application/generator/genmodel"
 	"github.com/maprost/application/generator/internal/util"
 )
 
@@ -105,4 +106,18 @@ func CompileSubTex(path string, mainFile string, data interface{}) (string, erro
 	}
 
 	return b.String(), nil
+}
+
+func GenerateOutput(outputPath string, app *genmodel.Application) (path string, file string) {
+	path = app.JobPosition.OutputPath
+	if path == "" {
+		path = outputPath
+	}
+
+	file = app.JobPosition.FileName
+	if file == "" {
+		file = "application"
+	}
+
+	return path, file
 }

@@ -126,7 +126,7 @@ type Profile struct {
 	Nationality         lang.TranslationMap
 	NationalityMig      lang.TranslationMap
 	Birthday            string
-	Address             ProfileAddress
+	Address             ProfileAddress // will be used inside the cl/cv
 	Email               string
 	Phone               string
 	SignPath            string   // path to the sign image
@@ -135,14 +135,19 @@ type Profile struct {
 	LeftSideActionType  LeftSideActionTypes  // add here the order of leftSideActions
 	RightSideActionType RightSideActionTypes // add here the order of leftSideActions
 
+	// cover letter
+	CoverLetterSubject    lang.TranslationMap
+	CoverLetterTxt        lang.TranslationMap
+	CoverLetterAttachment []lang.TranslationMap
+
 	// professional/tech skills
 	CustomProfessionalSkillLabel    lang.TranslationMap
-	ProfessionalSkills              []LeftSideAction // should contains all professional skills you have
+	ProfessionalSkills              []LeftSideAction // should contain all professional skills you have
 	ViewProfessionalSkillRatingSize int
 
 	// soft skills
 	CustomSoftSkillLabel lang.TranslationMap
-	SoftSkills           []LeftSideAction // should contains all soft skills you have
+	SoftSkills           []LeftSideAction // should contain all soft skills you have
 
 	// interest
 	CustomInterestLabel lang.TranslationMap
@@ -166,19 +171,19 @@ type Profile struct {
 
 	// profile
 	CustomProfilTextLabel lang.TranslationMap
-	GeneralProfileText    lang.TranslationMap // your general profile text, this text can contains tex elements
+	GeneralProfileText    lang.TranslationMap // your general profile text, this text can contain tex elements
 
 	// motivation
 	CustomMyMotivationTextLabel lang.TranslationMap
-	GeneralMyMotivationText     lang.TranslationMap // your general motivation text, this text can contains tex elements
+	GeneralMyMotivationText     lang.TranslationMap // your general motivation text, this text can contain tex elements
 
 	// values
 	CustomValuesLabel lang.TranslationMap
-	GeneralValuesText lang.TranslationMap // your values text, this text can contains tex elements
+	GeneralValuesText lang.TranslationMap // your values text, this text can contain tex elements
 
 	// main question
 	CustomMainQuestionTextLabel lang.TranslationMap
-	GeneralMainQuestionText     lang.TranslationMap // your main question text, this text can contains tex elements
+	GeneralMainQuestionText     lang.TranslationMap // your main question text, this text can contain tex elements
 
 	// experience
 	CustomExperienceLabel lang.TranslationMap

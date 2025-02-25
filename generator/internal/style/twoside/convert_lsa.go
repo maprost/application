@@ -108,7 +108,7 @@ func addLsa(data *texmodel.Index, app *genmodel.Application, local lang.Language
 			res = append(res, s.LeftSideAction)
 		}
 
-		fmt.Printf("%+v\n", res)
+		//fmt.Printf("%+v\n", res)
 		resTex, err := compiler.CompileSubTex(templatePath(), "lsa.tex", texmodel.LSAIndex{
 			Label: local,
 			List:  res,
