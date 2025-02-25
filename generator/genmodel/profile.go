@@ -137,7 +137,9 @@ type Profile struct {
 
 	// cover letter
 	CoverLetterSubject    lang.TranslationMap
+	CoverLetterTxtIntro   lang.TranslationMap
 	CoverLetterTxt        lang.TranslationMap
+	CoverLetterTxtOutro   lang.TranslationMap
 	CoverLetterAttachment []lang.TranslationMap
 
 	// professional/tech skills

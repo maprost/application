@@ -72,10 +72,10 @@ func Google() genmodel.JobPosition {
 		Lang:    lang.German,
 		Company: "Google",
 		Address: genmodel.JobAddress{
-			Street:  "...",
-			Zip:     "...",
-			City:    "...",
-			Country: "...",
+			Street:  "Straße 123",
+			Zip:     "99999",
+			City:    "Buxtehude",
+			Country: "",
 		},
 		UseMig:       true,
 		Title:        "Software Defender",
@@ -99,5 +99,13 @@ func Google() genmodel.JobPosition {
 		SoftSkillsLabel:   "Sozialkompetenz",
 		MainQuestionLabel: "MainQuestion Label",
 		MainQuestionText:  "MainQuestion Text",
+
+		CoverLetterSubject:  "Betrifft das Jobangebot XY",
+		CoverLetterTxtIntro: `Liebes XY-Team`,
+		CoverLetterTxtOutro: `Mit bestem Dank und besten Grüßen`,
+		CoverLetterTxt: `hiermit bewerbe ich mich...` +
+			`` +
+			`\\` +
+			``,
 	}
 }

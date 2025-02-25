@@ -82,8 +82,8 @@ func Profile() genmodel.Profile {
 	_, file, _, _ := runtime.Caller(1)
 
 	return genmodel.Profile{
-		FirstName: "maprost",
-		LastName:  "",
+		FirstName: "My First",
+		LastName:  "My Last",
 		Image:     path.Dir(file) + "/images/cv",
 		Birthday:  "",
 		Email:     "mat@test.de",
@@ -98,9 +98,9 @@ func Profile() genmodel.Profile {
 		Phone:    "N/A",
 		Websites: []string{"https://test.com/maprost", "https://github.com/maprost", "https://www.xing.com", "https://www.linkedin.com"},
 		Address: genmodel.ProfileAddress{
-			Street: "",
-			Zip:    "",
-			City:   lang.DefaultTranslation(""),
+			Street: "Meine Straße",
+			Zip:    "Meine Zip",
+			City:   lang.DefaultTranslation("Meine Stadt"),
 			Country: lang.TranslationMap{
 				lang.English: "Germany",
 				lang.German:  "Deutschland",

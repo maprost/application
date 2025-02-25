@@ -23,14 +23,17 @@ func addCoverLetter(data *texmodel.Index, app *genmodel.Application, outputPath 
 		Zip:    local.CityZip(app.JobPosition.Address.City, app.JobPosition.Address.Zip),
 	}
 	res.MyAddress = texmodel.Address{
-		Name:   fmt.Sprintf("%s %s", app.Profile.FirstName, app.Profile.LastName),
-		Phone:  app.Profile.Phone,
-		Email:  app.Profile.Email,
-		Street: app.Profile.Address.Street,
-		Zip:    local.CityZip(local.String(app.Profile.Address.City), app.Profile.Address.Zip),
+		Name:     fmt.Sprintf("%s %s", app.Profile.FirstName, app.Profile.LastName),
+		Phone:    app.Profile.Phone,
+		Email:    app.Profile.Email,
+		Street:   app.Profile.Address.Street,
+		Zip:      local.CityZip(local.String(app.Profile.Address.City), app.Profile.Address.Zip),
+		CityOnly: local.City(local.String(app.Profile.Address.City)),
 	}
 	res.Subject = util.DefaultValue(app.JobPosition.CoverLetterSubject, local.String(app.Profile.CoverLetterSubject))
+	res.TextIntro = util.DefaultValue(app.JobPosition.CoverLetterTxtIntro, local.String(app.Profile.CoverLetterTxtIntro))
 	res.Text = util.DefaultValue(app.JobPosition.CoverLetterTxt, local.String(app.Profile.CoverLetterTxt))
+	res.TextOutro = util.DefaultValue(app.JobPosition.CoverLetterTxtOutro, local.String(app.Profile.CoverLetterTxtOutro))
 	res.Date = local.Date()
 
 	if len(app.JobPosition.CoverLetterAttachment) > 0 {

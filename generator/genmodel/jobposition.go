@@ -48,7 +48,9 @@ type JobPosition struct {
 
 	// customize your profile
 	CoverLetterSubject    string   //  your cover letter subject, this text can contain tex elements
+	CoverLetterTxtIntro   string   //  your cover letter intro text, this text can contain tex elements
 	CoverLetterTxt        string   //  your cover letter text, this text can contain tex elements
+	CoverLetterTxtOutro   string   //  your cover letter outro text, this text can contain tex elements
 	CoverLetterAttachment []string //  your cover letter attachment, this text can contain tex elements
 	ProfileLabel          string
 	ProfileText           string //  your job specific profile text, this text can contain tex elements

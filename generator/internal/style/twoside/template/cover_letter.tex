@@ -1,5 +1,46 @@
-cover letter start
+\newgeometry{
+    left=2.5cm,
+    right=2cm,
+    top=2cm,
+    bottom=2cm,
+    bindingoffset=1mm
+}
 
-    {{ . }}
+\begin{flushright}
+{{.MyAddress.Name}}\\
+{{.MyAddress.Street}}\\
+{{.MyAddress.Zip}}\\
+{{.MyAddress.Phone}}\\
+{{.MyAddress.Email}}\\
+\end{flushright}
 
-cover letter end
+\hphantom{}\\[4ex]
+
+\textbf{{ print "{" .JobAddress.Name "}" }}\\
+{{.JobAddress.Street}}\\
+{{.JobAddress.Zip}}\\
+
+\hphantom{}\\[2ex]
+
+\begin{flushright}
+% TODO City, Date - local??
+{{.MyAddress.CityOnly}}, {{.Date}}\\
+\end{flushright}
+
+\hphantom{}\\[2ex]
+
+\textbf{{ print "{" .Subject "}" }}\\[2ex]
+
+{{ .TextIntro }}\\[1ex]
+
+{{.Text}}\\[1ex]
+
+{{ .TextOutro }}\\[4ex]
+
+% TODO Signature Image!
+
+\par\noindent\rule{4cm}{0.4pt}\\
+{{.MyAddress.Name}}
+
+
+\restoregeometry

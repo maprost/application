@@ -55,6 +55,13 @@ func (l Language) CityZip(city string, zip string) string {
 	return fmt.Sprintf("%s, %s", city, zip)
 }
 
+func (l Language) City(city string) string {
+	if l == German {
+		return fmt.Sprintf("%s", city)
+	}
+	return fmt.Sprintf("%s", city)
+}
+
 func (l Language) Date() string {
 	now := time.Now().Local()
 	if l == German {
