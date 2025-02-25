@@ -2,6 +2,8 @@ package texmodel
 
 type Address struct {
 	Name   string
+	Phone  string
+	Email  string
 	Street string
 	Zip    string
 }

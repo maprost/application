@@ -24,6 +24,8 @@ func addCoverLetter(data *texmodel.Index, app *genmodel.Application, outputPath 
 	}
 	res.MyAddress = texmodel.Address{
 		Name:   fmt.Sprintf("%s %s", app.Profile.FirstName, app.Profile.LastName),
+		Phone:  app.Profile.Phone,
+		Email:  app.Profile.Email,
 		Street: app.Profile.Address.Street,
 		Zip:    local.CityZip(local.String(app.Profile.Address.City), app.Profile.Address.Zip),
 	}
