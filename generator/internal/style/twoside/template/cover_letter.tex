@@ -31,13 +31,17 @@
 
 \textbf{{ print "{" .Subject "}" }}\\[2ex]
 
-{{ .TextIntro }}\\[1ex]
+{{if .TextIntro}}
+    {{ .TextIntro }}\\[1ex]
+{{end}}
 
-{{.Text}}\\[1ex]
+{{if .Text}}
+    {{.Text}}\\[1ex]
+{{end}}
 
-{{ .TextOutro }}\\[4ex]
-
-% TODO Signature Image!
+{{if .TextOutro}}
+    {{ .TextOutro }}\\[4ex]
+{{end}}
 
 {{if .Sign}}
     \includegraphics[width=\imagewidth]{{print "{" .Sign "}"}}
