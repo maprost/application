@@ -19,37 +19,39 @@ func (s Style) Data(app *genmodel.Application, outputPath string) (data interfac
 	switch s {
 	case OneSide:
 		// convert oneSide into twoSide
-		oneSideStyle := app.JobPosition.OneSideStyle
-		if len(oneSideStyle.LeftSideActionTypes) == 0 {
-			oneSideStyle.LeftSideActionTypes = genmodel.AllLeftSideActionTypes
+		oss := app.JobPosition.OneSideStyle
+		if len(oss.LeftSideActionTypes) == 0 {
+			oss.LeftSideActionTypes = genmodel.AllLeftSideActionTypes
 		}
 
 		app.JobPosition.TwoSideStyle = genmodel.TwoSideStyle{
+			ActivateCoverLetter:      oss.ActivateCoverLetter,
+			CoverLetterOnSeparatePdf: oss.CoverLetterOnSeparatePdf,
 			// LSA
-			Skills:                          oneSideStyle.Skills,
-			RemoveSkills:                    oneSideStyle.RemoveSkills,
-			SideOneLSATypes:                 oneSideStyle.LeftSideActionTypes,
+			Skills:                          oss.Skills,
+			RemoveSkills:                    oss.RemoveSkills,
+			SideOneLSATypes:                 oss.LeftSideActionTypes,
 			SideTwoLSATypes:                 nil,
-			ViewProfessionalSkillRatingSize: oneSideStyle.ViewProfessionalSkillRatingSize,
+			ViewProfessionalSkillRatingSize: oss.ViewProfessionalSkillRatingSize,
 			// RSA
-			SideOneRSATypes: oneSideStyle.RightSideActionTypes,
+			SideOneRSATypes: oss.RightSideActionTypes,
 			SideTwoRSATypes: nil,
 			SideOneRSAItems: math.MaxInt, // put all on side one
 			// experience
-			Experience:           oneSideStyle.Experience,
-			RemoveExperience:     oneSideStyle.RemoveExperience,
-			ShowExperienceParts:  oneSideStyle.ShowExperienceParts,
-			ShowExperiencePart:   oneSideStyle.ShowExperiencePart,
-			RemoveExperiencePart: oneSideStyle.RemoveExperiencePart,
+			Experience:           oss.Experience,
+			RemoveExperience:     oss.RemoveExperience,
+			ShowExperienceParts:  oss.ShowExperienceParts,
+			ShowExperiencePart:   oss.ShowExperiencePart,
+			RemoveExperiencePart: oss.RemoveExperiencePart,
 			// education
-			Education:       oneSideStyle.Education,
-			RemoveEducation: oneSideStyle.RemoveEducation,
+			Education:       oss.Education,
+			RemoveEducation: oss.RemoveEducation,
 			// publication
-			Publication:       oneSideStyle.Publication,
-			RemovePublication: oneSideStyle.RemovePublication,
+			Publication:       oss.Publication,
+			RemovePublication: oss.RemovePublication,
 			// award
-			Award:       oneSideStyle.Award,
-			RemoveAward: oneSideStyle.RemoveAward,
+			Award:       oss.Award,
+			RemoveAward: oss.RemoveAward,
 		}
 		app.JobPosition.Style = TwoSide
 		return twoside.Data(app, outputPath)

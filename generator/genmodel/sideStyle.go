@@ -6,6 +6,10 @@ type Style interface {
 }
 
 type OneSideStyle struct {
+	// cover letter
+	ActivateCoverLetter      bool
+	CoverLetterOnSeparatePdf bool
+
 	// LSA
 	Skills                          map[LeftSideActionType][]ID // if nothing is selected, it will use everything from profile
 	ViewSkillRatingSize             map[LeftSideActionType]int
