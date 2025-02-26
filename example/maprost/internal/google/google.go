@@ -107,5 +107,6 @@ func Google() genmodel.JobPosition {
 			`` +
 			`\\` +
 			``,
+		CoverLetterAttachment: []string{"Blob", "Drop"},
 	}
 }

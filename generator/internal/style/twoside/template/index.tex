@@ -420,7 +420,9 @@ urlcolor=linkcolor,
 %            \icon{\Letter} \iconFA{\faEnvelopeO}  & {{.Location}}  \\
                 \iconFA{\faEnvelopeO}  & {{.Location}}  \\[.5ex]
 %            \icon{\Email} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\
-                \iconFA{\faAt} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\[.5ex]
+                %TODO improve
+%                \iconFA{\faAt} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\[.5ex]
+                \iconFA{\faAt} & \small\href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }}\normalsize \\[.5ex]
 %            \icon{\Email}   & {{.Email}}    \\
 %            \icon{\Telefon} & {{.Phone}}    \\[1ex]
                 \iconFA{\faPhone} & {{.Phone}}    \\[1ex]

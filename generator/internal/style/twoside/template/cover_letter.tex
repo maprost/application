@@ -32,15 +32,18 @@
 \textbf{{ print "{" .Subject "}" }}\\[2ex]
 
 {{if .TextIntro}}
-    {{ .TextIntro }}\\[1ex]
+    {{ .TextIntro }}
+    \hphantom{}\\[1ex]
 {{end}}
 
 {{if .Text}}
-    {{.Text}}\\[1ex]
+    {{.Text}}
+    \hphantom{}\\[1ex]
 {{end}}
 
 {{if .TextOutro}}
-    {{ .TextOutro }}\\[4ex]
+    {{ .TextOutro }}
+    \hphantom{}\\[4ex]
 {{end}}
 
 {{if .Sign}}
@@ -48,7 +51,10 @@
 {{end}}
 
 \par\noindent\rule{4cm}{0.4pt}\\
-{{.MyAddress.Name}}
+{{.MyAddress.Name}}\\[10ex]
 
+{{range .AttachmentList}}
+    {{.}}
+{{end}}
 
 \restoregeometry
