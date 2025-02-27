@@ -39,11 +39,10 @@
 
 {{if .TextOutro}}
     {{ .TextOutro }}
-    \hphantom{}\\[4ex]
-{{end}}
-
-{{if .Sign}}
-    \includegraphics[width=\imagewidth]{{print "{" .Sign "}"}}
+    \hphantom{}\\[3ex]
+{{end}}%
+{{if .Sign}}%
+    \includegraphics[width=\imagewidth]{{print "{" .Sign "}"}}\vspace{-3ex}
 {{end}}%
 %
 \par\noindent\rule{4cm}{0.4pt}\\

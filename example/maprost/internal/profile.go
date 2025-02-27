@@ -107,7 +107,7 @@ func Profile() genmodel.Profile {
 				lang.German:  "Deutschland",
 			},
 		},
-		//SignPath: path + "/images/cv",
+		SignPath: path + "/images/sig_test",
 		//LeftSideActionType: []genmodel.LeftSideActionType{
 		//	genmodel.Languages,
 		//	genmodel.Hobbies,
