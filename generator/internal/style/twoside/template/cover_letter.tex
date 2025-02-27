@@ -11,25 +11,19 @@
 {{.MyAddress.Street}}\\
 {{.MyAddress.Zip}}\\
 {{.MyAddress.Phone}}\\
-{{.MyAddress.Email}}\\
+{{.MyAddress.Email}}\\[6ex]
 \end{flushright}
-
-\hphantom{}\\[4ex]
 
 \textbf{{ print "{" .JobAddress.Name "}" }}\\
 {{.JobAddress.Street}}\\
-{{.JobAddress.Zip}}\\
-
-\hphantom{}\\[2ex]
+{{.JobAddress.Zip}}\\[3ex]
 
 \begin{flushright}
 % TODO City, Date - local??
-{{.MyAddress.CityOnly}}, {{.Date}}\\
+{{.MyAddress.CityOnly}}, {{.Date}}\\[3ex]
 \end{flushright}
 
-\hphantom{}\\[2ex]
-
-\textbf{{ print "{" .Subject "}" }}\\[2ex]
+\textbf{{ print "{" .Subject "}" }}\\[3ex]
 
 {{if .TextIntro}}
     {{ .TextIntro }}
@@ -37,8 +31,10 @@
 {{end}}
 
 {{if .Text}}
-    {{.Text}}
-    \hphantom{}\\[1ex]
+    \begin{onehalfspace}
+        {{.Text}}
+        \hphantom{}\\[1ex]
+    \end{onehalfspace}
 {{end}}
 
 {{if .TextOutro}}
@@ -48,14 +44,16 @@
 
 {{if .Sign}}
     \includegraphics[width=\imagewidth]{{print "{" .Sign "}"}}
-{{end}}
-
+{{end}}%
+%
 \par\noindent\rule{4cm}{0.4pt}\\
 {{.MyAddress.Name}}\\[4ex]
 
+{{ if .AttachmentList }}
+    {{range .AttachmentList}}
+        {{.}}
+    {{end}}
+{{ end }}
 
-{{range .AttachmentList}}
-    {{.}}
-{{end}}
 
 \restoregeometry
