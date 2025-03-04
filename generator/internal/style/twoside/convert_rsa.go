@@ -316,6 +316,10 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 			exp.TechStack3 = exp.TechStack
 		}
 
+		if style.NoDocumentLinks {
+			exp.DocumentLinks = []string{}
+		}
+
 		res := texmodel.Experience{
 			PositionFirstLine: local.String(exp.JobPositionFirstLine),
 			Position:          convTransLang(genmodel.ExperiencePart_jobPosition, exp.JobPosition, exp.JobPosition2, exp.JobPosition3),
@@ -366,6 +370,10 @@ func convertEducation(app *genmodel.Application, local lang.Language) (rsa texmo
 			continue
 		}
 
+		if style.NoDocumentLinks {
+			edu.DocumentLinks = []string{}
+		}
+
 		res := texmodel.Education{
 			GraduationFirstLine: local.String(edu.GraduationFirstLine),
 			Graduation:          local.String(edu.Graduation),
@@ -394,11 +402,16 @@ func convertEducation(app *genmodel.Application, local lang.Language) (rsa texmo
 
 func convertPublication(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
 	action = genmodel.Rsa_publication
+	style := style(app)
 	if lsaTypeIsActive(app, genmodel.Lsa_publication) {
 		return texmodel.RSA{}, action, false, nil
 	}
 
 	for _, pub := range filterPublication(app) {
+		if style.NoDocumentLinks {
+			pub.DocumentLinks = []string{}
+		}
+
 		res := texmodel.Publication{
 			Title:           local.String(pub.Title),
 			Publisher:       local.String(pub.Publisher),
@@ -445,11 +458,16 @@ func filterPublication(app *genmodel.Application) []genmodel.Publication {
 
 func convertAward(app *genmodel.Application, local lang.Language) (rsa texmodel.RSA, action genmodel.RightSideActionType, ok bool, err error) {
 	action = genmodel.Rsa_award
+	style := style(app)
 	if lsaTypeIsActive(app, genmodel.Lsa_award) {
 		return texmodel.RSA{}, action, false, nil
 	}
 
 	for _, awa := range filterAward(app) {
+		if style.NoDocumentLinks {
+			awa.DocumentLinks = []string{}
+		}
+
 		res := texmodel.Award{
 			Title:           local.String(awa.Title),
 			Institute:       local.String(awa.Institute),

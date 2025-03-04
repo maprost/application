@@ -52,6 +52,9 @@ func (s Style) Data(app *genmodel.Application, outputPath string) (data interfac
 			// award
 			Award:       oss.Award,
 			RemoveAward: oss.RemoveAward,
+			// attachment
+			NoAttachments:   oss.NoAttachments,
+			NoDocumentLinks: oss.NoLinks,
 		}
 		app.JobPosition.Style = TwoSide
 		return twoside.Data(app, outputPath)
