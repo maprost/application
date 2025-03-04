@@ -524,7 +524,8 @@ urlcolor=linkcolor,
         {{range .Attachment}}
             \newpage
             \includepdf[pages={-}]{{print "{" . "}"}}
-        {{end}}
-    {{end}}
-
+        {{end}}%
+        % TODO: remove empty page here!
+    {{end}}%
+%
 \end{document}

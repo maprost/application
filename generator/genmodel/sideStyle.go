@@ -38,6 +38,9 @@ type OneSideStyle struct {
 	// award
 	Award       []ID
 	RemoveAward []ID
+
+	// attachment
+	NoAttachments bool
 }
 
 type TwoSideStyle struct {
@@ -75,4 +78,7 @@ type TwoSideStyle struct {
 	// award
 	Award       []ID
 	RemoveAward []ID
+
+	// attachment
+	NoAttachments bool
 }
