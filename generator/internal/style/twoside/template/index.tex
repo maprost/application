@@ -500,26 +500,28 @@ urlcolor=linkcolor,
     %------------------------------------------------
     {{if .Attachment}}
 
-        \newpage
-        \rfoot{}
-        \topskip0pt
-    %    \vspace*{200pt}
-        \vspace*{\fill}
-        \begin{center}
-            \begin{minipage}[b]{0.7\linewidth}
-                \begin{center}
-                    % TODO multilanguage
-                    {\headerfont{{print "{" $.Label.AttachmentTitle "}"}}} \\[10ex]
+        {{if .AttachmentAndHintsPage}}
+            \newpage
+            \rfoot{}
+            \topskip0pt
+        %    \vspace*{200pt}
+            \vspace*{\fill}
+            \begin{center}
+                \begin{minipage}[b]{0.7\linewidth}
+                    \begin{center}
+                        % TODO multilanguage
+                        {\headerfont{{print "{" $.Label.AttachmentTitle "}"}}} \\[10ex]
 
-                    {{$.Label.AttachmentParaIntro}} \\[5ex]
-                    \documentlinkexample{} {{$.Label.AttachmentParaDocuments}} \\[3ex]
-                    \externallinkexample{} {{$.Label.AttachmentParaLinks}} \\[5ex]
+                        {{$.Label.AttachmentParaIntro}} \\[5ex]
+                        \documentlinkexample{} {{$.Label.AttachmentParaDocuments}} \\[3ex]
+                        \externallinkexample{} {{$.Label.AttachmentParaLinks}} \\[5ex]
 
-                    {{$.Label.AttachmentParaOutro}}
-                \end{center}
-            \end{minipage}
-        \end{center}
-        \vspace*{\fill}
+                        {{$.Label.AttachmentParaOutro}}
+                    \end{center}
+                \end{minipage}
+            \end{center}
+            \vspace*{\fill}
+        {{end}}%
 
         {{range .Attachment}}
             \newpage

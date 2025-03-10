@@ -41,6 +41,7 @@ func TestConvert(t *testing.T) {
 			must.HaveLength(t, data.Attachment, 2)
 			should.BeEqual(t, data.Attachment[0], "file1")
 			should.BeEqual(t, data.Attachment[1], "file2")
+			should.BeTrue(t, data.AttachmentAndHintsPage)
 
 		})
 		t.Run("empty", func(t *testing.T) {
@@ -63,6 +64,22 @@ func TestConvert(t *testing.T) {
 			}
 			data := run(t, profile, jobProfile)
 			should.HaveLength(t, data.Attachment, 0)
+		})
+		t.Run("style.NoAttachmentAndHintsPage = true", func(t *testing.T) {
+			profile := genmodel.Profile{
+				Attachment: []string{"file1", "file2"},
+			}
+			jobProfile := genmodel.JobPosition{
+				TwoSideStyle: genmodel.TwoSideStyle{
+					NoAttachmentAndHintsPage: true,
+				},
+			}
+			data := run(t, profile, jobProfile)
+			must.HaveLength(t, data.Attachment, 2)
+			should.BeEqual(t, data.Attachment[0], "file1")
+			should.BeEqual(t, data.Attachment[1], "file2")
+			should.BeFalse(t, data.AttachmentAndHintsPage)
+
 		})
 	})
 

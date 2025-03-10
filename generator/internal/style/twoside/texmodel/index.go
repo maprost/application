@@ -58,7 +58,8 @@ type Index struct {
 	SideOneRSA []RSA
 	SideTwoRSA []RSA
 
-	Attachment []string
+	AttachmentAndHintsPage bool
+	Attachment             []string
 }
 
 func (x Index) HasSideOne() bool {

@@ -40,8 +40,9 @@ type OneSideStyle struct {
 	RemoveAward []ID
 
 	// attachment
-	NoAttachments bool
-	NoLinks       bool
+	NoAttachmentAndHintsPage bool
+	NoAttachments            bool
+	NoLinks                  bool
 }
 
 type TwoSideStyle struct {
@@ -81,6 +82,7 @@ type TwoSideStyle struct {
 	RemoveAward []ID
 
 	// attachment
-	NoAttachments   bool
-	NoDocumentLinks bool
+	NoAttachmentAndHintsPage bool
+	NoAttachments            bool
+	NoDocumentLinks          bool
 }

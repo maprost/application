@@ -57,7 +57,8 @@ func initData(app *genmodel.Application, outputPath string) (data texmodel.Index
 		Nationality: nationality,
 		Websites:    convertWebsites(app),
 
-		Attachment: attachments,
+		AttachmentAndHintsPage: !style.NoAttachmentAndHintsPage,
+		Attachment:             attachments,
 	}
 
 	checkColor := func(color *string, lsaLine string) {
