@@ -2,6 +2,7 @@ package twoside_test
 
 import (
 	"github.com/maprost/application/generator/genmodel"
+	"github.com/maprost/application/generator/internal/image"
 	"github.com/maprost/application/generator/internal/style/twoside/texmodel"
 	style2 "github.com/maprost/application/generator/style"
 	"github.com/maprost/testbox/must"
@@ -160,5 +161,43 @@ func TestConvert(t *testing.T) {
 
 		})
 
+	})
+
+	t.Run("image", func(t *testing.T) {
+		t.Run("profile", func(t *testing.T) {
+			profile := genmodel.Profile{
+				Image: "profilePath",
+			}
+			jobProfile := genmodel.JobPosition{}
+			data := run(t, profile, jobProfile)
+			should.BeEqual(t, data.Image, "profilePath")
+		})
+
+		t.Run("jobPosition", func(t *testing.T) {
+			profile := genmodel.Profile{}
+			jobProfile := genmodel.JobPosition{
+				Image: "jpPath",
+			}
+			data := run(t, profile, jobProfile)
+			should.BeEqual(t, data.Image, "jpPath")
+		})
+
+		t.Run("profile + jobPosition", func(t *testing.T) {
+			profile := genmodel.Profile{
+				Image: "profilePath",
+			}
+			jobProfile := genmodel.JobPosition{
+				Image: "jpPath",
+			}
+			data := run(t, profile, jobProfile)
+			should.BeEqual(t, data.Image, "jpPath")
+		})
+
+		t.Run("none", func(t *testing.T) {
+			profile := genmodel.Profile{}
+			jobProfile := genmodel.JobPosition{}
+			data := run(t, profile, jobProfile)
+			should.BeEqual(t, data.Image, image.ImagePath()+"noimage")
+		})
 	})
 }

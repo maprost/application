@@ -29,6 +29,7 @@ func (e FutureExperience) Empty() bool {
 }
 
 type JobPosition struct {
+	Image       string
 	MainColor   string // please use the HTML color signature: 800000, if the field is empty: standard color will used
 	SideColor   string
 	ShadowColor string

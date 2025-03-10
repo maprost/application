@@ -27,6 +27,11 @@ func initData(app *genmodel.Application, outputPath string) (data texmodel.Index
 		attachments = util.DefaultStringArray(app.JobPosition.Attachment, app.Profile.Attachment)
 	}
 
+	image := app.JobPosition.Image
+	if image == "" {
+		image = app.Profile.Image
+	}
+
 	data = texmodel.Index{
 		// config
 		MainColor:   util.GetSpecificDefaultColor(app.JobPosition.MainColor, util.DefaultMainColorValue),
@@ -50,7 +55,7 @@ func initData(app *genmodel.Application, outputPath string) (data texmodel.Index
 		// main infos
 		Name:        util.JoinStrings(app.Profile.FirstName, " ", app.Profile.LastName),
 		Title:       util.DefaultValue(app.JobPosition.Title, local.String(app.Profile.Title)),
-		Image:       util.DefaultImage(app.Profile.Image),
+		Image:       util.DefaultImage(image),
 		Email:       app.Profile.Email,
 		Phone:       app.Profile.Phone,
 		Location:    util.JoinStrings(local.String(app.Profile.Address.City), ", ", local.String(app.Profile.Address.Country)),
