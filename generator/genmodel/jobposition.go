@@ -47,6 +47,10 @@ type JobPosition struct {
 	FileName    string // default is 'application'
 	OutputPath  string // will overwrite build(outputPath)
 
+	HideNationality bool
+	HideLocation    bool
+	HideWebsites    bool
+
 	// customize your profile
 	CoverLetterSubject    string   //  your cover letter subject, this text can contain tex elements
 	CoverLetterTxtIntro   string   //  your cover letter intro text, this text can contain tex elements

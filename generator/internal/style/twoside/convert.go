@@ -21,6 +21,19 @@ func initData(app *genmodel.Application, outputPath string) (data texmodel.Index
 	if local.String(app.Profile.NationalityMig) != "" && app.JobPosition.UseMig {
 		nationality = local.String(app.Profile.NationalityMig)
 	}
+	if app.JobPosition.HideNationality {
+		nationality = ""
+	}
+
+	location := util.JoinStrings(local.String(app.Profile.Address.City), ", ", local.String(app.Profile.Address.Country))
+	if app.JobPosition.HideLocation {
+		location = ""
+	}
+
+	websites := convertWebsites(app)
+	if app.JobPosition.HideWebsites {
+		websites = nil
+	}
 
 	var attachments []string
 	if !style.NoAttachments {
@@ -58,9 +71,9 @@ func initData(app *genmodel.Application, outputPath string) (data texmodel.Index
 		Image:       util.DefaultImage(image),
 		Email:       app.Profile.Email,
 		Phone:       app.Profile.Phone,
-		Location:    util.JoinStrings(local.String(app.Profile.Address.City), ", ", local.String(app.Profile.Address.Country)),
+		Location:    location,
 		Nationality: nationality,
-		Websites:    convertWebsites(app),
+		Websites:    websites,
 
 		AttachmentAndHintsPage: !style.NoAttachmentAndHintsPage,
 		Attachment:             attachments,

@@ -9,6 +9,8 @@ import (
 
 func Google() genmodel.JobPosition {
 	return genmodel.JobPosition{
+		//HideWebsites: true,
+
 		Attachment: []string{
 			internal.Doc_CV,
 			//internal.Doc_Plan,

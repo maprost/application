@@ -415,10 +415,14 @@ urlcolor=linkcolor,
             % contact infos
             \renewcommand{\arraystretch}{1.2}
             \begin{tabular}{@{}p{0.5cm} @{\hskip 0.2cm}p{43mm}@{}}
+            {{if .Nationality}}%
 %            \icon{\Mundus} \iconFA{\faGlobe}  & {{.Nationality}}  \\
                 \iconFA{\faGlobe}  & {{.Nationality}}  \\[.5ex]
+            {{end}}%
+            {{if .Location}}%
 %            \icon{\Letter} \iconFA{\faEnvelopeO}  & {{.Location}}  \\
-                \iconFA{\faEnvelopeO}  & {{.Location}}  \\[.5ex]
+                \iconFA{\faEnvelopeO}  & \mbox{{print "{" .Location "}" }}  \\[.5ex]
+            {{end}}%
 %            \icon{\Email} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\
                 %TODO improve
 %                \iconFA{\faAt} & \href{mailto:{{print "" .Email "" }}}{{print "{" .Email "}" }} \\[.5ex]
@@ -426,15 +430,17 @@ urlcolor=linkcolor,
 %            \icon{\Email}   & {{.Email}}    \\
 %            \icon{\Telefon} & {{.Phone}}    \\[1ex]
                 \iconFA{\faPhone} & {{.Phone}}    \\[1ex]
+            {{if .Websites}}%
                                 &
-                {{range .Websites}}
+                {{range .Websites}}%
 %                \mbox{\LARGE \href{{print "{" .Url "}" }}{{print "{" .FontAwesome "}" }}\normalsize~~}
                     \Large \href{{print "{" .Url "}" }}{{print "{" .FontAwesome "}" }}\normalsize ~
 %                \href{{print "{" .Url "}" }}{\includegraphics[width=5mm]{{print "{" .Icon "}"}}}
 %                {{end}}\\
+            {{end}}%
             \end{tabular}
 
-            \medskip
+%            \medskip
 
             {{.SideOneLSA}}
 
