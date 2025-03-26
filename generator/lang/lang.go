@@ -14,6 +14,17 @@ const (
 
 const DefaultLanguage = English
 
+func (l Language) ShortCut() string {
+	switch l {
+	case English:
+		return "En"
+	case German:
+		return "De"
+	default:
+		return "N/A"
+	}
+}
+
 func (l Language) String(t TranslationMap) string {
 	// try used language
 	value, ok := t[l]
