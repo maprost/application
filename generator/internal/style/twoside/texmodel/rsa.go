@@ -1,5 +1,7 @@
 package texmodel
 
+import "fmt"
+
 type RSA struct {
 	Label   string
 	TexList []string
@@ -9,6 +11,28 @@ type RSA struct {
 	HasProjects      bool
 	HasRole          bool
 	HasTechStack     bool
+}
+
+type RunningLanguage struct {
+	Name  string
+	Value string
+}
+
+func (x RunningLanguage) String() string {
+	return fmt.Sprintf("%s: %s", x.Name, x.Value)
+}
+
+type RunningLanguages []RunningLanguage
+
+func (x RunningLanguages) String() string {
+	var res string
+	for _, e := range x {
+		if res != "" {
+			res += " – "
+		}
+		res += e.String()
+	}
+	return res
 }
 
 func (x RSA) Split(idx int) (RSA, RSA) {
@@ -22,6 +46,7 @@ func (x RSA) Split(idx int) (RSA, RSA) {
 
 type Experience struct {
 	Company           string
+	Languages         RunningLanguages
 	PositionFirstLine string
 	Position          string
 	Time              string
@@ -42,6 +67,7 @@ type Education struct {
 	Graduation          string
 	FinalGrade          string
 	Institute           string
+	Languages           RunningLanguages
 	Time                string
 	QuitReason          string
 	Focus               string
@@ -52,6 +78,7 @@ type Education struct {
 type Publication struct {
 	Title           string
 	Publisher       string
+	Languages       RunningLanguages
 	Time            string
 	Content         string
 	ContentShortLsa string
@@ -62,6 +89,7 @@ type Publication struct {
 type Award struct {
 	Title           string
 	Institute       string
+	Languages       RunningLanguages
 	Time            string
 	Content         string
 	ContentShortLsa string

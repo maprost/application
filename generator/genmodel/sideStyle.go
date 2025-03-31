@@ -1,5 +1,7 @@
 package genmodel
 
+import "math"
+
 type Style interface {
 	Data(app *Application, outputPath string) (data interface{}, err error)
 	Files() (path string, mainFile string, subFiles []string)
@@ -43,6 +45,46 @@ type OneSideStyle struct {
 	NoAttachmentAndHintsPage bool
 	NoAttachments            bool
 	NoLinks                  bool
+}
+
+func (x OneSideStyle) TwoSideStyle() TwoSideStyle {
+	if len(x.LeftSideActionTypes) == 0 {
+		x.LeftSideActionTypes = AllLeftSideActionTypes
+	}
+
+	return TwoSideStyle{
+		ActivateCoverLetter:      x.ActivateCoverLetter,
+		CoverLetterOnSeparatePdf: x.CoverLetterOnSeparatePdf,
+		// LSA
+		Skills:                          x.Skills,
+		RemoveSkills:                    x.RemoveSkills,
+		SideOneLSATypes:                 x.LeftSideActionTypes,
+		SideTwoLSATypes:                 nil,
+		ViewProfessionalSkillRatingSize: x.ViewProfessionalSkillRatingSize,
+		// RSA
+		SideOneRSATypes: x.RightSideActionTypes,
+		SideTwoRSATypes: nil,
+		SideOneRSAItems: math.MaxInt, // put all on side one
+		// experience
+		Experience:           x.Experience,
+		RemoveExperience:     x.RemoveExperience,
+		ShowExperienceParts:  x.ShowExperienceParts,
+		ShowExperiencePart:   x.ShowExperiencePart,
+		RemoveExperiencePart: x.RemoveExperiencePart,
+		// education
+		Education:       x.Education,
+		RemoveEducation: x.RemoveEducation,
+		// publication
+		Publication:       x.Publication,
+		RemovePublication: x.RemovePublication,
+		// award
+		Award:       x.Award,
+		RemoveAward: x.RemoveAward,
+		// attachment
+		NoAttachmentAndHintsPage: x.NoAttachmentAndHintsPage,
+		NoAttachments:            x.NoAttachments,
+		NoDocumentLinks:          x.NoLinks,
+	}
 }
 
 type TwoSideStyle struct {

@@ -26,6 +26,11 @@ type Language struct {
 	MustBeSelected bool // is hidden by default
 }
 
+type RunningLanguage struct {
+	Name     lang.TranslationMap
+	Language lang.Language
+}
+
 type ExperiencePart int
 
 const (
@@ -38,6 +43,7 @@ const (
 
 type Experience struct {
 	Id                   ID
+	Languages            []RunningLanguage
 	JobPositionFirstLine lang.TranslationMap
 	JobPosition          lang.TranslationMap
 	JobPosition2         lang.TranslationMap // if empty --> will be like 1; if must stay empty: "xxx"
@@ -67,6 +73,7 @@ type Experience struct {
 
 type Education struct {
 	Id                  ID
+	Languages           []RunningLanguage
 	GraduationFirstLine lang.TranslationMap
 	Graduation          lang.TranslationMap
 	Institute           string
@@ -82,6 +89,7 @@ type Education struct {
 
 type Publication struct {
 	Id              ID
+	Languages       []RunningLanguage
 	Title           lang.TranslationMap
 	SubTitle        lang.TranslationMap
 	Publisher       lang.TranslationMap
@@ -96,6 +104,7 @@ type Publication struct {
 
 type Award struct {
 	Id              ID
+	Languages       []RunningLanguage
 	Title           lang.TranslationMap
 	Institute       lang.TranslationMap
 	Date            string

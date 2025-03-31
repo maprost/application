@@ -6,6 +6,6 @@
     {{range .ExternalLinks}}%
     \hspace*{-3pt}\externallink{{print "{" . "}"}}%
     {{end}}%
-    \lineinstitute{{print "{" .Institute "}"}}
+    \lineinstitutelang{{print "{" .Institute "}" "{" .Languages "}"}}
     \linecontent{{print "{" .Content "}"}}
 \end{minipage} \\[1ex]

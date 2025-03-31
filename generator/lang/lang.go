@@ -25,6 +25,26 @@ func (l Language) ShortCut() string {
 	}
 }
 
+func (l Language) TranslateLanguage(lang Language) string {
+	switch l {
+	case English:
+		switch lang {
+		case English:
+			return "english"
+		case German:
+			return "german"
+		}
+	case German:
+		switch lang {
+		case English:
+			return "Englisch"
+		case German:
+			return "Deutsch"
+		}
+	}
+	return "N/A"
+}
+
 func (l Language) String(t TranslationMap) string {
 	// try used language
 	value, ok := t[l]

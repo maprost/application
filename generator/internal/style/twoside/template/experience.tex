@@ -11,7 +11,7 @@
         {{range .ExternalLinks}}%
         \hspace*{-3pt}\externallink{{print "{" . "}"}}%
         {{end}}%
-        \linecompany{{print "{" .Company "}"}}
+        \linecompanylang{{print "{" .Company "}" "{" .Languages "}"}}
     {{end}}%
     \linedescription{{print "{" .Description "}"}}
     \lineproject{{print "{" .Project "}"}}

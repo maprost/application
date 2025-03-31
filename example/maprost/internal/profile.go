@@ -216,9 +216,25 @@ func Profile() genmodel.Profile {
 		//},
 		Experience: []genmodel.Experience{
 			{
-				Id:                   Exp_fitness,
-				MustBeSelected:       true,
-				Company:              "Fitness Company",
+				Id:             Exp_fitness,
+				MustBeSelected: true,
+				Company:        "Fitness Company",
+				Languages: []genmodel.RunningLanguage{
+					{
+						Name: map[lang.Language]string{
+							lang.German:  "Firmensprache",
+							lang.English: "Company language",
+						},
+						Language: lang.English,
+					},
+					{
+						Name: map[lang.Language]string{
+							lang.German:  "Kaffesprache",
+							lang.English: "Coffee language",
+						},
+						Language: lang.German,
+					},
+				},
 				JobPositionFirstLine: lang.DefaultTranslation("Test erste Zeile"),
 				JobPosition:          lang.DefaultTranslation("Java Backend Developer"),
 				StartTime:            "Jul. 2014",

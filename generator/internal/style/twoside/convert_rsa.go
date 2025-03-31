@@ -327,6 +327,7 @@ func convertExperience(app *genmodel.Application, local lang.Language) (rsa texm
 			Project:           convTransLang(genmodel.ExperiencePart_project, exp.Project, exp.Project2, exp.Project3),
 			Role:              convTransLang(genmodel.ExperiencePart_role, exp.Role, exp.Role2, exp.Role3),
 			Company:           exp.Company,
+			Languages:         convertRunningLanguage(exp.Languages, local),
 			Tech:              convTransLang(genmodel.ExperiencePart_techStack, exp.TechStack, exp.TechStack2, exp.TechStack3),
 			Time:              timeRange,
 			TimeSecondLine:    timeRange2,
@@ -380,6 +381,7 @@ func convertEducation(app *genmodel.Application, local lang.Language) (rsa texmo
 			FinalGrade:          local.String(edu.FinalGrade),
 			QuitReason:          local.String(edu.QuitReason),
 			Institute:           edu.Institute,
+			Languages:           convertRunningLanguage(edu.Languages, local),
 			Focus:               local.String(edu.Focus),
 			Time:                convertTime(edu.StartTime, edu.EndTime, local),
 			DocumentLinks:       edu.DocumentLinks,
@@ -415,6 +417,7 @@ func convertPublication(app *genmodel.Application, local lang.Language) (rsa tex
 		res := texmodel.Publication{
 			Title:           local.String(pub.Title),
 			Publisher:       local.String(pub.Publisher),
+			Languages:       convertRunningLanguage(pub.Languages, local),
 			Time:            convertTime(pub.Date, pub.Date, local),
 			Content:         local.String(pub.Content),
 			ContentShortLsa: local.String(pub.ContentShortLsa),
@@ -471,6 +474,7 @@ func convertAward(app *genmodel.Application, local lang.Language) (rsa texmodel.
 		res := texmodel.Award{
 			Title:           local.String(awa.Title),
 			Institute:       local.String(awa.Institute),
+			Languages:       convertRunningLanguage(awa.Languages, local),
 			Time:            awa.Date,
 			Content:         local.String(awa.Content),
 			ContentShortLsa: local.String(awa.ContentShortLsa),
@@ -626,4 +630,15 @@ func splitSideTwoRSA(sideOne []texmodel.RSA, sideTwo []texmodel.RSA, rsaIdx int,
 	}
 
 	return newSideOne, newSideTwo
+}
+
+func convertRunningLanguage(languages []genmodel.RunningLanguage, local lang.Language) []texmodel.RunningLanguage {
+	var res []texmodel.RunningLanguage
+	for _, l := range languages {
+		res = append(res, texmodel.RunningLanguage{
+			Name:  local.String(l.Name),
+			Value: local.TranslateLanguage(l.Language),
+		})
+	}
+	return res
 }

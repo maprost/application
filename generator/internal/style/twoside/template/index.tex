@@ -182,17 +182,25 @@ urlcolor=linkcolor,
     {\color{futurecolor} #4} \hfill {\color{futurecolor} \footnotesize #3\normalsize}\\
 }
 
+\newcommand{\linewithlang}[2]{\checkPar{#1}{#1 ~\xrfill[0.0ex]{0pt}[white]~ \scriptsize #2}}
+
 \newcommand{\linefinalgrade}[1]{\checkPar{#1}{ {{$.Label.FinalGrade}}: #1}}
 
 \newcommand{\lineinstitute}[1]{\checkPar{#1}{#1}}
 
+\newcommand{\lineinstitutelang}[2]{\linewithlang{#1}{#2}}
+
 \newcommand{\linepublisher}[1]{\checkPar{#1}{#1}}
+
+\newcommand{\linepublisherlang}[2]{\linewithlang{#1}{#2}}
 
 \newcommand{\linefocus}[1]{\checkPar{#1}{#1}}
 
 \newcommand{\linecontent}[1]{\checkPar{#1}{#1}}
 
 \newcommand{\linecompany}[1]{\checkPar{#1}{#1}}
+
+\newcommand{\linecompanylang}[2]{\linewithlang{#1}{#2}}
 
 \newcommand{\linedescription}[1]{\checkPar{#1}{#1}}
 
